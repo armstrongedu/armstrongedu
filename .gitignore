@@ -1,0 +1,12 @@
+__pycache__
+venv
+.DS_Store
+[._]*.s[a-w][a-z]
+[._]s[a-w][a-z]
+.env
+.idea
+*.sqlite3
+uploads
+*.out
+uwsgi.ini
+uwsgi_params
