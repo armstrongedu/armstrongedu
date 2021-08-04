@@ -15,7 +15,6 @@ environ.Env.read_env()
 SECRET_KEY = ENV.str('SECRET_KEY')
 DEBUG = bool(ENV.str('DEBUG'))
 
-
 INSTALLED_APPS = [
     'admin_interface',
     'colorfield',
@@ -25,6 +24,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'parking_page',
 ]
 
 MIDDLEWARE = [
