@@ -25,6 +25,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'parking_page',
+    'course',
 ]
 
 MIDDLEWARE = [
