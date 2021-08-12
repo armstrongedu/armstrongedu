@@ -1,0 +1,74 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>My custom Bulma website</title>
+    <link rel="stylesheet" href="{% static 'main.css' %}">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css">
+  </head>
+  <body>
+    <nav class="navbar mynav is-dark" role="navigation" aria-label="main navigation">
+        <div class="navbar-brand">
+          <a class="navbar-item" href="https://bulma.io">
+            <img src="https://bulma.io/images/bulma-logo.png" width="112" height="28">
+          </a>
+      
+          
+        </div>
+      
+       
+      
+          <div class="navbar-end my">
+            <div class="navbar-item">
+              <div class="buttons">
+                <a class="button is-primary">
+                  <strong>Sign up</strong>
+                </a>
+                <a class="button is-dark">
+                  Log in
+                </a>
+              </div>
+            </div>
+          </div>
+       
+      </nav>
+    <section  class="hero  is-dark is-fullheight-with-navbar">
+        
+        <div class="hero-body is-dark content is-medium">
+            <div class="tile is-parent">
+                <article class="tile is-8">
+                  <div class="content constyle">
+                    <p class="title">Oops!
+                    </p>
+                    <div class="content">
+                      <p>
+                        Sorry, the page you were trying to load doesn't exist.                        </p>
+                    </div>
+                  </div>
+                </article>
+                <div  id="myhero" class=" tile is-9 is-vertical ">
+                       <img  src="https://cdn.kastatic.org/images/404/little_stars.svg" alt="" aria-hidden="true" style=" position: absolute; left: 100.68px; top: 69.96px;">    
+                      <img src="https://cdn.kastatic.org/images/404/question_marks.svg" alt="" aria-hidden="true" style="position: absolute; left: 857.28px; top: 101px;">              
+                      <img src="https://cdn.kastatic.org/images/404/large_stars.svg" alt="" aria-hidden="true" style="position: absolute; left: 654.36px; top: 159.8px;">
+                     
+                      <!-- <img  class="planet" src="planet.svg" alt=""> -->
+                      <img  class="planet" src="{% static 'planet.svg' %}" alt="" aria-hidden="true" style="position: absolute; left: 478.38px; top: 352.44px;">
+                     <img class="dog" src="{% static 'dog_2.svg' %}" alt="">
+                     
+                      <!--   <img src="https://cdn.kastatic.org/images/404/planet.svg" alt="" aria-hidden="true" style="position: absolute; left: 476px; top: 346.88px;">            
+                -->
+                </div>
+              </div>
+            </div>
+        </div>
+        
+      </section>
+     
+
+
+  </body>
+</html>

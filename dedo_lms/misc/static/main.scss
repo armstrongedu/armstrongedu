@@ -1,0 +1,70 @@
+@charset "utf-8";
+@import "https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css";
+
+
+html{
+    overflow: hidden  !important ;
+   
+    margin: 0;
+   max-height: 100vh ;
+   width: 100%;
+
+}
+body{
+   
+    position: relative;
+    overflow: hidden  !important ;
+    #myhero{
+        position: absolute !important;
+       // width: 100% !important;
+       // height: 100% !important;
+        left: 320px !important;
+        top: 230px;
+        
+       
+        // .planet{
+         
+            
+        //     position: absolute;
+        //    left: 476.02px;
+        //      top: 348.7px; 
+           
+
+            
+        //   }
+        .dog{
+           position: absolute; 
+           left: 913.16px;
+            top: 189.08px;
+        }
+    }
+
+
+
+  
+
+    .constyle{
+        max-width:60ch;
+    }
+}
+@media only screen and (max-width: 800px) {
+    body {
+      
+        img{
+          display: none;
+         
+
+      }
+      .mynav{
+          .my{
+            right: 0;
+            position: absolute;
+            bottom: 0;
+          }
+          img{
+              display: block;
+
+          }
+      }
+    }
+    }

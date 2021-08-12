@@ -26,6 +26,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'parking_page',
     'course',
+    'misc',
 ]
 
 MIDDLEWARE = [
