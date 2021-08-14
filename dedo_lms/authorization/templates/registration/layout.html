@@ -1,0 +1,19 @@
+{% extends 'layout.html' %}
+{% load static %}
+
+{% block body %}
+
+<div class="columns didocol is-size-7-mobile ">
+    <div class="column is-3 columnpic"></div>
+    <div class="column is-4  paragraph ">
+        <section class="is-medium is-small-mobile paragraphsec
+        content has-text-white  ">
+            <h2 class="subtitle is-5 paragraphsub">{% block sub-header %}{% endblock %}</h2>
+            <h1>{% block header %}{% endblock %}</h1>
+        </section>
+    </div>
+    {% block reg-form %}{% endblock %}
+</div>
+{% endblock %}
+
+

@@ -1,0 +1,161 @@
+body {
+  height: 100vh;
+  width: 100vw;
+  overflow: hidden;
+  color: white !important;
+  background-color: #272727;
+}
+body .input::-moz-placeholder,
+body .select select::-moz-placeholder,
+body .textarea::-moz-placeholder {
+  color: white;
+}
+body .mynav {
+  background-color: transparent;
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  padding-left: 1rem;
+  overflow: hidden;
+  width: 100%;
+  left: 0;
+  margin-top: 0;
+  top: 0;
+  position: absolute;
+}
+body .content h1, body .content h2, body .content h3, body .content h4, body .content h5, body .content h6 {
+  color: white;
+}
+body .columns {
+  margin: 0 !important;
+}
+body .didocol {
+  height: 100vh;
+}
+
+.columnpic {
+  min-height: 20rem;
+  background-image: url("graphics.png");
+  background-size: cover;
+}
+
+.mysignup {
+  transform: translate(0, 20%);
+  padding: 2.2rem !important;
+}
+.mysignup input {
+  border: solid 1px #707070;
+}
+.mysignup input, .mysignup select, .mysignup textarea {
+  color: white;
+}
+
+.or {
+  transform: translate(50%, -30%);
+}
+.or h1:before, .or h1:after {
+  content: "";
+  display: inline-block;
+  width: 44%;
+  margin: 0 0.5em 0 -50%;
+  border-bottom: 1px #4a4a4a solid;
+}
+.or h1:after {
+  margin: 0 -55% 0 0.5em;
+}
+
+.paragraph {
+  transform: translate(20%, 20%);
+  color: white;
+}
+.paragraph .content h1, .paragraph .content h2 {
+  margin: 0;
+  margin-top: 0 !important;
+}
+.paragraph .paragraphsec {
+  max-width: 18ch;
+}
+.paragraph .paragraphsub {
+  padding: 0;
+  margin: 0;
+}
+.paragraph .paragraphsub .subtitle.is-5 {
+  font-size: 0.7rem;
+  margin: 0 !important;
+}
+
+.signupbutton {
+  display: flex;
+  flex-direction: row;
+}
+.signupbutton .button.is-primary {
+  color: black;
+}
+.signupbutton input {
+  padding-right: 3em;
+  margin-right: 1em;
+  font-weight: bolder;
+}
+
+.button.is-info {
+  padding-left: 3rem;
+  margin-right: auto;
+  margin-left: auto;
+  padding-right: 3rem;
+  border-radius: 5px;
+  font-size: 1rem !important;
+}
+
+.fb {
+  background-color: #3b5998 !important;
+}
+
+@media only screen and (max-width: 800px) {
+  body {
+    overflow-y: unset;
+    margin-bottom: 3rem;
+  }
+
+  body .mynav .my {
+    right: 0;
+    position: absolute;
+    bottom: 0;
+  }
+
+  body .mynav {
+    background-color: #272727;
+  }
+
+  .paragraph {
+    max-width: unset;
+    transform: translate(6%, 30%);
+    padding: 1% !important;
+  }
+  .paragraph .paragraphsec {
+    max-width: 44ch;
+  }
+  .paragraph .content.is-medium {
+    font-size: 0.9rem;
+    font-weight: lighter;
+    letter-spacing: 0.09em;
+  }
+
+  .mysignup {
+    margin-bottom: 9rem !important;
+    padding: 2%;
+  }
+}
+::placeholder {
+  color: #7a7a7a !important;
+  opacity: 1 !important;
+}
+
+:-ms-input-placeholder {
+  color: #7a7a7a !important;
+}
+
+::-ms-input-placeholder {
+  color: #7a7a7a !important;
+}
+
+/*# sourceMappingURL=layout.css.map */

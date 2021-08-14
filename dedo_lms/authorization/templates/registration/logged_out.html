@@ -1,0 +1,11 @@
+{% extends 'registration/layout.html' %}
+{% load static %}
+
+{% block title %}Logged Out - {{ block.super }}{% endblock %}
+
+{% block sub-header %}See you Soon{% endblock %}
+{% block header %}Thank you for Using Dedo{% endblock %}
+
+{% block reg-form %}{% include 'registration/reg-form.html' with social=True url='authorization:login' switch_page_text='Forgot your password?' switch_page_url='authorization:password_reset' switch_page_help='Click here to reset password' %}{% endblock %}
+
+

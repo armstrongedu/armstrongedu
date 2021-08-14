@@ -1,0 +1,164 @@
+body{
+    .input::-moz-placeholder,
+.select select::-moz-placeholder,
+.textarea::-moz-placeholder {
+ color:white;
+}
+    height: 100vh;
+    width: 100vw;
+    overflow: hidden;
+    color:white !important;
+    background-color: #272727;
+    .mynav{
+        background-color: transparent;
+        list-style-type: none;
+        margin: 0;
+
+        padding: 0;
+        padding-left: 1rem;
+        overflow: hidden;
+        width: 100%;
+        left: 0;
+        margin-top: 0;
+        top: 0;
+        position: absolute;
+    }
+    .content h1, .content h2, .content h3, .content h4, .content h5, .content h6{
+        color: white;
+    }
+    .columns{
+        margin:0 !important;
+    }
+    .didocol{
+        height: 100vh;
+    }
+
+    }
+    .columnpic{
+        min-height: 20rem;
+        background-image: url("graphics.png");
+        background-size: cover;
+    }
+    .mysignup{
+      transform: translate(0,20%);
+      padding: 2.2rem !important;
+
+
+      input{
+          border: solid 1px #707070;
+      }
+      input, select, textarea{
+        color: white;
+      }
+    }
+    .or{
+
+        transform: translate(50% ,-30%);
+        h1:before, h1:after {
+            content: "";
+            display: inline-block;
+            width: 44%;
+            margin: 0 .5em 0 -50%;
+           // vertical-align: middle;
+            border-bottom: 1px #4a4a4a solid;
+          }
+          h1:after {
+            margin: 0 -55% 0 .5em;
+          }
+    }
+
+    .paragraph{
+      transform: translate(20%, 20%);
+      color: white;
+      .content h1, .content h2{
+          margin: 0;
+          margin-top: 0 !important;
+      }
+      .paragraphsec{
+            max-width: 18ch;
+      }
+
+      .paragraphsub{
+        padding:0;
+        margin:0;
+        .subtitle.is-5{
+            font-size: .7rem;
+            margin:0 !important;
+        }
+      }
+    }
+    .signupbutton{
+      display: flex;
+      flex-direction: row;
+      .button.is-primary{
+        color:black;
+      }
+      input{
+
+          padding-right: 3em;
+          margin-right: 1em;
+          font-weight: bolder;
+      }
+
+    }
+     .button.is-info{
+        padding-left: 3rem;
+        margin-right: auto;
+        margin-left: auto;
+        padding-right: 3rem;
+        border-radius: 5px;
+       font-size: 1rem !important;
+    }
+    .fb{
+        background-color: #3b5998 !important;
+    }
+
+
+
+    @media only screen and (max-width: 800px) {
+     body{
+         overflow-y: unset;
+         margin-bottom: 3rem;
+     }
+      body .mynav .my {
+        right: 0;
+        position: absolute;
+        bottom: 0;
+
+      }
+      body .mynav{
+
+        background-color: #272727;
+      }
+      .paragraph{
+        .paragraphsec {
+            max-width: 44ch;
+        }
+         max-width: unset;
+         transform: translate(6%, 30%);
+         padding:1% !important;
+         .content.is-medium {
+            font-size: 0.9rem;
+            font-weight: lighter;
+            letter-spacing: .09em;
+         }
+      }
+      .mysignup{
+          margin-bottom: 9rem !important;
+          padding:2%;
+      }
+
+    }
+
+::placeholder {
+    color: hsl(0, 0%, 48%) !important;
+    opacity: 1 !important;
+}
+
+:-ms-input-placeholder {
+    color: hsl(0, 0%, 48%) !important;
+}
+
+::-ms-input-placeholder {
+    color: hsl(0, 0%, 48%) !important;
+}

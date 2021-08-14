@@ -1,0 +1,49 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>{% block title %}DEDO LMS{% endblock %}</title>
+        <meta charset="utf-8">
+        <meta name="author" content="Muhamed Hassan">
+        <meta name="description" content="DEDO LMS brings interactive online education to kids.">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta property="og:image" content="{% static 'social.png' %}">
+        <meta property="og:url" content="dedolms.com">
+        <meta property="og:description" content="DEDO LMS brings interactive online education to kids.">
+        <meta property="og:title" content="DEDO LMS">
+        <meta name="twitter:title" content="DEDO LMS">
+        <link rel="shortcut icon" href="" type="image/x-icon">
+        <link rel="stylesheet" href="{% static 'layout.css' %}">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css" />
+    </head>
+    <body>
+        <nav class="navbar is-transparent mynav" role="navigation" aria-label="main navigation">
+            <div class="navbar-brand">
+                <a class="navbar-start" href="{% url "parking_page:parking_page" %}">
+                    <img src="{% static 'logo.svg' %}">
+                </a>
+            </div>
+            <div class="navbar-end my">
+                <div class="navbar-item">
+                    <div class="buttons">
+                        <a class="button is-link" href="{% url "authorization:signup" %}"><strong>Sign up</strong></a>
+                        <a class="button is-transparent" href="{% url "authorization:login" %}">Log in</a>
+                    </div>
+                </div>
+            </div>
+        </nav>
+        {% if form.errors %}
+            <p>error</p>
+        {% endif %}
+
+        {% if next %}
+            {% if user.is_authenticated %}
+                <p>no access</p>
+            {% else %}
+                <p>Please login to see this page.</p>
+            {% endif %}
+        {% endif %}
+
+        {% block body %} {% endblock %}
+    </body>
+</html>

@@ -1,0 +1,43 @@
+<div class="column is-one-third mysignup">
+    {% if social %}
+        <div class="field is-grouped is-justify-content-center">
+            <a class="button is-info is-medium" href="{% url "authorization:social:begin" "google-oauth2" %}">Google</a>
+            <a class="button is-info is-medium fb" href="{% url "authorization:social:begin" "facebook" %}">Facebook</a>
+        </div>
+        <div class="or"><h1>or</h1></div>
+    {% endif %}
+    {% if url %}
+        <form method="post" action="{% url url %}">
+    {% else %}
+        <form method="post" action="">
+    {% endif %}
+        {% csrf_token %}
+        {% for field in form %}
+            <div class="field">
+                {{ field }}
+                {% if field.help_text %}
+                    {% for help_text in field.help_text %}
+                        <p class="help">{{ help_text|safe }}</p>
+                    {% endfor %}
+                {% endif %}
+            </div>
+        {% endfor %}
+        {% if terms %}
+            <div class="field">
+                <div class="control">
+                    <label class="checkbox">
+                        <input type="checkbox"> I agree to the <a href="#">terms and conditions</a>
+                    </label>
+                </div>
+            </div>
+        {% endif %}
+        <div class="signupbutton">
+            <input type="submit" class="button is-medium is-primary" value="Go">
+            <div>
+                <p>{{ switch_page_text }}</p>
+                <a href="{% url switch_page_url %}">{{ switch_page_help }}</a>
+            </div>
+        </div>
+        <input type="hidden" name="next" value="{{ next }}" />
+    </form>
+</div>

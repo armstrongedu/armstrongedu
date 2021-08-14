@@ -1,0 +1,9 @@
+{% extends 'registration/layout.html' %}
+{% load static %}
+
+{% block title %}Sign Up - {{ block.super }}{% endblock %}
+
+{% block sub-header %}Welcome{% endblock %}
+{% block header %}Fill the Form to Become Part of Dedo{% endblock %}
+
+{% block reg-form %}{% include 'registration/reg-form.html' with social=True url='authorization:signup' terms=True switch_page_text='Do you already have an account?' switch_page_url='authorization:login' switch_page_help='Please use this login form' %}{% endblock %}
