@@ -15,6 +15,10 @@ environ.Env.read_env()
 SECRET_KEY = ENV.str('SECRET_KEY')
 DEBUG = bool(ENV.str('DEBUG'))
 
+import sys
+
+sys.modules['fontawesome_free'] = __import__('fontawesome-free')
+
 INSTALLED_APPS = [
     'authorization',
     'admin_interface',
@@ -27,7 +31,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'simple_email_confirmation',
     'social_django',
-    'parking_page',
+    'fontawesome_free',
+    'main',
     'course',
     'misc',
 ]
@@ -134,12 +139,12 @@ SOCIAL_AUTH_PIPELINE = (
     'social_core.pipeline.social_auth.social_details',
     'social_core.pipeline.social_auth.social_uid',
     'social_core.pipeline.social_auth.social_user',
-    'social_core.pipeline.user.get_username',
     'social_core.pipeline.social_auth.associate_by_email',
     'social_core.pipeline.user.create_user',
     'social_core.pipeline.social_auth.associate_user',
     'social_core.pipeline.social_auth.load_extra_data',
     'social_core.pipeline.user.user_details',
+    'authorization.social_pipeline.add_dummy_password',
 )
 SOCIAL_AUTH_URL_NAMESPACE = 'authorization:social'
 

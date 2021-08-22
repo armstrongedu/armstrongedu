@@ -1,6 +1,11 @@
 from django.contrib import admin
 
-from .models import Course, Lesson, Topic, Video, MCQQuiz, TFQuiz
+from .models import Category, Course, Lesson, Topic, Video, MCQQuiz, TFQuiz
+
+
+@admin.register(Category)
+class CategoryAdmin(admin.ModelAdmin):
+    search_fields = ('title',)
 
 
 class LessonInline(admin.TabularInline):

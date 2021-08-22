@@ -1,8 +1,8 @@
 <div class="column is-one-third mysignup">
     {% if social %}
         <div class="field is-grouped is-justify-content-center">
-            <a class="button is-info is-medium" href="{% url "authorization:social:begin" "google-oauth2" %}">Google</a>
-            <a class="button is-info is-medium fb" href="{% url "authorization:social:begin" "facebook" %}">Facebook</a>
+            <a class="button is-info is-medium social" href="{% url "authorization:social:begin" "google-oauth2" %}">Google</a>
+            <a class="button is-info is-medium fb social" href="{% url "authorization:social:begin" "facebook" %}">Facebook</a>
         </div>
         <div class="or"><h1>or</h1></div>
     {% endif %}

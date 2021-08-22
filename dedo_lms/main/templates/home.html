@@ -1,0 +1,206 @@
+{% extends 'layout.html' %} {% load static %} {% block body %}
+<body id="homepage">
+  <div class="level intro">
+    <section class="section content introcontent">
+      <h1 class="title introtitle has-text-grey-dark has-text-weight-bold">
+        Where Education Meets Entertainment.
+      </h1>
+      <p class="subtitle has-text-grey-dark has-text-weight-light">
+        Dedo is a global course provider based across Egypt that specialises in
+        accredited and bespoke stem courses. We crush the barrie for kids
+        education.
+      </p>
+      <button class="button introbtn is-primary has-text-grey-dark">Explore Courses</button>
+    </section>
+    <div class="level-right">
+      <img class="level-item intropic" src="{% static 'hero1.png' %}" alt="" />
+    </div>
+  </div>
+  <div class="breadcrumb mybreadcrumb has-bullet-separator is-centered">
+    <ul>
+      {% for category in categories %}
+      <li><a href="#"><button class="button is-text has-text-grey-light has-background-black-ter">{{ category.title }}</button></a></li>
+      {% endfor%}
+    </ul>
+  </div>
+  <div class="container is-centered content">
+    <h1 class="title feature">Featured Courses</h1>
+    <ul class="columns is-multiline featurecourse">
+      {% for course in courses %}
+      <div class="column is-one-third">
+        <div class="card">
+          <div class="card-image">
+            <img
+                src="{{ course.intro_video.url }}"
+              alt="Course Intro Video"
+            />
+          </div>
+          <div class="card-content">
+            <div class="media">
+              <div class="media-left">
+                <img
+                  src="https://bulma.io/images/placeholders/96x96.png"
+                  alt="Course Icon"
+                />
+              </div>
+              <div class="media-content">
+                  <p class="title is-4">{{ course.title }}</p>
+                <p class="subtitle is-6">@slug</p>
+              </div>
+            </div>
+            <div class="content">
+              This Course is the course description.
+              <a>@slug.</a>.
+              {% for category in course.category.all %}
+                  <a href="#">#{{ category }}</a>
+              {% endfor %}
+              <br />
+              <time datetime="2016-1-1">02:17 AM - 17 Aug 2021</time>
+            </div>
+          </div>
+        </div>
+      </div>
+      {% endfor %}
+    </ul>
+    <button class="button is-medium is-info level coursesbtn">
+      More Courses
+    </button>
+  </div>
+  <div class="whysec">
+    <img class="whyimg" src="{% static 'whysec.png' %}" alt="" />
+    <section class="whycont content is-large">
+      <h1 class="title has-text-white">Why Students Learn From Dedo</h1>
+      <p class="has-text-weight-light">
+        Dedo Cares about it’s students. We are not just another online courses
+        platform; We add fun to the education process by adding gamification to
+        the education journey, building intrest and passion for learning in our
+        students.
+      </p>
+      <ul class="whyicons has-text-weight-light">
+        <ul>
+          <div class="icon-text">
+            <span class="icon has-text-success">
+              <i class="fas fa-check-circle iconclr"></i>
+            </span>
+            <span> World Class</span>
+          </div>
+          <div class="icon-text">
+            <span class="icon has-text-success">
+              <i class="fas fa-check-circle iconclr"></i>
+            </span>
+            <span>Flexible</span>
+          </div>
+        </ul>
+        <ul class="pl-3">
+          <div class="icon-text">
+            <span class="icon has-text-success">
+              <i class="fas fa-check-circle iconclr"></i>
+            </span>
+            <span>Affordable</span>
+          </div>
+          <div class="icon-text">
+            <span class="icon has-text-success">
+              <i class="fas fa-check-circle iconclr"></i>
+            </span>
+            <span>Fun</span>
+          </div>
+        </ul>
+      </ul>
+      <button class="button is-primary">Register Now</button>
+    </section>
+  </div>
+  <div class="memeberships container pb-6">
+    <h1 class="title has-text-white membertitle">Join Dedo</h1>
+    <ul class="memebercrd level columns pb-6">
+      <div class="card column">
+        <div class="card-header is-shadowless">
+          <h1 class="title card-header-title has-text-grey-dark">Lite</h1>
+          <div class="card-header-icon footericon">
+            <h2 class="title has-text-grey-dark">10$</h2>
+            <br />
+            <p class="subtitle has-text-grey-dark has-text-weight-light">monthly</p>
+          </div>
+        </div>
+        <div class="card-content pb-6">
+          <ul>
+            <div class="icon-text pb-4">
+              <span class="icon has-text-success">
+                <i class="fas fa-check-circle iconclr"></i>
+              </span>
+              <span class="has-text-grey-dark has-text-weight-light">Unlimited Access to courses</span>
+            </div>
+            <div class="icon-text pb-4">
+              <span class="icon has-text-success">
+                <i class="fas fa-check-circle iconclr"></i>
+              </span>
+              <span class="has-text-grey-dark has-text-weight-light">Register Up to 4 Devices</span>
+            </div>
+            <div class="icon-text pb-4">
+              <span class="icon has-text-success">
+                <i class="fas fa-check-circle iconclr"></i>
+              </span>
+              <span class="has-text-grey-dark has-text-weight-light">Ask Our Trained Teachers</span>
+            </div>
+            <div class="icon-text pb-4">
+              <span class="icon has-text-success">
+                <i class="fas fa-check-circle iconclr"></i>
+              </span>
+              <span class="has-text-grey-dark has-text-weight-light">Graded Homeworks</span>
+            </div>
+          </ul>
+        </div>
+        <div class="card-footer is-centered memeberfooter">
+          <p class="has-text-grey-dark pb-4">Start Your 14-Days Free Trial Now</p>
+          <button class="button is-large has-text-weight-bold is-primary memeberbtn">
+            Register
+          </button>
+        </div>
+      </div>
+      <div class="card column">
+        <div class="card-header is-shadowless">
+          <h1 class="title card-header-title has-text-grey-dark">Pro</h1>
+          <div class="card-header-icon footericon">
+            <h2 class="title has-text-grey-dark">20$</h2>
+            <br />
+            <p class="subtitle has-text-grey-dark has-text-weight-light">monthly</p>
+          </div>
+        </div>
+        <div class="card-content pb-6">
+          <ul>
+            <div class="icon-text pb-4">
+              <span class="icon has-text-success">
+                <i class="fas fa-check-circle iconclr"></i>
+              </span>
+              <span class="has-text-grey-dark has-text-weight-light">Unlimited Access to courses</span>
+            </div>
+            <div class="icon-text pb-4">
+              <span class="icon has-text-success">
+                <i class="fas fa-check-circle iconclr"></i>
+              </span>
+              <span class="has-text-grey-dark has-text-weight-light">Register Up to 4 Devices</span>
+            </div>
+            <div class="icon-text pb-4">
+              <span class="icon has-text-success">
+                <i class="fas fa-check-circle iconclr"></i>
+              </span>
+              <span class="has-text-grey-dark has-text-weight-light">Ask Our Trained Teachers</span>
+            </div>
+            <div class="icon-text pb-4">
+              <span class="icon has-text-success">
+                <i class="fas fa-check-circle iconclr"></i>
+              </span>
+              <span class="has-text-grey-dark has-text-weight-light">Graded Homeworks</span>
+            </div>
+          </ul>
+        </div>
+        <div class="card-footer is-centered memeberfooter">
+          <p class="has-text-grey-dark pb-4">Start Your 14-Days Free Trial Now</p>
+          <button class="button is-large ha-text-weight-bold is-primary memeberbtn">
+            Register
+          </button>
+        </div>
+      </div>
+    </ul>
+  </div>
+</body>
+{% endblock %}

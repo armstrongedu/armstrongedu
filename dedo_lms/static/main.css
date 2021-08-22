@@ -1,140 +1,41 @@
-
-
-body{
-    height: 100%;
-    background-color: #141213;
-    font-size: 12px;
-    text-align: center;
-    max-width: 700px;
-  margin: auto;
-  padding: 6%;
-  overflow: hidden;
-}
-h1,p{
-  font-family:   'Poppins', sans-serif;
-  letter-spacing: .2rem;
-}
-p{
-    color: #ffffff;
-    font-size : 1.3rem;
-  
-}
- h1{
-     font-size : 5rem;
-    font-weight: bold;
-    text-transform: uppercase;
-    background: conic-gradient(
-        #CA4246 16.666%, 
-        #E16541 16.666%, 
-        #E16541 33.333%, 
-        #F18F43 33.333%, 
-        #F18F43 50%, 
-        #8B9862 50%, 
-        #8B9862 66.666%, 
-        #476098 66.666%, 
-        #476098 83.333%, 
-        #A7489B 83.333%);
-      
-      /* Set thee background size and repeat properties. */
-      background-size: 57%;
-      background-repeat: repeat;
-      
-	-webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    
-
-
-    animation: rainbow-text-animation-rev 0.5s ease forwards;
-
-  cursor: pointer;
+@import "https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css";
+html {
+  overflow: hidden !important;
+  margin: 0;
+  max-height: 100vh;
+  width: 100%;
 }
 
-.sub{
-    max-width: 80ch;
-   
-margin: 0 auto; 
+body {
+  position: relative;
+  overflow: hidden !important;
 }
-.bar{
-    display:flex;
-    flex-direction:row;
-    align-content: center;
-    padding:2%;
-    margin-left: 3%;
-    width: 24rem;
+body #myhero {
+  position: absolute !important;
+  left: 320px !important;
+  top: 230px;
 }
- input{
-    flex-grow:2;
-    color:#5F5F5F;
-    border:none;
-    margin: 0px;
-    padding:7%;
-    font-size: x-large;
-    width: 24rem;
-    height: 2.5rem;
-    background-color: #292929;
-    border-radius: 2px;
-    
+body #myhero .dog {
+  position: absolute;
+  left: 913.16px;
+  top: 189.08px;
+}
+body .constyle {
+  max-width: 60ch;
 }
 
-
- #bu {
+@media only screen and (max-width: 800px) {
+  body img {
+    display: none;
+  }
+  body .mynav .my {
+    right: 0;
+    position: absolute;
+    bottom: 0;
+  }
+  body .mynav img {
     display: block;
-    border: none;
-    border-radius: 2px;
-    border: none;
-    top: 2px;
-    height: inherit;
-    width: 5rem;
-    padding: 10px;
-    cursor: pointer;
-    color: #070707;
-    background-color: #ffffff;
-  
-}
-#bu:hover{
-    background-color: rgb(240, 240, 240);
-}
-h1:hover {
-    animation: rainbow-text-animation 0.5s ease forwards;
   }
+}
 
-  @keyframes rainbow-text-animation {
-    0% {
-      background-size: 57%;
-      background-position: 0 0;
-    }
-    20% {
-      background-size: 57%;
-      background-position: 0 1em;
-    }
-    100% {
-      background-size: 300%;
-      background-position: -9em 1em;
-    }
-  }
-@keyframes rainbow-text-animation-rev {
-    0% {
-      background-size: 300%;
-      background-position: -9em 1em;
-    }
-    20% {
-      background-size: 57%;
-      background-position: 0 1em;
-    }
-    100% {
-      background-size: 57%;
-      background-position: 0 0;
-    }
-  }
-  @media only screen and (max-width: 600px){
-      .bar{
-          flex-direction: column;
-      }
-      #bu{
-          padding:2%;
-          margin-left: auto;
-          margin-right: auto;
-        transform: translateY(30px);
-      }
-      
-  }
+/*# sourceMappingURL=main.css.map */

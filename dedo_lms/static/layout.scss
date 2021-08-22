@@ -150,6 +150,12 @@ body{
 
     }
 
+
+    #homepage{
+      overflow-y: auto;
+
+    }
+
 ::placeholder {
     color: hsl(0, 0%, 48%) !important;
     opacity: 1 !important;

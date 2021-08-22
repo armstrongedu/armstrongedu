@@ -145,6 +145,10 @@ body .didocol {
     padding: 2%;
   }
 }
+#homepage {
+  overflow-y: auto;
+}
+
 ::placeholder {
   color: #7a7a7a !important;
   opacity: 1 !important;

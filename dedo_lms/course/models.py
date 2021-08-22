@@ -2,7 +2,15 @@ from django.db import models
 from django.contrib.postgres.fields import ArrayField
 
 
+class Category(models.Model):
+    title = models.CharField(max_length=255)
+
+    def __str__(self):
+        return self.title
+
+
 class Course(models.Model):
+    category = models.ManyToManyField(Category)
     title = models.CharField(max_length=255)
     intro_video = models.FileField()
 

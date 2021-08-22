@@ -14,12 +14,13 @@
         <meta name="twitter:title" content="DEDO LMS">
         <link rel="shortcut icon" href="" type="image/x-icon">
         <link rel="stylesheet" href="{% static 'layout.css' %}">
+        <script src="{% static 'fontawesome_free/js/all.min.js' %}"></script>
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css" />
     </head>
     <body>
         <nav class="navbar is-transparent mynav" role="navigation" aria-label="main navigation">
             <div class="navbar-brand">
-                <a class="navbar-start" href="{% url "parking_page:parking_page" %}">
+                <a class="navbar-start" href="{% url "main:home" %}">
                     <img src="{% static 'logo.svg' %}">
                 </a>
             </div>
@@ -46,4 +47,14 @@
 
         {% block body %} {% endblock %}
     </body>
+    <footer class="footer">
+        <div class="content has-text-centered">
+            <p class="has-text-dark">
+                <i class="fas fa-copyright"></i> All Rights Reserved By Dedo LMS.
+            </p>
+            <p class="has-text-dark">
+                Made With By <i class="fas fa-heart has-text-danger"></i> <a href="https://gaytomycode.com" target="_blank">Hassan</a>.
+            </p>
+        </div>
+    </footer>
 </html>
