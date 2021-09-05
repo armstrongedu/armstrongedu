@@ -3,7 +3,7 @@ body {
   width: 100vw;
   overflow: hidden;
   color: white !important;
-  background-color: #272727;
+  background-color: #242424;
 }
 body .input::-moz-placeholder,
 body .select select::-moz-placeholder,
@@ -123,7 +123,7 @@ body .didocol {
   }
 
   body .mynav {
-    background-color: #272727;
+    background-color: #242424;
   }
 
   .paragraph {
@@ -147,6 +147,144 @@ body .didocol {
 }
 #homepage {
   overflow-y: auto;
+}
+#homepage .mynav {
+  background-color: #242424;
+  position: unset;
+}
+#homepage .feature {
+  text-align: center;
+}
+#homepage .mybreadcrumb {
+  border-bottom: solid #E5E5E5 1px;
+  border-top: solid #E5E5E5 1px;
+  padding: 1.3em;
+  margin: 8%;
+  margin-left: 20%;
+  margin-right: 20%;
+}
+#homepage .iconclr {
+  color: #00D1B2;
+}
+#homepage .intro {
+  font-size: 20px;
+  padding: 1.3em;
+  background-color: #E5E5E5;
+  background-image: url(hero.svg);
+  background-repeat: no-repeat;
+  background-position: center right;
+  background-size: contain;
+}
+#homepage .introcontent {
+  max-width: 50ch;
+}
+#homepage .intropic {
+  transform: translate(0, 1.7rem);
+}
+#homepage .introtitle {
+  margin-bottom: 2em;
+}
+#homepage .introbtn {
+  padding: 1.7em;
+  color: black;
+  margin-top: 2em;
+}
+#homepage .coursesbtn {
+  border-radius: 3px;
+  background-color: #3273DC !important;
+  padding: 1.5em;
+  padding-right: 4.6em;
+  padding-left: 4.6em;
+  transform: translate(0, 4rem);
+}
+#homepage .featurecourse .is-one-third {
+  padding: 2%;
+}
+#homepage .whysec {
+  margin: 4rem;
+  margin-top: 10rem;
+}
+#homepage .whysec .whycont {
+  padding-top: 6.5rem;
+  font-size: 20px;
+}
+#homepage .whysec .whyimg {
+  float: left;
+}
+#homepage .whysec .button {
+  padding: 1.7em;
+}
+#homepage .whysec .whyicons {
+  margin-left: 0;
+  padding-left: 0;
+  display: flex;
+  flex-direction: row;
+}
+#homepage .whysec .whyicons ul {
+  margin-left: 0;
+  padding-left: 0;
+}
+#homepage .whysec .whyicons ul div {
+  padding-top: 0.3em;
+}
+#homepage .memeberships {
+  padding-top: 7rem;
+}
+#homepage .memeberships .title {
+  text-align: center;
+  font-size: 3rem;
+  font-weight: bolder;
+}
+#homepage .memeberships span {
+  font-size: 1.4em;
+}
+#homepage .memeberships .membertitle {
+  margin: 0;
+  font-size: 2rem;
+}
+#homepage .memebercrd .card {
+  border-radius: 20px;
+  max-width: 60ch;
+  margin: 5vw;
+}
+#homepage .memebercrd .card:first-child {
+  background: #E5E5E5;
+}
+#homepage .memebercrd div {
+  padding: 0.1em;
+  margin: 1em;
+}
+#homepage .memebercrd .memeberfooter {
+  display: flex;
+  flex-direction: column;
+  border: 0;
+  text-align: center;
+}
+#homepage .memebercrd .card-header .title {
+  font-size: 4.5rem;
+}
+#homepage .memebercrd .card-header h1:before {
+  content: "";
+  position: absolute;
+  top: 6rem;
+  left: 2rem;
+  width: 20%;
+  height: 1rem;
+  border-bottom: 3px solid #4a4a4a;
+}
+#homepage .memebercrd .memeberbtn {
+  width: 48%;
+  margin: 1em;
+  margin-left: auto;
+  margin-right: auto;
+  border-radius: 3px;
+}
+#homepage .memebercrd .footericon .title {
+  transform: translate(60px, -11px);
+  font-size: 2.5rem;
+}
+#homepage .memebercrd .footericon .subtitle {
+  font-size: 0.8rem;
 }
 
 ::placeholder {

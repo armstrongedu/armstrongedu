@@ -1,19 +1,18 @@
-body{
+body {
     .input::-moz-placeholder,
-.select select::-moz-placeholder,
-.textarea::-moz-placeholder {
- color:white;
-}
+    .select select::-moz-placeholder,
+    .textarea::-moz-placeholder {
+        color:white;
+    }
     height: 100vh;
     width: 100vw;
     overflow: hidden;
     color:white !important;
-    background-color: #272727;
-    .mynav{
+    background-color: #242424;
+    .mynav {
         background-color: transparent;
         list-style-type: none;
         margin: 0;
-
         padding: 0;
         padding-left: 1rem;
         overflow: hidden;
@@ -23,138 +22,277 @@ body{
         top: 0;
         position: absolute;
     }
-    .content h1, .content h2, .content h3, .content h4, .content h5, .content h6{
+    .content h1, .content h2, .content h3, .content h4, .content h5, .content h6 {
         color: white;
     }
-    .columns{
+    .columns {
         margin:0 !important;
     }
-    .didocol{
+    .didocol {
         height: 100vh;
     }
+}
 
+.columnpic {
+    min-height: 20rem;
+    background-image: url("graphics.png");
+    background-size: cover;
+}
+
+.mysignup {
+    transform: translate(0,20%);
+    padding: 2.2rem !important;
+    input {
+        border: solid 1px #707070;
     }
-    .columnpic{
-        min-height: 20rem;
-        background-image: url("graphics.png");
-        background-size: cover;
-    }
-    .mysignup{
-      transform: translate(0,20%);
-      padding: 2.2rem !important;
-
-
-      input{
-          border: solid 1px #707070;
-      }
-      input, select, textarea{
+    input, select, textarea {
         color: white;
-      }
     }
-    .or{
+}
 
-        transform: translate(50% ,-30%);
-        h1:before, h1:after {
-            content: "";
-            display: inline-block;
-            width: 44%;
-            margin: 0 .5em 0 -50%;
-           // vertical-align: middle;
-            border-bottom: 1px #4a4a4a solid;
-          }
-          h1:after {
-            margin: 0 -55% 0 .5em;
-          }
+.or {
+    transform: translate(50% ,-30%);
+    h1:before, h1:after {
+        content: "";
+        display: inline-block;
+        width: 44%;
+        margin: 0 .5em 0 -50%;
+        border-bottom: 1px #4a4a4a solid;
     }
+    h1:after {
+        margin: 0 -55% 0 .5em;
+    }
+}
 
-    .paragraph{
-      transform: translate(20%, 20%);
-      color: white;
-      .content h1, .content h2{
-          margin: 0;
-          margin-top: 0 !important;
-      }
-      .paragraphsec{
-            max-width: 18ch;
-      }
-
-      .paragraphsub{
+.paragraph {
+    transform: translate(20%, 20%);
+    color: white;
+    .content h1, .content h2 {
+        margin: 0;
+        margin-top: 0 !important;
+    }
+    .paragraphsec {
+        max-width: 18ch;
+    }
+    .paragraphsub {
         padding:0;
         margin:0;
-        .subtitle.is-5{
+        .subtitle.is-5 {
             font-size: .7rem;
             margin:0 !important;
         }
-      }
     }
-    .signupbutton{
-      display: flex;
-      flex-direction: row;
-      .button.is-primary{
+}
+
+.signupbutton {
+    display: flex;
+    flex-direction: row;
+    .button.is-primary {
         color:black;
-      }
-      input{
-
-          padding-right: 3em;
-          margin-right: 1em;
-          font-weight: bolder;
-      }
-
     }
-     .button.is-info{
-        padding-left: 3rem;
-        margin-right: auto;
-        margin-left: auto;
-        padding-right: 3rem;
-        border-radius: 5px;
-       font-size: 1rem !important;
+    input {
+        padding-right: 3em;
+        margin-right: 1em;
+        font-weight: bolder;
     }
-    .fb{
-        background-color: #3b5998 !important;
+}
+
+.button.is-info {
+    padding-left: 3rem;
+    margin-right: auto;
+    margin-left: auto;
+    padding-right: 3rem;
+    border-radius: 5px;
+    font-size: 1rem !important;
+}
+
+.fb {
+    background-color: #3b5998 !important;
+}
+
+@media only screen and (max-width: 800px) {
+    body {
+        overflow-y: unset;
+        margin-bottom: 3rem;
     }
-
-
-
-    @media only screen and (max-width: 800px) {
-     body{
-         overflow-y: unset;
-         margin-bottom: 3rem;
-     }
-      body .mynav .my {
+    body .mynav .my {
         right: 0;
         position: absolute;
         bottom: 0;
-
-      }
-      body .mynav{
-
-        background-color: #272727;
-      }
-      .paragraph{
+    }
+    body .mynav {
+        background-color: #242424;
+    }
+    .paragraph {
         .paragraphsec {
             max-width: 44ch;
         }
-         max-width: unset;
-         transform: translate(6%, 30%);
-         padding:1% !important;
-         .content.is-medium {
+        max-width: unset;
+        transform: translate(6%, 30%);
+        padding:1% !important;
+        .content.is-medium {
             font-size: 0.9rem;
             font-weight: lighter;
             letter-spacing: .09em;
-         }
-      }
-      .mysignup{
-          margin-bottom: 9rem !important;
-          padding:2%;
-      }
-
+        }
     }
-
-
-    #homepage{
-      overflow-y: auto;
-
+    .mysignup {
+        margin-bottom: 9rem !important;
+        padding:2%;
     }
+}
+
+#homepage {
+    .mynav {
+        background-color: #242424;
+        position: unset;
+    }
+    .feature {
+        text-align: center;
+    }
+    .mybreadcrumb {
+        border-bottom: solid #E5E5E5 1px;
+        border-top: solid #E5E5E5 1px ;
+        padding: 1.3em;
+        margin: 8%;
+        margin-left: 20%;
+        margin-right: 20%;
+    }
+    overflow-y: auto;
+    .iconclr {
+        color:#00D1B2;
+    }
+    .intro {
+        font-size: 20px;
+        padding:1.3em;
+        background-color: #E5E5E5;
+        background-image: url(hero.svg);
+        background-repeat: no-repeat;
+        background-position: center right;
+        background-size: contain;
+    }
+    .introcontent {
+        max-width: 50ch;
+    }
+    .intropic {
+        transform: translate(0,1.7rem);
+    }
+    .introtitle {
+        margin-bottom: 2em;
+    }
+    .introbtn {
+        padding: 1.7em;
+        color: black;
+        margin-top: 2em;
+    }
+    .coursesbtn {
+        border-radius: 3px;
+        background-color: #3273DC !important;
+        padding:1.5em;
+        padding-right:4.6em;
+        padding-left:4.6em;
+        transform: translate(0, 4rem);
+    }
+    .featurecourse {
+        .is-one-third {
+            padding: 2%;
+        }
+    }
+    .whysec {
+        margin: 4rem;
+        margin-top:10rem;
+
+        .whycont {
+            padding-top: 6.5rem;
+            font-size: 20px;
+        }
+        .whyimg {
+            float: left;
+        }
+        .button {
+            padding: 1.7em;
+        }
+        .whyicons {
+            margin-left: 0;
+            padding-left: 0;
+            ul {
+                margin-left: 0;
+                padding-left: 0;
+
+                div {
+                    padding-top:.3em;
+                }
+            }
+            display: flex;
+            flex-direction: row;
+        }
+    }
+    .memeberships {
+        padding-top: 7rem;
+        .title {
+            text-align: center;
+            font-size: 3rem;
+            font-weight: bolder;
+        }
+        span {
+            font-size: 1.4em;
+        }
+        .membertitle {
+            margin: 0;
+            font-size: 2rem;
+        }
+    }
+    .memebercrd {
+        .card {
+            border-radius: 20px;
+            max-width: 60ch;
+            margin: 5vw;
+        }
+        .card:first-child {
+            background: #E5E5E5;
+        }
+        div {
+            padding: .1em;
+            margin: 1em;
+        }
+        .memeberfooter {
+            display: flex;
+            flex-direction: column;
+            border: 0;
+            text-align: center;
+        }
+        .card-header {
+            .title {
+                font-size: 4.5rem;
+            }
+            h1:before {
+                content: "";
+                position: absolute;
+                top: 6rem;
+                left: 2rem;
+                width: 20%;
+                height: 1rem;
+                border-bottom: 3px solid #4a4a4a;
+            }
+        }
+        .memeberbtn {
+            width: 48%;
+            margin: 1em;
+            margin-left: auto;
+            margin-right: auto;
+            border-radius: 3px;
+        }
+        .footericon {
+            .title {
+                transform: translate(60px,-11px);
+                font-size: 2.5rem;
+            }
+            .subtitle{
+                font-size: .8rem;
+            }
+        }
+    }
+}
 
 ::placeholder {
     color: hsl(0, 0%, 48%) !important;
