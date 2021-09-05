@@ -9,7 +9,7 @@ urlpatterns = [
     path('', include(('main.urls', 'main'), namespace='main')),
     path('', include(('misc.urls', 'misc'), namespace='misc')),
     path('authorization/', include(('authorization.urls', 'authorization'), namespace='authorization')),
-    path('course/', include(('course.urls', 'course'), namespace='course')),
+    path('courses/', include(('course.urls', 'course'), namespace='course')),
 ]
 
 handler400 = 'misc.views.handle_page_not_found'

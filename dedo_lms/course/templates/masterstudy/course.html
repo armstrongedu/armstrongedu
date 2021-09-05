@@ -1,0 +1,319 @@
+{% extends 'masterstudy/layout.html' %}
+
+{% block title %}Courses - {{ block.super }}{% endblock %}
+
+{% block main_body %}
+<div class="stm-lms-wrapper">
+        <div class="container">
+                <div class="row">
+                        <div class="col-md-9">
+                            <h1 class="stm_lms_course__title">{{ course.title }}</h1>
+                                <div class="single_product_after_title">
+                                        <div class="clearfix">
+                                                <div class="pull-left meta_pull">
+                                                        <div class="pull-left stm_lms_teachers">
+                                                                <a href="">
+                                                                        <div class="meta-unit teacher clearfix">
+                                                                                <div class="pull-left">
+                                                                                        <img alt='' src='http://0.gravatar.com/avatar/f94562563861857057c6a0a461c23805?s=215&#038;d=mm&#038;r=g' class='avatar avatar-215 photo' height='215' width='215' loading='lazy' />
+                                                                                </div>
+                                                                                <div class="meta_values">
+                                                                                        <div class="label h6">Author</div>
+                                                                                        <div class="value heading_font h6">Author Name</div>
+                                                                                </div>
+                                                                        </div>
+                                                                </a>
+                                                        </div>
+                                                        <div class="pull-left xs-product-cats-left">
+                                                                <div class="meta-unit categories clearfix">
+                                                                        <div class="pull-left">
+                                                                                <i class="fa-icon-stm_icon_category secondary_color"></i>
+                                                                        </div>
+                                                                        <div class="meta_values">
+                                                                                <div class="label h6">Category:</div>
+                                                                                <div class="value h6">
+                                                                                {% for category in course.category.all %}
+                                                                                    <a href='' title='Nvidia'>{{ category.title }}</a>,
+                                                                                {% endfor %}
+                                                                                </div>
+                                                                        </div>
+                                                                </div>
+                                                        </div>
+                                                </div>
+                                        </div>
+                                </div>
+                                <ul class="nav nav-tabs" role="tablist">
+                                        <li role="presentation" class="active">
+                                                <a href="#description"
+           data-toggle="tab">
+            Description                </a>
+                                        </li>
+                                        <li role="presentation" class="">
+                                                <a href="#curriculum"
+           data-toggle="tab">
+            Curriculum                </a>
+                                        </li>
+                                </ul>
+                                <div class="tab-content">
+                                        <div role="tabpanel"
+     class="tab-pane active"
+     id="description">
+                                                <div class="stm_lms_course__image">
+                                                    <img width="870" height="440" src="{{ course.intro_video.url }}" class="attachment-img-870-440 size-img-870-440 wp-post-image" alt="" loading="lazy" />
+                                                </div>
+                                                <div class="stm_lms_course__content">
+                                                        <div class="vc_row wpb_row vc_row-fluid">
+                                                                <div class="wpb_column vc_column_container vc_col-sm-12">
+                                                                        <div class="vc_column-inner">
+                                                                                <div class="wpb_wrapper">
+                                                                                        <div class="wpb_text_column wpb_content_element " >
+                                                                                                <div class="wpb_wrapper">
+                                                                                                        <p>The primary goal of this quick start guide is to introduce you to Unreal Engine 4&#8217;s (UE4) development environment. By the end of this guide, you&#8217;ll know how to set up and develop C++ Projects in UE4. This guide shows you how to create a new Unreal Engine project, add a new C++ class to it, compile the project, and add an instance of a new class to your level. By the time you reach the end of this guide, you&#8217;ll be able to see your programmed Actor floating above a table in the level.</p>
+                                                                                                        <p>This quick start guide shows you how to add assets to your Unreal Engine (UE4) games. By the end of this guide, you&#8217;ll know how to use the Project Browser to create new projects and navigate the Content Browser to find and add content. You&#8217;ll also know where to find information on the FBX Content Pipeline while learning how to use the Material Editor to modify Materials before applying them to a Static Mesh Actor.</p>
+                                                                                                        <h3>Main Features</h3>
+                                                                                                </div>
+                                                                                        </div>
+                                                                                        <div class="vc_row wpb_row vc_inner vc_row-fluid">
+                                                                                                <div class="wpb_column vc_column_container vc_col-sm-6">
+                                                                                                        <div class="vc_column-inner">
+                                                                                                                <div class="wpb_wrapper">
+                                                                                                                        <div class="wpb_text_column wpb_content_element  vc_custom_1533706322004" >
+                                                                                                                                <div class="wpb_wrapper">
+                                                                                                                                        <ul>
+                                                                                                                                                <li>Achieve Hollywood best quality visuals out of the box.</li>
+                                                                                                                                                <li>With complete C++ source code access, you can study.</li>
+                                                                                                                                                <li>Comes with designer-friendly Blueprint visual scripting.</li>
+                                                                                                                                        </ul>
+                                                                                                                                </div>
+                                                                                                                        </div>
+                                                                                                                </div>
+                                                                                                        </div>
+                                                                                                </div>
+                                                                                                <div class="wpb_column vc_column_container vc_col-sm-6">
+                                                                                                        <div class="vc_column-inner">
+                                                                                                                <div class="wpb_wrapper">
+                                                                                                                        <div class="wpb_text_column wpb_content_element  vc_custom_1533706426175" >
+                                                                                                                                <div class="wpb_wrapper">
+                                                                                                                                        <ul>
+                                                                                                                                                <li>Unreal Engine provides Robust Multiplayer Framework.</li>
+                                                                                                                                                <li>The built-in Cascade visual effects editor enables particles.</li>
+                                                                                                                                                <li>Unreal Engine 4&#8217;s Material Editor makes use of physically-based.</li>
+                                                                                                                                        </ul>
+                                                                                                                                </div>
+                                                                                                                        </div>
+                                                                                                                </div>
+                                                                                                        </div>
+                                                                                                </div>
+                                                                                        </div>
+                                                                                        <div class="wpb_text_column wpb_content_element " >
+                                                                                                <div class="wpb_wrapper">
+                                                                                                        <h3>What is the target audience?</h3>
+                                                                                                </div>
+                                                                                        </div>
+                                                                                        <div class="wpb_text_column wpb_content_element " >
+                                                                                                <div class="wpb_wrapper">
+                                                                                                        <ul>
+                                                                                                                <li>You might be thinking, all of the above &#8211; and that is fine. But as a complete beginner learning Unreal Engine 4.</li>
+                                                                                                                <li>The rendering system in Unreal Engine 4 is an all-new, DirectX 11 pipeline that includes deferred shading.</li>
+                                                                                                        </ul>
+                                                                                                        <p>Learning a new game engine as a complete beginner is very intimidating. There are a lot of tutorials, documentation and advice already out but how do you start and proceed with learning Unreal Engine 4 is unclear. You get pulled into many different directions and end up confused and overwhelmed.</p>
+                                                                                                        <p>I have spent a lot of time deconstructing what it takes to learn a game engine from scratch. What it is that you should focus on first and what you should avoid until later.</p>
+                                                                                                </div>
+                                                                                        </div>
+                                                                                </div>
+                                                                        </div>
+                                                                </div>
+                                                        </div>
+                                                </div>
+                                        </div>
+                                        <div role="tabpanel"
+     class="tab-pane "
+     id="curriculum">
+                                                <div class="stm-curriculum">
+                                                        <div class="stm-curriculum-section">
+                                                                <h3>Starting Course</h3>
+                                                        </div>
+                                                        <div class="stm-curriculum-item "
+         >
+                                                                <div class="stm-curriculum-item__num">
+                                1                </div>
+                                                                <div class="stm-curriculum-item__icon" data-toggle="tooltip" data-placement="bottom" title="Text Lesson">
+                                                                        <i class="stmlms-text"></i>
+                                                                </div>
+                                                                <div class="stm-curriculum-item__title">
+                                                                        <div class="heading_font">
+                Nvidia New Technologies Slides                                            </div>
+                                                                </div>
+                                                                <div class="stm-curriculum-item__preview"></div>
+                                                                <div class="stm-curriculum-item__meta"></div>
+                                                        </div>
+                                                        <div class="stm-curriculum-item "
+         >
+                                                                <div class="stm-curriculum-item__num">
+                                2                </div>
+                                                                <div class="stm-curriculum-item__icon" data-toggle="tooltip" data-placement="bottom" title="Quiz">
+                                                                        <i class="stmlms-quiz"></i>
+                                                                </div>
+                                                                <div class="stm-curriculum-item__title">
+                                                                        <div class="heading_font">
+                Quiz: Mobile / Native Apps                                            </div>
+                                                                </div>
+                                                                <div class="stm-curriculum-item__preview"></div>
+                                                                <div class="stm-curriculum-item__meta">
+                                                        24 questions                                    </div>
+                                                        </div>
+                                                        <div class="stm-curriculum-section">
+                                                                <h3>After Intro</h3>
+                                                        </div>
+                                                        <div class="stm-curriculum-item "
+         >
+                                                                <div class="stm-curriculum-item__num">
+                                1                </div>
+                                                                <div class="stm-curriculum-item__icon" data-toggle="tooltip" data-placement="bottom" title="Text Lesson">
+                                                                        <i class="stmlms-text"></i>
+                                                                </div>
+                                                                <div class="stm-curriculum-item__title">
+                                                                        <div class="heading_font">
+                Realistic Graphic on UE4                                            </div>
+                                                                </div>
+                                                                <div class="stm-curriculum-item__preview"></div>
+                                                                <div class="stm-curriculum-item__meta"></div>
+                                                        </div>
+                                                        <div class="stm-curriculum-item "
+         >
+                                                                <div class="stm-curriculum-item__num">
+                                2                </div>
+                                                                <div class="stm-curriculum-item__icon" data-toggle="tooltip" data-placement="bottom" title="Text Lesson">
+                                                                        <i class="stmlms-text"></i>
+                                                                </div>
+                                                                <div class="stm-curriculum-item__title">
+                                                                        <div class="heading_font">
+                Volta GPU for optimization.                                            </div>
+                                                                </div>
+                                                                <div class="stm-curriculum-item__preview"></div>
+                                                                <div class="stm-curriculum-item__meta"></div>
+                                                        </div>
+                                                        <div class="stm-curriculum-item "
+         >
+                                                                <div class="stm-curriculum-item__num">
+                                3                </div>
+                                                                <div class="stm-curriculum-item__icon" data-toggle="tooltip" data-placement="bottom" title="Text Lesson">
+                                                                        <i class="stmlms-text"></i>
+                                                                </div>
+                                                                <div class="stm-curriculum-item__title">
+                                                                        <div class="heading_font">
+                Deep Learning                                            </div>
+                                                                </div>
+                                                                <div class="stm-curriculum-item__preview"></div>
+                                                                <div class="stm-curriculum-item__meta"></div>
+                                                        </div>
+                                                </div>
+                                        </div>
+                                                <div role="tabpanel"
+     class="tab-pane "
+     id="reviews">
+                                                        <div id="stm-lms-reviews" v-bind:class="{'loading' : loading}">
+                                                                <div class="stm-lms-reviews">
+                                                                        <div class="stm-lms-reviews-single" v-for="(review, id) in reviews">
+                                                                                <div class="stm-lms-reviews-top">
+                                                                                        <h4>{{ review.user }}</h4>
+                                                                                        <div class="stm-lms-ago">
+                {{ review.time }}
+            </div>
+                                                                                </div>
+                                                                                <div class="media">
+                                                                                        <div class="media-left media-top">
+                                                                                                <div class="testimonial-media-unit">
+                                                                                                        <img v-bind:src="review.avatar_url" width="96" height="96"
+                         class="testimonial-media-unit-rounded"/>
+                                                                                                </div>
+                                                                                        </div>
+                                                                                        <div class="media-body">
+                                                                                                <div class="star-rating">
+                                                                                                        <span v-bind:style="{width: ((review.mark * 100) / 5) +'%'}">&nbsp;</span>
+                                                                                                </div>
+                                                                                                <p v-html="review.content" v-if="review.content"></p>
+                                                                                        </div>
+                                                                                </div>
+                                                                        </div>
+                                                                        <a @click="getReviews()" v-if="!total" class="btn btn-default" v-bind:class="{'loading' : loading}">
+                                                                                <span>Show more</span>
+                                                                        </a>
+                                                                </div>
+                                                        </div>
+                                                        <div id="stm_lms_add_review">
+                Please,
+                <a href="{% url 'authorization:login' %}">login</a> to leave a review
+                                                        </div>
+                                                </div>
+                                        </div>
+                                </div>
+                                <div class="col-md-3">
+                                        <div class="stm-lms-course__sidebar">
+                                                <div class="stm-lms-buy-buttons stm-lms-buy-buttons-mixed stm-lms-buy-buttons-mixed-pro">
+                                                        <a href="#"
+           class="btn btn-default"
+           data-target=".stm-lms-modal-login"
+           data-lms-modal="login">
+                                                                <span>Enroll course</span>
+                                                        </a>
+                                                </div>
+                                                <div class="stm-lms-course-info heading_font">
+                                                        <div class="stm-lms-course-info__single">
+                                                                <div class="stm-lms-course-info__single_label">
+                                                                        <span>Enrolled</span>:
+
+                                                                        <strong>35 students</strong>
+                                                                </div>
+                                                                <div class="stm-lms-course-info__single_icon">
+                                                                        <i class="fa-icon-stm_icon_users"></i>
+                                                                </div>
+                                                        </div>
+                                                        <div class="stm-lms-course-info__single">
+                                                                <div class="stm-lms-course-info__single_label">
+                                                                        <span>Duration</span>:
+
+                                                                        <strong>10 hours</strong>
+                                                                </div>
+                                                                <div class="stm-lms-course-info__single_icon">
+                                                                        <i class="fa-icon-stm_icon_clock"></i>
+                                                                </div>
+                                                        </div>
+                                                        <div class="stm-lms-course-info__single">
+                                                                <div class="stm-lms-course-info__single_label">
+                                                                        <span>Lectures</span>:
+
+                                                                        <strong>4</strong>
+                                                                </div>
+                                                                <div class="stm-lms-course-info__single_icon">
+                                                                        <i class="fa-icon-stm_icon_bullhorn"></i>
+                                                                </div>
+                                                        </div>
+                                                        <div class="stm-lms-course-info__single">
+                                                                <div class="stm-lms-course-info__single_label">
+                                                                        <span>Video</span>:
+
+                                                                        <strong>9 hours</strong>
+                                                                </div>
+                                                                <div class="stm-lms-course-info__single_icon">
+                                                                        <i class="fa-icon-stm_icon_film-play"></i>
+                                                                </div>
+                                                        </div>
+                                                        <div class="stm-lms-course-info__single">
+                                                                <div class="stm-lms-course-info__single_label">
+                                                                        <span>Level</span>:
+
+                                                                        <strong>Advanced</strong>
+                                                                </div>
+                                                                <div class="stm-lms-course-info__single_icon">
+                                                                        <i class="lnricons-chart-growth"></i>
+                                                                </div>
+                                                        </div>
+                                                </div>
+                                        </div>
+                                </div>
+                        </div>
+                </div>
+        </div>
+</div>
+{% endblock %}

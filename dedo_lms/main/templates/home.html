@@ -10,7 +10,9 @@
         accredited and bespoke stem courses. We crush the barrie for kids
         education.
       </p>
-      <button class="button introbtn is-primary has-text-grey-dark">Explore Courses</button>
+      <a href="{% url 'course:courses' %}">
+          <button class="button introbtn is-primary has-text-grey-dark">Explore Courses</button>
+      </a>
     </section>
     <div class="level-right">
       <img class="level-item intropic" src="{% static 'hero1.png' %}" alt="" />
