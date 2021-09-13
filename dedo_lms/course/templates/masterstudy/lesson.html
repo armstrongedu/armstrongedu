@@ -1,0 +1,369 @@
+{% extends 'masterstudy/layout.html' %}
+{% load static %}
+
+{% block title %}Lesson - {{ block.super }}{% endblock %}
+
+{% block body %}
+<body class="blog logged-in stm_lms_button theme-masterstudy woocommerce-js skin_custom_color classic-lms-2 wpb-js-composer js-comp-ver-6.7.0 vc_responsive elementor-default elementor-kit-5054 sizzy-full-desktop">
+                                        <div id="wrapper">
+                                        <div id="header" class="transparent_header_off" data-color="">
+                                        <div class="header_top_bar" style="background-color:#002e5b">
+                                        <div class="container">
+                                        <div class="clearfix">
+                                        <!-- Header Top bar Login -->
+                                        {% if not user.is_authenticated %}
+                                        <div class="pull-right">
+                                        <div class="header_login_url">
+                                        <a href="{% url 'authorization:login' %}">
+                                        <i class="fa fa-user"></i>Login</a>
+                                        <span class="vertical_divider"></span>
+                                        <a href="{% url 'authorization:signup' %}">Register</a>
+                                        </div>
+                                        </div>
+                                        {% endif %}
+                                        <!-- Header top bar Socials -->
+                                        <div class="pull-right xs-pull-left">
+                                        <ul class="top_bar_info clearfix">
+                                        <li class="hidden-info">
+                                        <i class="far fa-clock"></i> Mon - Sat 8.00 - 18.00				</li>
+                                        <li class="hidden-info">
+                                        <i class="fa fa-map-marker-alt"></i> 1010 Moon ave, New York, NY US				</li>
+                                        <li class="hidden-info">
+                                        <i class="fa fa-phone"></i> +1 212-226-3126                </li>
+                                        </ul>
+                                        </div>
+                                        </div>
+                                        </div>
+                                        </div>
+                                        <div class="header_default header_default">
+                                        <div class="container">
+                                        <div class="row">
+                                        <div class="col-md-3 col-sm-12 col-xs-12">
+
+
+                                        <div class="logo-unit">
+                                        <a href="{% url 'main:home' %}">
+                                        <img class="img-responsive logo_transparent_static visible" src="{% static 'logo.svg' %}" style="width: 50px;" alt="Dedo LMS"/>
+                                        </a>
+                                        </div>
+                                        <!-- Navbar toggle MOBILE -->
+                                        <button type="button" class="navbar-toggle collapsed hidden-lg hidden-md" data-toggle="collapse" data-target="#header_menu_toggler">
+                                        <span class="sr-only">Toggle navigation</span>
+                                        <span class="icon-bar"></span>
+                                        <span class="icon-bar"></span>
+                                        <span class="icon-bar"></span>
+                                        </button>
+                                        </div> <!-- md-3 -->
+                                        <!-- MObile menu -->
+                                        <div class="col-xs-12 col-sm-12 visible-xs visible-sm">
+                                        <div class="collapse navbar-collapse header-menu-mobile" id="header_menu_toggler">
+                                        <ul class="header-menu clearfix">
+                                        <li id="menu-item-1284" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-home menu-item-1284"><a href="{% url 'main:home' %}">Home</a></li>
+                                        <li id="menu-item-1220" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-1220"><a href="{% url 'course:courses' %}">Courses</a></li>
+                                        <!-- <li id="menu-item-5028" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-5028"><a href="">Plans</a></li>
+                                        <li id="menu-item-1313" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-1313"><a href="">Schools Programs</a></li>
+                                        <li id="menu-item-5029" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-5029"><a href="">About Us</a></li>
+                                        <li id="menu-item-5031" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-5031"><a href="">Contact Us</a></li> -->
+                                        </ul>
+                                        </div>
+                                        </div>
+                                        <!-- Desktop menu -->
+                                        <div class="col-md-9 col-sm-9 col-sm-offset-0 hidden-xs hidden-sm">
+                                        <div class="stm_menu_toggler" data-text="Menu"></div>
+                                        <div class="header_main_menu_wrapper clearfix" style="margin-top:5px;">
+                                        <div class="pull-right hidden-xs right_buttons">
+                                        </div>
+                                        <div class="collapse navbar-collapse pull-right">
+                                        <ul class="header-menu clearfix">
+                                        <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-home menu-item-1284"><a href="{% url 'main:home' %}">Home</a></li>
+                                        <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-1220"><a href="{% url 'course:courses' %}" >Courses</a></li>
+                                        <!-- <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-5028"><a href="">Plans</a></li>
+                                        <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-1313"><a href="">Schools Programs</a></li>
+                                        <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-5029"><a href="">About Us</a></li>
+                                        <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-5031"><a href="">Contact Us</a></li> -->
+                                        </ul>
+                                        </div>
+                                        </div>	    </div><!-- md-8 desk menu -->
+                                        </div> <!-- row -->
+                                        </div> <!-- container -->    </div>
+                                        </div> <!-- id header -->
+				</div>
+			</div>
+		</div>
+		<div class="stm-lms-wrapper stm-lessons lesson_style_default">
+
+                        <div class="stm-lms-curriculum-trigger" style="position: static; margin-left: 50px;display: inline-block; vertical-align: top; width: 50px; height: 50px; text-align: center; line-height: 46px; color: #f0f4fa; border-radius: 50%; font-size: 16px; background-color: #385bce; border: 2px solid #385bce; cursor: pointer; transition: .3s ease;">
+                                <i class="fa fa-list-ul"></i>
+                        </div>
+			<div class="stm-lms-course__curriculum">
+				<div class="stm-curriculum__close">
+					<i class="lnr lnr-cross"></i>
+				</div>
+				<div class="stm-curriculum">
+					<h3 class="stm-curriculum__title">
+        Course sections            </h3>
+                                        {% for lesson in lessons %}
+					<div class="stm-curriculum-section opened">
+						<div class="stm-curriculum-item stm-curriculum-item__section opened">
+							<div class="stm-curriculum-section__info">
+                                                            <span>Section {{ lesson.order }}</span>
+                                                            <h5>{{ lesson.title }}</h5>
+							</div>
+						</div>
+						<div class="stm-curriculum-section__lessons">
+                                                        {% for topic in lesson.topics.all %}
+                                                        <a href="{% url 'course:start' topic.id %}" class="stm-curriculum-item  is- first">
+								<div class="stm-curriculum-item__icon">
+                                                                    {% if topic.type == topic.TEXT %}
+                                                                        <i class="stmlms-text"></i>
+                                                                    {% elif topic.type == topic.VIDEO %}
+                                                                        <i class="stmlms-text"></i>
+                                                                    {% elif topic.type == topic.QUIZ %}
+                                                                        <i class="stmlms-quiz"></i>
+                                                                    {% endif %}
+								</div>
+                                                                <div class="stm-curriculum-item__num">{{ topic.order }}</div>
+								<div class="stm-curriculum-item__title">
+									<div class="heading_font">{{ topic }}</div>
+								</div>
+								<div class="stm-curriculum-item__meta"></div>
+								<div class="stm-curriculum-item__completed ">
+									<i class="fa fa-check"></i>
+								</div>
+							</a>
+                                                        {% endfor %}
+						</div>
+					</div>
+                                        {% endfor %}
+				</div>
+			</div>
+			<div class="stm-lms-course__sidebar_toggle">
+				<i class="fa fa-question"></i>
+			</div>
+			<div class="stm-lms-course__sidebar">
+				<div class="stm-lesson_sidebar__close">
+					<i class="lnr lnr-cross"></i>
+				</div>
+				<div id="stm_lms_lesson_comments" class="stm_lms_lesson_comments">
+					<div class="stm_lms_lesson_comments__inner">
+						<div class="stm_lms_lesson_comments__top">
+							<h3>
+                                Book a Help Session
+            </h3>
+							<!-- <a href="#" class="btn btn-default btn-icon">
+                    My Question
+								<i class="lnr lnr-arrow-right"></i>
+                                                        </a> -->
+						</div>
+                                        </div>
+                                    </div>
+				</div>
+				<div id="stm-lms-lessons">
+					<div class="stm-lms-course__content">
+						<div class="container">
+							<div class="row">
+								<div class="col-md-8 col-md-push-2">
+									<div class="stm-lms-course__lesson-content__top">
+                                                                            <h3>{{ topic.lesson.title }}</h3>
+                                                                            <h1>{{ topic }}</h1>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="stm-lms-course__content_wrapper">
+							<div class="container">
+								<div class="row">
+									<div class="col-md-8 col-md-push-2">
+										<div class="stm-lms-course__lesson-content">
+                                                                                        <h4>{{ topic.video.title }}</h4>
+                                                                                        <h4>{{ topic.text.title }}</h4>
+                                                                                        {% if topic.type == topic.TEXT %}
+                                                                                            <p>{{ topic.text.text }}</p>
+                                                                                        {% elif topic.type == topic.VIDEO %}
+                                                                                            <div style="height:500px;">{{ topic.video.video_iframe | safe}}</div>
+                                                                                        {% elif topic.type == topic.QUIZ %}
+
+                                                                                        <form class="stm-lms-single_quiz" style="display: block;">
+                                                                                          <input type="hidden" name="source" value="0" />
+                                                                                          <div
+                                                                                            class="
+                                                                                              stm-lms-single_question stm-lms-single_question_single_choice
+                                                                                              correct_answer_
+                                                                                            "
+                                                                                          >
+                                                                                            {% if topic.mcq_quiz %}
+                                                                                            <div class="stm-lms-single_question_text">
+                                                                                                <h3>{{ topic.mcq_quiz.question }}</h3>
+                                                                                              <div></div>
+                                                                                            </div>
+
+                                                                                            <div class="heading_font">
+                                                                                              {% for choice in topic.mcq_quiz.choices %}
+                                                                                              <div class="stm-lms-single-answer">
+                                                                                                <label>
+                                                                                                  <input type="radio" name="759" value="Answer 1 (Correct)" />
+                                                                                                  <i class="fa fa-check"></i>
+                                                                                                  {{ choice }}
+                                                                                                </label>
+                                                                                              </div>
+                                                                                              {% endfor %}
+                                                                                            </div>
+                                                                                            {% elif topic.tf_quiz %}
+                                                                                            <div class="stm-lms-single_question_text">
+                                                                                                <h3>{{ topic.tf_quiz.question }}</h3>
+                                                                                              <div></div>
+                                                                                            </div>
+
+                                                                                            <div class="heading_font">
+                                                                                              <div class="stm-lms-single-answer">
+                                                                                                <label>
+                                                                                                  <input type="radio" name="759" value="Answer 1 (Correct)" />
+                                                                                                  <i class="fa fa-check"></i>
+                                                                                                  True
+                                                                                                </label>
+                                                                                              </div>
+                                                                                              <div class="stm-lms-single-answer">
+                                                                                                <label>
+                                                                                                  <input type="radio" name="759" value="Answer 1 (Correct)" />
+                                                                                                  <i class="fa fa-check"></i>
+                                                                                                  False
+                                                                                                </label>
+                                                                                              </div>
+                                                                                            </div>
+                                                                                            {% endif%}
+                                                                                      <input type="hidden" name="action" value="stm_lms_user_answers" />
+                                                                                      <input type="hidden" name="quiz_id" value="19" />
+                                                                                      <input type="hidden" name="course_id" value="1072" />
+                                                                                      <button type="submit" class="btn btn-default stm_lms_complete_lesson">
+                                                                                    <span>Submit Quiz</span>
+                                                                                  </button>
+                                                                                </form>
+
+                                                                                <div class="stm-lms-quiz__result">
+                                                                                    <h2>Result</h2>
+                                                                                    <h4 class="stm-lms-quiz__result_number">
+                                                                                        <span>0%</span>
+                                                                                    </h4>
+
+                                                                                    <div class="stm-lms-quiz__result_actions">
+                                                                                        <a href="#retake" class="btn btn-default btn-retake">
+                                                                                            Re-take Quiz        </a>
+
+                                                                                            </div>
+
+                                                                                    <div class="stm-lms-quiz__result_passing_grade">
+                                                                                        Passing grade - 0%    </div><div class="stm-lms-quiz__result_actions"><a class="btn btn-default btn-close-quiz-modal-results" href="http://167.179.117.201/courses/nvidia-and-ue4-technologies-practice/19">Close</a></div>
+                                                                                </div>
+
+
+
+
+                                                                                        {% endif %}
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="stm-lms-lesson_navigation heading_font ncompleted">
+                                <div class="stm-lms-lesson_navigation_side stm-lms-lesson_navigation_prev">
+                                {% if prev_topic %}
+                                    <a href="{% url 'course:start' prev_topic.id %}">
+                                        <i class="lnr lnr-chevron-left"></i>
+                                            <span class="stm_lms_section_text">{{ prev_topic.lesson.title }}</span>
+                                                <span>{{ prev_topic }}</span>
+					</a>
+                                        {% endif %}
+                                        </div>
+				<div class="stm-lms-lesson_navigation_complete">
+					<a href="#" class="btn btn-default stm_lms_complete_lesson uncompleted" data-course="1072" data-lesson="4974">
+						<span>Complete</span>
+					</a>
+				</div>
+				<div class="stm-lms-lesson_navigation_side stm-lms-lesson_navigation_next">
+                                {% if next_topic %}
+                                    <a href="{% url 'course:start' next_topic.id %}">
+                                            <span class="stm_lms_section_text">{{ next_topic.lesson.title }}</span>
+                                                <span>{{ next_topic }}</span>
+						<i class="lnr lnr-chevron-right"></i>
+					</a>
+                                {% endif %}
+				</div>
+			</div>
+			<script type="text/javascript">
+			window.RS_MODULES = window.RS_MODULES || {};
+			window.RS_MODULES.modules = window.RS_MODULES.modules || {};
+			window.RS_MODULES.waiting = window.RS_MODULES.waiting || [];
+			window.RS_MODULES.defered = true;
+			window.RS_MODULES.moduleWaiting = window.RS_MODULES.moduleWaiting || {};
+			window.RS_MODULES.type = 'compiled';
+		</script>
+			<!-- Memberships powered by Paid Memberships Pro v2.5.10.1.
+ -->
+			<script type="text/javascript">
+		(function () {
+			var c = document.body.className;
+			c = c.replace(/woocommerce-no-js/, 'woocommerce-js');
+			document.body.className = c;
+		})();
+	</script>
+			<link rel="stylesheet" id="stm-lms-curriculum_trigger-css" href="" type="text/css" media="all">
+                        <link rel="stylesheet" id="stm-curriculum_trigger-style_1-css" href="{% static 'masterstudy/style_1.css' %}" type="text/css" media="all">
+                        <link rel="stylesheet" id="stm-lms-lesson-css" href="{% static 'masterstudy/lesson.css' %}" type="text/css" media="all">
+                        <link rel="stylesheet" id="stm-lms-user-css" href="{% static 'masterstudy/user.css' %}" type="text/css" media="all">
+                                                <link rel="stylesheet" id="stm-lms-curriculum-css" href="{% static 'masterstudy/curriculum.css' %}" type="text/css" media="all">
+                                                <link rel="stylesheet" id="stm-lms-quiz-css" href="{% static 'masterstudy/quiz.css' %}" type="text/css" media="all">
+                                                <link rel="stylesheet" id="stm_lms_wpb_front_css-css" href="{% static 'masterstudy/js_composer.min.css' %}" type="text/css" media="all">
+                                                <link rel="stylesheet" id="rs-plugin-settings-css" href="{% static 'masterstudy/rs6.css' %}" type="text/css" media="all">
+											<style id="rs-plugin-settings-inline-css" type="text/css">
+#rs-demo-id {}
+</style>
+                                                                                                        <script type="text/javascript" src="{% static 'masterstudy/regenerator-runtime.min.js' %}" id="regenerator-runtime-js"></script>
+                                                                                                        <script type="text/javascript" src="{% static 'masterstudy/wp-polyfill.min.js' %}" id="wp-polyfill-js"></script>
+											<script type="text/javascript" id="contact-form-7-js-extra">
+/*
+												<![CDATA[ */
+var wpcf7 = {"api":{"root":"http:\/\/167.179.117.201\/wp-json\/","namespace":"contact-form-7\/v1"}};
+/* ]]> */
+
+											</script>
+                                                                                                        <script type="text/javascript" src="{% static 'masterstudy/index.js' %}" id="contact-form-7-js"></script>
+                                                                                                        <script type="text/javascript" src="{% static 'masterstudy/bootstrap.min.js' %}" id="bootstrap-js"></script>
+                                                                                                        <script type="text/javascript" src="{% static 'masterstudy/countdown.js' %}" id="lms_countdown.js-js"></script>
+                                                                                                        <script type="text/javascript" src="{% static 'masterstudy/rbtools.min.js' %}" defer="" async="" id="tp-tools-js"></script>
+                                                                                                        <script type="text/javascript" src="{% static 'masterstudy/rs6.min.js' %}" defer="" async="" id="revmin-js"></script>
+                                                                                                        <script type="text/javascript" src="{% static 'masterstudy/js.cookie.min.js' %}" id="js-cookie-js"></script>
+                                                                                                        <script type="text/javascript" src="{% static 'masterstudy/woocommerce.min.js' %}" id="woocommerce-js"></script>
+                                                                                                        <script type="text/javascript" src="{% static 'masterstudy/cart-fragments.min.js' %}" id="wc-cart-fragments-js"></script>
+                                                                                                        <script type="text/javascript" src="{% static 'masterstudy/jquery.fancybox.min.js' %}" id="fancybox-js"></script>
+                                                                                                        <script type="text/javascript" src="{% static 'masterstudy/select2.full.min.js' %}" id="select2-js"></script>
+                                                                                                        <script type="text/javascript" src="{% static 'masterstudy/custom.js' %}" id="stm_theme_scripts-js"></script>
+                                                                                                        <script type="text/javascript" src="{% static 'masterstudy/ajax.submit.js' %}" id="ajaxsubmit-js"></script>
+                                                                                                        <script type="text/javascript" src="{% static 'masterstudy/wp-embed.min.js' %}" id="wp-embed-js"></script>
+                                                                                                        <script type="text/javascript" src="{% static 'masterstudy/curriculum_trigger.js' %}" id="stm-lms-curriculum_trigger-js"></script>
+                                                                                                        <script type="text/javascript" src="{% static 'masterstudy/curriculum.js' %}" id="stm-lms-curriculum-js"></script>
+                                                                                                        <script type="text/javascript" src="{% static 'masterstudy/lesson_sidebar.js' %}" id="stm-lms-lesson_sidebar-js"></script>
+                                                                                                        <script type="text/javascript" src="{% static 'masterstudy/video.min.js' %}" id="video.js-js"></script>
+                                                                                                        <script type="text/javascript" src="{% static 'masterstudy/lessons.js' %}" id="stm-lms-lessons-js"></script>
+                                                                                                        <link rel="stylesheet" id="stm-lms-lesson_comments-css" href="{% static 'masterstudy/lesson_comments.css' %}" type="text/css" media="all">
+											<script type="text/javascript">
+			window.RS_MODULES = window.RS_MODULES || {};
+			window.RS_MODULES.modules = window.RS_MODULES.modules || {};
+			window.RS_MODULES.waiting = window.RS_MODULES.waiting || [];
+			window.RS_MODULES.defered = true;
+			window.RS_MODULES.moduleWaiting = window.RS_MODULES.moduleWaiting || {};
+			window.RS_MODULES.type = 'compiled';
+		</script>
+											<!-- Memberships powered by Paid Memberships Pro v2.5.10.1.
+ -->
+											<script type="text/javascript">
+		(function () {
+			var c = document.body.className;
+			c = c.replace(/woocommerce-no-js/, 'woocommerce-js');
+			document.body.className = c;
+		})();
+	</script>
+</body>
+{% endblock %}

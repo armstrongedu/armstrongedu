@@ -6,3 +6,4 @@ django-admin-interface==0.15.5
 django-simple-email-confirmation==0.7.0
 social-auth-app-django==5.0.0
 fontawesome-free==5.15.4
+api.video==0.0.14

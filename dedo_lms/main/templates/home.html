@@ -1,6 +1,6 @@
 {% extends 'layout.html' %} {% load static %} {% block body %}
 <body id="homepage">
-  <div class="level intro">
+  <div class="level intro" style='height: calc(100vh - 3.25rem)'>
     <section class="section content introcontent">
       <h1 class="title introtitle has-text-grey-dark has-text-weight-bold">
         Where Education Meets Entertainment.
@@ -18,24 +18,14 @@
       <img class="level-item intropic" src="{% static 'hero1.png' %}" alt="" />
     </div>
   </div>
-  <div class="breadcrumb mybreadcrumb has-bullet-separator is-centered">
-    <ul>
-      {% for category in categories %}
-      <li><a href="#"><button class="button is-text has-text-grey-light has-background-black-ter">{{ category.title }}</button></a></li>
-      {% endfor%}
-    </ul>
-  </div>
-  <div class="container is-centered content">
+  <div class="container is-centered content pt-6">
     <h1 class="title feature">Featured Courses</h1>
     <ul class="columns is-multiline featurecourse">
       {% for course in courses %}
       <div class="column is-one-third">
         <div class="card">
           <div class="card-image">
-            <img
-                src="{{ course.intro_video.url }}"
-              alt="Course Intro Video"
-            />
+            {{ course.intro_video_iframe | safe }}
           </div>
           <div class="card-content">
             <div class="media">
