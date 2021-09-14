@@ -18,13 +18,15 @@ def course(request, course_id):
 def start(request, topic_id): # NOTE(gaytomycode): this is tmp
     topic = Topic.objects.get(id=topic_id)
     course = topic.lesson.course
+    prev_lesson = Lesson.objects.filter(course_id=course, order=topic.lesson.order-1).first()
+    next_lesson = Lesson.objects.filter(course_id=course, order=topic.lesson.order+1).first()
     context = {
         'course': course,
         'lessons': Lesson.objects.filter(course_id=course).order_by('order'),
         'topic': topic,
-        'prev_topic': (Topic.objects.filter(lesson=topic.lesson, order=topic.order-1).first() or
-                       Lesson.objects.filter(course_id=course, order=topic.lesson.order-1).first()),
-        'next_topic': (Topic.objects.filter(lesson=topic.lesson, order=topic.order+1).first() or
-                       Lesson.objects.filter(course_id=course, order=topic.lesson.order+1).first()),
+        'prev_topic': (Topic.objects.filter(lesson__course_id=course, lesson=topic.lesson, order=topic.order-1).first() or
+                       (prev_lesson.topics.filter(order=1).first() if prev_lesson else None)),
+        'next_topic': (Topic.objects.filter(lesson__course_id=course, lesson=topic.lesson, order=topic.order+1).first() or
+                       (next_lesson.topics.filter(order=1).first() if next_lesson else None)),
     }
     return render(template_name='masterstudy/lesson.html', request=request, context=context)
