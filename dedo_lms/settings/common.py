@@ -32,9 +32,11 @@ INSTALLED_APPS = [
     'simple_email_confirmation',
     'social_django',
     'fontawesome_free',
+    'django_celery_beat',
     'main',
     'course',
     'misc',
+    'payment',
 ]
 
 MIDDLEWARE = [
@@ -127,6 +129,8 @@ AUTH_USER_MODEL = 'authorization.User'
 LOGIN_REDIRECT_URL = '/'
 LOGIN_URL = '/authorization/login/'
 
+EMAIL_HOST_USER = FROM_EMAIL = ENV.str('EMAIL_HOST_USER')
+
 SOCIAL_AUTH_JSONFIELD_ENABLED = True
 
 AUTHENTICATION_BACKENDS = (
@@ -157,4 +161,14 @@ SOCIAL_AUTH_FACEBOOK_SCOPE = ['email']
 SOCIAL_AUTH_FACEBOOK_PROFILE_EXTRA_PARAMS = {
     'fields': 'email'
 }
+
 API_VIDEO_KEY = ENV.str('API_VIDEO_KEY')
+
+CELERY_BROKER_URL = ENV.str('CELERY_BROKER_URL')
+CELERY_RESULT_BACKEND = ENV.str('CELERY_RESULT_BACKEND')
+CELERY_TIMEZONE = "Africa/Cairo"
+CELERY_TASK_TRACK_STARTED = True
+CELERY_TASK_TIME_LIMIT = 30 * 60
+CELERY_ACCEPT_CONTENT = ['application/json']
+CELERY_TASK_SERIALIZER = 'json'
+CELERY_RESULT_SERIALIZER = 'json'

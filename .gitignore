@@ -10,3 +10,4 @@ uploads
 *.out
 uwsgi.ini
 uwsgi_params
+dump.rdb
