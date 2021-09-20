@@ -1,12 +1,10 @@
-from celery import shared_task
-from django.core.mail import send_mail
-from django.conf import settings
-
 from armstrong.celery import app
 
 
 @app.task
 def test_task(email_list):
+    from django.core.mail import send_mail
+    from django.conf import settings
     from urllib.request import urlopen
     import json
     resp = json.loads(urlopen('http://ron-swanson-quotes.herokuapp.com/v2/quotes').read())[0]
