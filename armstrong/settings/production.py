@@ -1,6 +1,6 @@
 from .common import *
 
-ALLOWED_HOSTS = ['dedolms.com', 'www.dedolms.com', 'dev.dedolms.com',]
+ALLOWED_HOSTS = ['armstrongedu.com', 'www.armstrongedu.com', 'dev.armstrongedu.com',]
 
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_USE_TLS=ENV.str('EMAIL_USE_TLS')
