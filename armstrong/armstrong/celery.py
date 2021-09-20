@@ -2,7 +2,7 @@ import os
 
 from celery import Celery
 
-app = Celery('dedo_lms')
+app = Celery('armstrong')
 
 app.config_from_object('django.conf:settings', namespace='CELERY')
 
