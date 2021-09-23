@@ -63,9 +63,10 @@ class Lesson(models.Model):
 
 
 class Topic(models.Model):
-    TEXT, VIDEO, QUIZ = range(3)
+    TEXT, GAME, VIDEO, QUIZ = range(4)
     TYPE_CHOICES = (
         (TEXT, 'Text'),
+        (GAME, 'Game'),
         (VIDEO, 'Video'),
         (QUIZ, 'Quiz'),
     )
@@ -94,6 +95,17 @@ class Video(models.Model):
 
     def __str__(self):
         return self.title
+
+
+class Game(models.Model):
+    lesson = models.ForeignKey(Lesson, null=True, blank=True, on_delete=models.SET_NULL, related_name='games')
+    topic = models.OneToOneField(Topic, null=True, blank=True, on_delete=models.CASCADE, related_name='game')
+    title = models.CharField(max_length=255)
+    iframe = models.TextField()
+
+    def __str__(self):
+        return self.title
+
 
 class MCQQuiz(models.Model):
     lesson = models.ForeignKey(Lesson, null=True, blank=True, on_delete=models.SET_NULL, related_name='mcq_quizez')

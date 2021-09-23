@@ -29,13 +29,13 @@ body {
             a{
                 margin: 0;
             }
-            
+
         }
         .navbar-end:nth-child(2){
             margin-right:1.2em ;
             margin-left:1.2em ;
         }
-        
+
     }
     .content h1, .content h2, .content h3, .content h4, .content h5, .content h6 {
         color: white;
@@ -126,20 +126,20 @@ body {
 }
 
 @media only screen and (max-width: 800px) {
-    
+
     body {
         overflow-y: unset;
         margin-bottom: 3rem;
     }
     body .mynav {
-        
+
         .buttons{
             display: inline;
             float: right;
             margin: .6em;
             margin-right: 1em;
         }
-        
+
     }
     body .mynav {
         background-color: #242424;
@@ -164,7 +164,7 @@ body {
 }
 
 #homepage {
-   
+
     .mynav {
         background-color: #242424;
         position: unset;
@@ -220,7 +220,7 @@ body {
         transform: translate(0, 4rem);
     }
     .featurecourse {
-       
+
         .is-one-third {
             padding: 2%;
         }
@@ -257,7 +257,7 @@ body {
             }
 
         }
-       
+
     }
     .column:nth-child(n){
         margin-bottom:2em;
@@ -344,12 +344,12 @@ body {
 }
 @media only screen and (max-width: 600px){
 #homepage{
-    
+
     .button{
         margin-right: auto;
         margin-left: auto;
     }
-    
+
      .intro{
         background-image: unset;
         padding: 0;
@@ -373,29 +373,29 @@ body {
 
     .introcontent{
         transform: translate(0,2em);
-       
+
         .subtitle{
-            color: #D8D8D8 !important; 
+            color: #D8D8D8 !important;
         }
         .title{
-            color: #D8D8D8 !important; 
+            color: #D8D8D8 !important;
             margin: 0;
             padding-bottom: 1em;
-          
+
         }
     }
-   
+
 
     .whysec {
         margin:.1em;
-        
+
         .whyicons{
             ul {
             margin-left: auto;
             padding-left: 0;
             margin-right: auto;
             }
-            
+
         }
         .whyimg{
             display: block;
@@ -416,3 +416,17 @@ body {
     }
 }
 }
+
+#mobile-hero-image {
+    display: none;
+}
+
+@media only screen and (max-width: 600px) {
+    #web-hero-image {
+        display: none;
+    }
+    #mobile-hero-image {
+        display: unset;
+    }
+}
+

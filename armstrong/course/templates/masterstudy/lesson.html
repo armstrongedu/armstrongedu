@@ -120,6 +120,8 @@
                                                                         <i class="stmlms-text"></i>
                                                                     {% elif topic.type == topic.QUIZ %}
                                                                         <i class="stmlms-quiz"></i>
+                                                                    {% elif topic.type == topic.GAME %}
+                                                                        <i class="stmlms-quiz"></i>
                                                                     {% endif %}
 								</div>
                                                                 <div class="stm-curriculum-item__num">{{ topic.order }}</div>
@@ -177,8 +179,11 @@
 										<div class="stm-lms-course__lesson-content">
                                                                                         <h4>{{ topic.video.title }}</h4>
                                                                                         <h4>{{ topic.text.title }}</h4>
+                                                                                        <h4>{{ topic.game.title }}</h4>
                                                                                         {% if topic.type == topic.TEXT %}
                                                                                             <p>{{ topic.text.text }}</p>
+                                                                                        {% elif topic.type == topic.GAME %}
+                                                                                            <div style="height:500px;">{{ topic.game.iframe | safe}}</div>
                                                                                         {% elif topic.type == topic.VIDEO %}
                                                                                             <div style="height:500px;">{{ topic.video.video_iframe | safe}}</div>
                                                                                         {% elif topic.type == topic.QUIZ %}
