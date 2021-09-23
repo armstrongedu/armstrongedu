@@ -1,6 +1,9 @@
 {% extends 'layout.html' %} {% load static %} {% block body %}
 <body id="homepage">
-  <div class="level intro" style='height: calc(100vh - 3.25rem)'>
+  <div class=" intro">
+    <div>
+      <img class=" intropic" src="{% static 'hero1.png' %}" alt="" />
+    </div>
     <section class="section content introcontent">
       <h1 class="title introtitle has-text-grey-dark has-text-weight-bold">
         Where Education Meets Entertainment.
@@ -10,22 +13,28 @@
         accredited and bespoke stem courses. We crush the barrie for kids
         education.
       </p>
-      <a href="{% url 'course:courses' %}">
-          <button class="button introbtn is-primary has-text-grey-dark">Explore Courses</button>
-      </a>
+      <button class="button introbtn is-primary has-text-grey-dark level-item">Explore Courses</button>
     </section>
-    <div class="level-right">
-      <img class="level-item intropic" src="{% static 'hero1.png' %}" alt="" />
-    </div>
+    
   </div>
-  <div class="container is-centered content pt-6">
+  <div class="breadcrumb mybreadcrumb has-bullet-separator is-centered">
+    <ul>
+      {% for category in categories %}
+      <li><a href="#"><button class="button is-text has-text-grey-light has-background-black-ter">{{ category.title }}</button></a></li>
+      {% endfor%}
+    </ul>
+  </div>
+  <div class="container is-centered content">
     <h1 class="title feature">Featured Courses</h1>
     <ul class="columns is-multiline featurecourse">
       {% for course in courses %}
       <div class="column is-one-third">
         <div class="card">
           <div class="card-image">
-            {{ course.intro_video_iframe | safe }}
+            <img
+                src="{{ course.intro_video.url }}"
+              alt="Course Intro Video"
+            />
           </div>
           <div class="card-content">
             <div class="media">
@@ -42,9 +51,9 @@
             </div>
             <div class="content">
               This Course is the course description.
-              <a>@slug.</a>.
+              <a class="is-link">@slug.</a>.
               {% for category in course.category.all %}
-                  <a href="#">#{{ category }}</a>
+                  <a  href="#">#{{ category }}</a>
               {% endfor %}
               <br />
               <time datetime="2016-1-1">02:17 AM - 17 Aug 2021</time>
@@ -54,7 +63,7 @@
       </div>
       {% endfor %}
     </ul>
-    <button class="button is-medium is-info level coursesbtn">
+    <button class="button is-medium is-info level-item coursesbtn">
       More Courses
     </button>
   </div>
@@ -97,10 +106,17 @@
             <span>Fun</span>
           </div>
         </ul>
+        <hr>
+        
       </ul>
-      <button class="button is-primary">Register Now</button>
+      
+        
+        <button class="button is-primary level-item">Register Now</button>
+      
+      
     </section>
   </div>
+  
   <div class="memeberships container pb-6">
     <h1 class="title has-text-white membertitle">Join Dedo</h1>
     <ul class="memebercrd level columns pb-6">
@@ -143,7 +159,7 @@
         </div>
         <div class="card-footer is-centered memeberfooter">
           <p class="has-text-grey-dark pb-4">Start Your 14-Days Free Trial Now</p>
-          <button class="button is-large has-text-weight-bold is-primary memeberbtn">
+          <button class="button is-large  is-primary memeberbtn">
             Register
           </button>
         </div>

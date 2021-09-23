@@ -18,22 +18,16 @@
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css" />
     </head>
     <body>
-        <nav class="navbar is-transparent mynav" role="navigation" aria-label="main navigation">
-            <div class="navbar-brand">
+        <nav class="navbar-menu is-active is-transparent mynav" role="navigation" aria-label="main navigation">
                 <a class="navbar-start" href="{% url "main:home" %}">
                     <img src="{% static 'logo.svg' %}">
                 </a>
-            </div>
-            {% if not user.is_authenticated %}
-            <div class="navbar-end my">
-                <div class="navbar-item">
-                    <div class="buttons">
-                        <a class="button is-link" href="{% url "authorization:signup" %}"><strong>Sign up</strong></a>
+               
+                    <div class="buttons navbar-end">
+                        <a class="button is-link" href="{% url "authorization:signup" %}">Sign up</a>
                         <a class="button is-transparent" href="{% url "authorization:login" %}">Log in</a>
                     </div>
-                </div>
-            </div>
-            {% endif %}
+                         
         </nav>
         {% if form.errors %}
             <p>error</p>
@@ -55,7 +49,7 @@
                 <i class="fas fa-copyright"></i> All Rights Reserved By Dedo LMS.
             </p>
             <p class="has-text-dark">
-                Made With <i class="fas fa-heart has-text-danger"></i> By <a href="https://gaytomycode.com" target="_blank">Hassan</a>.
+                Made With By <i class="fas fa-heart has-text-danger"></i> <a href="https://gaytomycode.com" target="_blank">Hagar, Hassan</a>.
             </p>
         </div>
     </footer>
