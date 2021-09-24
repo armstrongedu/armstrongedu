@@ -43,8 +43,17 @@ class Category(models.Model):
         return self.title
 
 
+class Track(models.Model):
+    title = models.CharField(max_length=255)
+
+    def __str__(self):
+        return self.title
+
+
 class Course(models.Model):
     category = models.ManyToManyField(Category)
+    track = models.ForeignKey(Track, null=True, blank=True, on_delete=models.SET_NULL, related_name='courses')
+    track_order = models.IntegerField(null=True, blank=True)
     title = models.CharField(max_length=255)
     intro_video_iframe = models.FileField(storage=APIVideoStorage(), max_length=1000)
 
@@ -57,6 +66,9 @@ class Lesson(models.Model):
     title = models.CharField(max_length=255)
     summary = models.TextField()
     order = models.IntegerField()
+
+    class Meta:
+        ordering = ('order',)
 
     def __str__(self):
         return f'{self.course} - {self.order}'
@@ -73,6 +85,9 @@ class Topic(models.Model):
     lesson = models.ForeignKey(Lesson, null=True, blank=True, on_delete=models.SET_NULL, related_name='topics')
     order = models.IntegerField()
     type = models.PositiveIntegerField(choices=TYPE_CHOICES)
+
+    class Meta:
+        ordering = ('order',)
 
     def __str__(self):
         return f'{self.lesson.course} - {self.lesson.order}.{self.order}'

@@ -2,12 +2,24 @@ from django.contrib import admin
 from django.forms import widgets, TextInput
 from django.db import models
 
-from .models import Category, Course, Lesson, Topic, Text, Video, MCQQuiz, TFQuiz, Game
+from .models import Category, Track, Course, Lesson, Topic, Text, Video, MCQQuiz, TFQuiz, Game
 
 
 @admin.register(Category)
 class CategoryAdmin(admin.ModelAdmin):
     search_fields = ('title',)
+
+
+class CourseInline(admin.TabularInline):
+    model = Course
+    raw_id_fields = ('track',)
+
+
+@admin.register(Track)
+class TrackAdmin(admin.ModelAdmin):
+    search_fields = ('title',)
+    list_display = ('title',)
+    inlines = (CourseInline,)
 
 
 class LessonInline(admin.TabularInline):
