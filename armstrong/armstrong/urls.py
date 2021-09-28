@@ -10,6 +10,7 @@ urlpatterns = [
     path('', include(('misc.urls', 'misc'), namespace='misc')),
     path('authorization/', include(('authorization.urls', 'authorization'), namespace='authorization')),
     path('courses/', include(('course.urls', 'course'), namespace='course')),
+    path('payment/', include(('payment.urls', 'payment'), namespace='payment')),
 ]
 
 handler400 = 'misc.views.handle_page_not_found'

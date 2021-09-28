@@ -1,4 +1,5 @@
 {% extends 'masterstudy/courses_layout.html' %}
+{% block title %}Subscribe - {{ block.super }}{% endblock %}
 {% block main_body %}
 <div class="stm-lms-wrapper">
         <div class="container">
@@ -197,9 +198,22 @@
                                 <div class="col-md-3">
                                         <div class="stm-lms-course__sidebar">
                                                 <div class="stm-lms-buy-buttons stm-lms-buy-buttons-mixed stm-lms-buy-buttons-mixed-pro">
-                                                    <a href="{% url 'course:start' lessons.first.topics.first.id %}" class="btn btn-default" >
+                                                    {% if user.is_authenticated %}
+                                                        {% if user.is_member %}
+                                                        <a href="{% url 'course:start' lessons.first.topics.first.id %}" class="btn btn-default" >
                                                                 <span>Start Course</span>
                                                         </a>
+                                                        {% else %}
+                                                        <a href="{% url 'payment:subscribe' %}" class="btn btn-default" >
+                                                                <span>Subscribe</span>
+                                                        </a>
+                                                        {% endif %}
+                                                    {% else %}
+                                                    <a href="{% url 'authorization:signup' %}'" class="btn btn-default" >
+                                                                <span>Regitser</span>
+                                                        </a>
+
+                                                    {% endif %}
                                                 </div>
                                                 <div class="stm-lms-course-info heading_font">
                                                         <div class="stm-lms-course-info__single">

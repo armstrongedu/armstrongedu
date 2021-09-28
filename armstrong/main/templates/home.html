@@ -58,12 +58,14 @@
       </div>
       {% endfor %}
     </ul>
+    <a href="{% url 'course:courses' %}">
     <button class="button is-medium is-info level-item coursesbtn">
       More Courses
     </button>
+    </a>
   </div>
   <div class="whysec">
-    <img class="whyimg" src="{% static 'whysec.png' %}" alt="" />
+    <img class="whyimg" src="{% static 'whysec.png' %}" alt="" style="padding-top: 100px"/>
     <section class="whycont content is-large">
       <h1 class="title has-text-white">Why Students Learn From Dedo</h1>
       <p class="has-text-weight-light">
@@ -106,7 +108,16 @@
       </ul>
 
 
+    {% if not user.is_authenticated %}
+      <a href="{% url 'authorization:signup' %}">
         <button class="button is-primary level-item">Register Now</button>
+      </a>
+    {% else %}
+
+      <a href="{% url 'payment:subscribe' %}">
+        <button class="button is-primary level-item">Subscribe Now</button>
+      </a>
+    {% endif %}
 
 
     </section>
@@ -119,7 +130,7 @@
         <div class="card-header is-shadowless">
           <h1 class="title card-header-title has-text-grey-dark">Lite</h1>
           <div class="card-header-icon footericon">
-            <h2 class="title has-text-grey-dark">10$</h2>
+            <h2 class="title as_sub_title has-text-grey-dark">10$</h2>
             <br />
             <p class="subtitle has-text-grey-dark has-text-weight-light">monthly</p>
           </div>
@@ -154,16 +165,26 @@
         </div>
         <div class="card-footer is-centered memeberfooter">
           <p class="has-text-grey-dark pb-4">Start Your 14-Days Free Trial Now</p>
+                    {% if not user.is_authenticated %}
+          <a href="{% url 'authorization:signup' %}">
           <button class="button is-large  is-primary memeberbtn">
             Register
           </button>
+          </a>
+          {% else %}
+          <a href="{% url 'payment:subscribe' %}">
+          <button class="button is-large  is-primary memeberbtn">
+             Subscribe
+          </button>
+          </a>
+          {% endif %}
         </div>
       </div>
       <div class="card column">
         <div class="card-header is-shadowless">
           <h1 class="title card-header-title has-text-grey-dark">Pro</h1>
           <div class="card-header-icon footericon">
-            <h2 class="title has-text-grey-dark">20$</h2>
+            <h2 class="title as_sub_title has-text-grey-dark">20$</h2>
             <br />
             <p class="subtitle has-text-grey-dark has-text-weight-light">monthly</p>
           </div>
@@ -198,9 +219,19 @@
         </div>
         <div class="card-footer is-centered memeberfooter">
           <p class="has-text-grey-dark pb-4">Start Your 14-Days Free Trial Now</p>
+                    {% if not user.is_authenticated %}
+          <a href="{% url 'authorization:signup' %}">
           <button class="button is-large ha-text-weight-bold is-primary memeberbtn">
             Register
           </button>
+          </a>
+          {% else %}
+          <a href="{% url 'payment:subscribe' %}">
+          <button class="button is-large  is-primary memeberbtn">
+             Subscribe
+          </button>
+          </a>
+          {% endif %}
         </div>
       </div>
     </ul>

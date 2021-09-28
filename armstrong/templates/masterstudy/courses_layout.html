@@ -20,6 +20,12 @@
 <a href="{% url 'authorization:signup' %}">Register</a>
 </div>
 </div>
+{% else %}
+<div class="pull-right">
+<div class="header_login_url">
+<a href="{% url 'authorization:logout' %}">Logout</a>
+</div>
+</div>
 {% endif %}
 <!-- Header top bar Socials -->
 <div class="pull-right xs-pull-left">

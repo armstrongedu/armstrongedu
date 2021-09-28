@@ -2,16 +2,16 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>{% block title %}DEDO LMS{% endblock %}</title>
+        <title>{% block title %}ARMSTRONG{% endblock %}</title>
         <meta charset="utf-8">
         <meta name="author" content="Muhamed Hassan">
-        <meta name="description" content="DEDO LMS brings interactive online education to kids.">
+        <meta name="description" content="ARMSTRONG brings interactive online education to kids.">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta property="og:image" content="{% static 'social.png' %}">
         <meta property="og:url" content="dedolms.com">
-        <meta property="og:description" content="DEDO LMS brings interactive online education to kids.">
-        <meta property="og:title" content="DEDO LMS">
-        <meta name="twitter:title" content="DEDO LMS">
+        <meta property="og:description" content="ARMSTRONG brings interactive online education to kids.">
+        <meta property="og:title" content="ARMSTRONG">
+        <meta name="twitter:title" content="ARMSTRONG">
         <link rel="shortcut icon" href="" type="image/x-icon">
         <link rel="stylesheet" href="{% static 'layout.css' %}">
         <script src="{% static 'fontawesome_free/js/all.min.js' %}"></script>
@@ -22,12 +22,16 @@
                 <a class="navbar-start" href="{% url "main:home" %}">
                     <img src="{% static 'logo.svg' %}">
                 </a>
-               
+
                     <div class="buttons navbar-end">
+                    {% if not user.is_authenticated %}
                         <a class="button is-link" href="{% url "authorization:signup" %}">Sign up</a>
                         <a class="button is-transparent" href="{% url "authorization:login" %}">Log in</a>
+                    {% else %}
+                        <a class="button is-transparent" href="{% url "authorization:logout" %}">Log Out</a>
+                    {% endif %}
                     </div>
-                         
+
         </nav>
         {% if form.errors %}
             <p>error</p>

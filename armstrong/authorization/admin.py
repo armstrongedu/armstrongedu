@@ -23,6 +23,5 @@ class UserAdmin(UserAdmin):
     ordering = ('date_joined',)
     search_fields = ('first_name', 'last_name', 'email')
     list_display = ('email', 'is_confirmed', 'first_name',
-                    'last_name', 'is_staff', 'confirmed_emails',
-                    'unconfirmed_emails')
+                    'last_name', 'is_staff', 'membership',)
     list_filter = ('is_staff', 'is_superuser', 'is_active', 'groups')

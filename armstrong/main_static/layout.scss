@@ -266,8 +266,11 @@ body {
         padding-top: 7rem;
         .title {
             text-align: center;
-            font-size: 3rem;
             font-weight: bolder;
+            font-size: 3rem !important;
+        }
+        .as_sub_title {
+            font-size: 2rem !important;
         }
         span {
             font-size: 1.4em;

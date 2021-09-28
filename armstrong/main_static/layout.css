@@ -256,8 +256,11 @@ body .didocol {
 }
 #homepage .memeberships .title {
   text-align: center;
-  font-size: 3rem;
   font-weight: bolder;
+  font-size: 3rem !important;
+}
+#homepage .memeberships .as_sub_title {
+  font-size: 2rem !important;
 }
 #homepage .memeberships span {
   font-size: 1.4em;

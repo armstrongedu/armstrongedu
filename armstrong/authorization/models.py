@@ -15,3 +15,6 @@ class User(SimpleEmailConfirmationUserMixin, AbstractUser):
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = []
 
+    def is_member(self):
+        from payment.models import Membership
+        return hasattr(self, 'membership') and (self.membership.status == Membership.ACTIVE)
