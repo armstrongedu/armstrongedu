@@ -1,7 +1,7 @@
 {% extends 'layout.html' %} {% load static %} {% block body %}
 <body id="homepage">
-  <div class=" intro">
-    <div>
+  <div class="level intro" style='height: calc(100vh - 3.25rem)'>
+    <div id="mobile-hero-image">
       <img class=" intropic" src="{% static 'hero1.png' %}" alt="" />
     </div>
     <section class="section content introcontent">
@@ -13,28 +13,23 @@
         accredited and bespoke stem courses. We crush the barrie for kids
         education.
       </p>
-      <button class="button introbtn is-primary has-text-grey-dark level-item">Explore Courses</button>
+      <a href="{% url 'course:courses' %}">
+          <button class="button introbtn is-primary has-text-grey-dark level-item">Explore Courses</button>
+      </a>
     </section>
-    
+    <div id="web-hero-image">
+      <img class=" intropic" src="{% static 'hero1.png' %}" alt="" />
+    </div>
+
   </div>
-  <div class="breadcrumb mybreadcrumb has-bullet-separator is-centered">
-    <ul>
-      {% for category in categories %}
-      <li><a href="#"><button class="button is-text has-text-grey-light has-background-black-ter">{{ category.title }}</button></a></li>
-      {% endfor%}
-    </ul>
-  </div>
-  <div class="container is-centered content">
-    <h1 class="title feature">Featured Courses</h1>
+  <div class="container is-centered content pt-6">
+    <h1 class="title feature pt-6 mt-6">Featured Courses</h1>
     <ul class="columns is-multiline featurecourse">
       {% for course in courses %}
       <div class="column is-one-third">
         <div class="card">
           <div class="card-image">
-            <img
-                src="{{ course.intro_video.url }}"
-              alt="Course Intro Video"
-            />
+              {{ course.intro_video_iframe | safe }}
           </div>
           <div class="card-content">
             <div class="media">
@@ -107,16 +102,16 @@
           </div>
         </ul>
         <hr>
-        
+
       </ul>
-      
-        
+
+
         <button class="button is-primary level-item">Register Now</button>
-      
-      
+
+
     </section>
   </div>
-  
+
   <div class="memeberships container pb-6">
     <h1 class="title has-text-white membertitle">Join Dedo</h1>
     <ul class="memebercrd level columns pb-6">

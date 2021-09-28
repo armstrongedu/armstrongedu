@@ -43,8 +43,17 @@ class Category(models.Model):
         return self.title
 
 
+class Track(models.Model):
+    title = models.CharField(max_length=255)
+
+    def __str__(self):
+        return self.title
+
+
 class Course(models.Model):
     category = models.ManyToManyField(Category)
+    track = models.ForeignKey(Track, null=True, blank=True, on_delete=models.SET_NULL, related_name='courses')
+    track_order = models.IntegerField(null=True, blank=True)
     title = models.CharField(max_length=255)
     intro_video_iframe = models.FileField(storage=APIVideoStorage(), max_length=1000)
 
@@ -58,20 +67,27 @@ class Lesson(models.Model):
     summary = models.TextField()
     order = models.IntegerField()
 
+    class Meta:
+        ordering = ('order',)
+
     def __str__(self):
         return f'{self.course} - {self.order}'
 
 
 class Topic(models.Model):
-    TEXT, VIDEO, QUIZ = range(3)
+    TEXT, GAME, VIDEO, QUIZ = range(4)
     TYPE_CHOICES = (
         (TEXT, 'Text'),
+        (GAME, 'Game'),
         (VIDEO, 'Video'),
         (QUIZ, 'Quiz'),
     )
     lesson = models.ForeignKey(Lesson, null=True, blank=True, on_delete=models.SET_NULL, related_name='topics')
     order = models.IntegerField()
     type = models.PositiveIntegerField(choices=TYPE_CHOICES)
+
+    class Meta:
+        ordering = ('order',)
 
     def __str__(self):
         return f'{self.lesson.course} - {self.lesson.order}.{self.order}'
@@ -94,6 +110,17 @@ class Video(models.Model):
 
     def __str__(self):
         return self.title
+
+
+class Game(models.Model):
+    lesson = models.ForeignKey(Lesson, null=True, blank=True, on_delete=models.SET_NULL, related_name='games')
+    topic = models.OneToOneField(Topic, null=True, blank=True, on_delete=models.CASCADE, related_name='game')
+    title = models.CharField(max_length=255)
+    iframe = models.TextField()
+
+    def __str__(self):
+        return self.title
+
 
 class MCQQuiz(models.Model):
     lesson = models.ForeignKey(Lesson, null=True, blank=True, on_delete=models.SET_NULL, related_name='mcq_quizez')

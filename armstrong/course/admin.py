@@ -2,12 +2,24 @@ from django.contrib import admin
 from django.forms import widgets, TextInput
 from django.db import models
 
-from .models import Category, Course, Lesson, Topic, Text, Video, MCQQuiz, TFQuiz
+from .models import Category, Track, Course, Lesson, Topic, Text, Video, MCQQuiz, TFQuiz, Game
 
 
 @admin.register(Category)
 class CategoryAdmin(admin.ModelAdmin):
     search_fields = ('title',)
+
+
+class CourseInline(admin.TabularInline):
+    model = Course
+    raw_id_fields = ('track',)
+
+
+@admin.register(Track)
+class TrackAdmin(admin.ModelAdmin):
+    search_fields = ('title',)
+    list_display = ('title',)
+    inlines = (CourseInline,)
 
 
 class LessonInline(admin.TabularInline):
@@ -36,6 +48,18 @@ class TextInline(admin.TabularInline):
         if db_field.name == 'topic':
             lesson_id = request.resolver_match.kwargs.get('object_id')
             field.queryset = field.queryset.filter(lesson=lesson_id, type=Topic.TEXT,)
+        return field
+
+
+class GameInline(admin.TabularInline):
+    model = Game
+    raw_id_fileds = ('lesson',)
+
+    def formfield_for_foreignkey(self, db_field, request=None, **kwargs):
+        field = super().formfield_for_foreignkey(db_field, request, **kwargs)
+        if db_field.name == 'topic':
+            lesson_id = request.resolver_match.kwargs.get('object_id')
+            field.queryset = field.queryset.filter(lesson=lesson_id, type=Topic.GAME,)
         return field
 
 
@@ -80,4 +104,4 @@ class LessonAdmin(admin.ModelAdmin):
     search_fields = (lambda s: s.__str__(), 'title', 'summary',)
     list_display = (lambda s: s.__str__(), 'title',)
     list_filter = ('course',)
-    inlines = (TopicInline, TextInline, VideoInline, MCQQuizInline, TFQuizInline,)
+    inlines = (TopicInline, TextInline, GameInline, VideoInline, MCQQuizInline, TFQuizInline,)

@@ -10,6 +10,85 @@
 </div>
 <div class="container">
     <div class="post_type_exist clearfix">
+        <div class="">
+            <div class="courses_filters">
+                <div class="courses_filters__title">
+                <h1>Tracks</h1>
+                </div>
+            </div>
+            <div class="stm_lms_courses__archive_wrapper">
+                <div class="stm_lms_courses stm_lms_courses__archive">
+                <div class="stm_lms_courses__grid stm_lms_courses__grid_4 stm_lms_courses__grid_center archive_grid stm_lms_courses__grid_found_2"
+                data-pages="1">
+
+                {% for track in tracks %}
+                <div class="stm_lms_courses__single stm_lms_courses__single_animation no-sale style_1 ">
+                <div class="stm_lms_courses__single__inner">
+                <div class="stm_lms_courses__single--image">
+                <a href=""
+                class="heading_font"
+                data-preview="Preview this course">
+<!--                {% for course in track.courses.all %}
+                    <div>
+                        {{ course.intro_video_iframe | safe }}
+                    </div>
+                    {% endfor %} -->
+                </a>
+                </div>
+                <div class="stm_lms_courses__single--inner" style="text-align: center !important;">
+                <h4>{{ track.title }}</h4>
+                </div>
+                <div class="stm_lms_courses__single--info" style="width: {% widthratio 300 1 track.courses.count %}px !important;">
+                    <div class="stm_lms_courses__single--info_author">
+                <div class="stm_lms_courses__single--info_author__avatar">
+                <img alt="" src="http://0.gravatar.com/avatar/f94562563861857057c6a0a461c23805?s=215&amp;d=mm&amp;r=g" class="avatar avatar-215 photo" height="215" width="215" loading="lazy">            </div>
+                <div class="stm_lms_courses__single--info_author__login">
+                Author Name            </div>
+                </div>
+                <div style="display:flex !important;">
+                {% for course in track.courses.all %}
+                <div style="float: left !important; display:inline-block !important; width: auto !important; padding:20px !important;">
+                    <div class="stm_lms_courses__single--info_title">
+                        <a href="{% url 'course:course' course.id %}"><h4>{{ course.title }}</h4> </a>
+                    </div>
+                    <div style="height: 50px !important;">
+                    <a href=""
+                    class="heading_font"
+                    data-preview="Preview this course">
+                    <div>
+                        {{ course.intro_video_iframe | safe }}
+                    </div>
+                    </a>
+                    </div>
+                    <div class="stm_lms_courses__single--info_excerpt">With no prior experience, you will have the opportunity to walk through hands-on examples with Hadoop and Spark frameworks, two of the most common ...    </div>
+                    <div class="stm_lms_courses__single--info_meta">
+                        <div class="stm_lms_course__meta"><i class="stmlms-cats"></i>Lessons {{ course.lessons.count }}</div>
+                    </div>
+                    <div class="stm_lms_courses__single--info_preview">
+                        <a href="{% url 'course:course' course.id %}" title="{{ course.title }}" class="heading_font">Preview this course        </a>
+                    </div>
+                </div>
+                {% endfor %}
+                </div>
+                </div>
+                </div>
+                </div>
+                {% endfor %}
+
+                </div>
+                <div class="text-center">
+                <a href="#"
+                class="btn btn-default stm_lms_load_more_courses"
+                data-offset="1"
+                data-template="courses/grid"
+                data-url=""
+                data-args='{"image_d":"img-480-380","per_row":4,"posts_per_page":"12","class":"archive_grid"}'>
+                <span>Load more</span>
+                </a>
+                </div>
+                </div>
+            </div>
+        </div>
         <div class="stm_lms_courses_wrapper">
             <div class="courses_filters">
                 <div class="courses_filters__title">
@@ -17,15 +96,6 @@
                 </div>
                 <div class="courses_filters__activities">
                 <div class="stm_lms_courses_grid__sort">
-                <span class="sort_label heading_font">Sort By:</span>
-                <select class="no-search">
-                <option value="date_high">Release date (newest first)</option>
-                <option value="date_low">Release date (oldest first)</option>
-                <option value="price_high">Price high</option>
-                <option value="price_low">Price low</option>
-                <option value="rating">Overall Rating</option>
-                <option value="popular">Popular (most viewed)</option>
-                </select>
                 </div>
                 <div class="courses_filters__switcher">
                 <i class="lnricons-icons2 grid_view stc active" data-view="grid"></i>
@@ -39,7 +109,7 @@
                 data-pages="1">
 
                 {% for course in courses %}
-                <div class="stm_lms_courses__single stm_lms_courses__single_animation no-sale style_1 ">
+                <div class="stm_lms_courses__single stm_lms_courses__single_animation no-sale style_1 " style="padding-top: 50px !important;">
                 <div class="stm_lms_courses__single__inner">
                 <div class="stm_lms_courses__single--image">
                 <a href="{% url 'course:course' course.id %}"

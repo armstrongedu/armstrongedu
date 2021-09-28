@@ -382,5 +382,18 @@ body .didocol {
     font-size: 0.8em;
   }
 }
+#mobile-hero-image {
+  display: none;
+}
+
+@media only screen and (max-width: 600px) {
+  #web-hero-image {
+    display: none;
+  }
+
+  #mobile-hero-image {
+    display: unset;
+  }
+}
 
 /*# sourceMappingURL=layout.css.map */
