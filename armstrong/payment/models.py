@@ -43,7 +43,7 @@ class Invoice(models.Model):
     user = models.ForeignKey(get_user_model(), null=True, blank=True, on_delete=models.SET_NULL, related_name='invoices')
     created_at = models.DateTimeField(auto_now=True, null=False, blank=False)
     service = models.CharField(max_length=255, null=False, blank=False)
-    billed = models.IntegerField(null=False, blank=False)
+    billed = models.FloatField(null=False, blank=False)
 
 class CardToken(models.Model):
     user = models.OneToOneField(get_user_model(), null=False, blank=False, on_delete=models.CASCADE, related_name='card_token')
