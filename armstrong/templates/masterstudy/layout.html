@@ -117,10 +117,10 @@ top: 3px;
 }
 </style>
 <script type="text/javascript">function setREVStartSize(e){
-//window.requestAnimationFrame(function() {				 
-window.RSIW = window.RSIW===undefined ? window.innerWidth : window.RSIW;	
-window.RSIH = window.RSIH===undefined ? window.innerHeight : window.RSIH;	
-try {								
+//window.requestAnimationFrame(function() {
+window.RSIW = window.RSIW===undefined ? window.innerWidth : window.RSIW;
+window.RSIH = window.RSIH===undefined ? window.innerHeight : window.RSIH;
+try {
 var pw = document.getElementById(e.c).parentNode.offsetWidth,
 newh;
 pw = pw===0 || isNaN(pw) ? window.RSIW : pw;
@@ -130,36 +130,36 @@ e.tabh = e.tabh===undefined ? 0 : parseInt(e.tabh);
 e.thumbh = e.thumbh===undefined ? 0 : parseInt(e.thumbh);
 e.tabhide = e.tabhide===undefined ? 0 : parseInt(e.tabhide);
 e.thumbhide = e.thumbhide===undefined ? 0 : parseInt(e.thumbhide);
-e.mh = e.mh===undefined || e.mh=="" || e.mh==="auto" ? 0 : parseInt(e.mh,0);		
-if(e.layout==="fullscreen" || e.l==="fullscreen") 						
-newh = Math.max(e.mh,window.RSIH);					
-else{					
+e.mh = e.mh===undefined || e.mh=="" || e.mh==="auto" ? 0 : parseInt(e.mh,0);
+if(e.layout==="fullscreen" || e.l==="fullscreen")
+newh = Math.max(e.mh,window.RSIH);
+else{
 e.gw = Array.isArray(e.gw) ? e.gw : [e.gw];
-for (var i in e.rl) if (e.gw[i]===undefined || e.gw[i]===0) e.gw[i] = e.gw[i-1];					
+for (var i in e.rl) if (e.gw[i]===undefined || e.gw[i]===0) e.gw[i] = e.gw[i-1];
 e.gh = e.el===undefined || e.el==="" || (Array.isArray(e.el) && e.el.length==0)? e.gh : e.el;
 e.gh = Array.isArray(e.gh) ? e.gh : [e.gh];
 for (var i in e.rl) if (e.gh[i]===undefined || e.gh[i]===0) e.gh[i] = e.gh[i-1];
 
 var nl = new Array(e.rl.length),
-ix = 0,						
-sl;					
+ix = 0,
+sl;
 e.tabw = e.tabhide>=pw ? 0 : e.tabw;
 e.thumbw = e.thumbhide>=pw ? 0 : e.thumbw;
 e.tabh = e.tabhide>=pw ? 0 : e.tabh;
-e.thumbh = e.thumbhide>=pw ? 0 : e.thumbh;					
+e.thumbh = e.thumbhide>=pw ? 0 : e.thumbh;
 for (var i in e.rl) nl[i] = e.rl[i]<window.RSIW ? 0 : e.rl[i];
-sl = nl[0];									
-for (var i in nl) if (sl>nl[i] && nl[i]>0) { sl = nl[i]; ix=i;}															
-var m = pw>(e.gw[ix]+e.tabw+e.thumbw) ? 1 : (pw-(e.tabw+e.thumbw)) / (e.gw[ix]);					
+sl = nl[0];
+for (var i in nl) if (sl>nl[i] && nl[i]>0) { sl = nl[i]; ix=i;}
+var m = pw>(e.gw[ix]+e.tabw+e.thumbw) ? 1 : (pw-(e.tabw+e.thumbw)) / (e.gw[ix]);
 newh =  (e.gh[ix] * m) + (e.tabh + e.thumbh);
 }
 var el = document.getElementById(e.c);
-if (el!==null && el) el.style.height = newh+"px";					
+if (el!==null && el) el.style.height = newh+"px";
 el = document.getElementById(e.c+"_wrapper");
 if (el!==null && el) el.style.height = newh+"px";
 } catch(e){
 console.log("Failure at Presize of Slider:" + e)
-}					   
+}
 //});
 };</script>
 <style type="text/css" title="dynamic-css" class="options-output">.logo-unit .logo{font-family:Exo;color:#fff;font-size:23px;}.header_top_bar, .header_top_bar a, .header_2_top_bar .header_2_top_bar__inner ul.header-menu li a{font-family:Exo;font-weight:400;font-style:normal;color:#ffffff;font-size:12px;}
@@ -611,6 +611,14 @@ body.rtl.rtl-demo .stm_testimonials_wrapper_style_2 .stm_lms_testimonials_single
 <meta property="og:description" content="ARMSTRONG brings interactive online education to kids.">
 <meta property="og:title" content="ARMSTRONG">
 <meta name="twitter:title" content="ARMSTRONG">
+                <style>
+                    canvas {
+                        position: absolute;
+                        bottom: 0;
+                        left: 0;
+                        width: 100%;
+                    }
+                </style>
 </head>
 {% block body %}
 {% endblock %}
