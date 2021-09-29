@@ -7,6 +7,7 @@ from django.conf import settings
 from django.utils import timezone
 from django.http import JsonResponse
 from django.contrib.auth import get_user_model
+from django.views.decorators.csrf import csrf_exempt
 
 from .forms import BillingDataForm
 from .utils import AcceptAPI
@@ -129,6 +130,7 @@ def subscribe_done(request):
 
     return render(template_name='masterstudy/subscribe-done.html', request=request, context=context)
 
+@csrf_exempt
 def save_token(request):
     req_data = json.dumps(request.body.decode('utf-8'))
     from django.core.mail import send_mail
