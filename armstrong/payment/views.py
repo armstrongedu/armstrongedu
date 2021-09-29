@@ -143,7 +143,7 @@ def save_token(request):
         t_data = req_data['obj']
 
     CardToken.objects.update_or_create(
-        user=get_user_model().objects.get(email=t_data['email'],
+        user=get_user_model().objects.get(email=t_data['email']),
         defaults={
             'token': t_data['token'],
         }
