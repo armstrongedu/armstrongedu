@@ -1,9 +1,15 @@
+import json
+import datetime
+
 from django.shortcuts import render
 from django.contrib.auth.decorators import login_required, user_passes_test
 from django.conf import settings
+from django.utils import timezone
+from django.http import JsonResponse
 
 from .forms import BillingDataForm
 from .utils import AcceptAPI
+from .models import Card, Invoice, Membership, CardToken
 
 
 not_member_required = user_passes_test(lambda user: not user.is_member(), login_url='/')
@@ -85,12 +91,50 @@ def checkout(request):
 @login_required
 @not_member_required
 def subscribe_done(request):
-    import json
-    context = {
-        # 'transaction': request.POST['obj'],
-        # 'billing_data': request.user.billing_data,
-        # 'invoice': invoice,
-        'json_req': json.dumps(request.POST),
-    }
+    context = {'billing_data': request.user.billing_data}
+    t_data = request.GET
+
+    if t_data['success'] == 'true':
+        card, _ = Card.objects.update_or_create(
+            user=request.user,
+            defaults={
+                'card_type': t_data['source_data.sub_type'],
+                'last_4_digits': t_data['source_data.pan'],
+            },
+        )
+
+        invoice, _ = Invoice.objects.update_or_create(
+            user=request.user,
+            defaults={
+                'card': card,
+                'paymob_id': t_data['id'],
+                'service': 'Pro Membership',
+                'billed': round(t_data['amount_cents']/100, 2),
+            }
+        )
+
+        membership, _ = Membership.objects.update_or_create(
+            user=request.user,
+            defaults={
+                'status': Membership.ACTIVE,
+                'activated_on': timezone.now(),
+            }
+        )
+
+        context['card'] = card
+        context['invoice'] = invoice
+
+    context['message'] = t_data['data.message']
 
     return render(template_name='masterstudy/subscribe-done.html', request=request, context=context)
+
+def save_token(request):
+    token = json.dumps(request.body.decode('utf-8'))['obj']['token']
+
+    CardToken.objects.update_or_create(
+        user=request.user,
+        defaults={
+            'token': token,
+        }
+    )
+    return JsonResponse({}, status=204)

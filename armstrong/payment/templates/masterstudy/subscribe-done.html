@@ -12,41 +12,48 @@
     <br>
     <div class="container">
         <div class="post_type_exist clearfix">
-            {{ request.POST }}
-            {{ json_req }}
             <div class="stm_lms_pmpro_message">
+                {% if card and invoice %}
                 <h3>Thank you for your membership to Armstrong. Your Pro membership is now active.</h3>
                 <p>Below are details about your membership account and a receipt for your initial membership invoice. A welcome email with a copy of your initial membership invoice has been sent to {{ request.user.email }}.</p>
+                {% else %}
+                <h3>Payment not successful</h3>
+                <p>{{ message }}</p>
+                {% endif %}
             </div>
-            <h3>Invoice #7A87DA97FB on September 27, 2021</h3>
+            {% if card and invoice %}
+            <h3>Invoice #{{ invoice.paymob_id }} on {{ invoice.created_at }}</h3>
             <ul>
                 <li><strong>Account :</strong> {{ request.user.email }}</li>
-                <li><strong>Membership Level :</strong> Pro</li>
+                <li><strong>Membership Level :</strong> {{ invoice.service }}</li>
             </ul>
             <hr />
             <div class="pmpro_invoice_details">
                 <div class="pmpro_invoice-billing-address">
                     <strong>Billing Address</strong>
                     <p>
-                        aouoeaonetuh snthsth<br />
-                        sntha<br />
-                        aoeuaoue, aouaoue54353US <br />
-                        aoenvutha
+                    {{ billing_data.first_name }} {{ billing_data.last_name }}<br />
+                    {{ billing_data.address_1 }}<br />
+                    {{ billing_data.city }}<br />
+                    {{ billing_data.state }}<br />
+                    {{ billing_data.postal_code }}<br />
+                    {{ billing_data.country }}<br />
+                    {{ billing_data.phone }}<br />
+                    {{ billing_data.email }}
                     </p>
                 </div>
                 <div class="pmpro_invoice-payment-method">
                     <strong>Payment Method</strong>
-                    <p>Mastercardending in4523</p>
-                    <p>Expiration : 01 /2021</p>
+                    <p>{{ card.card_type }} ending in {{ card.last_4_digits }}</p>
                 </div>
                 <div class="pmpro_invoice-total">
                     <strong>Total Billed</strong>
-                    <p><sup>$</sup>50.00</p>
+                    <p><sup>EGP</sup>{{ invoice.billed }}</p>
                 </div>
             </div>
             <hr />
             <br />
-            <h3>Redirecting to course...</h3>
+            {% endif %}
         </div>
         <div class="clearfix"></div>
     </div>

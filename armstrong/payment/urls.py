@@ -6,4 +6,5 @@ urlpatterns = [
     path('subscribe/', views.subscribe, name='subscribe'),
     path('checkout/', views.checkout,  name='checkout'),
     path('subscribe-done/', views.subscribe_done,  name='subscribe-done'),
+    path('save-token/', views.save_token, name='save-token'),
 ]
