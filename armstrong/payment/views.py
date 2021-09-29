@@ -109,7 +109,7 @@ def subscribe_done(request):
                 'card': card,
                 'paymob_id': t_data['id'],
                 'service': 'Pro Membership',
-                'billed': round(t_data['amount_cents']/100, 2),
+                'billed': round(int(t_data['amount_cents'])/100, 2),
             }
         )
 
