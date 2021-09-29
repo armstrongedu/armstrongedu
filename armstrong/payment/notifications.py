@@ -4,7 +4,7 @@ from django.conf import settings
 from django.template.loader import render_to_string
 
 
-def confirmation_email(user):
+def invoice_email(user):
     send_mail(
         subject='Armstrong Invoice',
         from_email=settings.FROM_EMAIL,
