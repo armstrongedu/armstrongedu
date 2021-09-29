@@ -48,7 +48,7 @@ def checkout(request):
     order_data = {
         "auth_token": auth_token,
         "delivery_needed": "false",
-        "amount_cents": "40_000",
+        "amount_cents": 40_000,
         "currency": "EGP",
         "items": [],
     }
@@ -57,18 +57,18 @@ def checkout(request):
 
     accept_api_request = {
         "auth_token": auth_token,
-        "amount_cents": "40_000",
+        "amount_cents": 40_000,
         "expiration": 3600,
         "order_id": order.get("id"),
         "billing_data": {
             "apartment": billing_data_form['address_1'].value(),
             "email": request.user.email,
-            "floor": "",
+            "floor": "-",
             "first_name": billing_data_form['first_name'].value(),
-            "street": "",
-            "building": "",
+            "street": "-",
+            "building": "-",
             "phone_number": billing_data_form['phone'].value(),
-            "shipping_method": "",
+            "shipping_method": "-",
             "postal_code": billing_data_form['postal_code'].value(),
             "city": billing_data_form['city'].value(),
             "country": billing_data_form['country'].value(),
@@ -79,6 +79,7 @@ def checkout(request):
         "integration_id": 1139146,
         "lock_order_when_paid": "false"
     }
+    print(accept_api_request)
 
     payment_token = accept_api.payment_key_request(accept_api_request)
 
