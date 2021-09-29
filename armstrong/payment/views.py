@@ -48,7 +48,7 @@ def checkout(request):
     order_data = {
         "auth_token": auth_token,
         "delivery_needed": "false",
-        "amount_cents": "1100",
+        "amount_cents": "40_000",
         "currency": "EGP",
         "items": [],
     }
@@ -57,23 +57,23 @@ def checkout(request):
 
     accept_api_request = {
         "auth_token": auth_token,
-        "amount_cents": "1100",
+        "amount_cents": "40_000",
         "expiration": 3600,
         "order_id": order.get("id"),
         "billing_data": {
-            "apartment": "803",
-            "email": "claudette09@exa.com",
-            "floor": "42",
-            "first_name": "Clifford",
-            "street": "Ethan Land",
-            "building": "8028",
-            "phone_number": "+86(8)9135210487",
-            "shipping_method": "PKG",
-            "postal_code": "01898",
-            "city": "Jaskolskiburgh",
-            "country": "CR",
-            "last_name": "Nicolas",
-            "state": "Utah"
+            "apartment": billing_data['address_1'],
+            "email": request.user.email,
+            "floor": "",
+            "first_name": billing_data['first_name'],
+            "street": "",
+            "building": "",
+            "phone_number": billing_data['phone'],
+            "shipping_method": "",
+            "postal_code": billing_data['postal_code'],
+            "city": billing_data['city'],
+            "country": billing_data['country'],
+            "last_name": billing_data['last_name'],
+            "state": billing_data['state'],
         },
         "currency": "EGP",
         "integration_id": 1139146,
@@ -133,21 +133,13 @@ def subscribe_done(request):
 @csrf_exempt
 def save_token(request):
     req_data = json.dumps(request.body.decode('utf-8'))
-    from django.core.mail import send_mail
-    send_mail(
-        subject='Armstrong Invoice',
-        from_email=settings.FROM_EMAIL,
-        recipient_list=['muhamedhassan8@icloud.com'],
-        message=req_data,
-        html_message=req_data,
-    )
     if req_data['type'] == 'TOKEN':
         t_data = req_data['obj']
 
-    CardToken.objects.update_or_create(
-        user=get_user_model().objects.get(email=t_data['email']),
-        defaults={
-            'token': t_data['token'],
-        }
-    )
+        CardToken.objects.update_or_create(
+            user=get_user_model().objects.get(email=t_data['email']),
+            defaults={
+                'token': t_data['token'],
+            }
+        )
     return JsonResponse({}, status=204)
