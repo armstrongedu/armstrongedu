@@ -23,6 +23,19 @@ body .mynav {
   top: 0;
   position: absolute;
 }
+body .mynav .buttons {
+  display: inline;
+  float: right;
+  margin: 0.5em;
+  margin-right: 1em;
+}
+body .mynav .buttons a {
+  margin: 0;
+}
+body .mynav .navbar-end:nth-child(2) {
+  margin-right: 1.2em;
+  margin-left: 1.2em;
+}
 body .content h1, body .content h2, body .content h3, body .content h4, body .content h5, body .content h6 {
   color: white;
 }
@@ -116,10 +129,11 @@ body .didocol {
     margin-bottom: 3rem;
   }
 
-  body .mynav .my {
-    right: 0;
-    position: absolute;
-    bottom: 0;
+  body .mynav .buttons {
+    display: inline;
+    float: right;
+    margin: 0.6em;
+    margin-right: 1em;
   }
 
   body .mynav {
@@ -159,7 +173,7 @@ body .didocol {
   border-bottom: solid #E5E5E5 1px;
   border-top: solid #E5E5E5 1px;
   padding: 1.3em;
-  margin: 8%;
+  margin: 10%;
   margin-left: 20%;
   margin-right: 20%;
 }
@@ -175,11 +189,15 @@ body .didocol {
   background-position: center right;
   background-size: contain;
 }
+#homepage .container {
+  padding: 2em;
+}
 #homepage .introcontent {
   max-width: 50ch;
 }
 #homepage .intropic {
-  transform: translate(0, 1.7rem);
+  float: right;
+  transform: translate(0, -2.4rem);
 }
 #homepage .introtitle {
   margin-bottom: 2em;
@@ -210,6 +228,9 @@ body .didocol {
 }
 #homepage .whysec .whyimg {
   float: left;
+  width: 30%;
+  margin: 5rem;
+  margin-top: 0;
 }
 #homepage .whysec .button {
   padding: 1.7em;
@@ -227,13 +248,19 @@ body .didocol {
 #homepage .whysec .whyicons ul div {
   padding-top: 0.3em;
 }
+#homepage .column:nth-child(n) {
+  margin-bottom: 2em;
+}
 #homepage .memeberships {
   padding-top: 7rem;
 }
 #homepage .memeberships .title {
   text-align: center;
-  font-size: 3rem;
   font-weight: bolder;
+  font-size: 3rem !important;
+}
+#homepage .memeberships .as_sub_title {
+  font-size: 2rem !important;
 }
 #homepage .memeberships span {
   font-size: 1.4em;
@@ -278,6 +305,7 @@ body .didocol {
   margin-left: auto;
   margin-right: auto;
   border-radius: 3px;
+  font-weight: normal;
 }
 #homepage .memebercrd .footericon .title {
   transform: translate(60px, -11px);
@@ -298,6 +326,77 @@ body .didocol {
 
 ::-ms-input-placeholder {
   color: #7a7a7a !important;
+}
+
+@media only screen and (max-width: 600px) {
+  #homepage .button {
+    margin-right: auto;
+    margin-left: auto;
+  }
+  #homepage .intro {
+    background-image: unset;
+    padding: 0;
+    background-color: unset;
+  }
+  #homepage .intro .introbtn {
+    margin: 0;
+    color: white !important;
+    font-weight: bold;
+  }
+  #homepage .intropic {
+    transform: unset;
+    background-color: #585757;
+    background-image: url(hero.svg);
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+  }
+  #homepage .introcontent {
+    transform: translate(0, 2em);
+  }
+  #homepage .introcontent .subtitle {
+    color: #D8D8D8 !important;
+  }
+  #homepage .introcontent .title {
+    color: #D8D8D8 !important;
+    margin: 0;
+    padding-bottom: 1em;
+  }
+  #homepage .whysec {
+    margin: 0.1em;
+  }
+  #homepage .whysec .whyicons ul {
+    margin-left: auto;
+    padding-left: 0;
+    margin-right: auto;
+  }
+  #homepage .whysec .whyimg {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 8rem;
+    float: unset;
+    width: unset;
+  }
+  #homepage .whysec .whycont {
+    padding: 1.2em;
+  }
+  #homepage .memeberships {
+    font-size: 0.8em;
+  }
+}
+#mobile-hero-image {
+  display: none;
+}
+
+@media only screen and (max-width: 600px) {
+  #web-hero-image {
+    display: none;
+  }
+
+  #mobile-hero-image {
+    display: unset;
+  }
 }
 
 /*# sourceMappingURL=layout.css.map */

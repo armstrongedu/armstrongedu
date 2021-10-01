@@ -10,3 +10,4 @@ api.video==0.0.14
 celery==5.1.2
 redis==3.5.3
 django-celery-beat==2.2.1
+requests==2.26.0

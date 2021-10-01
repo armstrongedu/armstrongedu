@@ -21,6 +21,21 @@ body {
         margin-top: 0;
         top: 0;
         position: absolute;
+        .buttons{
+            display: inline;
+            float: right;
+            margin: .5em;
+            margin-right: 1em;
+            a{
+                margin: 0;
+            }
+
+        }
+        .navbar-end:nth-child(2){
+            margin-right:1.2em ;
+            margin-left:1.2em ;
+        }
+
     }
     .content h1, .content h2, .content h3, .content h4, .content h5, .content h6 {
         color: white;
@@ -111,14 +126,20 @@ body {
 }
 
 @media only screen and (max-width: 800px) {
+
     body {
         overflow-y: unset;
         margin-bottom: 3rem;
     }
-    body .mynav .my {
-        right: 0;
-        position: absolute;
-        bottom: 0;
+    body .mynav {
+
+        .buttons{
+            display: inline;
+            float: right;
+            margin: .6em;
+            margin-right: 1em;
+        }
+
     }
     body .mynav {
         background-color: #242424;
@@ -143,6 +164,7 @@ body {
 }
 
 #homepage {
+
     .mynav {
         background-color: #242424;
         position: unset;
@@ -154,7 +176,7 @@ body {
         border-bottom: solid #E5E5E5 1px;
         border-top: solid #E5E5E5 1px ;
         padding: 1.3em;
-        margin: 8%;
+        margin: 10%;
         margin-left: 20%;
         margin-right: 20%;
     }
@@ -171,11 +193,15 @@ body {
         background-position: center right;
         background-size: contain;
     }
+    .container{
+        padding: 2em;
+    }
     .introcontent {
         max-width: 50ch;
     }
     .intropic {
-        transform: translate(0,1.7rem);
+        float: right;
+        transform:translate(0, -2.4rem);
     }
     .introtitle {
         margin-bottom: 2em;
@@ -194,6 +220,7 @@ body {
         transform: translate(0, 4rem);
     }
     .featurecourse {
+
         .is-one-third {
             padding: 2%;
         }
@@ -208,6 +235,9 @@ body {
         }
         .whyimg {
             float: left;
+            width: 30%;
+            margin: 5rem;
+            margin-top: 0;
         }
         .button {
             padding: 1.7em;
@@ -215,6 +245,8 @@ body {
         .whyicons {
             margin-left: 0;
             padding-left: 0;
+            display: flex;
+            flex-direction: row;
             ul {
                 margin-left: 0;
                 padding-left: 0;
@@ -223,16 +255,22 @@ body {
                     padding-top:.3em;
                 }
             }
-            display: flex;
-            flex-direction: row;
+
         }
+
+    }
+    .column:nth-child(n){
+        margin-bottom:2em;
     }
     .memeberships {
         padding-top: 7rem;
         .title {
             text-align: center;
-            font-size: 3rem;
             font-weight: bolder;
+            font-size: 3rem !important;
+        }
+        .as_sub_title {
+            font-size: 2rem !important;
         }
         span {
             font-size: 1.4em;
@@ -281,6 +319,7 @@ body {
             margin-left: auto;
             margin-right: auto;
             border-radius: 3px;
+            font-weight: normal;
         }
         .footericon {
             .title {
@@ -306,3 +345,91 @@ body {
 ::-ms-input-placeholder {
     color: hsl(0, 0%, 48%) !important;
 }
+@media only screen and (max-width: 600px){
+#homepage{
+
+    .button{
+        margin-right: auto;
+        margin-left: auto;
+    }
+
+     .intro{
+        background-image: unset;
+        padding: 0;
+        background-color: unset;
+
+        .introbtn{
+            margin: 0;
+            color: white !important;
+            font-weight: bold;
+        }
+    }
+
+    .intropic{
+        transform: unset;
+         background-color: #585757;
+        background-image: url(hero.svg);
+        background-repeat: no-repeat;
+        background-position: center;
+        background-size: cover;
+    }
+
+    .introcontent{
+        transform: translate(0,2em);
+
+        .subtitle{
+            color: #D8D8D8 !important;
+        }
+        .title{
+            color: #D8D8D8 !important;
+            margin: 0;
+            padding-bottom: 1em;
+
+        }
+    }
+
+
+    .whysec {
+        margin:.1em;
+
+        .whyicons{
+            ul {
+            margin-left: auto;
+            padding-left: 0;
+            margin-right: auto;
+            }
+
+        }
+        .whyimg{
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+            margin-top: 8rem;
+            float: unset;
+            width: unset;
+        }
+        .whycont{
+            padding: 1.2em;
+        }
+
+
+}
+    .memeberships{
+        font-size: .8em;
+    }
+}
+}
+
+#mobile-hero-image {
+    display: none;
+}
+
+@media only screen and (max-width: 600px) {
+    #web-hero-image {
+        display: none;
+    }
+    #mobile-hero-image {
+        display: unset;
+    }
+}
+

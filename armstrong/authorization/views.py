@@ -14,9 +14,8 @@ class SignUpView(generic.CreateView):
     @classmethod
     def as_view(cls, **initkwargs):
         view = super().as_view(**initkwargs)
-        return login_excluded('parking_page:parking_page')(view)
+        return login_excluded('main:home')(view)
 
-# from django.contrib.auth import get_user_model
 # from django.contrib.auth.decorators import login_required
 
 # @login_required
