@@ -162,6 +162,16 @@ body .didocol {
 #homepage {
   overflow-y: auto;
 }
+#homepage .locked {
+  opacity: 0.2;
+}
+#homepage .locked-text {
+  position: relative;
+  top: 50%;
+  left: 40%;
+  color: white !important;
+  z-index: 3;
+}
 #homepage .mynav {
   background-color: #242424;
   position: unset;
@@ -377,6 +387,9 @@ body .didocol {
 }
 
 @media only screen and (max-width: 600px) {
+  #homepage .locked-text {
+    transform: translate(-18px, 18rem);
+  }
   #homepage .button {
     margin-right: auto;
     margin-left: auto;

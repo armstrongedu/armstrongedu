@@ -26,8 +26,12 @@
     <h1 class="title feature pt-6 mt-6">Featured Courses</h1>
     <ul class="columns is-multiline featurecourse">
       {% for course in courses %}
+      
       <div class="column is-one-third">
+        <h1 class="locked-text">Locked
+        </h1>
         <div class="card">
+          
           <div class="card-image">
               {{ course.intro_video_iframe | safe }}
           </div>

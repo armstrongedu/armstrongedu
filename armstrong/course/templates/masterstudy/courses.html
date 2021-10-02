@@ -169,6 +169,101 @@
                 {% endfor %}
 
                 </div>
+
+
+
+
+
+            
+
+
+
+    
+                    
+                               <div class="stm_lms_courses__grid stm_lms_courses__grid_4 stm_lms_courses__grid_center archive_grid stm_lms_courses__grid_found_2"
+                    data-pages="1">
+    
+
+                    {% for course in courses %}
+
+                    <h1 style="position: relative;
+                    top: 45%;
+                    left: 19%;
+                    color: white !important;
+                    transform: translate(0,46%);
+                    z-index: 3;">Locked
+                    </h1>
+                    <div class="stm_lms_courses__single stm_lms_courses__single_animation no-sale style_1 " style="padding-top: 50px !important; filter:brightness(40%) ">
+                       
+                    <div class="stm_lms_courses__single__inner">
+                    <div class="stm_lms_courses__single--image">
+                    <a href="{% url 'course:course' course.id %}"
+                    class="heading_font"
+                    data-preview="Preview this course">
+                    <div>
+                        {{ course.intro_video_iframe | safe }}
+                    </div>
+                    </a>
+                    </div>
+                    <div class="stm_lms_courses__single--inner">
+                    <div class="stm_lms_courses__single--terms">
+                    <div class="stm_lms_courses__single--term">
+                    {% for category in course.category.all %}
+                        {{ category }}
+                    {% endfor %}
+                    </div>
+                    </div>
+                    <div class="stm_lms_courses__single--title">
+                    <a href="{% url 'course:course' course.id %}"
+                    <h5>{{ course.title }}</h5>
+                    </a>
+                    </div>
+                    <div class="stm_lms_courses__single--meta">
+                    <div class="stm_lms_courses__single--price heading_font">
+                    <strong>Tool Box Needed</strong>
+                    </div>
+                    </div>
+                    </div>
+                    <div class="stm_lms_courses__single--info">
+                        <div class="stm_lms_courses__single--info_author">
+                    <div class="stm_lms_courses__single--info_author__avatar">
+                    <img alt="" src="http://0.gravatar.com/avatar/f94562563861857057c6a0a461c23805?s=215&amp;d=mm&amp;r=g" class="avatar avatar-215 photo" height="215" width="215" loading="lazy">            </div>
+                    <div class="stm_lms_courses__single--info_author__login">
+                    Author Name            </div>
+                    </div>
+                    <div class="stm_lms_courses__single--info_title">
+                    <a href="{% url 'course:course' course.id %}"
+                    <h4>{{ course.title }}</h4>
+                    </a>
+                    </div>
+                    {{ course.intro_video_iframe | safe }}
+                    <div class="stm_lms_courses__single--info_excerpt">
+                    With no prior experience, you will have the opportunity to walk through hands-on examples with Hadoop and Spark frameworks, two of the most common ...    </div>
+                    <div class="stm_lms_courses__single--info_meta">
+                    <div class="stm_lms_course__meta">
+                    <i class="stmlms-cats"></i>
+                    Lessons {{ course.lessons.count }}</div>
+                    </div>
+                    <div class="stm_lms_courses__single--info_preview">
+                        <a href="{% url 'course:course' course.id %}" title="{{ course.title }}" class="heading_font">
+                    Preview this course        </a>
+                    </div>
+                    </div>
+                    </div>
+                    
+                    </div>
+                    {% endfor %}
+    
+                    </div>
+
+
+
+
+
+
+
+
+
                 <div class="text-center">
                 <a href="#"
                 class="btn btn-default stm_lms_load_more_courses"
