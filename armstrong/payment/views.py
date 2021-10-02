@@ -11,7 +11,7 @@ from django.views.decorators.csrf import csrf_exempt
 
 from .forms import BillingDataForm
 from .utils import AcceptAPI
-from .models import Card, Invoice, Membership, CardToken
+from .models import Card, Invoice, Membership, CardToken, MembershipType
 
 
 not_member_required = user_passes_test(lambda user: not user.is_member(), login_url='/')
@@ -19,7 +19,7 @@ not_member_required = user_passes_test(lambda user: not user.is_member(), login_
 @login_required
 @not_member_required
 def subscribe(request):
-    context = {}
+    context = {'membership_types': MembershipType.objects.all()}
     if hasattr(request.user, 'billing_data'):
         context['billing_data'] = BillingDataForm(instance=request.user.billing_data)
     return render(template_name='masterstudy/subscribe.html', request=request, context=context)
@@ -28,12 +28,17 @@ def subscribe(request):
 @login_required
 @not_member_required
 def checkout(request):
+    membership_type = MembershipType.objects.get(id=request.POST['membership_type'])
+
     if hasattr(request.user, 'billing_data'):
         billing_data_form = BillingDataForm(request.POST, instance=request.user.billing_data)
     else:
         billing_data_form = BillingDataForm(request.POST)
 
+
     context = {
+            'membership_types': MembershipType.objects.all(),
+            'membership_type': membership_type,
             'error': billing_data_form.errors,
             'billing_data': billing_data_form,
     }
@@ -48,7 +53,7 @@ def checkout(request):
     order_data = {
         "auth_token": auth_token,
         "delivery_needed": "false",
-        "amount_cents": 40_000,
+        "amount_cents": membership_type.price_cents,
         "currency": "EGP",
         "items": [],
     }
@@ -57,7 +62,7 @@ def checkout(request):
 
     accept_api_request = {
         "auth_token": auth_token,
-        "amount_cents": 40_000,
+        "amount_cents": membership_type.price_cents,
         "expiration": 3600,
         "order_id": order.get("id"),
         "billing_data": {
@@ -79,7 +84,6 @@ def checkout(request):
         "integration_id": 1139146,
         "lock_order_when_paid": "false"
     }
-    print(accept_api_request)
 
     payment_token = accept_api.payment_key_request(accept_api_request)
 
@@ -98,6 +102,9 @@ def subscribe_done(request):
     t_data = request.GET
 
     if t_data['success'] == 'true':
+        membership_type = MembershipType.objects.get(price_cents=t_data['amount_cents'])
+        context['membership_type'] = membership_type
+
         card, _ = Card.objects.update_or_create(
             user=request.user,
             defaults={
@@ -111,7 +118,6 @@ def subscribe_done(request):
             defaults={
                 'card': card,
                 'paymob_id': t_data['id'],
-                'service': 'Pro Membership',
                 'billed': round(int(t_data['amount_cents'])/100, 2),
             }
         )
@@ -120,6 +126,7 @@ def subscribe_done(request):
             user=request.user,
             defaults={
                 'status': Membership.ACTIVE,
+                'membership_type': membership_type,
                 'activated_on': timezone.now(),
             }
         )

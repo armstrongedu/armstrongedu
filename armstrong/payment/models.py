@@ -2,6 +2,15 @@ from django.db import models
 from django.contrib.auth import get_user_model
 
 
+class MembershipType(models.Model):
+    name = models.CharField(max_length=255, null=False, blank=False)
+    price_cents = models.IntegerField(null=False, blank=False)
+    number_of_students = models.IntegerField(null=False, blank=False)
+
+    def price_pounds(self):
+        return round(self.price_cents/100, 2)
+
+
 class BillingData(models.Model):
     user = models.OneToOneField(get_user_model(), null=False, blank=False, on_delete=models.CASCADE, related_name='billing_data')
     first_name = models.CharField(max_length=255, null=False, blank=False)
@@ -24,6 +33,7 @@ class Membership(models.Model):
     )
 
     user = models.OneToOneField(get_user_model(), null=False, blank=False, on_delete=models.CASCADE, related_name='membership')
+    membership_type = models.ForeignKey(MembershipType, null=True, blank=True, on_delete=models.SET_NULL, related_name='memberships')
     activated_on = models.DateTimeField(null=False, blank=False)
     status = models.PositiveSmallIntegerField(choices=STATUS, null=False, blank=False, default=ACTIVE)
 
@@ -42,7 +52,6 @@ class Invoice(models.Model):
     paymob_id = models.CharField(max_length=255, null=False, blank=False)
     user = models.ForeignKey(get_user_model(), null=True, blank=True, on_delete=models.SET_NULL, related_name='invoices')
     created_at = models.DateTimeField(auto_now=True, null=False, blank=False)
-    service = models.CharField(max_length=255, null=False, blank=False)
     billed = models.FloatField(null=False, blank=False)
 
 class CardToken(models.Model):

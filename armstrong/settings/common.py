@@ -37,6 +37,7 @@ INSTALLED_APPS = [
     'course',
     'misc',
     'payment',
+    'toolbox',
 ]
 
 MIDDLEWARE = [

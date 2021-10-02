@@ -26,9 +26,6 @@
                                                                                     <tr>
                                                                                             <th>
                                                                                                     <h3 class="pmpro_thead-name">subscription</h3>
-                                                                                                    <span class="pmpro_thead-msg">
-                                                                                                            <a href="">Change level</a>
-                                                                                                    </span>
                                                                                             </th>
                                                                                     </tr>
                                                                             </thead>
@@ -36,31 +33,19 @@
                                                                                     <tr>
                                                                                             <td class="lp-pmpro-td">
                                                                                                     <div class="lp-pmpro-name">
-                                                                                                            <h4>Pro</h4>
+                                                                                                            <label for="membership_type">Membership Level</label>
+                                                                                                            <select name="membership_type" id="membership_type" class="pmpro_required select2-hidden-accessible" tabindex="-1" aria-hidden="true">
+                                                                                                                {% for membership_type in membership_types %}
+                                                                                                                <option value="{{ membership_type.id }}">{{ membership_type.name }} - {{ membership_type.price_pounds }} EGP</option>
+                                                                                                                {% endfor %}
+                                                                                                            </select>
                                                                                                     </div>
+                                                                                                    <br>
                                                                                                     <div class="lp-pmpro-content">
-                                                                                                            <div class="lp-pmpro-desc">
-                                                                                                                    <label>Membership level:</label>Pro
-                                                                                                            </div>
                                                                                                             <div id="pmpro_level_cost">
-                                                                                                                    <div class="lp-pmpro-desc lp-pmpro-price">
-                                                                                                                            <label>Price:</label>
-                                                                                                                            <strong>
-                                                                                                                                    <sup>$</sup>20.00
-                                                                                                                            </strong> now.
-                                                                                                                    </div>
                                                                                                                     <div class="lp-pmpro-desc">
                                                                                                                             <label>Expires after:</label>30 days
                                                                                                                     </div>
-                                                                                                            </div>
-                                                                                                            <div class="lp-pmpro-desc lp-pmpro-description">
-                                                                                                                    <label>Description:</label>
-                                                                                                                    <ul>
-                                                                                                                            <li>Best choice</li>
-                                                                                                                            <li>Learner Record</li>
-                                                                                                                            <li>Indiviual Course</li>
-                                                                                                                            <li>Full Access to Courses</li>
-                                                                                                                    </ul>
                                                                                                             </div>
                                                                                                     </div>
                                                                                             </td>

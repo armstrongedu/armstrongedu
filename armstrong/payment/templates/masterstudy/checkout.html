@@ -22,9 +22,6 @@
                                                                 <tr>
                                                                         <th>
                                                                                 <h3 class="pmpro_thead-name">subscription</h3>
-                                                                                <span class="pmpro_thead-msg">
-                                                                                        <a href="">Change level</a>
-                                                                                </span>
                                                                         </th>
                                                                 </tr>
                                                         </thead>
@@ -32,17 +29,17 @@
                                                                 <tr>
                                                                         <td class="lp-pmpro-td">
                                                                                 <div class="lp-pmpro-name">
-                                                                                        <h4>Pro</h4>
+                                                                                    <h4>{{ membership_type.name }}</h4>
                                                                                 </div>
                                                                                 <div class="lp-pmpro-content">
                                                                                         <div class="lp-pmpro-desc">
-                                                                                                <label>Membership level:</label>Pro
+                                                                                            <label>Membership level:</label>{{ membership_type.name }}
                                                                                         </div>
                                                                                         <div id="pmpro_level_cost">
                                                                                                 <div class="lp-pmpro-desc lp-pmpro-price">
                                                                                                         <label>Price:</label>
                                                                                                         <strong>
-                                                                                                                <sup>$</sup>20.00
+                                                                                                            <sup>£</sup>{{ membership_type.price_pounds }}
                                                                                                         </strong> now.
                                                                                                 </div>
                                                                                                 <div class="lp-pmpro-desc">

@@ -1,6 +1,11 @@
 from django.contrib import admin
 
-from .models import BillingData, Membership, Card, Invoice, CardToken
+from .models import BillingData, Membership, Card, Invoice, CardToken, MembershipType
+
+
+@admin.register(MembershipType)
+class MembershipTypeAdmin(admin.ModelAdmin):
+    list_display = ('name', 'price_cents', 'number_of_students',)
 
 
 @admin.register(BillingData)
@@ -10,7 +15,7 @@ class BillingDataAdmin(admin.ModelAdmin):
 
 @admin.register(Membership)
 class MembershipAdmin(admin.ModelAdmin):
-    list_display = ('user', 'activated_on', 'get_status_display',)
+    list_display = ('user', 'activated_on', 'get_status_display', 'membership_type',)
 
 
 @admin.register(Card)
@@ -20,7 +25,7 @@ class CardAdmin(admin.ModelAdmin):
 
 @admin.register(Invoice)
 class InoviceAdmin(admin.ModelAdmin):
-    list_display = ('user', 'card', 'paymob_id', 'created_at', 'service', 'billed',)
+    list_display = ('user', 'card', 'paymob_id', 'created_at', 'billed',)
 
 
 @admin.register(CardToken)
