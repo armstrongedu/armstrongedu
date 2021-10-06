@@ -11,7 +11,7 @@ from django.views.decorators.csrf import csrf_exempt
 
 from .forms import BillingDataForm
 from .utils import AcceptAPI
-from .models import Card, Invoice, Membership, CardToken, MembershipType
+from .models import Card, Receipt, Membership, CardToken, MembershipType
 
 
 not_member_required = user_passes_test(lambda user: not user.is_member(), login_url='/')
@@ -55,7 +55,12 @@ def checkout(request):
         "delivery_needed": "false",
         "amount_cents": membership_type.price_cents,
         "currency": "EGP",
-        "items": [],
+        "items": [{
+            "name": membership_type.name,
+            "amount_cents": membership_type.price_cents,
+            "description": membership_type.name,
+            "quantity": 1,
+        },],
     }
 
     order = accept_api.order_registration(order_data)
@@ -98,11 +103,13 @@ def checkout(request):
 @login_required
 @not_member_required
 def subscribe_done(request):
+    # TODO: here i should do the toolbox order
     context = {'billing_data': request.user.billing_data}
     t_data = request.GET
 
+
     if t_data['success'] == 'true':
-        membership_type = MembershipType.objects.get(price_cents=t_data['amount_cents'])
+        membership_type = MembershipType.objects.filter(name=t_data['order']['items'][0]['name'])
         context['membership_type'] = membership_type
 
         card, _ = Card.objects.update_or_create(
@@ -113,7 +120,7 @@ def subscribe_done(request):
             },
         )
 
-        invoice, _ = Invoice.objects.update_or_create(
+        invoice, _ = Receipt.objects.update_or_create(
             user=request.user,
             defaults={
                 'card': card,

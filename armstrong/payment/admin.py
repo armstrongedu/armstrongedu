@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from .models import BillingData, Membership, Card, Invoice, CardToken, MembershipType
+from .models import BillingData, Membership, Card, Receipt, CardToken, MembershipType
 
 
 @admin.register(MembershipType)
@@ -23,8 +23,8 @@ class CardAdmin(admin.ModelAdmin):
     list_display = ('user', 'card_type', 'last_4_digits',)
 
 
-@admin.register(Invoice)
-class InoviceAdmin(admin.ModelAdmin):
+@admin.register(Receipt)
+class ReceiptAdmin(admin.ModelAdmin):
     list_display = ('user', 'card', 'paymob_id', 'created_at', 'billed',)
 
 

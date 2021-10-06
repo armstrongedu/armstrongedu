@@ -1,3 +1,13 @@
 from django.contrib import admin
 
-# Register your models here.
+from .models import ToolBox, Order
+
+
+@admin.register(ToolBox)
+class ToolBoxAdmin(admin.ModelAdmin):
+    list_display = ('name',)
+
+
+@admin.register(Order)
+class OrderAdmin(admin.ModelAdmin):
+    list_display = ('bosta_id', 'user', 'toolbox',)

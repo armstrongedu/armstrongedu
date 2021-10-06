@@ -1,6 +1,10 @@
 from django.shortcuts import render, get_object_or_404
+from django.contrib.auth.decorators import login_required, user_passes_test
+
 from course.models import Course, Lesson, Topic, Track
 
+
+member_required = user_passes_test(lambda user: user.is_member(), login_url='/')
 
 def courses(request):
     context = {
@@ -16,7 +20,9 @@ def course(request, course_id):
     }
     return render(template_name='masterstudy/course.html', request=request, context=context)
 
-def start(request, topic_id): # NOTE(gaytomycode): this is tmp
+@login_required
+@member_required
+def start(request, topic_id):
     topic = Topic.objects.get(id=topic_id)
     course = topic.lesson.course
     prev_lesson = Lesson.objects.filter(course_id=course, order=topic.lesson.order-1).first()

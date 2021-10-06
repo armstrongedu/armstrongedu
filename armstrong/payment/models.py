@@ -7,6 +7,9 @@ class MembershipType(models.Model):
     price_cents = models.IntegerField(null=False, blank=False)
     number_of_students = models.IntegerField(null=False, blank=False)
 
+    def __str__(self):
+        return f'{self.name} - {self.price_pounds()} EGP'
+
     def price_pounds(self):
         return round(self.price_cents/100, 2)
 
@@ -46,11 +49,14 @@ class Card(models.Model):
     card_type = models.CharField(max_length=255, null=False, blank=False)
     last_4_digits = models.CharField(max_length=255, null=False, blank=False)
 
+    def __str__(self):
+        return self.last_4_digits
 
-class Invoice(models.Model):
-    card = models.ForeignKey(Card, null=True, blank=True, on_delete=models.SET_NULL, related_name='invoices')
+
+class Receipt(models.Model):
+    card = models.ForeignKey(Card, null=True, blank=True, on_delete=models.SET_NULL, related_name='receipts')
     paymob_id = models.CharField(max_length=255, null=False, blank=False)
-    user = models.ForeignKey(get_user_model(), null=True, blank=True, on_delete=models.SET_NULL, related_name='invoices')
+    user = models.ForeignKey(get_user_model(), null=True, blank=True, on_delete=models.SET_NULL, related_name='receipts')
     created_at = models.DateTimeField(auto_now=True, null=False, blank=False)
     billed = models.FloatField(null=False, blank=False)
 

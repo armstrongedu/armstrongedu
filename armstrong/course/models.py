@@ -10,6 +10,11 @@ import apivideo
 from apivideo.apis import VideosApi
 from apivideo.exceptions import ApiAuthException
 
+from django_middleware_global_request.middleware import get_request
+
+
+from toolbox.models import ToolBox
+
 
 class APIVideoStorage(FileSystemStorage):
     def _save(self, name, content):
@@ -51,7 +56,9 @@ class Track(models.Model):
 
 
 class Course(models.Model):
+    TB_NO, TB_GET, TB_BOUGHT, TB_DELIVERY = range(1, 5)
     category = models.ManyToManyField(Category)
+    toolbox = models.ForeignKey(ToolBox, null=True, blank=True, on_delete=models.SET_NULL, related_name='courses')
     track = models.ForeignKey(Track, null=True, blank=True, on_delete=models.SET_NULL, related_name='courses')
     track_order = models.IntegerField(null=True, blank=True)
     title = models.CharField(max_length=255)
@@ -59,6 +66,12 @@ class Course(models.Model):
 
     def __str__(self):
         return self.title
+
+    def toolbox_status(self):
+        return self.TB_NO if not self.toolbox else (
+            self.TB_DELIVERY if get_request().user.orders.filter(toolbox=self.toolbox).exists() else
+            self.TB_GET
+        )
 
 
 class Lesson(models.Model):

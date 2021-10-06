@@ -33,6 +33,7 @@ INSTALLED_APPS = [
     'social_django',
     'fontawesome_free',
     'django_celery_beat',
+    'django_middleware_global_request',
     'main',
     'course',
     'misc',
@@ -48,6 +49,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'django_middleware_global_request.middleware.GlobalRequestMiddleware',
 ]
 
 ROOT_URLCONF = 'armstrong.urls'
@@ -174,3 +176,8 @@ CELERY_ACCEPT_CONTENT = ['application/json']
 CELERY_TASK_SERIALIZER = 'json'
 CELERY_RESULT_SERIALIZER = 'json'
 PAYMOB_API_KEY = ENV.str('PAYMOB_API_KEY')
+
+BOSTA_API_KEY = ENV.str('BOSTA_API_KEY')
+BOSTA_USERNAME = ENV.str('BOSTA_USERNAME')
+BOSTA_NUMBER = ENV.str('BOSTA_NUMBER')
+BOSTA_EMAIL = ENV.str('BOSTA_EMAIL')

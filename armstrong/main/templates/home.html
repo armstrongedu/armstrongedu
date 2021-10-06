@@ -26,12 +26,12 @@
     <h1 class="title feature pt-6 mt-6">Featured Courses</h1>
     <ul class="columns is-multiline featurecourse">
       {% for course in courses %}
-      
       <div class="column is-one-third">
         <h1 class="locked-text">Locked
+        {# TODO(gaytomycode): when you apply the locked hna apply it brdo 3ala l get tools button #}
         </h1>
-        <div class="card">
-          
+        <div class="card locked">
+
           <div class="card-image">
               {{ course.intro_video_iframe | safe }}
           </div>
@@ -58,28 +58,54 @@
               <time datetime="2016-1-1">02:17 AM - 17 Aug 2021</time>
             </div>
           </div>
-
+          <div style="margin-left: auto; margin-right: auto;width:100%; text-align:center; padding-bottom:10px;">
+          <strong>{{ course.toolbox.name }} ToolBox</strong>
+          </div>
           <div class="rightbox">
             <div class="rb-container">
-              <ul class="rb">
-                <li class="rb-item" >
-                  <div class="item-title"> Serrano </div>
-                </li>
-                <li class="rb-item" >    
-                  <div class="item-title"> Redwood </div>
-                </li>
+              {% if course.toolbox_status == course.TB_NO or not user.is_authenticated %}
+              {% elif course.toolbox_status == course.TB_DELIVERY %}
+                  <ul class="rb">
+                    <li class="rb-item" >
+                      <div class="item-title">Placed</div>
+                    </li>
+                    <li class="rb-item" >
+                      <div class="item-title">Shipped</div>
+                    </li>
 
-                <li class="rb-item" >
-                
-                  <div class="item-title"> McAlister </div>
-                </li>
-                <li class="rb-item" >    
-                  <div class="item-title"></div>
-                </li>
-              </ul>
+                    <li class="rb-item" >
+
+                      <div class="item-title">Delivered</div>
+                    </li>
+                    <li class="rb-item" >
+                      <div class="item-title"></div>
+                    </li>
+                  </ul>
+              {% elif course.toolbox_status == course.TB_BOUGHT %}
+                  <ul class="rb">
+                    <li class="rb-item as-progress" >
+                      <div class="item-title">Placed</div>
+                    </li>
+                    <li class="rb-item as-progress" >
+                      <div class="item-title">Shipped</div>
+                    </li>
+                    <li class="rb-item as-progress" >
+                      <div class="item-title">Delivered</div>
+                    </li>
+                    <li class="rb-item as-progress" >
+                      <div class="item-title"></div>
+                    </li>
+                  </ul>
+              {% elif course.toolbox_status == course.TB_GET %}
+              <form  method="POST" action="{% url 'toolbox:place-order' %}" style="position: relative;display: inline-block;margin-bottom: 10px;margin-left: auto; margin-right: auto;text-align: center;overflow: hidden;">
+                  {% csrf_token %}
+                  <input type="hidden" value="{{ course.toolbox.id }}" name="tool_box_id">
+                  <input value="Get ToolBox" class="for-checkbox-tools" type="submit" style="position: relative;display: inline-block;padding: 15px;width: 150px;font-size: 12px;line-height: 10px;letter-spacing: 1px;margin-bottom: 10px;margin-left: auto; margin-right: auto;text-align: center;border-radius: 4px;overflow: hidden;cursor: pointer;text-transform: uppercase;color: var(--white);border: 1px solid;">
+              </form>
+              {% endif %}
             </div>
           </div>
-        
+
 
         </div>
       </div>
@@ -153,65 +179,12 @@
   <div class="memeberships container pb-6">
     <h1 class="title has-text-white membertitle">Join Dedo</h1>
     <ul class="memebercrd level columns pb-6">
+      {% for membership_type in membership_types %}
       <div class="card column">
         <div class="card-header is-shadowless">
-          <h1 class="title card-header-title has-text-grey-dark">Lite</h1>
+          <h1 class="title card-header-title has-text-grey-dark">{{ membership_type.name }}</h1>
           <div class="card-header-icon footericon">
-            <h2 class="title as_sub_title has-text-grey-dark">10$</h2>
-            <br />
-            <p class="subtitle has-text-grey-dark has-text-weight-light">monthly</p>
-          </div>
-        </div>
-        <div class="card-content pb-6">
-          <ul>
-            <div class="icon-text pb-4">
-              <span class="icon has-text-success">
-                <i class="fas fa-check-circle iconclr"></i>
-              </span>
-              <span class="has-text-grey-dark has-text-weight-light">Unlimited Access to courses</span>
-            </div>
-            <div class="icon-text pb-4">
-              <span class="icon has-text-success">
-                <i class="fas fa-check-circle iconclr"></i>
-              </span>
-              <span class="has-text-grey-dark has-text-weight-light">Register Up to 4 Devices</span>
-            </div>
-            <div class="icon-text pb-4">
-              <span class="icon has-text-success">
-                <i class="fas fa-check-circle iconclr"></i>
-              </span>
-              <span class="has-text-grey-dark has-text-weight-light">Ask Our Trained Teachers</span>
-            </div>
-            <div class="icon-text pb-4">
-              <span class="icon has-text-success">
-                <i class="fas fa-check-circle iconclr"></i>
-              </span>
-              <span class="has-text-grey-dark has-text-weight-light">Graded Homeworks</span>
-            </div>
-          </ul>
-        </div>
-        <div class="card-footer is-centered memeberfooter">
-          <p class="has-text-grey-dark pb-4">Start Your 14-Days Free Trial Now</p>
-                    {% if not user.is_authenticated %}
-          <a href="{% url 'authorization:signup' %}">
-          <button class="button is-large  is-primary memeberbtn">
-            Register
-          </button>
-          </a>
-          {% else %}
-          <a href="{% url 'payment:subscribe' %}">
-          <button class="button is-large  is-primary memeberbtn">
-             Subscribe
-          </button>
-          </a>
-          {% endif %}
-        </div>
-      </div>
-      <div class="card column">
-        <div class="card-header is-shadowless">
-          <h1 class="title card-header-title has-text-grey-dark">Pro</h1>
-          <div class="card-header-icon footericon">
-            <h2 class="title as_sub_title has-text-grey-dark">20$</h2>
+              <h2 class="title as_sub_title has-text-grey-dark pr-2">{{ membership_type.price_pounds }}£</h2>
             <br />
             <p class="subtitle has-text-grey-dark has-text-weight-light">monthly</p>
           </div>
@@ -261,6 +234,7 @@
           {% endif %}
         </div>
       </div>
+      {% endfor %}
     </ul>
   </div>
 </body>

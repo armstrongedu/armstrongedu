@@ -3,9 +3,9 @@ from django.dispatch import receiver
 from django.contrib.auth import get_user_model
 
 from . import notifications
-from .models import Invoice
+from .models import Receipt
 
 
-@receiver(post_save, sender=Invoice)
+@receiver(post_save, sender=Receipt)
 def new_invoice_added(sender, instance, **kwargs):
     notifications.invoice_email(instance)
