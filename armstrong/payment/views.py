@@ -11,7 +11,7 @@ from django.views.decorators.csrf import csrf_exempt
 
 from .forms import BillingDataForm
 from .utils import AcceptAPI
-from .models import Card, Receipt, Membership, CardToken, MembershipType
+from .models import Card, Invoice, Membership, CardToken, MembershipType
 
 
 not_member_required = user_passes_test(lambda user: not user.is_member(), login_url='/')
@@ -111,7 +111,7 @@ def subscribe_done(request):
         accept_api = AcceptAPI(settings.PAYMOB_API_KEY)
         item_name = accept_api.retrieve_transaction(t_data['id'])['order']['items'][0]['name']
 
-        membership_type = MembershipType.objects.filter(name=item_name).first()
+        membership_type = MembershipType.objects.get(name=item_name)
         context['membership_type'] = membership_type
 
         card, _ = Card.objects.update_or_create(
@@ -122,7 +122,7 @@ def subscribe_done(request):
             },
         )
 
-        receipt = Receipt.objects.create(
+        invoice = Invoice.objects.create(
             user = request.user,
             card = card,
             paymob_id = t_data['id'],
@@ -139,7 +139,7 @@ def subscribe_done(request):
         )
 
         context['card'] = card
-        context['receipt'] = receipt
+        Invoice['invoice'] = invoice
 
     context['message'] = t_data['data.message']
 

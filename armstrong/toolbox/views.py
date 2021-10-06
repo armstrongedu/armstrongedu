@@ -10,7 +10,7 @@ from bostaSDK import delivery
 from bostaSDK import pickup
 from bostaSDK.utils import Receiver, Address, ContactPerson, DeliveryTypes
 
-from payment.models import Receipt
+from payment.models import Invoice
 
 from .models import Order, ToolBox
 from payment.utils import AcceptAPI
@@ -74,7 +74,7 @@ def place_order(request):
     payment_resp = accept_api.pay(request.user.card_token.token, 'TOKEN', payment_token)
 
     if payment_resp['obj']['success'] == 'true':
-        receipt = Receipt.objects.create(
+        receipt = Invoice.objects.create(
             user = request.user,
             card = request.user.card,
             paymob_id = payment_resp['obj']['id'],

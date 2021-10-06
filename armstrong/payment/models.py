@@ -53,10 +53,10 @@ class Card(models.Model):
         return self.last_4_digits
 
 
-class Receipt(models.Model):
-    card = models.ForeignKey(Card, null=True, blank=True, on_delete=models.SET_NULL, related_name='receipts')
+class Invoice(models.Model):
+    card = models.ForeignKey(Card, null=True, blank=True, on_delete=models.SET_NULL, related_name='invoices')
     paymob_id = models.CharField(max_length=255, null=False, blank=False)
-    user = models.ForeignKey(get_user_model(), null=True, blank=True, on_delete=models.SET_NULL, related_name='receipts')
+    user = models.ForeignKey(get_user_model(), null=True, blank=True, on_delete=models.SET_NULL, related_name='invoices')
     created_at = models.DateTimeField(auto_now=True, null=False, blank=False)
     billed = models.FloatField(null=False, blank=False)
 
