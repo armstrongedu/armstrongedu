@@ -103,7 +103,6 @@ def checkout(request):
 @login_required
 @not_member_required
 def subscribe_done(request):
-    # TODO: here i should do the toolbox order
     context = {'billing_data': request.user.billing_data}
     t_data = request.GET
 
@@ -112,7 +111,7 @@ def subscribe_done(request):
         accept_api = AcceptAPI(settings.PAYMOB_API_KEY)
         item_name = accept_api.retrieve_transaction(t_data['id'])['order']['items'][0]['name']
 
-        membership_type = MembershipType.objects.filter(name=name)
+        membership_type = MembershipType.objects.filter(name=item_name)
         context['membership_type'] = membership_type
 
         card, _ = Card.objects.update_or_create(
@@ -123,13 +122,11 @@ def subscribe_done(request):
             },
         )
 
-        invoice, _ = Receipt.objects.update_or_create(
-            user=request.user,
-            defaults={
-                'card': card,
-                'paymob_id': t_data['id'],
-                'billed': round(int(t_data['amount_cents'])/100, 2),
-            }
+        receipt = Receipt.objects.create(
+            user = request.user,
+            card = card,
+            paymob_id = t_data['id'],
+            billed = round(int(t_data['amount_cents'])/100, 2),
         )
 
         membership, _ = Membership.objects.update_or_create(
@@ -142,7 +139,7 @@ def subscribe_done(request):
         )
 
         context['card'] = card
-        context['invoice'] = invoice
+        context['receipt'] = receipt
 
     context['message'] = t_data['data.message']
 
