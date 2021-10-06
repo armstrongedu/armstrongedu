@@ -110,8 +110,7 @@ def subscribe_done(request):
     if t_data['success'] == 'true':
 
         accept_api = AcceptAPI(settings.PAYMOB_API_KEY)
-        return JsonResponse(accept_api.retrieve_transaction(t_data['id']), status=200)
-        item_name = accept_api.retrieve_transaction(t_data['id'])['obj']['order']['items'][0]['name']
+        item_name = accept_api.retrieve_transaction(t_data['id'])['order']['items'][0]['name']
 
         membership_type = MembershipType.objects.filter(name=name)
         context['membership_type'] = membership_type
