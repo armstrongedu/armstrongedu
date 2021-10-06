@@ -4,11 +4,11 @@ from django.conf import settings
 from django.template.loader import render_to_string
 
 
-def invoice_email(receipt):
+def receipt_email(receipt):
     send_mail(
         subject='Armstrong Receipt',
         from_email=settings.FROM_EMAIL,
-        recipient_list=[invoice.user.email],
+        recipient_list=[receipt.user.email],
         # message=render_to_string('emails/confirmation_code.html', {'user': user, 'settings': settings}),
         message='Receipt',
         # html_message=render_to_string('emails/confirmation_code.html', {'user': user, 'settings': settings}),

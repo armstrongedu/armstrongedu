@@ -7,5 +7,5 @@ from .models import Receipt
 
 
 @receiver(post_save, sender=Receipt)
-def new_invoice_added(sender, instance, **kwargs):
-    notifications.invoice_email(instance)
+def new_receipt_added(sender, instance, **kwargs):
+    notifications.receipt_email(instance)
