@@ -107,9 +107,12 @@ def subscribe_done(request):
     context = {'billing_data': request.user.billing_data}
     t_data = request.GET
 
-
     if t_data['success'] == 'true':
-        membership_type = MembershipType.objects.filter(name=t_data['order']['items'][0]['name'])
+
+        accept_api = AcceptAPI(settings.PAYMOB_API_KEY)
+        item_name = json.loads(accept_api.retrieve_transaction(t_data['id']))['obj']['order']['items'][0]['name']
+
+        membership_type = MembershipType.objects.filter(name=name)
         context['membership_type'] = membership_type
 
         card, _ = Card.objects.update_or_create(

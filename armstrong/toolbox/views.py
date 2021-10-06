@@ -20,6 +20,58 @@ member_required = user_passes_test(lambda user: user.is_member(), login_url='/')
 @login_required
 @member_required
 def place_order(request):
+
+    accept_api = AcceptAPI(settings.PAYMOB_API_KEY)
+
+    auth_token = accept_api.retrieve_auth_token()
+
+    order_data = {
+        "auth_token": auth_token,
+        "delivery_needed": "false",
+        "amount_cents": membership_type.price_cents,
+        "currency": "EGP",
+        "items": [{
+            "name": membership_type.name,
+            "amount_cents": membership_type.price_cents,
+            "description": membership_type.name,
+            "quantity": 1,
+        },],
+    }
+
+
+    order = accept_api.order_registration(order_data)
+
+    accept_api_request = {
+        "auth_token": auth_token,
+        "amount_cents": membership_type.price_cents,
+        "expiration": 3600,
+        "order_id": order.get("id"),
+        "billing_data": {
+            "apartment": billing_data_form['address_1'].value(),
+            "email": request.user.email,
+            "floor": "-",
+            "first_name": billing_data_form['first_name'].value(),
+            "street": "-",
+            "building": "-",
+            "phone_number": billing_data_form['phone'].value(),
+            "shipping_method": "-",
+            "postal_code": billing_data_form['postal_code'].value(),
+            "city": billing_data_form['city'].value(),
+            "country": billing_data_form['country'].value(),
+            "last_name": billing_data_form['last_name'].value(),
+            "state": billing_data_form['state'].value(),
+        },
+        "currency": "EGP",
+        "integration_id": 1139146,
+        "lock_order_when_paid": "false"
+    }
+
+    payment_token = accept_api.payment_key_request(accept_api_request)
+
+    iframe_url = accept_api.retrieve_iframe("4242", payment_token)
+
+
+
     api_client=ApiClient(settings.BOSTA_API_KEY)
 
     delivery_types = api_client.deliveyTypes
