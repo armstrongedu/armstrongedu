@@ -12,7 +12,7 @@ from bostaSDK.utils import Receiver, Address, ContactPerson, DeliveryTypes
 
 from payment.models import Receipt
 
-from .models import Order, Toolbox
+from .models import Order, ToolBox
 from payment.utils import AcceptAPI
 
 
