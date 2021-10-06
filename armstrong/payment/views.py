@@ -111,7 +111,7 @@ def subscribe_done(request):
         accept_api = AcceptAPI(settings.PAYMOB_API_KEY)
         item_name = accept_api.retrieve_transaction(t_data['id'])['order']['items'][0]['name']
 
-        membership_type = MembershipType.objects.filter(name=item_name)
+        membership_type = MembershipType.objects.filter(name=item_name).first()
         context['membership_type'] = membership_type
 
         card, _ = Card.objects.update_or_create(
