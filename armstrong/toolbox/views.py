@@ -21,7 +21,7 @@ member_required = user_passes_test(lambda user: user.is_member(), login_url='/')
 @login_required
 @member_required
 def place_order(request):
-    toolbox = Toolbox.objects.get(id=request.POST['tool_box_id'])
+    toolbox = ToolBox.objects.get(id=request.POST['tool_box_id'])
     billing_data = request.user.billing_data
 
     accept_api = AcceptAPI(settings.PAYMOB_API_KEY)
