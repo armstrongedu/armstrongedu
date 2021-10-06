@@ -63,7 +63,7 @@
           </div>
           <div class="rightbox">
             <div class="rb-container">
-              {% if course.toolbox_status == course.TB_NO or not user.is_authenticated %}
+              {% if course.toolbox_status == course.TB_NO or not user.is_authenticated or not user.is_member %}
               {% elif course.toolbox_status == course.TB_DELIVERY %}
                   <ul class="rb">
                     <li class="rb-item" >

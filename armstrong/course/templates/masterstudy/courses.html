@@ -68,7 +68,7 @@
           <strong>{{ course.toolbox.name }} ToolBox</strong>
           </div>
                 <div class="stm_lms_courses__single--info_meta rb-container">
-              {% if course.toolbox_status == course.TB_NO or not user.is_authenticated %}
+              {% if course.toolbox_status == course.TB_NO or not user.is_authenticated or not user.is_member %}
               {% elif course.toolbox_status == course.TB_DELIVERY %}
                   <ul class="rb">
                     <li class="rb-item" >
@@ -208,7 +208,7 @@
           <strong>{{ course.toolbox.name }} ToolBox</strong>
           </div>
                 <div class="stm_lms_courses__single--info_meta rb-container">
-              {% if course.toolbox_status == course.TB_NO or not user.is_authenticated %}
+              {% if course.toolbox_status == course.TB_NO or not user.is_authenticated or not user.is_member %}
               {% elif course.toolbox_status == course.TB_DELIVERY %}
                   <ul class="rb">
                     <li class="rb-item" >
