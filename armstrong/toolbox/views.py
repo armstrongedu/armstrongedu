@@ -73,12 +73,12 @@ def place_order(request):
 
     payment_resp = accept_api.pay(request.user.card_token.token, 'TOKEN', payment_token)
 
-    if payment_resp['obj']['success'] == 'true':
+    if payment_resp['success'] == 'true':
         receipt = Invoice.objects.create(
             user = request.user,
             card = request.user.card,
-            paymob_id = payment_resp['obj']['id'],
-            billed = round(int(payment_resp['obj']['amount_cents'])/100, 2),
+            paymob_id = payment_resp['id'],
+            billed = round(int(payment_resp['amount_cents'])/100, 2),
         )
         api_client=ApiClient(settings.BOSTA_API_KEY)
 
