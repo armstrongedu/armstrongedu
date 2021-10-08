@@ -27,10 +27,22 @@
     <ul class="columns is-multiline featurecourse">
       {% for course in courses %}
       <div class="column is-one-third">
-        <h1 class="locked-text">Locked
-        {# TODO(gaytomycode): when you apply the locked hna apply it brdo 3ala l get tools button #}
-        </h1>
-        <div class="card locked">
+        {% if min_age and max_age %}
+            {% if course.start_age <= min_age or course.start_age <= max_age and course.end_age >= max_age %}
+                <div class="card">
+            {% else %}
+            <div style="position:relative;">
+            <h1 class="locked-text" style="
+            position: absolute;
+            top: 17rem;
+            left: 8rem;
+            ">Locked</h1>
+            </div>
+            <div class="card locked">
+            {% endif %}
+        {% else %}
+            <div class="card">
+        {% endif %}
 
           <div class="card-image">
               {{ course.intro_video_iframe | safe }}
@@ -59,7 +71,9 @@
             </div>
           </div>
           <div style="margin-left: auto; margin-right: auto;width:100%; text-align:center; padding-bottom:10px;">
+          {% if course.toolbox %}
           <strong>{{ course.toolbox.name }} ToolBox</strong>
+          {% endif %}
           </div>
           <div class="rightbox">
             <div class="rb-container">
@@ -100,7 +114,13 @@
               <form  method="POST" action="{% url 'toolbox:place-order' %}" style="position: relative;display: inline-block;margin-bottom: 10px;margin-left: auto; margin-right: auto;text-align: center;overflow: hidden;">
                   {% csrf_token %}
                   <input type="hidden" value="{{ course.toolbox.id }}" name="tool_box_id">
-                  <input value="Get ToolBox" class="for-checkbox-tools" type="submit" style="position: relative;display: inline-block;padding: 15px;width: 150px;font-size: 12px;line-height: 10px;letter-spacing: 1px;margin-bottom: 10px;margin-left: auto; margin-right: auto;text-align: center;border-radius: 4px;overflow: hidden;cursor: pointer;text-transform: uppercase;color: var(--white);border: 1px solid;">
+                {% if min_age and max_age %}
+                    {% if course.start_age <= min_age or course.start_age <= max_age and course.end_age >= max_age %}
+                      <input value="Get ToolBox" class="for-checkbox-tools" type="submit" style="position: relative;display: inline-block;padding: 15px;width: 150px;font-size: 12px;line-height: 10px;letter-spacing: 1px;margin-bottom: 10px;margin-left: auto; margin-right: auto;text-align: center;border-radius: 4px;overflow: hidden;cursor: pointer;text-transform: uppercase;color: var(--white);border: 1px solid;">
+                    {% else %}
+                    {% endif %}
+                {% else %}
+                {% endif %}
               </form>
               {% endif %}
             </div>

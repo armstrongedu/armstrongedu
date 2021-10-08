@@ -63,6 +63,8 @@ class Course(models.Model):
     track_order = models.IntegerField(null=True, blank=True)
     title = models.CharField(max_length=255)
     intro_video_iframe = models.FileField(storage=APIVideoStorage(), max_length=1000)
+    start_age = models.IntegerField(null=False, blank=False)
+    end_age = models.IntegerField(null=False, blank=False)
 
     def __str__(self):
         return self.title

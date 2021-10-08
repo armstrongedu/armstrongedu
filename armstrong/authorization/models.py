@@ -18,3 +18,12 @@ class User(SimpleEmailConfirmationUserMixin, AbstractUser):
     def is_member(self):
         from payment.models import Membership
         return hasattr(self, 'membership') and (self.membership.status == Membership.ACTIVE)
+
+    def has_students(self):
+        return self.membership.membership_type.number_of_students == self.students.count()
+
+
+class Student(models.Model):
+    user = models.ForeignKey(User, null=False, blank=False, on_delete=models.CASCADE, related_name='students')
+    name = models.CharField(max_length=255, null=False, blank=False)
+    birth_year = models.IntegerField(null=False, blank=False)

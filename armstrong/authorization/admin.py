@@ -3,6 +3,8 @@ from django.contrib.auth.admin import UserAdmin
 from django.utils.translation import ugettext_lazy as _
 from django.contrib.auth import get_user_model
 
+from .models import Student
+
 
 @admin.register(get_user_model())
 class UserAdmin(UserAdmin):
@@ -25,3 +27,8 @@ class UserAdmin(UserAdmin):
     list_display = ('email', 'is_confirmed', 'first_name',
                     'last_name', 'is_staff', 'membership',)
     list_filter = ('is_staff', 'is_superuser', 'is_active', 'groups')
+
+
+@admin.register(Student)
+class StudentAmin(admin.ModelAdmin):
+    list_display = ('user', 'name', 'birth_year',)

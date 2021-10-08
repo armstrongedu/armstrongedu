@@ -3,6 +3,7 @@ from datetime import datetime, timedelta
 from django.shortcuts import render, redirect
 from django.conf import settings
 from django.contrib.auth.decorators import login_required, user_passes_test
+from django.urls import reverse
 
 
 from bostaSDK.apiClient import ApiClient
@@ -17,9 +18,11 @@ from payment.utils import AcceptAPI
 
 
 member_required = user_passes_test(lambda user: user.is_member(), login_url='/')
+students_required = user_passes_test(lambda user: user.has_students(), login_url='/authorization/add-students/')
 
 @login_required
 @member_required
+@students_required
 def place_order(request):
     toolbox = ToolBox.objects.get(id=request.POST['tool_box_id'])
     billing_data = request.user.billing_data

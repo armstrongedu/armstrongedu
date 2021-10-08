@@ -162,6 +162,16 @@ body .didocol {
 #homepage {
   overflow-y: auto;
 }
+#homepage .locked {
+  opacity: 0.2;
+}
+#homepage .locked-text {
+  position: relative;
+  top: 50%;
+  left: 40%;
+  color: white !important;
+  z-index: 3;
+}
 #homepage .mynav {
   background-color: #242424;
   position: unset;
@@ -218,6 +228,54 @@ body .didocol {
 #homepage .featurecourse .is-one-third {
   padding: 2%;
 }
+#homepage .featurecourse .rb-container {
+  font-family: "PT Sans", sans-serif;
+  margin: auto;
+  display: flex;
+  flex-direction: row;
+  position: relative;
+}
+#homepage .featurecourse .rb-container ul.rb {
+  padding: 1em;
+  margin: auto !important;
+  display: flex;
+}
+#homepage .featurecourse .rb-container ul.rb li {
+  list-style: none;
+  min-height: 50px;
+  margin-top: 0;
+  border-top: 3px solid #ccc;
+  padding-top: 1em;
+  position: relative;
+}
+#homepage .featurecourse .rb-container ul.rb li::before {
+  position: absolute;
+  left: -19px;
+  top: -1px;
+  content: " ";
+  border: 8px solid #ccc;
+  border-radius: 500%;
+  background: #50d890;
+  height: 20px;
+  width: 20px;
+  transition: all 500ms ease-in-out;
+  transform: translate(0, -13px);
+}
+#homepage .featurecourse .item-title {
+  padding: 0.8em;
+}
+#homepage .featurecourse .rb-container ul.rb .as-progress::before {
+  border-color: #232931;
+  transition: all 1000ms ease-in-out;
+}
+#homepage .featurecourse .rb-container ul.rb .as-progress {
+  border-color: #232931;
+  transition: all 1000ms ease-in-out;
+}
+#homepage .featurecourse .rb-container ul.rb li:last-child {
+  border-top: 3px solid transparent;
+  margin-left: 10px;
+}
 #homepage .whysec {
   margin: 4rem;
   margin-top: 10rem;
@@ -257,10 +315,10 @@ body .didocol {
 #homepage .memeberships .title {
   text-align: center;
   font-weight: bolder;
-  font-size: 3rem !important;
+  font-size: 1.5rem !important;
 }
 #homepage .memeberships .as_sub_title {
-  font-size: 2rem !important;
+  font-size: 1rem !important;
 }
 #homepage .memeberships span {
   font-size: 1.4em;
@@ -293,7 +351,7 @@ body .didocol {
 #homepage .memebercrd .card-header h1:before {
   content: "";
   position: absolute;
-  top: 6rem;
+  top: 4rem;
   left: 2rem;
   width: 20%;
   height: 1rem;
@@ -329,6 +387,9 @@ body .didocol {
 }
 
 @media only screen and (max-width: 600px) {
+  #homepage .locked-text {
+    transform: translate(-18px, 18rem);
+  }
   #homepage .button {
     margin-right: auto;
     margin-left: auto;
@@ -387,6 +448,11 @@ body .didocol {
 }
 #mobile-hero-image {
   display: none;
+}
+
+.rb {
+  width: 33ch;
+  margin-top: 2em;
 }
 
 @media only screen and (max-width: 600px) {
