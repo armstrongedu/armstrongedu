@@ -38,7 +38,7 @@ def add_students(request):
             'range': range(cur_year, cur_year-20, -1),
             'std_range': range(0, std_count),
         }
-        return render(template_name=f'masterstudy/add-students{_ar if settings.LANG == "ar" else ""}.html', request=request, context=context)
+        return render(template_name=f'masterstudy/add-students{_ar if settings.AS_LANG == "ar" else ""}.html', request=request, context=context)
     if request.method == 'POST':
         data = request.POST
         std_count = request.user.membership.membership_type.number_of_students

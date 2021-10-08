@@ -22,7 +22,7 @@ def subscribe(request):
     context = {'membership_types': MembershipType.objects.all()}
     if hasattr(request.user, 'billing_data'):
         context['billing_data'] = BillingDataForm(instance=request.user.billing_data)
-    return render(template_name=f'masterstudy/subscribe{_ar if settings.LANG == "ar" else ""}.html', request=request, context=context)
+    return render(template_name=f'masterstudy/subscribe{_ar if settings.AS_LANG == "ar" else ""}.html', request=request, context=context)
 
 
 @login_required
@@ -44,7 +44,7 @@ def checkout(request):
     }
 
     if not billing_data_form.is_valid():
-        return render(template_name=f'masterstudy/subscribe{_ar if settings.LANG == "ar" else ""}.html', request=request, context=context)
+        return render(template_name=f'masterstudy/subscribe{_ar if settings.AS_LANG == "ar" else ""}.html', request=request, context=context)
 
     accept_api = AcceptAPI(settings.PAYMOB_API_KEY)
 
@@ -98,7 +98,7 @@ def checkout(request):
 
     billing_data_form.save()
 
-    return render(template_name=f'masterstudy/checkout{_ar if settings.LANG == "ar" else ""}.html', request=request, context=context)
+    return render(template_name=f'masterstudy/checkout{_ar if settings.AS_LANG == "ar" else ""}.html', request=request, context=context)
 
 @login_required
 @not_member_required
@@ -143,7 +143,7 @@ def subscribe_done(request):
 
     context['message'] = t_data['data.message']
 
-    return render(template_name=f'masterstudy/subscribe-done{_ar if settings.LANG == "ar" else ""}.html', request=request, context=context)
+    return render(template_name=f'masterstudy/subscribe-done{_ar if settings.AS_LANG == "ar" else ""}.html', request=request, context=context)
 
 @csrf_exempt
 def save_token(request):

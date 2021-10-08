@@ -18,14 +18,14 @@ def courses(request):
     if not request.user.is_anonymous and request.user.is_authenticated and request.user.is_member() and request.user.has_students():
         context['min_age'] = datetime.now().year - request.user.students.order_by('-birth_year').first().birth_year
         context['max_age'] = datetime.now().year - request.user.students.order_by('birth_year').first().birth_year
-    return render(template_name=f'masterstudy/courses{_ar if settings.LANG == "ar" else ""}.html', request=request, context=context)
+    return render(template_name=f'masterstudy/courses{_ar if settings.AS_AS_LANG == "ar" else ""}.html', request=request, context=context)
 
 def course(request, course_id):
     context = {
         'course': get_object_or_404(Course, id=course_id),
         'lessons': Lesson.objects.filter(course_id=course_id).order_by('order'),
     }
-    return render(template_name=f'masterstudy/course{_ar if settings.LANG == "ar" else ""}.html', request=request, context=context)
+    return render(template_name=f'masterstudy/course{_ar if settings.AS_AS_LANG == "ar" else ""}.html', request=request, context=context)
 
 
 @login_required
@@ -45,4 +45,4 @@ def start(request, topic_id):
         'next_topic': (Topic.objects.filter(lesson__course_id=course, lesson=topic.lesson, order=topic.order+1).first() or
                        (next_lesson.topics.all().first() if next_lesson else None)),
     }
-    return render(template_name=f'masterstudy/lesson{_ar if settings.LANG == "ar" else ""}.html', request=request, context=context)
+    return render(template_name=f'masterstudy/lesson{_ar if settings.AS_AS_LANG == "ar" else ""}.html', request=request, context=context)
