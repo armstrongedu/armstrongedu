@@ -164,7 +164,17 @@ body {
 }
 
 #homepage {
-
+    .locked{
+        opacity: .2;
+    }
+    .locked-text{
+        position: relative;
+        top: 50%;
+        left: 40%;
+        color: white !important;
+        z-index: 3;
+    
+    }
     .mynav {
         background-color: #242424;
         position: unset;
@@ -224,6 +234,69 @@ body {
         .is-one-third {
             padding: 2%;
         }
+        .rb-container {
+            
+            font-family: "PT Sans", sans-serif;
+            margin: auto;
+            display: flex;
+            flex-direction:row;
+            position: relative;
+          }
+          
+          .rb-container ul.rb {
+           
+            padding: 1em;
+            margin: auto !important;
+            display: flex;
+          }
+          
+          .rb-container ul.rb li {
+            list-style: none;
+            min-height: 50px;
+            margin-top: 0;
+            border-top: 3px solid #ccc;
+            padding-top: 1em;
+            position: relative;
+          }
+          
+          
+          
+          
+          
+          .rb-container ul.rb li::before {
+            position: absolute;  
+            left: -19px;
+            top: -1px;
+            content: " ";
+            border: 8px solid #ccc;
+            border-radius: 500%;
+            background: #50d890;
+            height: 20px;
+            width: 20px;
+            transition: all 500ms ease-in-out;
+            transform:translate(0,-13px);
+          }
+          .item-title{
+              padding:.8em;
+          }
+         
+          
+            .rb-container ul.rb .as-progress::before {
+                border-color: #232931;
+                transition: all 1000ms ease-in-out;
+              }
+              .rb-container ul.rb .as-progress{
+                border-color: #232931;
+                transition: all 1000ms ease-in-out;
+              }
+          
+          
+          .rb-container ul.rb li:last-child{
+            border-top: 3px solid transparent;
+            margin-left: 10px;
+          }
+          
+          
     }
     .whysec {
         margin: 4rem;
@@ -347,7 +420,9 @@ body {
 }
 @media only screen and (max-width: 600px){
 #homepage{
-
+    .locked-text{
+        transform: translate(-18px, 18rem);
+    }
     .button{
         margin-right: auto;
         margin-left: auto;
@@ -423,6 +498,13 @@ body {
 #mobile-hero-image {
     display: none;
 }
+.rb{
+    
+        width: 33ch;
+margin-top: 2em;
+    
+}
+
 
 @media only screen and (max-width: 600px) {
     #web-hero-image {
