@@ -16,6 +16,7 @@
         <link rel="stylesheet" href="{% static 'layout.css' %}">
         <script src="{% static 'fontawesome_free/js/all.min.js' %}"></script>
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css" />
+        <script src="https://widebot-webchat.s3.amazonaws.com/shared/widebot.js?botConfigs=iOiYnblJyeiwiIFZVSMJjOiQWS09mYvJmIscTMykiclRWYlhEdTBSbyFkI6ICLicmbvJHdtFmTyV2c1JXZzVnI6ISZOR3biJCLiIXQiojIl1WYu9mc0NFItJ2QzlmIsIyZuFGTldmbhhXdTV2ZhV3ZiQWZ0J3bwBCLlNHbhZmOlt2bUR3biJUMadnI6IibrA3c1pmWz81YNhESVZlUzhUaZhjZIBVMjVUdNplVyc3ZYpHdxFVdGN1Nk1mY5dGRylzSzcHRrYjRtdkSoFjS2ADbGRCLi0zbvZVWMR3YlJXakJjIMJVVl5Wa6MHc0RHaioGajJWZ39yLiVGZpdnL0F2L0VmbuQ3bk9yM29SawFWasR3YlJXa09mYiwiIl5jIyFGdhZXQ6MHc0RHaiomYlRWa39yLnFmcvR3c09mLi9Gbi5SZul2duUmcvNXZu5yc39GZvZGdhxGcvQ2YhRHdh1mcw8yc05WZthSZkFjZxEjN4QTL0YzYl1iM5ITYtMTMzUzYkBDM30GcuQTZhNGM0VnYiwiIn52Zh1WSu9GdiIiOiMmcTV2QulWYtJCLjIiOiI3bs9iIGVkN1kjM0F2VzFGaiwjIrJXYNJXZjJCLlVnc0piOiwkUVN3cvozcwRHdoJ3biVGZpd3Lhh2YiV2dtQWbh5yMz5CduM3dh52b6FXYoN3Lt92YjR3bi9CZlJyczNmL0FGayN2UzpmIsIjIMJVV0BXa6MHc0RHaiomYlRWa39yLoNmYldXL09WYuMzcuQXYzdXYu9meh1Gaz9SbvNmL09mYvQWZyFycq5Cdhh2Y9J"></script>
     </head>
     <body>
         <nav class="navbar-menu is-active is-transparent mynav" role="navigation" aria-label="main navigation">
@@ -28,6 +29,16 @@
                         <a class="button is-link" href="{% url "authorization:signup" %}">Sign up</a>
                         <a class="button is-transparent" href="{% url "authorization:login" %}">Log in</a>
                     {% else %}
+                        {% if user.is_member and user.has_students %}
+                            {% for std in user.students.all %}
+                                {% if request.COOKIES.std_id|add:"0" == std.id|add:"0" %}
+                                    <a class="button is-link" href="{% url "authorization:change-std" std.id %}" style="pointer-events: none; color:grey;"> {{ std.name }}</a>
+                                {% else %}
+                                    <a class="button is-link" href="{% url "authorization:change-std" std.id %}"> {{ std.name }}</a>
+                                {% endif %}
+                            <span class="vertical_divider"></span>
+                            {% endfor %}
+                        {% endif %}
                         <a class="button is-transparent" href="{% url "authorization:logout" %}">Log Out</a>
                     {% endif %}
                     </div>

@@ -49,7 +49,15 @@
                 {% for course in track.courses.all %}
                 <div style="float: left !important; display:inline-block !important; width: auto !important; padding:20px !important;">
                     <div class="stm_lms_courses__single--info_title">
+                {% if min_age and max_age %}
+                    {% if course.start_age <= min_age or course.start_age <= max_age and course.end_age >= max_age %}
                         <a href="{% url 'course:course' course.id %}"><h4>{{ course.title }}</h4> </a>
+                    {% else %}
+                        <h4>{{ course.title }}</h4>
+                    {% endif %}
+                {% else %}
+                        <a href="{% url 'course:course' course.id %}"><h4>{{ course.title }}</h4> </a>
+                {% endif %}
                     </div>
                     <div style="height: 50px !important;">
                     <a href=""
@@ -71,9 +79,9 @@
           </div>
                 <div class="stm_lms_courses__single--info_meta rb-container">
               {% if course.toolbox_status == course.TB_NO or not user.is_authenticated or not user.is_member %}
-              {% elif course.toolbox_status == course.TB_DELIVERY %}
+              {% elif course.toolbox_status == course.TB_PLACED %}
                   <ul class="rb">
-                    <li class="rb-item" >
+                    <li class="rb-item as-progress" >
                       <div class="item-title">Placed</div>
                     </li>
                     <li class="rb-item" >
@@ -81,6 +89,40 @@
                     </li>
 
                     <li class="rb-item" >
+
+                      <div class="item-title">Delivered</div>
+                    </li>
+                    <li class="rb-item" >
+                      <div class="item-title"></div>
+                    </li>
+                  </ul>
+              {% elif course.toolbox_status == course.TB_PICKEDUP %}
+                  <ul class="rb">
+                    <li class="rb-item as-progress" >
+                      <div class="item-title">Placed</div>
+                    </li>
+                    <li class="rb-item as-progress" >
+                      <div class="item-title">Shipped</div>
+                    </li>
+
+                    <li class="rb-item" >
+
+                      <div class="item-title">Delivered</div>
+                    </li>
+                    <li class="rb-item" >
+                      <div class="item-title"></div>
+                    </li>
+                  </ul>
+              {% elif course.toolbox_status == course.TB_DELIVERY %}
+                  <ul class="rb">
+                    <li class="rb-item as-progress" >
+                      <div class="item-title">Placed</div>
+                    </li>
+                    <li class="rb-item as-progress" >
+                      <div class="item-title">Shipped</div>
+                    </li>
+
+                    <li class="rb-item as-progress" >
 
                       <div class="item-title">Delivered</div>
                     </li>
@@ -208,9 +250,15 @@
                 </div>
                 </div>
                 <div class="stm_lms_courses__single--title">
-                <a href="{% url 'course:course' course.id %}"
-                <h5>{{ course.title }}</h5>
-                </a>
+                {% if min_age and max_age %}
+                    {% if course.start_age <= min_age or course.start_age <= max_age and course.end_age >= max_age %}
+                        <a href="{% url 'course:course' course.id %}"><h5>{{ course.title }}</h5> </a>
+                    {% else %}
+                        <h5>{{ course.title }}</h5>
+                    {% endif %}
+                {% else %}
+                        <a href="{% url 'course:course' course.id %}"><h5>{{ course.title }}</h5> </a>
+                {% endif %}
                 </div>
                 <div class="stm_lms_courses__single--meta">
                 <div class="stm_lms_courses__single--price heading_font">
@@ -226,9 +274,15 @@
                 Author Name            </div>
                 </div>
                 <div class="stm_lms_courses__single--info_title">
-                <a href="{% url 'course:course' course.id %}"
-                <h4>{{ course.title }}</h4>
-                </a>
+                {% if min_age and max_age %}
+                    {% if course.start_age <= min_age or course.start_age <= max_age and course.end_age >= max_age %}
+                        <a href="{% url 'course:course' course.id %}"><h5>{{ course.title }}</h5> </a>
+                    {% else %}
+                        <h5>{{ course.title }}</h5>
+                    {% endif %}
+                {% else %}
+                        <a href="{% url 'course:course' course.id %}"><h5>{{ course.title }}</h5> </a>
+                {% endif %}
                 </div>
                 {{ course.intro_video_iframe | safe }}
                 <div class="stm_lms_courses__single--info_excerpt">

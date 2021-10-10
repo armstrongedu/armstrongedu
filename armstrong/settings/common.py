@@ -39,6 +39,8 @@ INSTALLED_APPS = [
     'misc',
     'payment',
     'toolbox',
+    'help_sessions',
+    'login_sessions',
 ]
 
 MIDDLEWARE = [
@@ -50,6 +52,8 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'django_middleware_global_request.middleware.GlobalRequestMiddleware',
+    'login_sessions.middleware.OneSessionPerUserMiddleware',
+
 ]
 
 ROOT_URLCONF = 'armstrong.urls'

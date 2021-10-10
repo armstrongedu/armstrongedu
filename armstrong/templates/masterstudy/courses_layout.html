@@ -23,6 +23,16 @@
 {% else %}
 <div class="pull-right">
 <div class="header_login_url">
+                        {% if user.is_member and user.has_students %}
+                            {% for std in user.students.all %}
+                                {% if request.COOKIES.std_id|add:"0" == std.id|add:"0" %}
+                                    <a href="{% url "authorization:change-std" std.id %}" style="pointer-events: none; color:grey;"> {{ std.name }}</a>
+                                {% else %}
+                                    <a href="{% url "authorization:change-std" std.id %}"> {{ std.name }}</a>
+                                {% endif %}
+                            <span class="vertical_divider"></span>
+                            {% endfor %}
+                        {% endif %}
 <a href="{% url 'authorization:logout' %}">Logout</a>
 </div>
 </div>

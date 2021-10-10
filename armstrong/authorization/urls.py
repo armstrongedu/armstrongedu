@@ -50,4 +50,5 @@ urlpatterns = [
     path('', include('django.contrib.auth.urls')),
     path('', include('social_django.urls', namespace='social')),
     path('add-students/', views.add_students, name='add-students'),
+    path('switch-students/<std_id>', views.switch_students, name='change-std'),
 ]

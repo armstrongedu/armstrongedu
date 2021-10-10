@@ -5,6 +5,7 @@ from django.db import models
 from django.contrib.postgres.fields import ArrayField
 from django.core.files.storage import FileSystemStorage
 from django.conf import settings
+from django.contrib.auth import get_user_model
 
 import apivideo
 from apivideo.apis import VideosApi
@@ -12,7 +13,14 @@ from apivideo.exceptions import ApiAuthException
 
 from django_middleware_global_request.middleware import get_request
 
+from bostaSDK.apiClient import ApiClient
+from bostaSDK import delivery
+from bostaSDK import pickup
+from bostaSDK.utils import Receiver, Address, ContactPerson, DeliveryTypes
 
+import requests
+
+from authorization.models import Student
 from toolbox.models import ToolBox
 
 
@@ -56,7 +64,7 @@ class Track(models.Model):
 
 
 class Course(models.Model):
-    TB_NO, TB_GET, TB_BOUGHT, TB_DELIVERY = range(1, 5)
+    TB_NO, TB_GET, TB_PLACED, TB_PICKEDUP, TB_DELIVERY, TB_BOUGHT = range(1, 7)
     category = models.ManyToManyField(Category)
     toolbox = models.ForeignKey(ToolBox, null=True, blank=True, on_delete=models.SET_NULL, related_name='courses')
     track = models.ForeignKey(Track, null=True, blank=True, on_delete=models.SET_NULL, related_name='courses')
@@ -70,11 +78,41 @@ class Course(models.Model):
         return self.title
 
     def toolbox_status(self):
-        return self.TB_NO if not self.toolbox else (
-            self.TB_DELIVERY if get_request().user.orders.filter(toolbox=self.toolbox).exists() else
-            self.TB_GET
-        )
+        if not self.toolbox:
+            return self.TB_NO
 
+        user = get_request().user
+        order = user.orders.filter(toolbox=self.toolbox)
+
+        if not order.exists():
+            return self.TB_GET
+
+        order = order.first()
+
+        api_client=ApiClient(settings.BOSTA_API_KEY)
+
+        headers = {
+            'X-Requested-By': 'python-sdk',
+            'Authorization': api_client.apiKey,
+        }
+        tracking_num = requests.get(f'https://app.bosta.co/api/v0/deliveries/{order.bosta_id}', headers=headers).json()['trackingNumber']
+
+        order_states = {
+            'AVAILABLE_FOR_PICKUP': self.TB_PLACED,
+            'TICKET_CREATED': self.TB_PLACED,
+            'PACKAGE_RECEIVED': self.TB_PICKEDUP,
+            'NOT_YET_SHIPPED': self.TB_PICKEDUP,
+            'IN_TRANSIT': self.TB_PICKEDUP,
+            'OUT_FOR_DELIVERY': self.TB_DELIVERY,
+            'RECEIVED_DELIVERY_LOCATION': self.TB_DELIVERY,
+            'DELIVERED': self.TB_BOUGHT,
+            'CANCELLED': self.TB_BOUGHT,
+            'WAITING_FOR_CUSTOMER_ACTION': self.TB_BOUGHT,
+            'DELIVERED_TO_SENDER': self.TB_BOUGHT,
+            'DELIVERY_FAILED': self.TB_BOUGHT,
+
+        }
+        return order_states.get(requests.get(f'https://tracking.bosta.co/shipments/track/{tracking_num}', headers=headers).json()['CurrentStatus']['state'], self.TB_DELIVERY)
 
 class Lesson(models.Model):
     course = models.ForeignKey(Course, null=True, blank=True, on_delete=models.SET_NULL, related_name='lessons')
@@ -106,6 +144,9 @@ class Topic(models.Model):
 
     def __str__(self):
         return f'{self.lesson.course} - {self.lesson.order}.{self.order}'
+
+    def completed(self):
+        return self.progress.filter(user=get_request().user, std=get_request().COOKIES['std_id']).exists()
 
 
 class Text(models.Model):
@@ -153,6 +194,16 @@ class MCQQuiz(models.Model):
         random.shuffle(choices)
         return choices
 
+    def answered(self):
+        return self.mcq_solution.filter(user=get_request().user, std=request.COOKIES['std_id']).exists()
+
+    def answered_correct(self):
+        return self.mcq_solution.filter(user=get_request().user, std=request.COOKIES['std_id']).first().choice == self.correct_choice
+
+    def get_choice(self):
+        return self.mcq_solution.filter(user=get_request().user, std=request.COOKIES['std_id']).first().choice
+
+
 class TFQuiz(models.Model):
     lesson = models.ForeignKey(Lesson, null=True, blank=True, on_delete=models.SET_NULL, related_name='tf_quizez')
     topic = models.OneToOneField(Topic, null=True, blank=True, on_delete=models.CASCADE, related_name='tf_quiz')
@@ -162,3 +213,32 @@ class TFQuiz(models.Model):
 
     def __str__(self):
         return self.question
+
+
+    def answered(self):
+        return self.tf_solution.filter(user=get_request().user, std=request.COOKIES['std_id']).exists()
+
+    def answered_correct(self):
+        return self.tf_solution.filter(user=get_request().user, std=request.COOKIES['std_id']).first().choice == self.answer
+
+    def get_choice(self):
+        return self.tf_solution.filter(user=get_request().user, std=request.COOKIES['std_id']).first().choice
+
+class Progress(models.Model):
+    user = models.ForeignKey(get_user_model(), null=False, blank=False, on_delete=models.CASCADE, related_name='progress')
+    std = models.ForeignKey(Student, null=False, blank=False, on_delete=models.CASCADE, related_name='progress')
+    topic = models.ForeignKey(Topic, null=False, blank=False, on_delete=models.CASCADE, related_name='progress')
+
+
+class MCQQuizSolution(models.Model):
+    user = models.ForeignKey(get_user_model(), null=False, blank=False, on_delete=models.CASCADE, related_name='mcq_solution')
+    std = models.ForeignKey(Student, null=False, blank=False, on_delete=models.CASCADE, related_name='mcq_solution')
+    mcq_quiz = models.ForeignKey(MCQQuiz, null=False, blank=False, on_delete=models.CASCADE, related_name='mcq_solution')
+    choice = models.CharField(max_length=255)
+
+
+class TFQuizSolution(models.Model):
+    user = models.ForeignKey(get_user_model(), null=False, blank=False, on_delete=models.CASCADE, related_name='tf_solution')
+    std = models.ForeignKey(Student, null=False, blank=False, on_delete=models.CASCADE, related_name='tf_solution')
+    tf_quiz = models.ForeignKey(TFQuiz, null=False, blank=False, on_delete=models.CASCADE, related_name='tf_solution')
+    choice = models.BooleanField()

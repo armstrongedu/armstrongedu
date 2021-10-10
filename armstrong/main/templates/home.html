@@ -56,7 +56,15 @@
                 />
               </div>
               <div class="media-content">
-                  <p class="title is-4">{{ course.title }}</p>
+                {% if min_age and max_age %}
+                    {% if course.start_age <= min_age or course.start_age <= max_age and course.end_age >= max_age %}
+                      <a href="{% url 'course:course' course.id %}"><p class="title is-4">{{ course.title }}</p></a>
+                    {% else %}
+                      <p class="title is-4">{{ course.title }}</p>
+                    {% endif %}
+                {% else %}
+                  <a href="{% url 'course:course' course.id %}"><p class="title is-4">{{ course.title }}</p></a>
+                {% endif %}
                 <p class="subtitle is-6">@slug</p>
               </div>
             </div>
@@ -78,9 +86,9 @@
           <div class="rightbox">
             <div class="rb-container">
               {% if course.toolbox_status == course.TB_NO or not user.is_authenticated or not user.is_member %}
-              {% elif course.toolbox_status == course.TB_DELIVERY %}
+              {% elif course.toolbox_status == course.TB_PLACED %}
                   <ul class="rb">
-                    <li class="rb-item" >
+                    <li class="rb-item as-progress" >
                       <div class="item-title">Placed</div>
                     </li>
                     <li class="rb-item" >
@@ -88,6 +96,40 @@
                     </li>
 
                     <li class="rb-item" >
+
+                      <div class="item-title">Delivered</div>
+                    </li>
+                    <li class="rb-item" >
+                      <div class="item-title"></div>
+                    </li>
+                  </ul>
+              {% elif course.toolbox_status == course.TB_PICKEDUP %}
+                  <ul class="rb">
+                    <li class="rb-item as-progress" >
+                      <div class="item-title">Placed</div>
+                    </li>
+                    <li class="rb-item as-progress" >
+                      <div class="item-title">Shipped</div>
+                    </li>
+
+                    <li class="rb-item" >
+
+                      <div class="item-title">Delivered</div>
+                    </li>
+                    <li class="rb-item" >
+                      <div class="item-title"></div>
+                    </li>
+                  </ul>
+              {% elif course.toolbox_status == course.TB_DELIVERY %}
+                  <ul class="rb">
+                    <li class="rb-item as-progress" >
+                      <div class="item-title">Placed</div>
+                    </li>
+                    <li class="rb-item as-progress" >
+                      <div class="item-title">Shipped</div>
+                    </li>
+
+                    <li class="rb-item as-progress" >
 
                       <div class="item-title">Delivered</div>
                     </li>

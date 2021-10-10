@@ -20,8 +20,25 @@
                                         <a href="{% url 'authorization:signup' %}">Register</a>
                                         </div>
                                         </div>
-                                        {% endif %}
+
+{% else %}
                                         <!-- Header top bar Socials -->
+                            <div class="pull-right">
+                            <div class="header_login_url">
+                                                    {% if user.is_member and user.has_students %}
+                                                        {% for std in user.students.all %}
+                                                            {% if request.COOKIES.std_id|add:"0" == std.id|add:"0" %}
+                                                                <a href="{% url "authorization:change-std" std.id %}" style="pointer-events: none; color:grey;"> {{ std.name }}</a>
+                                                            {% else %}
+                                                                <a href="{% url "authorization:change-std" std.id %}"> {{ std.name }}</a>
+                                                            {% endif %}
+                                                        <span class="vertical_divider"></span>
+                                                        {% endfor %}
+                                                    {% endif %}
+                            <a href="{% url 'authorization:logout' %}">Logout</a>
+                            </div>
+                            </div>
+{% endif %}
                                         <div class="pull-right xs-pull-left">
                                         <ul class="top_bar_info clearfix">
                                         <li class="hidden-info">
@@ -90,7 +107,7 @@
 				</div>
 			</div>
 		</div>
-		<div class="stm-lms-wrapper stm-lessons lesson_style_default">
+		<div class="stm-lms-wrapper stm-lessons lesson_style_default" style="padding-bottom:0px !important;">
 
                         <div class="stm-lms-curriculum-trigger" style="position: static; margin-left: 50px;display: inline-block; vertical-align: top; width: 50px; height: 50px; text-align: center; line-height: 46px; color: #f0f4fa; border-radius: 50%; font-size: 16px; background-color: #385bce; border: 2px solid #385bce; cursor: pointer; transition: .3s ease;">
                                 <i class="fa fa-list-ul"></i>
@@ -111,25 +128,25 @@
 							</div>
 						</div>
 						<div class="stm-curriculum-section__lessons">
-                                                        {% for topic in lesson.topics.all %}
-                                                        <a href="{% url 'course:start' topic.id %}" class="stm-curriculum-item  is- first">
+                                                        {% for cur_topic in lesson.topics.all %}
+                                                        <a href="{% url 'course:start' cur_topic.id %}" class="stm-curriculum-item  is- first" {% if not cur_topic.completed and cur_topic != topic %} style="pointer-events: none;" {% endif %}>
 								<div class="stm-curriculum-item__icon">
-                                                                    {% if topic.type == topic.TEXT %}
+                                                                    {% if cur_topic.type == cur_topic.TEXT %}
                                                                         <i class="stmlms-text"></i>
-                                                                    {% elif topic.type == topic.VIDEO %}
+                                                                    {% elif cur_topic.type == cur_topic.VIDEO %}
                                                                         <i class="stmlms-text"></i>
-                                                                    {% elif topic.type == topic.QUIZ %}
+                                                                    {% elif cur_topic.type == cur_topic.QUIZ %}
                                                                         <i class="stmlms-quiz"></i>
-                                                                    {% elif topic.type == topic.GAME %}
+                                                                    {% elif cur_topic.type == cur_topic.GAME %}
                                                                         <i class="stmlms-quiz"></i>
                                                                     {% endif %}
 								</div>
-                                                                <div class="stm-curriculum-item__num">{{ topic.order }}</div>
+                                                                <div class="stm-curriculum-item__num">{{ cur_topic.order }}</div>
 								<div class="stm-curriculum-item__title">
-									<div class="heading_font">{{ topic }}</div>
+									<div class="heading_font">{{ cur_topic }}</div>
 								</div>
 								<div class="stm-curriculum-item__meta"></div>
-								<div class="stm-curriculum-item__completed ">
+                                                                <div class="stm-curriculum-item__completed {% if cur_topic.completed %} completed {% endif %}">
 									<i class="fa fa-check"></i>
 								</div>
 							</a>
@@ -156,41 +173,25 @@
 						</div>
                                         </div>
 
-                                        <form action="">
-                                          <h3>18/8</h3>
-                                          <input class="checkbox-tools" type="radio" id="1" name="help" value="1" >
-                                          <label for="1" class="for-checkbox-tools" >
-						                              	<i class='uil uil-vector-square'></i>
-                                            8 am
-                                          </label>
-                                          <input class="checkbox-tools" type="radio" id="2"  name="help" value="2">
-                                          <label for="2" class="for-checkbox-tools" >
-						                              	<i class='uil'></i>
-                                            10 am
-                                          </label>
-                                          <input class="checkbox-tools" type="radio" id="3"  name="help" value="3">
-                                          <label for="3" class="for-checkbox-tools" >
-						                              	<i class='uil uil-vector'></i>
-                                            2 pm
-                                          </label>
-
-                                          <h3>19/8</h3>
-                                          <input class="checkbox-tools" type="radio" id="4" name="help" value="1" >
-                                          <label for="4" class="for-checkbox-tools" >
-						                              	<i class='uil uil-vector-square'></i>
-                                            8 am
-                                          </label>
-                                          <input class="checkbox-tools" type="radio" id="5"  name="help" value="2">
-                                          <label for="5" class="for-checkbox-tools" >
-						                              	<i class='uil'></i>
-                                            10 am
-                                          </label>
-                                          <input class="checkbox-tools" type="radio" id="6"  name="help" value="3">
-                                          <label for="6" class="for-checkbox-tools" >
-						                              	<i class='uil uil-vector'></i>
-                                            2 pm
-                                          </label>
-                                          <input type="text"  required="" style="height: 10ch;background: white;margin-top: 1em;margin-bottom: 1em;" size="40" height="20">
+                                        <form method="POST" action="{% url 'help_sessions:place-help' %}">
+                                          {% csrf_token %}
+                                          {% for help_slot_name, help_slot_times in help_slots.items %}
+                                              {% if help_slot_times %}
+                                                  <h3>{{ help_slot_name }}</h3>
+                                                  {% for time in help_slot_times %}
+                                                      {% if time.open %}
+                                                          <input class="checkbox-tools" type="radio" id="{{ topic.id }}-{{ help_slot_name }}-{{ time.time }}" name="help" value="{{ topic.id }}-{{ help_slot_name }}-{{ time.time }}" >
+                                                      {% else %}
+                                                          <input class="checkbox-tools booked-checkbox-tools" type="radio" id="{{ topic.id }}-{{ help_slot_name }}-{{ time.time }}" name="help" value="{{ topic.id }}-{{ help_slot_name }}-{{ time.time }}" disabled>
+                                                      {% endif %}
+                                                      <label for="{{ topic.id }}-{{ help_slot_name }}-{{ time.time }}" class="for-checkbox-tools">
+                                                          <i class='uil uil-vector-square'></i>
+                                                          {{ time.time }}
+                                                      </label>
+                                                  {% endfor %}
+                                              {% endif %}
+                                          {% endfor %}
+                                          <input type="text"  name="help_text" required="" style="height: 10ch;background: white;margin-top: 1em;margin-bottom: 1em;" size="40" height="20">
                                           <input class="for-checkbox-tools" type="submit" style="position: relative;display: inline-block;padding: 20px;width: 110px;font-size: 14px;line-height: 10px;letter-spacing: 1px;margin: 0 auto;margin: auto;margin-bottom: 0px;margin-left: auto;margin-left: 5px;margin-right: 5px;/*! margin-bottom: 10px; */text-align: center;border-radius: 4px;overflow: hidden;cursor: pointer;text-transform: uppercase;color: var(--white);-webkit-transition: all 300ms linear;transition: all 300ms linear;border: 1px solid;/*! text-align: ; */">
                                         </form>
                                     </div>
@@ -211,26 +212,25 @@
 							<div class="container">
 								<div class="row">
 									<div class="col-md-8 col-md-push-2">
-										<div class="stm-lms-course__lesson-content">
+										<div class="stm-lms-course__lesson-content" style="min-height:500px;">
                                                                                         <h4>{{ topic.video.title }}</h4>
                                                                                         <h4>{{ topic.text.title }}</h4>
                                                                                         <h4>{{ topic.game.title }}</h4>
                                                                                         {% if topic.type == topic.TEXT %}
                                                                                             <p>{{ topic.text.text }}</p>
                                                                                         {% elif topic.type == topic.GAME %}
-                                                                                            <div style="height:500px;">{{ topic.game.iframe | safe}}</div>
+                                                                                            <div style="min-height:500px;">{{ topic.game.iframe | safe}}</div>
                                                                                         {% elif topic.type == topic.VIDEO %}
-                                                                                            <div style="height:500px;">{{ topic.video.video_iframe | safe}}</div>
+                                                                                            <div style="min-height:500px;">{{ topic.video.video_iframe | safe}}</div>
                                                                                         {% elif topic.type == topic.QUIZ %}
 
-                                                                                        <form class="stm-lms-single_quiz" style="display: block;">
-                                                                                          <input type="hidden" name="source" value="0" />
-                                                                                          <div
-                                                                                            class="
-                                                                                              stm-lms-single_question stm-lms-single_question_single_choice
-                                                                                              correct_answer_
-                                                                                            "
-                                                                                          >
+                                                                                        {% if topic.mcq_quiz %}
+                                                                                        <form id="quiz" method="POST" action="{% url 'course:answer-mcq' topic.mcq_quiz.id %}" class="stm-lms-single_quiz" style="display: block;">
+                                                                                        {% elif topic.tf_quiz %}
+                                                                                        <form id="quiz" method="POST" action="{% url 'course:answer-tf' topic.tf_quiz.id %}" class="stm-lms-single_quiz" style="display: block;">
+                                                                                        {% endif %}
+                                                                                          {% csrf_token %}
+                                                                                          <div class=" stm-lms-single_question stm-lms-single_question_single_choice correct_answer_ " >
                                                                                             {% if topic.mcq_quiz %}
                                                                                             <div class="stm-lms-single_question_text">
                                                                                                 <h3>{{ topic.mcq_quiz.question }}</h3>
@@ -239,11 +239,34 @@
 
                                                                                             <div class="heading_font">
                                                                                               {% for choice in topic.mcq_quiz.choices %}
-                                                                                              <div class="stm-lms-single-answer">
+                                                                                                    {% if topic.mcq_quiz.answered %}
+                                                                                                        {% if topic.mcq_quiz.answered_correct and topic.mcq_quiz.get_choice == choice %}
+                                                                                                            <canvas id="canvas"></canvas>
+                                                                                                          <div class="stm-lms-single-answer correctly_answered">
+                                                                                                        {% elif not topic.mcq_quiz.answered_correct and topic.mcq_quiz.get_choice == choice %}
+                                                                                                          <div class="stm-lms-single-answer wrongly_answered">
+                                                                                                        {% else %}
+                                                                                                          <div class="stm-lms-single-answer">
+                                                                                                        {% endif %}
+                                                                                                    {% else %}
+                                                                                                          <div class="stm-lms-single-answer">
+                                                                                                    {% endif %}
                                                                                                 <label>
-                                                                                                  <input type="radio" name="759" value="Answer 1 (Correct)" />
+                                                                                                    {% if topic.mcq_quiz.answered %}
+                                                                                                        {% if topic.mcq_quiz.correct_choice == choice  %}
+                                                                                                            <input type="radio" name="choice" value="{{ choice }}" disabled/>
+                                                                                                        {% else %}
+                                                                                                            <input type="radio" name="choice" value="{{ choice }}" disabled/>
+                                                                                                        {% endif %}
+                                                                                                    {% else %}
+                                                                                                        <input type="radio" name="choice" value="{{ choice }}" />
+                                                                                                    {% endif %}
                                                                                                   <i class="fa fa-check"></i>
+                                                                                                    {% if topic.mcq_quiz.answered and not topic.mcq_quiz.answered_correct and topic.mcq_quiz.correct_choice == choice  %}
+                                                                                                  {{ choice }} (Correct)
+                                                                                                  {% else %}
                                                                                                   {{ choice }}
+                                                                                                  {% endif %}
                                                                                                 </label>
                                                                                               </div>
                                                                                               {% endfor %}
@@ -255,28 +278,58 @@
                                                                                             </div>
 
                                                                                             <div class="heading_font">
-                                                                                              <div class="stm-lms-single-answer">
+                                                                                                    {% if topic.tf_quiz.answered %}
+                                                                                                        {% if topic.tf_quiz.answered_correct and topic.tf_quiz.get_choice == True %}
+                                                                                                          <div class="stm-lms-single-answer correctly_answered">
+                                                                                                            <canvas id="canvas"></canvas>
+                                                                                                        {% elif not topic.tf_quiz.answered_correct and topic.tf_quiz.get_choice == True %}
+                                                                                                          <div class="stm-lms-single-answer wrongly_answered">
+                                                                                                        {% else %}
+                                                                                                          <div class="stm-lms-single-answer">
+                                                                                                        {% endif %}
+                                                                                                    {% else %}
+                                                                                                          <div class="stm-lms-single-answer">
+                                                                                                    {% endif %}
                                                                                                 <label>
-                                                                                                  <input type="radio" name="759" value="Answer 1 (Correct)" />
+                                                                                                  {% if topic.tf_quiz.answered %}
+                                                                                                  <input type="radio" name="choice" value="true" disabled/>
+                                                                                                  {% else %}
+                                                                                                  <input type="radio" name="choice" value="true" />
+                                                                                                  {% endif %}
                                                                                                   <i class="fa fa-check"></i>
                                                                                                   True
                                                                                                 </label>
                                                                                               </div>
-                                                                                              <div class="stm-lms-single-answer">
+                                                                                                    {% if topic.tf_quiz.answered %}
+                                                                                                        {% if topic.tf_quiz.answered_correct and topic.tf_quiz.get_choice == False %}
+                                                                                                          <div class="stm-lms-single-answer correctly_answered">
+                                                                                                            <canvas id="canvas"></canvas>
+                                                                                                        {% elif not topic.tf_quiz.answered_correct and topic.tf_quiz.get_choice == False %}
+                                                                                                          <div class="stm-lms-single-answer wrongly_answered">
+                                                                                                        {% else %}
+                                                                                                          <div class="stm-lms-single-answer">
+                                                                                                        {% endif %}
+                                                                                                    {% else %}
+                                                                                                          <div class="stm-lms-single-answer">
+                                                                                                    {% endif %}
                                                                                                 <label>
-                                                                                                  <input type="radio" name="759" value="Answer 1 (Correct)" />
+                                                                                                  {% if topic.tf_quiz.answered %}
+                                                                                                  <input type="radio" name="choice" value="false" disabled/>
+                                                                                                  {% else %}
+                                                                                                  <input type="radio" name="choice" value="false" />
+                                                                                                  {% endif %}
                                                                                                   <i class="fa fa-check"></i>
                                                                                                   False
                                                                                                 </label>
                                                                                               </div>
                                                                                             </div>
                                                                                             {% endif%}
-                                                                                      <input type="hidden" name="action" value="stm_lms_user_answers" />
-                                                                                      <input type="hidden" name="quiz_id" value="19" />
-                                                                                      <input type="hidden" name="course_id" value="1072" />
-                                                                                      <button type="submit" class="btn btn-default stm_lms_complete_lesson">
+                                                                                        {% if topic.mcq_quiz.answered or topic.tf_quiz.answered %}
+                                                                                        {% else %}
+                                                                                      <button for="quiz" type="submit" class="btn btn-default stm_lms_complete_lesson" onclick="document.getElementById('quiz').submit()">
                                                                                     <span>Submit Quiz</span>
                                                                                   </button>
+                                                                                          {% endif %}
                                                                                 </form>
 
                                                                                 <div class="stm-lms-quiz__result">
@@ -307,7 +360,7 @@
 					</div>
 				</div>
 			</div>
-			<div class="stm-lms-lesson_navigation heading_font ncompleted">
+                        <div class="stm-lms-lesson_navigation heading_font {% if topic.completed %} completed {% else %} uncompleted {% endif %}">
                                 <div class="stm-lms-lesson_navigation_side stm-lms-lesson_navigation_prev">
                                 {% if prev_topic %}
                                     <a href="{% url 'course:start' prev_topic.id %}">
@@ -318,13 +371,23 @@
                                         {% endif %}
                                         </div>
 				<div class="stm-lms-lesson_navigation_complete">
-					<a href="#" class="btn btn-default stm_lms_complete_lesson uncompleted" data-course="1072" data-lesson="4974">
+                                    <form id="complete-form" method="POST" action="{% url 'course:mark-complete' %}">
+                                        {% csrf_token %}
+                                        <input type="hidden" name="topic" value="{{ topic.id }}">
+                                        {% if topic.type == topic.QUIZ %}
+					<a href="#" class="btn btn-default stm_lms_complete_lesson {% if topic.completed %} completed {% else %} uncompleted {% endif %}" style="pointer-events: none;">
 						<span>Complete</span>
 					</a>
+                                        {% else %}
+					<a href="#" class="btn btn-default stm_lms_complete_lesson {% if topic.completed %} completed {% else %} uncompleted {% endif %}" onclick="document.getElementById('complete-form').submit()">
+						<span>Complete</span>
+					</a>
+                                        {% endif %}
+                                    </form>
 				</div>
 				<div class="stm-lms-lesson_navigation_side stm-lms-lesson_navigation_next">
                                 {% if next_topic %}
-                                    <a href="{% url 'course:start' next_topic.id %}">
+                                <a href="{% url 'course:start' next_topic.id %}" {% if not topic.completed %} style="pointer-events: none;" {% endif %}>
                                             <span class="stm_lms_section_text">{{ next_topic.lesson.title }}</span>
                                                 <span>{{ next_topic }}</span>
 						<i class="lnr lnr-chevron-right"></i>
@@ -405,5 +468,74 @@ var wpcf7 = {"api":{"root":"http:\/\/167.179.117.201\/wp-json\/","namespace":"co
 			document.body.className = c;
 		})();
 	</script>
+                <script>
+                    const canvasEl = document.querySelector('#canvas');
+
+                    const w = canvasEl.width = window.innerWidth;
+                    const h = canvasEl.height = window.innerHeight * 2;
+
+                    function loop() {
+                                              requestAnimationFrame(loop);
+                                                ctx.clearRect(0,0,w,h);
+
+                                              confs.forEach((conf) => {
+                                                                          conf.update();
+                                                                          conf.draw();
+                                                                        })
+                                        }
+
+                    function Confetti () {
+                                              //construct confetti
+                                              const colours = ['#fde132', '#009bde', '#ff6b00'];
+
+                                              this.x = Math.round(Math.random() * w);
+                                              this.y = Math.round(Math.random() * h)-(h/2);
+                                              this.rotation = Math.random()*360;
+
+                                              const size = Math.random()*(w/60);
+                                              this.size = size < 15 ? 15 : size;
+
+                                              this.color = colours[Math.floor(colours.length * Math.random())];
+
+                                              this.speed = this.size/7;
+
+                                              this.opacity = Math.random();
+
+                                              this.shiftDirection = Math.random() > 0.5 ? 1 : -1;
+                                        }
+
+                    Confetti.prototype.border = function() {
+                                              if (this.y >= h) {
+                                                                          this.y = h;
+                                                                        }
+                                        }
+
+                    Confetti.prototype.update = function() {
+                                              this.y += this.speed;
+
+                                              if (this.y <= h) {
+                     this.x += this.shiftDirection/3;
+                     this.rotation += this.shiftDirection*this.speed/100;
+                   }
+
+                   if (this.y > h) this.border();
+                                        };
+
+                    Confetti.prototype.draw = function() {
+                                              ctx.beginPath();
+                                              ctx.arc(this.x, this.y, this.size, this.rotation, this.rotation+(Math.PI/2));
+                                              ctx.lineTo(this.x, this.y);
+                                              ctx.closePath();
+                                              ctx.globalAlpha = this.opacity;
+                                              ctx.fillStyle = this.color;
+                                              ctx.fill();
+                                        };
+
+                    const ctx = canvasEl.getContext('2d');
+                    const confNum = Math.floor(w / 4);
+                    const confs = new Array(confNum).fill().map(_ => new Confetti());
+
+                    loop();
+                </script>
 </body>
 {% endblock %}

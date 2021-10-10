@@ -2,7 +2,7 @@ from django.contrib import admin
 from django.forms import widgets, TextInput
 from django.db import models
 
-from .models import Category, Track, Course, Lesson, Topic, Text, Video, MCQQuiz, TFQuiz, Game
+from .models import Category, Track, Course, Lesson, Topic, Text, Video, MCQQuiz, TFQuiz, Game, Progress, MCQQuizSolution, TFQuizSolution
 
 
 @admin.register(Category)
@@ -105,3 +105,21 @@ class LessonAdmin(admin.ModelAdmin):
     list_display = (lambda s: s.__str__(), 'title',)
     list_filter = ('course',)
     inlines = (TopicInline, TextInline, GameInline, VideoInline, MCQQuizInline, TFQuizInline,)
+
+
+@admin.register(Progress)
+class ProgressAdmin(admin.ModelAdmin):
+    list_display = ('user', 'std', 'topic')
+    search_fields = ('user', 'std', 'topic',)
+
+
+@admin.register(MCQQuizSolution)
+class MCQQuizSolutionAdmin(admin.ModelAdmin):
+    list_display = ('user', 'std', 'mcq_quiz', 'choice')
+    search_fields = ('user', 'std', 'mcq_quiz', 'choice')
+
+
+@admin.register(TFQuizSolution)
+class TFQuizSolutionAdmin(admin.ModelAdmin):
+    list_display = ('user', 'std', 'tf_quiz', 'choice')
+    search_fields = ('user', 'std', 'tf_quiz', 'choice')
