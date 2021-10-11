@@ -6,6 +6,7 @@ from django.conf import settings
 from django.contrib.auth.decorators import login_required, user_passes_test
 from django.urls import reverse
 
+from main.utils import localize
 from course.models import Topic
 from .models import Period, HelpSession
 
@@ -36,3 +37,11 @@ def place_help(request):
         if created:
             booked = True
     return redirect('course:start', topic_id=topic_id)
+
+
+@login_required
+@member_required
+@students_required
+def start_help(request, session_id):
+    context = { }
+    return render(template_name=localize('masterstudy/help_session.html') , request=request, context=context)

@@ -1,9 +1,9 @@
 from django.contrib import admin
-
-# Register your models here.
-from django.contrib import admin
 from django.forms import widgets, TextInput
 from django.db import models
+from django.conf import settings
+from django.urls import reverse
+from django.utils.safestring import mark_safe, SafeText, SafeData
 
 from .models import Period, HelpSession
 
@@ -16,9 +16,13 @@ class PeriodAdmin(admin.ModelAdmin):
 
 @admin.register(HelpSession)
 class HelpSessionAdmin(admin.ModelAdmin):
-    list_display = ('user', 'date', 'time', 'help_text',)
+    list_display = ('user', 'date', 'time', 'help_text', 'get_session_url',)
     list_filter =('date',)
 
     def get_queryset(self, request):
         qs = super().get_queryset(request)
         return qs.filter(teacher=request.user)
+
+    @admin.display(description='SESSION URL')
+    def get_session_url(self, h):
+        return mark_safe('<a href="' + settings.URL + reverse('help_sessions:start', kwargs={'session_id': str(h.teacher.id) + '-' + str(h.user.id)}) + '" target="_blank">Open Session</a>')

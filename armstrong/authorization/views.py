@@ -61,13 +61,3 @@ def switch_students(request, std_id):
     resp.set_cookie('std', std.name)
     return resp
 
-
-@login_required
-@member_required
-@students_required
-def gen_cert(request, std_name):
-    std = Student.objects.get(user=request.user, name=std_name)
-    resp = redirect('main:home')
-    resp.set_cookie('std_id', std.id)
-    resp.set_cookie('std', std.name)
-    return resp
