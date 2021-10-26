@@ -315,10 +315,10 @@ body .didocol {
 #homepage .memeberships .title {
   text-align: center;
   font-weight: bolder;
-  font-size: 3rem !important;
+  font-size: 1.5rem !important;
 }
 #homepage .memeberships .as_sub_title {
-  font-size: 2rem !important;
+  font-size: 1rem !important;
 }
 #homepage .memeberships span {
   font-size: 1.4em;
@@ -351,7 +351,7 @@ body .didocol {
 #homepage .memebercrd .card-header h1:before {
   content: "";
   position: absolute;
-  top: 6rem;
+  top: 4rem;
   left: 2rem;
   width: 20%;
   height: 1rem;

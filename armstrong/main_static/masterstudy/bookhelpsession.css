@@ -1,4 +1,3 @@
-@charset "UTF-8";
 [type=checkbox]:checked,
 [type=checkbox]:not(:checked),
 [type=radio]:checked,
@@ -43,7 +42,7 @@
 }
 
 .checkbox:not(:checked) + label:before {
-  content: "";
+  content: "\eac1";
   left: 0;
   color: var(--grey);
   background-color: var(--dark-light);
@@ -93,6 +92,15 @@
   line-height: 24px;
   display: block;
   padding-bottom: 10px;
+}
+
+.booked-checkbox-tools:not(:checked) + label {
+  background-color: dimgrey;
+  color: silver;
+}
+
+.booked-checkbox-tools:not(:checked) + label:hover {
+  box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.1);
 }
 
 /*# sourceMappingURL=bookhelpsession.css.map */

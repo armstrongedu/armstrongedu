@@ -27,10 +27,22 @@
     <ul class="columns is-multiline featurecourse">
       {% for course in courses %}
       <div class="column is-one-third">
-        <h1 class="locked-text">Locked
-        {# TODO(gaytomycode): when you apply the locked hna apply it brdo 3ala l get tools button #}
-        </h1>
-        <div class="card locked">
+        {% if min_age and max_age %}
+            {% if course.start_age <= min_age or course.start_age <= max_age and course.end_age >= max_age %}
+                <div class="card">
+            {% else %}
+            <div style="position:relative;">
+            <h1 class="locked-text" style="
+            position: absolute;
+            top: 17rem;
+            left: 8rem;
+            ">Locked</h1>
+            </div>
+            <div class="card locked">
+            {% endif %}
+        {% else %}
+            <div class="card">
+        {% endif %}
 
           <div class="card-image">
               {{ course.intro_video_iframe | safe }}
@@ -44,7 +56,15 @@
                 />
               </div>
               <div class="media-content">
-                  <p class="title is-4">{{ course.title }}</p>
+                {% if min_age and max_age %}
+                    {% if course.start_age <= min_age or course.start_age <= max_age and course.end_age >= max_age %}
+                      <a href="{% url 'course:course' course.id %}"><p class="title is-4">{{ course.title }}</p></a>
+                    {% else %}
+                      <p class="title is-4">{{ course.title }}</p>
+                    {% endif %}
+                {% else %}
+                  <a href="{% url 'course:course' course.id %}"><p class="title is-4">{{ course.title }}</p></a>
+                {% endif %}
                 <p class="subtitle is-6">@slug</p>
               </div>
             </div>
@@ -59,14 +79,16 @@
             </div>
           </div>
           <div style="margin-left: auto; margin-right: auto;width:100%; text-align:center; padding-bottom:10px;">
+          {% if course.toolbox %}
           <strong>{{ course.toolbox.name }} ToolBox</strong>
+          {% endif %}
           </div>
           <div class="rightbox">
             <div class="rb-container">
               {% if course.toolbox_status == course.TB_NO or not user.is_authenticated or not user.is_member %}
-              {% elif course.toolbox_status == course.TB_DELIVERY %}
+              {% elif course.toolbox_status == course.TB_PLACED %}
                   <ul class="rb">
-                    <li class="rb-item" >
+                    <li class="rb-item as-progress" >
                       <div class="item-title">Placed</div>
                     </li>
                     <li class="rb-item" >
@@ -74,6 +96,40 @@
                     </li>
 
                     <li class="rb-item" >
+
+                      <div class="item-title">Delivered</div>
+                    </li>
+                    <li class="rb-item" >
+                      <div class="item-title"></div>
+                    </li>
+                  </ul>
+              {% elif course.toolbox_status == course.TB_PICKEDUP %}
+                  <ul class="rb">
+                    <li class="rb-item as-progress" >
+                      <div class="item-title">Placed</div>
+                    </li>
+                    <li class="rb-item as-progress" >
+                      <div class="item-title">Shipped</div>
+                    </li>
+
+                    <li class="rb-item" >
+
+                      <div class="item-title">Delivered</div>
+                    </li>
+                    <li class="rb-item" >
+                      <div class="item-title"></div>
+                    </li>
+                  </ul>
+              {% elif course.toolbox_status == course.TB_DELIVERY %}
+                  <ul class="rb">
+                    <li class="rb-item as-progress" >
+                      <div class="item-title">Placed</div>
+                    </li>
+                    <li class="rb-item as-progress" >
+                      <div class="item-title">Shipped</div>
+                    </li>
+
+                    <li class="rb-item as-progress" >
 
                       <div class="item-title">Delivered</div>
                     </li>
@@ -100,7 +156,13 @@
               <form  method="POST" action="{% url 'toolbox:place-order' %}" style="position: relative;display: inline-block;margin-bottom: 10px;margin-left: auto; margin-right: auto;text-align: center;overflow: hidden;">
                   {% csrf_token %}
                   <input type="hidden" value="{{ course.toolbox.id }}" name="tool_box_id">
-                  <input value="Get ToolBox" class="for-checkbox-tools" type="submit" style="position: relative;display: inline-block;padding: 15px;width: 150px;font-size: 12px;line-height: 10px;letter-spacing: 1px;margin-bottom: 10px;margin-left: auto; margin-right: auto;text-align: center;border-radius: 4px;overflow: hidden;cursor: pointer;text-transform: uppercase;color: var(--white);border: 1px solid;">
+                {% if min_age and max_age %}
+                    {% if course.start_age <= min_age or course.start_age <= max_age and course.end_age >= max_age %}
+                      <input value="Get ToolBox" class="for-checkbox-tools" type="submit" style="position: relative;display: inline-block;padding: 15px;width: 150px;font-size: 12px;line-height: 10px;letter-spacing: 1px;margin-bottom: 10px;margin-left: auto; margin-right: auto;text-align: center;border-radius: 4px;overflow: hidden;cursor: pointer;text-transform: uppercase;color: var(--white);border: 1px solid;">
+                    {% else %}
+                    {% endif %}
+                {% else %}
+                {% endif %}
               </form>
               {% endif %}
             </div>

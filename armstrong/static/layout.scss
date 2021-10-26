@@ -173,7 +173,11 @@ body {
         left: 40%;
         color: white !important;
         z-index: 3;
+<<<<<<< HEAD
     
+=======
+
+>>>>>>> a54d80ceba3cd081441f3e71891cae2cf7ab533a
     }
     .mynav {
         background-color: #242424;
@@ -235,21 +239,35 @@ body {
             padding: 2%;
         }
         .rb-container {
+<<<<<<< HEAD
             
+=======
+
+>>>>>>> a54d80ceba3cd081441f3e71891cae2cf7ab533a
             font-family: "PT Sans", sans-serif;
             margin: auto;
             display: flex;
             flex-direction:row;
             position: relative;
           }
+<<<<<<< HEAD
           
           .rb-container ul.rb {
            
+=======
+
+          .rb-container ul.rb {
+
+>>>>>>> a54d80ceba3cd081441f3e71891cae2cf7ab533a
             padding: 1em;
             margin: auto !important;
             display: flex;
           }
+<<<<<<< HEAD
           
+=======
+
+>>>>>>> a54d80ceba3cd081441f3e71891cae2cf7ab533a
           .rb-container ul.rb li {
             list-style: none;
             min-height: 50px;
@@ -258,6 +276,7 @@ body {
             padding-top: 1em;
             position: relative;
           }
+<<<<<<< HEAD
           
           
           
@@ -265,6 +284,15 @@ body {
           
           .rb-container ul.rb li::before {
             position: absolute;  
+=======
+
+
+
+
+
+          .rb-container ul.rb li::before {
+            position: absolute;
+>>>>>>> a54d80ceba3cd081441f3e71891cae2cf7ab533a
             left: -19px;
             top: -1px;
             content: " ";
@@ -279,8 +307,13 @@ body {
           .item-title{
               padding:.8em;
           }
+<<<<<<< HEAD
          
           
+=======
+
+
+>>>>>>> a54d80ceba3cd081441f3e71891cae2cf7ab533a
             .rb-container ul.rb .as-progress::before {
                 border-color: #232931;
                 transition: all 1000ms ease-in-out;
@@ -289,14 +322,24 @@ body {
                 border-color: #232931;
                 transition: all 1000ms ease-in-out;
               }
+<<<<<<< HEAD
           
           
+=======
+
+
+>>>>>>> a54d80ceba3cd081441f3e71891cae2cf7ab533a
           .rb-container ul.rb li:last-child{
             border-top: 3px solid transparent;
             margin-left: 10px;
           }
+<<<<<<< HEAD
           
           
+=======
+
+
+>>>>>>> a54d80ceba3cd081441f3e71891cae2cf7ab533a
     }
     .whysec {
         margin: 4rem;
@@ -340,10 +383,10 @@ body {
         .title {
             text-align: center;
             font-weight: bolder;
-            font-size: 3rem !important;
+            font-size: 1.5rem !important;
         }
         .as_sub_title {
-            font-size: 2rem !important;
+            font-size: 1rem !important;
         }
         span {
             font-size: 1.4em;
@@ -379,7 +422,7 @@ body {
             h1:before {
                 content: "";
                 position: absolute;
-                top: 6rem;
+                top: 4rem;
                 left: 2rem;
                 width: 20%;
                 height: 1rem;
@@ -499,10 +542,17 @@ body {
     display: none;
 }
 .rb{
+<<<<<<< HEAD
     
         width: 33ch;
 margin-top: 2em;
     
+=======
+
+        width: 33ch;
+margin-top: 2em;
+
+>>>>>>> a54d80ceba3cd081441f3e71891cae2cf7ab533a
 }
 
 

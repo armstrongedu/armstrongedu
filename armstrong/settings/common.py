@@ -39,6 +39,8 @@ INSTALLED_APPS = [
     'misc',
     'payment',
     'toolbox',
+    'help_sessions',
+    'login_sessions',
 ]
 
 MIDDLEWARE = [
@@ -50,6 +52,8 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'django_middleware_global_request.middleware.GlobalRequestMiddleware',
+    'login_sessions.middleware.OneSessionPerUserMiddleware',
+
 ]
 
 ROOT_URLCONF = 'armstrong.urls'
@@ -181,3 +185,5 @@ BOSTA_API_KEY = ENV.str('BOSTA_API_KEY')
 BOSTA_USERNAME = ENV.str('BOSTA_USERNAME')
 BOSTA_NUMBER = ENV.str('BOSTA_NUMBER')
 BOSTA_EMAIL = ENV.str('BOSTA_EMAIL')
+
+AS_LANG = ENV.str('AS_LANG')
