@@ -8,6 +8,8 @@ from django.utils import timezone
 from django.http import JsonResponse
 from django.contrib.auth import get_user_model
 from django.views.decorators.csrf import csrf_exempt
+from django.contrib.gis.geoip2 import GeoIP2
+
 
 from .forms import BillingDataForm
 from .utils import AcceptAPI
@@ -19,7 +21,17 @@ not_member_required = user_passes_test(lambda user: not user.is_member(), login_
 @login_required
 @not_member_required
 def subscribe(request):
-    context = {'membership_types': MembershipType.objects.all()}
+    g = GeoIP2()
+    client_ip = request.META.get('REMOTE_ADDR') or request.META.get('HTTP_X_FORWARDED_FOR')
+    try:
+        country = g.country(client_ip)
+    except Exception:
+        localized_membership_type = MembershipType.objects.filter(country=MembershipType.INTERNATIONAL)
+    else:
+        localized_membership_type = MembershipType.objects.filter(country=country)
+        if not localized_membership_type.exists():
+            localized_membership_type = MembershipType.objects.filter(country=MembershipType.INTERNATIONAL)
+    context = {'membership_types': localized_membership_type}
     if hasattr(request.user, 'billing_data'):
         context['billing_data'] = BillingDataForm(instance=request.user.billing_data)
     return render(template_name=f'masterstudy/subscribe{"_ar" if settings.AS_LANG == "ar" else ""}.html', request=request, context=context)
@@ -53,11 +65,11 @@ def checkout(request):
     order_data = {
         "auth_token": auth_token,
         "delivery_needed": "false",
-        "amount_cents": membership_type.price_cents,
+        "amount_cents": membership_type.real_price_egyptian_cents,
         "currency": "EGP",
         "items": [{
             "name": membership_type.name,
-            "amount_cents": membership_type.price_cents,
+            "amount_cents": membership_type.real_price_egyptian_cents,
             "description": membership_type.name,
             "quantity": 1,
         },],
@@ -67,7 +79,7 @@ def checkout(request):
 
     accept_api_request = {
         "auth_token": auth_token,
-        "amount_cents": membership_type.price_cents,
+        "amount_cents": membership_type.real_price_egyptian_cents,
         "expiration": 3600,
         "order_id": order.get("id"),
         "billing_data": {
@@ -143,7 +155,7 @@ def subscribe_done(request):
 
     context['message'] = t_data['data.message']
 
-    return render(template_name=f'masterstudy/subscribe-done{"_ar" if settings.AS_LANG == "ar" else ""}.html', request=request, context=context)
+    return render(template_name=f'masterstudy/subscribe-done{_ar if settings.AS_LANG == "ar" else ""}.html', request=request, context=context)
 
 @csrf_exempt
 def save_token(request):

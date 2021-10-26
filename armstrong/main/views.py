@@ -1,8 +1,9 @@
 from datetime import datetime
 
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.conf import settings
 from django.contrib.auth.decorators import login_required, user_passes_test
+from django.contrib.gis.geoip2 import GeoIP2
 
 from course.models import Category, Course
 from payment.models import MembershipType
@@ -15,8 +16,22 @@ students_required = user_passes_test(lambda user: user.has_students(), login_url
 
 
 def home(request):
+    user = request.user
+    if user.is_authenticated and user.is_member() and user.has_students():
+        redirect('authorization:select-stuent')
+
+    g = GeoIP2()
+    client_ip = request.META.get('REMOTE_ADDR') or request.META.get('HTTP_X_FORWARDED_FOR')
+    try:
+        country = g.country(client_ip)
+    except Exception:
+        localized_membership_type = MembershipType.objects.filter(country=MembershipType.INTERNATIONAL)
+    else:
+        localized_membership_type = MembershipType.objects.filter(country=country)
+        if not localized_membership_type.exists():
+            localized_membership_type = MembershipType.objects.filter(country=MembershipType.INTERNATIONAL)
     context = {
-        'membership_types': MembershipType.objects.all(),
+        'membership_types': localized_membership_type,
         'courses': Course.objects.all(),
     }
     if not request.user.is_anonymous and request.user.is_authenticated and request.user.is_member() and request.user.has_students():

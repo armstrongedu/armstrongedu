@@ -1,5 +1,27 @@
 import requests
 
+
+CUR_EGYPT =  '£'
+CUR_QATAR = CUR_OMAN = CUR_SAUDI_ARABIA = '﷼'
+CUR_BAHRAIN = 'BD'
+CUR_UNITED_ARAB_EMIRATES = 'د.إ'
+CUR_JORDAN = 'Dinar'
+CUR_KUWAIT = 'ك'
+CUR_INTERNATIONAL = '$'
+
+CURRENCIES = {
+    'Egypt': CUR_EGYPT,
+    'Qatar': CUR_QATAR,
+    'Bahrain': CUR_BAHRAIN,
+    'Saudi Arabia': CUR_SAUDI_ARABIA,
+    'United Arab Emirates': CUR_UNITED_ARAB_EMIRATES,
+    'Jordan': CUR_JORDAN,
+    'Kuwait': CUR_KUWAIT,
+    'Oman': CUR_OMAN,
+    'International': CUR_INTERNATIONAL,
+}
+
+
 class URLs:
     def __init__(self):
         self.base_url = "https://accept.paymob.com/api/"
