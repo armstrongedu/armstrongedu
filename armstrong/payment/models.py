@@ -1,17 +1,43 @@
 from django.db import models
 from django.contrib.auth import get_user_model
 
+from . import utils
+
 
 class MembershipType(models.Model):
+    EGYPT = 'Egypt'
+    QATAR = 'Qatar'
+    BAHRAIN = 'Bahrain'
+    SAUDI_ARABIA = 'Saudi Arabia'
+    UNITED_ARAB_EMIRATES = 'United Arab Emirates'
+    JORDAN = 'Jordan'
+    KUWAIT = 'Kuwait'
+    OMAN = 'Oman'
+    INTERNATIONAL = 'International'
+
+    STATUS = (
+        (EGYPT, f'Egypt - {utils.CUR_EGYPT}'),
+        (QATAR, f'Qatar - {utils.CUR_QATAR}'),
+        (BAHRAIN, f'Bahrain - {utils.CUR_BAHRAIN}'),
+        (SAUDI_ARABIA, f'Saudi Arabia {utils.CUR_SAUDI_ARABIA}'),
+        (UNITED_ARAB_EMIRATES, f'United Arab Emiartes {utils.CUR_UNITED_ARAB_EMIRATES}'),
+        (JORDAN, f'Jordan {utils.CUR_JORDAN}'),
+        (KUWAIT, f'Kuwait {utils.CUR_KUWAIT}'),
+        (OMAN, f'Oman {utils.CUR_OMAN}'),
+        (INTERNATIONAL, f'International {utils.CUR_INTERNATIONAL}'),
+    )
+
+    country = models.CharField(max_length=255, choices=STATUS, null=False, blank=False)
     name = models.CharField(max_length=255, null=False, blank=False)
-    price_cents = models.IntegerField(null=False, blank=False)
+    display_float_price = models.FloatField(null=False, blank=False)
+    real_price_egyptian_cents = models.IntegerField(null=False, blank=False)
     number_of_students = models.IntegerField(null=False, blank=False)
 
     def __str__(self):
-        return f'{self.name} - {self.price_pounds()} EGP'
+        return f'{self.name} - {self.real_price_egyptian_cents} Egyptian Cents'
 
-    def price_pounds(self):
-        return round(self.price_cents/100, 2)
+    def currency(self):
+        return utils.CURRENCIES.get(self.country)
 
 
 class BillingData(models.Model):

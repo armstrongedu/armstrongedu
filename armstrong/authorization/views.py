@@ -50,6 +50,22 @@ def add_students(request):
         resp.set_cookie('std', std.name)
     return resp
 
+@login_required
+@member_required
+@students_required
+def set_student(request):
+    if request.method == 'GET':
+        context = {
+            'stds': Student.objects.filter(user=request.user),
+        }
+        return render(template_name=f'masterstudy/select-student.html', request=request, context=context)
+    if request.method == 'POST':
+        std_id = request.POST.get('std_id')
+        std = Student.objects.get(id=std_id)
+        resp = redirect('course:courses')
+        resp.set_cookie('std_id', std.id)
+        resp.set_cookie('std', std.name)
+        return resp
 
 @login_required
 @member_required
@@ -61,13 +77,3 @@ def switch_students(request, std_id):
     resp.set_cookie('std', std.name)
     return resp
 
-
-@login_required
-@member_required
-@students_required
-def gen_cert(request, std_name):
-    std = Student.objects.get(user=request.user, name=std_name)
-    resp = redirect('main:home')
-    resp.set_cookie('std_id', std.id)
-    resp.set_cookie('std', std.name)
-    return resp

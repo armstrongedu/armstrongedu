@@ -187,3 +187,7 @@ BOSTA_NUMBER = ENV.str('BOSTA_NUMBER')
 BOSTA_EMAIL = ENV.str('BOSTA_EMAIL')
 
 AS_LANG = ENV.str('AS_LANG')
+
+URL = ENV.str('URL')
+
+GEOIP_PATH = os.path.join(BASE_DIR, 'payment')

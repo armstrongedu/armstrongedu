@@ -1,0 +1,157 @@
+{% extends 'masterstudy/courses_layout.html' %}
+{% block title %}Select Student - ARMSTRONG{% endblock %}
+{% block main_body %}
+<div class="entry-header clearfix" style="">
+	<div class="container">
+		<div class="entry-title-left">
+			<div class="entry-title">
+				<h1 style="">Students</h1>
+			</div>
+		</div>
+		<div class="entry-title-right"></div>
+	</div>
+</div>
+                    <div class="container">
+                            <div class="post_type_exist clearfix">
+                                    <div id="pmpro_level-3">
+                                                            <form id="pmpro_form" class="pmpro_form" action="{% url 'authorization:set-student' %}" method="post">
+                                                            {% csrf_token %}
+                                                                    <table id="pmpro_billing_address_fields" class="pmpro_checkout top1em" width="100%" cellpadding="0" cellspacing="0" border="0">
+                                                                            <thead>
+                                                                                    <tr>
+                                                                                            <th>Student</th>
+                                                                                    </tr>
+                                                                            </thead>
+                                                                            <tbody>
+                                                                                                        {% for std in stds %}
+                                                                                    <tr>
+                                                                                            <td>
+                                                                                                    <div class="stm_lms_checkout_fields">
+
+                                                                                                                                                                    <div>
+                                                                                                                                                                        <label for="{{ std.id }}">Select Student</label>
+                                                                                                                                                                        <select name="std_id" class="pmpro_required select2-hidden-accessible" tabindex="-1" aria-hidden="true">
+                                                                                                                                                                            <option value="{{ std.id }}">{{ std.name }}</option>
+                                                                                                                                                                            {% endfor %}
+
+                                                                                                                                                                            </select>
+                                                                                                                                                                            <span class="pmpro_asterisk">
+                                                                                                                                                                                    <abbr title="Required Field">*</abbr>
+                                                                                                                                                                            </span>
+                                                                                                                                                                    </div>
+                                                                                                                                                                            </td>
+                                                                                                                                                                    </tr>
+                                                                                                                                                            {% endfor %}
+                                                                                                                                                            </tbody>
+                                                                                                                                                    </table>
+                                                                                                                                                                            <script>//checking a discount code
+jQuery('#discount_code_button').on('click', function () {
+var code = jQuery('#discount_code').val();
+var level_id = jQuery('#level').val();
+
+if (code) {
+//hide any previous message
+jQuery('.pmpro_discount_code_msg').hide();
+
+//disable the apply button
+jQuery('#discount_code_button').attr('disabled', 'disabled');
+
+jQuery.ajax({
+    url: 'https://stylemixthemes.com/masterstudy/classic-lms-2/wp-admin/admin-ajax.php',
+    type: 'GET',
+    timeout:5000,
+    dataType: 'html',
+    data: "action=applydiscountcode&code=" + code + "&level=" + level_id + "&msgfield=discount_code_message",
+    error: function (xml) {
+        alert('Error applying discount code [1]');
+
+        //enable apply button
+        jQuery('#discount_code_button').removeAttr('disabled');
+    },
+    success: function (responseHTML) {
+        if (responseHTML == 'error') {
+            alert('Error applying discount code [2]');
+        } else {
+            jQuery('#discount_code_message').html(responseHTML);
+        }
+
+        //enable invite button
+        jQuery('#discount_code_button').removeAttr('disabled');
+    }
+});
+}
+});</script>
+                                                                                                                                                                            <div class="pmpro_submit">
+                                                                                                                                                                                    <span id="pmpro_submit_span">
+                                                                                                                                                                                            <input type="hidden" name="submit-checkout" value="1">
+                                                                                                                                                                                                    <input type="hidden" name="javascriptok" value="1">
+                                                                                                                                                                                                            <input type="hidden" name="javascriptok" value="1">
+                                                                                                                                                                                                                    <input type="submit" class="btn btn-default pmpro_btn-submit-checkout" value="Submit and Check Out">
+                                                                                                                                                                                                                    </span>
+                                                                                                                                                                                                                    <span id="pmpro_processing_message" style="visibility: hidden;"> Processing... </span>
+                                                                                                                                                                                                            </div>
+                                                                                                                                                                                                    </form>
+                                                                                                                                                                                            </div>
+                                                                                                                                                                                            <script>// Find ALL
+                                                                                                                                                                                                    <form> tags on your page
+jQuery('form').submit(function () {
+// On submit disable its submit button
+jQuery('input[type=submit]', this).attr('disabled', 'disabled');
+jQuery('input[type=image]', this).attr('disabled', 'disabled');
+jQuery('#pmpro_processing_message').css('visibility', 'visible');
+});
+
+//iOS Safari fix (see: http://stackoverflow.com/questions/20210093/stop-safari-on-ios7-prompting-to-save-card-data)
+var userAgent = window.navigator.userAgent;
+if (userAgent.match(/iPad/i) || userAgent.match(/iPhone/i)) {
+jQuery('input[type=submit]').on('click', function () {
+try {
+jQuery("input[type=password]").attr("type", "hidden");
+} catch (ex) {
+try {
+jQuery("input[type=password]").prop("type", "hidden");
+} catch (ex) {
+}
+}
+});
+}
+
+//add required to required fields
+jQuery('.pmpro_required').after('
+                                                                                                                                                                                                            <span class="pmpro_asterisk">
+                                                                                                                                                                                                                    <abbr title="Required Field">*</abbr>
+                                                                                                                                                                                                            </span>');
+
+//unhighlight error fields when the user edits them
+jQuery('.pmpro_error').on("change keyup input", function () {
+jQuery(this).removeClass('pmpro_error');
+});
+
+//click apply button on enter in discount code box
+jQuery('#discount_code').keydown(function (e) {
+if (e.keyCode == 13) {
+e.preventDefault();
+jQuery('#discount_code_button').click();
+}
+});
+
+//hide apply button if a discount code was passed in
+
+//click apply button on enter in *other* discount code box
+jQuery('#other_discount_code').keydown(function (e) {
+if (e.keyCode == 13) {
+e.preventDefault();
+jQuery('#other_discount_code_button').click();
+}
+});
+                                                                                                                                                                                                    </script>
+                                                                                                                                                                                                    <script>//add javascriptok hidden field to checkout
+jQuery("input[name=submit-checkout]").after('
+                                                                                                                                                                                                            <input type="hidden" name="javascriptok" value="1" />');
+                                                                                                                                                                                                    </script>
+                                                                                                                                                                                            </div>
+                                                                                                                                                                                            <div class="clearfix"></div>
+                                                                                                                                                                                    </div>
+                                                                                                                                                                            </div>
+
+{% endblock %}

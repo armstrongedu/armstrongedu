@@ -4,21 +4,22 @@
     <div id="mobile-hero-image">
       <img class=" intropic" src="{% static 'hero1.png' %}" alt="" />
     </div>
-    <section class="section content introcontent">
+    <section class="section content introcontent" style="min-width: 700px !important;">
       <h1 class="title introtitle has-text-grey-dark has-text-weight-bold">
         Where Education Meets Entertainment.
       </h1>
       <p class="subtitle has-text-grey-dark has-text-weight-light">
-        Dedo is a global course provider based across Egypt that specialises in
-        accredited and bespoke stem courses. We crush the barrie for kids
-        education.
+      Armstrong delivers the most interactive way for education as never before. Unleash their creativity and let them explore the world by themselves.
+      We do provide STEM programs, Science and Math Illustrations and more interactive programs that helps in developing their characters and enrich their logical and analytical skills.
+      We aim to present a unique experience that will encourage self-learning and developing curiosity towards exploring science and education in an innovative yet interesting and fun way that will change students’ mindset towards the love of knowledge.
+      Proudly, Armstrong is accredited from STEM.org.
       </p>
       <a href="{% url 'course:courses' %}">
-          <button class="button introbtn is-primary has-text-grey-dark level-item">Explore Courses</button>
+          <button class="button introbtn is-primary has-text-white level-item">Explore Courses</button>
       </a>
     </section>
-    <div id="web-hero-image">
-      <img class=" intropic" src="{% static 'hero1.png' %}" alt="" />
+    <div id="web-hero-image" class="pt-2">
+      <img class=" intropic pt-6" src="{% static 'hero1.png' %}" alt="" />
     </div>
 
   </div>
@@ -174,48 +175,39 @@
       {% endfor %}
     </ul>
     <a href="{% url 'course:courses' %}">
-    <button class="button is-medium is-info level-item coursesbtn">
+    <button class="button is-medium is-info level-item coursesbtn" style="background-color: #e81a4b !important;">
       More Courses
     </button>
     </a>
   </div>
   <div class="whysec">
-    <img class="whyimg" src="{% static 'whysec.png' %}" alt="" style="padding-top: 100px"/>
+    <img class="whyimg" src="{% static 'whysec.png' %}" alt="" style="padding-top: 12rem"/>
     <section class="whycont content is-large">
-      <h1 class="title has-text-white">Why Students Learn From Dedo</h1>
+      <h1 class="title has-text-white">Why Students Learn From ArmStrong</h1>
       <p class="has-text-weight-light">
-        Dedo Cares about it’s students. We are not just another online courses
-        platform; We add fun to the education process by adding gamification to
-        the education journey, building intrest and passion for learning in our
-        students.
+      Welcome to Arm Strong Educational Website where learning was never more fun. Our website offers variety of STEM and Educational programs for students aged between 4 -18 years old where:
       </p>
       <ul class="whyicons has-text-weight-light">
         <ul>
-          <div class="icon-text">
-            <span class="icon has-text-success">
-              <i class="fas fa-check-circle iconclr"></i>
+          <div class="icon-text" style="display:inline;">
+            <span class="icon has-text-white">
+              <i class="has-text-white fas fa-check-circle iconclr"></i>
             </span>
-            <span> World Class</span>
+            <span> Students learn interactively and building their own practical models based on scientific concepts presented</span>
           </div>
-          <div class="icon-text">
-            <span class="icon has-text-success">
-              <i class="fas fa-check-circle iconclr"></i>
+          <br>
+          <div class="icon-text" style="display:inline;">
+            <span class="icon has-text-white">
+              <i class="has-text-white fas fa-check-circle iconclr"></i>
             </span>
-            <span>Flexible</span>
+            <span>Learn more about their surroundings, and explore the cutting-edge technologies</span>
           </div>
-        </ul>
-        <ul class="pl-3">
-          <div class="icon-text">
-            <span class="icon has-text-success">
-              <i class="fas fa-check-circle iconclr"></i>
+          <br>
+          <div class="icon-text" style="display:inline;">
+            <span class="icon has-text-white">
+              <i class="has-text-white fas fa-check-circle iconclr"></i>
             </span>
-            <span>Affordable</span>
-          </div>
-          <div class="icon-text">
-            <span class="icon has-text-success">
-              <i class="fas fa-check-circle iconclr"></i>
-            </span>
-            <span>Fun</span>
+            <span>Receive a certificate of completion accredited internationally from STEM.org</span>
           </div>
         </ul>
         <hr>
@@ -239,14 +231,18 @@
   </div>
 
   <div class="memeberships container pb-6">
-    <h1 class="title has-text-white membertitle">Join Dedo</h1>
+    <h1 class="title has-text-white membertitle">Join ArmStrong</h1>
+    <p class="has-text-centered p-5">
+    Enroll now for our monthly subscription for 299 EGP only and get unlimited
+    access to all programs.
+    </p>
     <ul class="memebercrd level columns pb-6">
       {% for membership_type in membership_types %}
       <div class="card column">
         <div class="card-header is-shadowless">
           <h1 class="title card-header-title has-text-grey-dark">{{ membership_type.name }}</h1>
           <div class="card-header-icon footericon">
-              <h2 class="title as_sub_title has-text-grey-dark pr-2">{{ membership_type.price_pounds }}£</h2>
+              <h2 class="title as_sub_title has-text-grey-dark pr-2">{{ membership_type.display_float_price }} {{ membership_type.currency }}</h2>
             <br />
             <p class="subtitle has-text-grey-dark has-text-weight-light">monthly</p>
           </div>
@@ -254,26 +250,26 @@
         <div class="card-content pb-6">
           <ul>
             <div class="icon-text pb-4">
-              <span class="icon has-text-success">
-                <i class="fas fa-check-circle iconclr"></i>
+              <span class="icon has-text-white">
+                <i class="has-text-primary fas fa-check-circle iconclr"></i>
               </span>
               <span class="has-text-grey-dark has-text-weight-light">Unlimited Access to courses</span>
             </div>
             <div class="icon-text pb-4">
-              <span class="icon has-text-success">
-                <i class="fas fa-check-circle iconclr"></i>
+              <span class="icon has-text-white">
+                <i class="has-text-primary fas fa-check-circle iconclr"></i>
               </span>
               <span class="has-text-grey-dark has-text-weight-light">Register Up to 4 Devices</span>
             </div>
             <div class="icon-text pb-4">
-              <span class="icon has-text-success">
-                <i class="fas fa-check-circle iconclr"></i>
+              <span class="icon has-text-white">
+                <i class="has-text-primary fas fa-check-circle iconclr"></i>
               </span>
               <span class="has-text-grey-dark has-text-weight-light">Ask Our Trained Teachers</span>
             </div>
             <div class="icon-text pb-4">
-              <span class="icon has-text-success">
-                <i class="fas fa-check-circle iconclr"></i>
+              <span class="icon has-text-white">
+                <i class="has-text-primary fas fa-check-circle iconclr"></i>
               </span>
               <span class="has-text-grey-dark has-text-weight-light">Graded Homeworks</span>
             </div>
