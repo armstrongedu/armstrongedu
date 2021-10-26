@@ -60,15 +60,16 @@
                     <p><sup>£</sup>{{ invoice.billed }}</p>
                 </div>
             </div>
-                    <div class="stm_lms_courses__single--info_preview">
-                        <a href="{% url 'authorization:add-students' %}" title="{{ course.title }}" class="heading_font">Add Students</a>
-                    </div>
             <hr />
             <br />
             {% endif %}
         </div>
         <div class="clearfix"></div>
     </div>
+                    <div class="stm_lms_courses__single--info_preview">
+                        <a href="{% url 'authorization:add-students' %}" title="{{ course.title }}" class="heading_font">Add Students</a>
+                    </div>
+        <div class="clearfix"></div>
 </div>
 
 
