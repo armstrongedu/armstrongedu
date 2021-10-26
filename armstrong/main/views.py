@@ -18,7 +18,7 @@ students_required = user_passes_test(lambda user: user.has_students(), login_url
 def home(request):
     user = request.user
     if user.is_authenticated and user.is_member() and user.has_students():
-        redirect('authorization:select-student')
+        redirect('authorization:set-student')
 
     g = GeoIP2()
     client_ip = request.META.get('REMOTE_ADDR') or request.META.get('HTTP_X_FORWARDED_FOR')
