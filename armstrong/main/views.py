@@ -23,7 +23,7 @@ def home(request):
     g = GeoIP2()
     client_ip = request.META.get('REMOTE_ADDR') or request.META.get('HTTP_X_FORWARDED_FOR')
     try:
-        country = g.country(client_ip)
+        country = g.country(client_ip).get('country_name')
     except Exception:
         localized_membership_type = MembershipType.objects.filter(country=MembershipType.INTERNATIONAL)
     else:
@@ -32,7 +32,7 @@ def home(request):
             localized_membership_type = MembershipType.objects.filter(country=MembershipType.INTERNATIONAL)
     context = {
         'membership_types': localized_membership_type,
-        'courses': Course.objects.all(),
+        'courses': Course.objects.filter(is_featured=True),
     }
     if not request.user.is_anonymous and request.user.is_authenticated and request.user.is_member() and request.user.has_students():
         context['min_age'] = datetime.now().year - request.user.students.order_by('-birth_year').first().birth_year

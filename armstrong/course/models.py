@@ -73,6 +73,7 @@ class Course(models.Model):
     intro_video_iframe = models.FileField(storage=APIVideoStorage(), max_length=1000)
     start_age = models.IntegerField(null=False, blank=False)
     end_age = models.IntegerField(null=False, blank=False)
+    is_featured = models.BooleanField(default=False)
 
     def __str__(self):
         return self.title

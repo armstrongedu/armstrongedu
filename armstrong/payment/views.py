@@ -24,7 +24,7 @@ def subscribe(request):
     g = GeoIP2()
     client_ip = request.META.get('REMOTE_ADDR') or request.META.get('HTTP_X_FORWARDED_FOR')
     try:
-        country = g.country(client_ip)
+        country = g.country(client_ip).get('country_name')
     except Exception:
         localized_membership_type = MembershipType.objects.filter(country=MembershipType.INTERNATIONAL)
     else:
@@ -68,7 +68,7 @@ def checkout(request):
         "amount_cents": membership_type.real_price_egyptian_cents,
         "currency": "EGP",
         "items": [{
-            "name": membership_type.name,
+            "name": membership_type.id,
             "amount_cents": membership_type.real_price_egyptian_cents,
             "description": membership_type.name,
             "quantity": 1,
@@ -123,7 +123,7 @@ def subscribe_done(request):
         accept_api = AcceptAPI(settings.PAYMOB_API_KEY)
         item_name = accept_api.retrieve_transaction(t_data['id'])['order']['items'][0]['name']
 
-        membership_type = MembershipType.objects.get(name=item_name)
+        membership_type = MembershipType.objects.get(id=item_name)
         context['membership_type'] = membership_type
 
         card, _ = Card.objects.update_or_create(

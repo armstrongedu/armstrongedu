@@ -30,7 +30,7 @@ class LessonInline(admin.TabularInline):
 @admin.register(Course)
 class CouresAdmin(admin.ModelAdmin):
     search_fields = ('title',)
-    list_display = ('title',)
+    list_display = ('title', 'is_featured',)
     inlines = (LessonInline,)
 
 
