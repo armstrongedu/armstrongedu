@@ -4,11 +4,13 @@ from django.shortcuts import render, redirect
 from django.conf import settings
 from django.contrib.auth.decorators import login_required, user_passes_test
 from django.contrib.gis.geoip2 import GeoIP2
+from cryptography.fernet import Fernet
 
 from course.models import Category, Course
 from payment.models import MembershipType
+from authorization.models import Student
 
-from .utils import localize
+from .utils import localize, gen_cert
 
 member_required = user_passes_test(lambda user: user.is_member(), login_url='/')
 students_required = user_passes_test(lambda user: user.has_students(), login_url='/')
@@ -18,7 +20,11 @@ students_required = user_passes_test(lambda user: user.has_students(), login_url
 def home(request):
     user = request.user
     if user.is_authenticated and user.is_member() and user.has_students():
-        redirect('authorization:set-student')
+        if request.COOKIES.get('std_id') and request.COOKIES.get('std'):
+            return redirect('course:courses')
+        else:
+            return redirect('authorization:set-student')
+
 
     g = GeoIP2()
     client_ip = request.META.get('REMOTE_ADDR') or request.META.get('HTTP_X_FORWARDED_FOR')
@@ -41,12 +47,13 @@ def home(request):
 
 
 @login_required
-@member_required
-@students_required
 def cert(request, cert_id):
-    # TODO(gaytomycode): if the current student finished the course sent then eb3t cert
-    std = Student.objects.get(user=request.user, name=std_name)
-    resp = redirect('main:home')
-    resp.set_cookie('std_id', std.id)
-    resp.set_cookie('std', std.name)
-    return resp
+    course_id, std_id = cert_id.split('-')
+    course = Course.objects.get(id=course_id)
+    std = Student.objects.get(id=std_id)
+    gen_cert(course, std)
+    context = {
+        'cert_url': f'/uploads/{cert_id}.pdf',
+    }
+
+    return render(template_name=localize('masterstudy/cert.html'), request=request, context=context)

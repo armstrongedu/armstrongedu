@@ -13,7 +13,7 @@ from django.contrib.gis.geoip2 import GeoIP2
 
 from .forms import BillingDataForm
 from .utils import AcceptAPI
-from .models import Card, Invoice, Membership, CardToken, MembershipType
+from .models import Card, Invoice, Membership, CardToken, MembershipType, Promocode
 
 
 not_member_required = user_passes_test(lambda user: not user.is_member(), login_url='/')
@@ -41,6 +41,9 @@ def subscribe(request):
 @not_member_required
 def checkout(request):
     membership_type = MembershipType.objects.get(id=request.POST['membership_type'])
+    promocode = request.POST['promocode']
+    promocode = Promocode.objects.filter(promocode=promocode)
+
 
     if hasattr(request.user, 'billing_data'):
         billing_data_form = BillingDataForm(request.POST, instance=request.user.billing_data)
@@ -48,12 +51,30 @@ def checkout(request):
         billing_data_form = BillingDataForm(request.POST)
 
 
+    g = GeoIP2()
+    client_ip = request.META.get('REMOTE_ADDR') or request.META.get('HTTP_X_FORWARDED_FOR')
+    try:
+        country = g.country(client_ip).get('country_name')
+    except Exception:
+        localized_membership_type = MembershipType.objects.filter(country=MembershipType.INTERNATIONAL)
+    else:
+        localized_membership_type = MembershipType.objects.filter(country=country)
+        if not localized_membership_type.exists():
+            localized_membership_type = MembershipType.objects.filter(country=MembershipType.INTERNATIONAL)
     context = {
-            'membership_types': MembershipType.objects.all(),
+            'membership_types': localized_membership_type,
             'membership_type': membership_type,
             'error': billing_data_form.errors,
             'billing_data': billing_data_form,
     }
+
+    if not promocode.exists():
+        context['error'] = 'Promocode Not Valid!'
+        return render(template_name=f'masterstudy/subscribe{"_ar" if settings.AS_LANG == "ar" else ""}.html', request=request, context=context)
+
+    promocode = promocode.first()
+    promocode_price = int(membership_type.real_price_egyptian_cents * promocode.percent // 100)
+    promocode_display = int(membership_type.display_float_price * promocode.percent // 100)
 
     if not billing_data_form.is_valid():
         return render(template_name=f'masterstudy/subscribe{"_ar" if settings.AS_LANG == "ar" else ""}.html', request=request, context=context)
@@ -65,12 +86,17 @@ def checkout(request):
     order_data = {
         "auth_token": auth_token,
         "delivery_needed": "false",
-        "amount_cents": membership_type.real_price_egyptian_cents,
+        "amount_cents": membership_type.real_price_egyptian_cents - promocode_price,
         "currency": "EGP",
         "items": [{
             "name": membership_type.id,
             "amount_cents": membership_type.real_price_egyptian_cents,
             "description": membership_type.name,
+            "quantity": 1,
+        }, {
+            "name": 'PROMOCODE',
+            "amount_cents": promocode_price,
+            "description": 'PROMOCODE',
             "quantity": 1,
         },],
     }
@@ -79,7 +105,7 @@ def checkout(request):
 
     accept_api_request = {
         "auth_token": auth_token,
-        "amount_cents": membership_type.real_price_egyptian_cents,
+        "amount_cents": membership_type.real_price_egyptian_cents - promocode_price,
         "expiration": 3600,
         "order_id": order.get("id"),
         "billing_data": {
@@ -107,6 +133,10 @@ def checkout(request):
     iframe_url = accept_api.retrieve_iframe("4242", payment_token)
 
     context['iframe_url'] = iframe_url
+    context['promocode'] = promocode
+    context['promocode_display'] = round(int(promocode_display), 2)
+    context['net_price'] = round(int(membership_type.display_float_price - promocode_display), 2)
+
 
     billing_data_form.save()
 
@@ -121,7 +151,18 @@ def subscribe_done(request):
     if t_data['success'] == 'true':
 
         accept_api = AcceptAPI(settings.PAYMOB_API_KEY)
-        item_name = accept_api.retrieve_transaction(t_data['id'])['order']['items'][0]['name']
+        items = accept_api.retrieve_transaction(t_data['id'])['order']['items']
+        if len(items) > 1:
+            for item in items:
+                if item['name'] == 'PROMOCODE':
+                    promcode_amount = item['amount_cents']
+                else:
+                    item_name = item['name']
+                    item_price = item['amount_cents']
+                    item_description = item['description']
+        else:
+            item_name = items[0]['name']
+            item_description = items[0]['description']
 
         membership_type = MembershipType.objects.get(id=item_name)
         context['membership_type'] = membership_type
@@ -138,6 +179,9 @@ def subscribe_done(request):
             user = request.user,
             card = card,
             paymob_id = t_data['id'],
+            item_name = item_description,
+            item_price = round(int(item_price)/100, 2),
+            promocode_price = round(int(promocode_price)/100, 2),
             billed = round(int(t_data['amount_cents'])/100, 2),
         )
 
@@ -149,6 +193,7 @@ def subscribe_done(request):
                 'activated_on': timezone.now(),
             }
         )
+        request.user.students.all().delete()
 
         context['card'] = card
         context['invoice'] = invoice

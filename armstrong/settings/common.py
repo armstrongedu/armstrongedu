@@ -191,3 +191,4 @@ AS_LANG = ENV.str('AS_LANG')
 URL = ENV.str('URL')
 
 GEOIP_PATH = os.path.join(BASE_DIR, 'payment')
+CRYPT_KEY = ENV.str('CRYPT_KEY')

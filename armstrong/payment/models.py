@@ -83,9 +83,17 @@ class Invoice(models.Model):
     card = models.ForeignKey(Card, null=True, blank=True, on_delete=models.SET_NULL, related_name='invoices')
     paymob_id = models.CharField(max_length=255, null=False, blank=False)
     user = models.ForeignKey(get_user_model(), null=True, blank=True, on_delete=models.SET_NULL, related_name='invoices')
+    item_name = models.CharField(max_length=255, null=False, blank=False)
     created_at = models.DateTimeField(auto_now=True, null=False, blank=False)
+    item_price = models.FloatField(null=False, blank=False)
+    promocode_price = models.FloatField(null=False, blank=False)
     billed = models.FloatField(null=False, blank=False)
 
 class CardToken(models.Model):
     user = models.OneToOneField(get_user_model(), null=False, blank=False, on_delete=models.CASCADE, related_name='card_token')
     token = models.CharField(max_length=255, null=False, blank=False)
+
+
+class Promocode(models.Model):
+    promocode = models.CharField(max_length=255, null=False, blank=False)
+    percent = models.IntegerField(null=False, blank=False)

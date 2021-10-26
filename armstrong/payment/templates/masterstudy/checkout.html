@@ -37,9 +37,15 @@
                                                                                         </div>
                                                                                         <div id="pmpro_level_cost">
                                                                                                 <div class="lp-pmpro-desc lp-pmpro-price">
+                                                                                                        <label>Original Price:</label>
+                                                                                                            <sup>{{ membership_type.currency }}</sup>{{ membership_type.display_float_price}}.
+                                                                                                            <br>
+                                                                                                            <label>Promocode ({{ promocode.promocode }}):</label>
+                                                                                                        <sup>{{ membership_type.currency }}</sup>{{ promocode_display }} ({{ promocode.percent }}%).
+                                                                                                            <br>
                                                                                                         <label>Price:</label>
                                                                                                         <strong>
-                                                                                                            <sup>{{ membership_type.currency }}</sup>{{ membership_type.display_float_price }}
+                                                                                                            <sup>{{ membership_type.currency }}</sup>{{ net_price }}
                                                                                                         </strong> now.
                                                                                                 </div>
                                                                                                 <div class="lp-pmpro-desc">

@@ -23,14 +23,14 @@
                                                                                     </tr>
                                                                             </thead>
                                                                             <tbody>
-                                                                                                        {% for std in stds %}
                                                                                     <tr>
                                                                                             <td>
                                                                                                     <div class="stm_lms_checkout_fields">
 
                                                                                                                                                                     <div>
-                                                                                                                                                                        <label for="{{ std.id }}">Select Student</label>
+                                                                                                                                                                        <label for="std_id">Select Student</label>
                                                                                                                                                                         <select name="std_id" class="pmpro_required select2-hidden-accessible" tabindex="-1" aria-hidden="true">
+                                                                                                                                                                {% for std in stds %}
                                                                                                                                                                             <option value="{{ std.id }}">{{ std.name }}</option>
                                                                                                                                                                             {% endfor %}
 
@@ -41,7 +41,6 @@
                                                                                                                                                                     </div>
                                                                                                                                                                             </td>
                                                                                                                                                                     </tr>
-                                                                                                                                                            {% endfor %}
                                                                                                                                                             </tbody>
                                                                                                                                                     </table>
                                                                                                                                                                             <script>//checking a discount code
@@ -86,7 +85,7 @@ jQuery.ajax({
                                                                                                                                                                                             <input type="hidden" name="submit-checkout" value="1">
                                                                                                                                                                                                     <input type="hidden" name="javascriptok" value="1">
                                                                                                                                                                                                             <input type="hidden" name="javascriptok" value="1">
-                                                                                                                                                                                                                    <input type="submit" class="btn btn-default pmpro_btn-submit-checkout" value="Submit and Check Out">
+                                                                                                                                                                                                                    <input type="submit" class="btn btn-default pmpro_btn-submit-checkout" value="Select Student">
                                                                                                                                                                                                                     </span>
                                                                                                                                                                                                                     <span id="pmpro_processing_message" style="visibility: hidden;"> Processing... </span>
                                                                                                                                                                                                             </div>

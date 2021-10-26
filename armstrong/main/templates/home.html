@@ -174,11 +174,28 @@
       </div>
       {% endfor %}
     </ul>
-    <a href="{% url 'course:courses' %}">
-    <button class="button is-medium is-info level-item coursesbtn" style="background-color: #e81a4b !important;">
-      More Courses
+    <div class="centered" style="display:flex; width:90%; text-align:center; margin:auto;">
+    <a href="{% url 'course:courses' %}?min_age=4&max_age=7" style="margin:auto;">
+    <button class="button is-medium is-info level-item coursesbtn" style="background-color: #e81a4b !important; margin:auto">
+      4 - 7 Years
     </button>
     </a>
+    <a href="{% url 'course:courses' %}?min_age=7&max_age=9" style="margin:auto;">
+    <button class="button is-medium is-info level-item coursesbtn" style="background-color: #e81a4b !important; margin:auto">
+      7 - 9 Years
+    </button>
+    </a>
+    <a href="{% url 'course:courses' %}?min_age=9&max_age=12" style="margin:auto;">
+    <button class="button is-medium is-info level-item coursesbtn" style="background-color: #e81a4b !important; margin:auto">
+      9 - 12 Years
+    </button>
+    </a>
+    <a href="{% url 'course:courses' %}?min_age=12&max_age=18" style="margin:auto;">
+    <button class="button is-medium is-info level-item coursesbtn" style="background-color: #e81a4b !important; margin:auto">
+      12 - 18 Years
+    </button>
+    </a>
+    </div>
   </div>
   <div class="whysec">
     <img class="whyimg" src="{% static 'whysec.png' %}" alt="" style="padding-top: 12rem"/>

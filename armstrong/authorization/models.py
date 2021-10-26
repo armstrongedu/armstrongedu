@@ -2,6 +2,7 @@ from django.db import models
 from django.contrib.auth.models import AbstractUser
 from django.utils.translation import gettext_lazy as _
 from simple_email_confirmation.models import SimpleEmailConfirmationUserMixin
+from django.utils.timezone import now
 
 from .managers import UserManager
 
@@ -21,6 +22,9 @@ class User(SimpleEmailConfirmationUserMixin, AbstractUser):
 
     def has_students(self):
         return self.membership.membership_type.number_of_students == self.students.count()
+
+    def is_free_trial(self):
+        return not self.is_member() and (now() - self.date_joined).days <= 14
 
 
 class Student(models.Model):

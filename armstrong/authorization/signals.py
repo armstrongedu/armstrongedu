@@ -3,9 +3,11 @@ from django.dispatch import receiver
 from django.contrib.auth import get_user_model
 
 from . import notifications
+from . import utils
 
 
 @receiver(post_save, sender=get_user_model())
 def new_user_added(sender, instance, **kwargs):
     if not instance.is_confirmed:
         notifications.confirmation_email(instance)
+        utils.create_trial_student(instance)

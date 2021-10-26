@@ -73,7 +73,8 @@ class Course(models.Model):
     intro_video_iframe = models.FileField(storage=APIVideoStorage(), max_length=1000)
     start_age = models.IntegerField(null=False, blank=False)
     end_age = models.IntegerField(null=False, blank=False)
-    is_featured = models.BooleanField(default=False)
+    is_featured = models.BooleanField(null=False, blank=False, default=False)
+    is_free_trial = models.BooleanField(null=False, blank=False, default=False)
 
     def __str__(self):
         return self.title
@@ -149,6 +150,9 @@ class Topic(models.Model):
     def completed(self):
         return self.progress.filter(user=get_request().user, std=get_request().COOKIES['std_id']).exists()
 
+    def free_trial_completed(self):
+        std = Student.objects.get(user=get_request().user, name='Trial Student')
+        return self.progress.filter(user=get_request().user, std=std).exists()
 
 class Text(models.Model):
     lesson = models.ForeignKey(Lesson, null=True, blank=True, on_delete=models.SET_NULL, related_name='texts')
@@ -196,14 +200,25 @@ class MCQQuiz(models.Model):
         return choices
 
     def answered(self):
-        return self.mcq_solution.filter(user=get_request().user, std=request.COOKIES['std_id']).exists()
+        return self.mcq_solution.filter(user=get_request().user, std=get_request().COOKIES['std_id']).exists()
 
     def answered_correct(self):
-        return self.mcq_solution.filter(user=get_request().user, std=request.COOKIES['std_id']).first().choice == self.correct_choice
+        return self.mcq_solution.filter(user=get_request().user, std=get_request().COOKIES['std_id']).first().choice == self.correct_choice
 
     def get_choice(self):
-        return self.mcq_solution.filter(user=get_request().user, std=request.COOKIES['std_id']).first().choice
+        return self.mcq_solution.filter(user=get_request().user, std=get_request().COOKIES['std_id']).first().choice
 
+    def free_trial_answered(self):
+        std = Student.objects.get(user=get_request().user, name='Trial Student')
+        return self.mcq_solution.filter(user=get_request().user, std=std).exists()
+
+    def free_trial_answered_correct(self):
+        std = Student.objects.get(user=get_request().user, name='Trial Student')
+        return self.mcq_solution.filter(user=get_request().user, std=std).first().choice == self.correct_choice
+
+    def free_trial_get_choice(self):
+        std = Student.objects.get(user=get_request().user, name='Trial Student')
+        return self.mcq_solution.filter(user=get_request().user, std=std).first().choice
 
 class TFQuiz(models.Model):
     lesson = models.ForeignKey(Lesson, null=True, blank=True, on_delete=models.SET_NULL, related_name='tf_quizez')
@@ -217,13 +232,25 @@ class TFQuiz(models.Model):
 
 
     def answered(self):
-        return self.tf_solution.filter(user=get_request().user, std=request.COOKIES['std_id']).exists()
+        return self.tf_solution.filter(user=get_request().user, std=get_request().COOKIES['std_id']).exists()
 
     def answered_correct(self):
-        return self.tf_solution.filter(user=get_request().user, std=request.COOKIES['std_id']).first().choice == self.answer
+        return self.tf_solution.filter(user=get_request().user, std=get_request().COOKIES['std_id']).first().choice == self.answer
 
     def get_choice(self):
-        return self.tf_solution.filter(user=get_request().user, std=request.COOKIES['std_id']).first().choice
+        return self.tf_solution.filter(user=get_request().user, std=get_request().COOKIES['std_id']).first().choice
+
+    def free_trial_answered(self):
+        std = Student.objects.get(user=get_request().user, name='Trial Student')
+        return self.tf_solution.filter(user=get_request().user, std=std).exists()
+
+    def free_trial_answered_correct(self):
+        std = Student.objects.get(user=get_request().user, name='Trial Student')
+        return self.tf_solution.filter(user=get_request().user, std=std).first().choice == self.answer
+
+    def free_trial_get_choice(self):
+        std = Student.objects.get(user=get_request().user, name='Trial Student')
+        return self.tf_solution.filter(user=get_request().user, std=std).first().choice
 
 class Progress(models.Model):
     user = models.ForeignKey(get_user_model(), null=False, blank=False, on_delete=models.CASCADE, related_name='progress')

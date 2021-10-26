@@ -129,7 +129,7 @@
 						</div>
 						<div class="stm-curriculum-section__lessons">
                                                         {% for cur_topic in lesson.topics.all %}
-                                                        <a href="{% url 'course:start' cur_topic.id %}" class="stm-curriculum-item  is- first" {% if not cur_topic.completed and cur_topic != topic %} style="pointer-events: none;" {% endif %}>
+                                                        <a href="{% url 'course:free-trial-start' cur_topic.id %}" class="stm-curriculum-item  is- first" {% if not cur_topic.free_trial_completed and cur_topic != topic %} style="pointer-events: none;" {% endif %}>
 								<div class="stm-curriculum-item__icon">
                                                                     {% if cur_topic.type == cur_topic.TEXT %}
                                                                         <i class="stmlms-text"></i>
@@ -146,7 +146,7 @@
 									<div class="heading_font">{{ cur_topic }}</div>
 								</div>
 								<div class="stm-curriculum-item__meta"></div>
-                                                                <div class="stm-curriculum-item__completed {% if cur_topic.completed %} completed {% endif %}">
+                                                                <div class="stm-curriculum-item__completed {% if cur_topic.free_trial_completed %} completed {% endif %}">
 									<i class="fa fa-check"></i>
 								</div>
 							</a>
@@ -173,8 +173,6 @@
 						</div>
                                         </div>
 
-                                        <form method="POST" action="{% url 'help_sessions:place-help' %}">
-                                          {% csrf_token %}
                                           {% for help_slot_name, help_slot_times in help_slots.items %}
                                               {% if help_slot_times %}
                                                   <h3>{{ help_slot_name }}</h3>
@@ -192,8 +190,7 @@
                                               {% endif %}
                                           {% endfor %}
                                           <input type="text"  name="help_text" required="" style="height: 10ch;background: white;margin-top: 1em;margin-bottom: 1em;" size="40" height="20">
-                                          <input class="for-checkbox-tools" type="submit" style="position: relative;display: inline-block;padding: 20px;width: 110px;font-size: 14px;line-height: 10px;letter-spacing: 1px;margin: 0 auto;margin: auto;margin-bottom: 0px;margin-left: auto;margin-left: 5px;margin-right: 5px;/*! margin-bottom: 10px; */text-align: center;border-radius: 4px;overflow: hidden;cursor: pointer;text-transform: uppercase;color: var(--white);-webkit-transition: all 300ms linear;transition: all 300ms linear;border: 1px solid;/*! text-align: ; */">
-                                        </form>
+                                          <input value="Available for free for subscribers" class="for-checkbox-tools" type="submit" style="position: relative;display: inline-block;padding: 20px;width: 350px;font-size: 14px;line-height: 10px;letter-spacing: 1px;margin: 0 auto;margin: auto;margin-bottom: 0px;margin-left: auto;margin-left: 5px;margin-right: 5px;/*! margin-bottom: 10px; */text-align: center;border-radius: 4px;overflow: hidden;cursor: pointer;text-transform: uppercase;color: var(--white);-webkit-transition: all 300ms linear;transition: all 300ms linear;border: 1px solid;/*! text-align: ; */" disabled>
                                     </div>
 				</div>
 				<div id="stm-lms-lessons">
@@ -225,9 +222,9 @@
                                                                                         {% elif topic.type == topic.QUIZ %}
 
                                                                                         {% if topic.mcq_quiz %}
-                                                                                        <form id="quiz" method="POST" action="{% url 'course:answer-mcq' topic.mcq_quiz.id %}" class="stm-lms-single_quiz" style="display: block;">
+                                                                                        <form id="quiz" method="POST" action="{% url 'course:free-trial-answer-mcq' topic.mcq_quiz.id %}" class="stm-lms-single_quiz" style="display: block;">
                                                                                         {% elif topic.tf_quiz %}
-                                                                                        <form id="quiz" method="POST" action="{% url 'course:answer-tf' topic.tf_quiz.id %}" class="stm-lms-single_quiz" style="display: block;">
+                                                                                        <form id="quiz" method="POST" action="{% url 'course:free-trial-answer-tf' topic.tf_quiz.id %}" class="stm-lms-single_quiz" style="display: block;">
                                                                                         {% endif %}
                                                                                           {% csrf_token %}
                                                                                           <div class=" stm-lms-single_question stm-lms-single_question_single_choice correct_answer_ " >
@@ -239,11 +236,11 @@
 
                                                                                             <div class="heading_font">
                                                                                               {% for choice in topic.mcq_quiz.choices %}
-                                                                                                    {% if topic.mcq_quiz.answered %}
-                                                                                                        {% if topic.mcq_quiz.answered_correct and topic.mcq_quiz.get_choice == choice %}
+                                                                                                    {% if topic.mcq_quiz.free_trial_answered %}
+                                                                                                        {% if topic.mcq_quiz.free_trial_answered_correct and topic.mcq_quiz.free_trial_get_choice == choice %}
                                                                                                             <canvas id="canvas"></canvas>
                                                                                                           <div class="stm-lms-single-answer correctly_answered">
-                                                                                                        {% elif not topic.mcq_quiz.answered_correct and topic.mcq_quiz.get_choice == choice %}
+                                                                                                        {% elif not topic.mcq_quiz.free_trial_answered_correct and topic.mcq_quiz.free_trial_get_choice == choice %}
                                                                                                           <div class="stm-lms-single-answer wrongly_answered">
                                                                                                         {% else %}
                                                                                                           <div class="stm-lms-single-answer">
@@ -252,7 +249,7 @@
                                                                                                           <div class="stm-lms-single-answer">
                                                                                                     {% endif %}
                                                                                                 <label>
-                                                                                                    {% if topic.mcq_quiz.answered %}
+                                                                                                    {% if topic.mcq_quiz.free_trial_answered %}
                                                                                                         {% if topic.mcq_quiz.correct_choice == choice  %}
                                                                                                             <input type="radio" name="choice" value="{{ choice }}" disabled/>
                                                                                                         {% else %}
@@ -262,7 +259,7 @@
                                                                                                         <input type="radio" name="choice" value="{{ choice }}" />
                                                                                                     {% endif %}
                                                                                                   <i class="fa fa-check"></i>
-                                                                                                    {% if topic.mcq_quiz.answered and not topic.mcq_quiz.answered_correct and topic.mcq_quiz.correct_choice == choice  %}
+                                                                                                    {% if topic.mcq_quiz.free_trial_answered and not topic.mcq_quiz.free_trial_answered_correct and topic.mcq_quiz.correct_choice == choice  %}
                                                                                                   {{ choice }} (Correct)
                                                                                                   {% else %}
                                                                                                   {{ choice }}
@@ -278,11 +275,11 @@
                                                                                             </div>
 
                                                                                             <div class="heading_font">
-                                                                                                    {% if topic.tf_quiz.answered %}
-                                                                                                        {% if topic.tf_quiz.answered_correct and topic.tf_quiz.get_choice == True %}
+                                                                                                    {% if topic.tf_quiz.free_trial_answered %}
+                                                                                                        {% if topic.tf_quiz.free_trial_answered_correct and topic.tf_quiz.free_trial_get_choice == True %}
                                                                                                           <div class="stm-lms-single-answer correctly_answered">
                                                                                                             <canvas id="canvas"></canvas>
-                                                                                                        {% elif not topic.tf_quiz.answered_correct and topic.tf_quiz.get_choice == True %}
+                                                                                                        {% elif not topic.tf_quiz.free_trial_answered_correct and topic.tf_quiz.free_trial_get_choice == True %}
                                                                                                           <div class="stm-lms-single-answer wrongly_answered">
                                                                                                         {% else %}
                                                                                                           <div class="stm-lms-single-answer">
@@ -291,7 +288,7 @@
                                                                                                           <div class="stm-lms-single-answer">
                                                                                                     {% endif %}
                                                                                                 <label>
-                                                                                                  {% if topic.tf_quiz.answered %}
+                                                                                                  {% if topic.tf_quiz.free_trial_answered %}
                                                                                                   <input type="radio" name="choice" value="true" disabled/>
                                                                                                   {% else %}
                                                                                                   <input type="radio" name="choice" value="true" />
@@ -300,11 +297,11 @@
                                                                                                   True
                                                                                                 </label>
                                                                                               </div>
-                                                                                                    {% if topic.tf_quiz.answered %}
-                                                                                                        {% if topic.tf_quiz.answered_correct and topic.tf_quiz.get_choice == False %}
+                                                                                                    {% if topic.tf_quiz.free_trial_answered %}
+                                                                                                        {% if topic.tf_quiz.free_trial_answered_correct and topic.tf_quiz.free_trial_get_choice == False %}
                                                                                                           <div class="stm-lms-single-answer correctly_answered">
                                                                                                             <canvas id="canvas"></canvas>
-                                                                                                        {% elif not topic.tf_quiz.answered_correct and topic.tf_quiz.get_choice == False %}
+                                                                                                        {% elif not topic.tf_quiz.free_trial_answered_correct and topic.tf_quiz.free_trial_get_choice == False %}
                                                                                                           <div class="stm-lms-single-answer wrongly_answered">
                                                                                                         {% else %}
                                                                                                           <div class="stm-lms-single-answer">
@@ -313,7 +310,7 @@
                                                                                                           <div class="stm-lms-single-answer">
                                                                                                     {% endif %}
                                                                                                 <label>
-                                                                                                  {% if topic.tf_quiz.answered %}
+                                                                                                  {% if topic.tf_quiz.free_trial_answered %}
                                                                                                   <input type="radio" name="choice" value="false" disabled/>
                                                                                                   {% else %}
                                                                                                   <input type="radio" name="choice" value="false" />
@@ -324,7 +321,7 @@
                                                                                               </div>
                                                                                             </div>
                                                                                             {% endif%}
-                                                                                        {% if topic.mcq_quiz.answered or topic.tf_quiz.answered %}
+                                                                                        {% if topic.mcq_quiz.free_trial_answered or topic.tf_quiz.free_trial_answered %}
                                                                                         {% else %}
                                                                                       <button for="quiz" type="submit" class="btn btn-default stm_lms_complete_lesson" onclick="document.getElementById('quiz').submit()">
                                                                                     <span>Submit Quiz</span>
@@ -360,10 +357,10 @@
 					</div>
 				</div>
 			</div>
-                        <div class="stm-lms-lesson_navigation heading_font {% if topic.completed %} completed {% else %} uncompleted {% endif %}">
+                        <div class="stm-lms-lesson_navigation heading_font {% if topic.free_trial_completed %} completed {% else %} uncompleted {% endif %}">
                                 <div class="stm-lms-lesson_navigation_side stm-lms-lesson_navigation_prev">
                                 {% if prev_topic %}
-                                    <a href="{% url 'course:start' prev_topic.id %}">
+                                    <a href="{% url 'course:free-trial-start' prev_topic.id %}">
                                         <i class="lnr lnr-chevron-left"></i>
                                             <span class="stm_lms_section_text">{{ prev_topic.lesson.title }}</span>
                                                 <span>{{ prev_topic }}</span>
@@ -371,15 +368,15 @@
                                         {% endif %}
                                         </div>
 				<div class="stm-lms-lesson_navigation_complete">
-                                    <form id="complete-form" method="POST" action="{% url 'course:mark-complete' %}">
+                                    <form id="complete-form" method="POST" action="{% url 'course:free-trial-mark-complete' %}">
                                         {% csrf_token %}
                                         <input type="hidden" name="topic" value="{{ topic.id }}">
                                         {% if topic.type == topic.QUIZ %}
-					<a href="#" class="btn btn-default stm_lms_complete_lesson {% if topic.completed %} completed {% else %} uncompleted {% endif %}" style="pointer-events: none;">
+					<a href="#" class="btn btn-default stm_lms_complete_lesson {% if topic.free_trial_completed %} completed {% else %} uncompleted {% endif %}" style="pointer-events: none;">
 						<span>Complete</span>
 					</a>
                                         {% else %}
-					<a href="#" class="btn btn-default stm_lms_complete_lesson {% if topic.completed %} completed {% else %} uncompleted {% endif %}" onclick="document.getElementById('complete-form').submit()">
+					<a href="#" class="btn btn-default stm_lms_complete_lesson {% if topic.free_trial_completed %} completed {% else %} uncompleted {% endif %}" onclick="document.getElementById('complete-form').submit()">
 						<span>Complete</span>
 					</a>
                                         {% endif %}
@@ -387,7 +384,7 @@
 				</div>
 				<div class="stm-lms-lesson_navigation_side stm-lms-lesson_navigation_next">
                                 {% if next_topic %}
-                                <a href="{% url 'course:start' next_topic.id %}" {% if not topic.completed %} style="pointer-events: none;" {% endif %}>
+                                <a href="{% url 'course:free-trial-start' next_topic.id %}" {% if not topic.free_trial_completed %} style="pointer-events: none;" {% endif %}>
                                             <span class="stm_lms_section_text">{{ next_topic.lesson.title }}</span>
                                                 <span>{{ next_topic }}</span>
 						<i class="lnr lnr-chevron-right"></i>
