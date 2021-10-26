@@ -155,7 +155,7 @@ def subscribe_done(request):
         if len(items) > 1:
             for item in items:
                 if item['name'] == 'PROMOCODE':
-                    promcode_price = item['amount_cents']
+                    promocode_price = item['amount_cents']
                 else:
                     item_name = item['name']
                     item_price = item['amount_cents']
