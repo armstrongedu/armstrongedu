@@ -48,6 +48,14 @@
                     <p>{{ card.card_type }} ending with {{ card.last_4_digits }}</p>
                 </div>
                 <div class="pmpro_invoice-total">
+
+
+                <label>Original Price:</label>
+                    <sup>£</sup>{{ invoice.item_price }}.
+                    <br>
+                    <label>Promocode:</label>
+                <sup>£</sup>{{ invoice.promocode_price }}.
+                    <br>
                     <strong>Total Billed</strong>
                     <p><sup>£</sup>{{ invoice.billed }}</p>
                 </div>
