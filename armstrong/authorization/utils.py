@@ -14,4 +14,4 @@ def login_excluded(redirect_to):
     return _method_wrapper
 
 def create_trial_student(user):
-    Student.objects.create(user=user, name='Trial Student', birth_year='0000')
+    Student.objects.get_or_create(user=user, name='Trial Student', birth_year='0000')
