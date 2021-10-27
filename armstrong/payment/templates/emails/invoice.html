@@ -1,3 +1,4 @@
+
 {% load static %}
 <!DOCTYPE html>
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:v="urn:schemas-microsoft-com:vml" xmlns:o="urn:schemas-microsoft-com:office:office">
@@ -157,31 +158,34 @@
     </head>
     <body width="100%" style="margin: 0; padding: 0 !important; mso-line-height-rule: exactly; background-color: #f5f5f5">
         <center style="width: 100%; background-color: #f5f5f5">
-            <div style="display: none; font-size: 1px; line-height: 1px; max-height: 0px; max-width: 0px; opacity: 0; overflow: hidden; mso-hide: all; font-family: 'PT Sans', sans-serif">Your Confirmation Code</div>
+            <div style="display: none; font-size: 1px; line-height: 1px; max-height: 0px; max-width: 0px; opacity: 0; overflow: hidden; mso-hide: all; font-family: 'PT Sans', sans-serif">Order Confirmation</div>
             <div style="display: none; font-size: 1px; line-height: 1px; max-height: 0px; max-width: 0px; opacity: 0; overflow: hidden; mso-hide: all; font-family: 'PT Sans', sans-serif">&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;</div>
             <div style="max-width: 645px; margin: 0 auto; font-family: 'PT Sans', sans-serif" class="email-container">
                 <table align="center" role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%" style="margin: auto; max-width: 605px">
                     <tbody>
                         <tr>
                             <td class="p-l-r-15" style="padding: 40px 70px 48px; background: #ffffff; border-top: 4px solid #214a35; text-align: center">
-                                <h2 style="margin: 0 0 12px; font-size: 32px; color: #242424; line-height: 36px">Confirm Your Email</h2>
-                                <p style="margin: 0 0 16px; font-size: 20px; color: #767676; line-height: 24px;">Here is your ArmStrong email confirmation code for {{ user.unconfirmed_emails.0 }}.</p>
-                                <table align="center" role="presentation" cellspacing="0" cellpadding="0" border="0" style="margin: auto">
-                                    <tbody>
-                                        <tr>
-                                            <td style="border-radius: 3px; background: #214a35">
-                                                <p style="background: #214a35; border: 1px solid #214a35; font-size: 19px; font-weight: bold; text-decoration: none; color: #ffffff; display: block; border-radius: 3px; padding: 1px;">{{ user.confirmation_key }}</p>
-                                            </td>
-                                        </tr>
-                                    </tbody>
-                                </table>
+                                <h2 style="margin: 0 0 12px; font-size: 32px; color: #242424; line-height: 36px">Order #{{ invoice.paymob_id }}</h2>
+                                <p style="margin: 0 0 16px; font-size: 20px; color: #767676; line-height: 24px;">Thank you for your purchase!</p>
+                                <p style="margin: 0 0 16px; font-size: 20px; color: #767676; line-height: 24px;">We’re getting your kit ready to be shipped. You can view your order from here or track your shipment from here.</p>
+                                <p style="margin: 0 0 16px; font-size: 20px; color: #767676; line-height: 24px;">Original Price for {{ invoice.item_name }}: {{ invoice.item_price }}</p>
+                                <p style="margin: 0 0 16px; font-size: 20px; color: #767676; line-height: 24px;">Promocode Price: {{ invoice.promocode_price }}</p>
+                                <p style="margin: 0 0 16px; font-size: 20px; color: #767676; line-height: 24px;">Billed: {{ invoice.billed }}</p>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="p-l-r-15" style="padding: 40px 70px 48px; background: #ffffff; border-top: 4px solid #214a35; text-align: center">
+                                <h2 style="margin: 0 0 12px; font-size: 32px; color: #242424; line-height: 36px">Billed & shipped to {{ billing_data.first_name }} {{ billing_data.last_name }} ({{ billing_data.email }})</h2>
+                                <p style="margin: 0 0 16px; font-size: 20px; color: #767676; line-height: 24px;">Address: {{ billing_data.address_1 }}</p>
+                                <p style="margin: 0 0 16px; font-size: 20px; color: #767676; line-height: 24px;">City: {{ billing_data.city }}</p>
+                                <p style="margin: 0 0 16px; font-size: 20px; color: #767676; line-height: 24px;">State: {{ billing_data.state }}</p>
+                                <p style="margin: 0 0 16px; font-size: 20px; color: #767676; line-height: 24px;">Country: {{ billing_data.country }}</p>
+                                <p style="margin: 0 0 16px; font-size: 20px; color: #767676; line-height: 24px;">Phone: {{ billing_data.phone }}</p>
                             </td>
                         </tr>
                         <tr>
                             <td class="p-l-r-15" style="padding: 40px 50px 48px; background: #ffffff; text-align: left">
-                                <p style="margin: 0 0 16px; font-size: 18px; color: #767676; line-height: 20px">This code was generated because you registered on ArmStrong.</p>
-                                <p style="margin: 0 0 16px; font-size: 18px; color: #767676; line-height: 20px">This confirmation code is required to complete your registration.</p>
-                                <p style="margin: 0 0 16px; font-size: 18px; color: #767676; line-height: 20px">If you didn't register ignore this email.</p>
+                                <p style="margin: 0 0 16px; font-size: 18px; color: #767676; line-height: 20px">If you’ve any inquiries or need support, you can contact our customer service team through live support or send us an email on help@armstrong.com</p>
                             </td>
                         </tr>
                     </tbody>

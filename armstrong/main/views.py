@@ -57,3 +57,11 @@ def cert(request, cert_id):
     }
 
     return render(template_name=localize('masterstudy/cert.html'), request=request, context=context)
+
+
+def terms(request):
+    return render(template_name=localize('masterstudy/terms.html'), request=request)
+
+
+def privacy(request):
+    return render(template_name=localize('masterstudy/privacy.html'), request=request)
