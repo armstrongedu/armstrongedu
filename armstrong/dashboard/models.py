@@ -16,7 +16,7 @@ class UpdatedDaily(models.Model):
     total_sales_international = models.FloatField(null=False, blank=False)
 
     def __str__(self):
-        return str(date)
+        return str(self.date)
 
     class Meta:
         verbose_name_plural = "Daily Sales Reports"
@@ -29,7 +29,7 @@ class UpdatedMonthly(models.Model):
     total_number_of_registers = models.IntegerField(null=False, blank=False)
 
     def __str__(self):
-        return str(date)
+        return str(self.date)
 
     class Meta:
         verbose_name_plural = "Monthly Sales Reports"
@@ -40,7 +40,7 @@ class UpdatedDailyPromocode(models.Model):
     total_sales = models.FloatField(null=False, blank=False)
 
     def __str__(self):
-        return str(date)
+        return str(self.date)
 
     class Meta:
         verbose_name_plural = "Daily Promocode Reports"
@@ -51,7 +51,7 @@ class UpdatedDailyMembershipType(models.Model):
     total_sales = models.FloatField(null=False, blank=False)
 
     def __str__(self):
-        return str(date)
+        return str(self.date)
 
     class Meta:
         verbose_name_plural = "Daily Memberships Reports"
