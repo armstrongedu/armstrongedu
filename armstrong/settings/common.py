@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'toolbox',
     'help_sessions',
     'login_sessions',
+    'dashboard',
 ]
 
 MIDDLEWARE = [

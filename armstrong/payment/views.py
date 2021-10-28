@@ -41,8 +41,9 @@ def subscribe(request):
 @not_member_required
 def checkout(request):
     membership_type = MembershipType.objects.get(id=request.POST['membership_type'])
-    promocode = request.POST['promocode']
-    promocode = Promocode.objects.filter(promocode=promocode)
+    promocode = promocode_post = request.POST.get('promocode')
+    if promocode_post:
+        promocode = Promocode.objects.filter(promocode=promocode_post)
 
 
     if hasattr(request.user, 'billing_data'):
@@ -68,13 +69,17 @@ def checkout(request):
             'billing_data': billing_data_form,
     }
 
-    if not promocode.exists():
+    if promocode_post and not promocode.exists():
         context['error'] = 'Promocode Not Valid!'
         return render(template_name=f'masterstudy/subscribe{"_ar" if settings.AS_LANG == "ar" else ""}.html', request=request, context=context)
 
-    promocode = promocode.first()
-    promocode_price = int(membership_type.real_price_egyptian_cents * promocode.percent // 100)
-    promocode_display = int(membership_type.display_float_price * promocode.percent // 100)
+    if promocode_post:
+        promocode = promocode.first()
+        promocode_price = int(membership_type.real_price_egyptian_cents * promocode.percent // 100)
+        promocode_display = int(membership_type.display_float_price * promocode.percent // 100)
+    else:
+        promocode_price = 0
+        promocode_display = 0.0
 
     if not billing_data_form.is_valid():
         return render(template_name=f'masterstudy/subscribe{"_ar" if settings.AS_LANG == "ar" else ""}.html', request=request, context=context)
@@ -96,7 +101,7 @@ def checkout(request):
         }, {
             "name": 'PROMOCODE',
             "amount_cents": promocode_price,
-            "description": 'PROMOCODE',
+            "description": promocode.promocode if promocode_post else '',
             "quantity": 1,
         },],
     }
@@ -133,7 +138,8 @@ def checkout(request):
     iframe_url = accept_api.retrieve_iframe("4242", payment_token)
 
     context['iframe_url'] = iframe_url
-    context['promocode'] = promocode
+    if promocode_post:
+        context['promocode'] = promocode
     context['promocode_display'] = round(int(promocode_display), 2)
     context['net_price'] = round(int(membership_type.display_float_price - promocode_display), 2)
 
@@ -156,6 +162,7 @@ def subscribe_done(request):
             for item in items:
                 if item['name'] == 'PROMOCODE':
                     promocode_price = item['amount_cents']
+                    promocode_name = item['description']
                 else:
                     item_name = item['name']
                     item_price = item['amount_cents']
@@ -175,11 +182,20 @@ def subscribe_done(request):
             },
         )
 
+        g = GeoIP2()
+        client_ip = request.META.get('REMOTE_ADDR') or request.META.get('HTTP_X_FORWARDED_FOR')
+        try:
+            country = g.country(client_ip).get('country_name')
+        except Exception:
+            country = MembershipType.INTERNATIONAL
+
         invoice = Invoice.objects.create(
             user = request.user,
             card = card,
+            country = country,
             paymob_id = t_data['id'],
             item_name = item_description,
+            promocode_name = promocode_name,
             item_price = round(int(item_price)/100, 2),
             promocode_price = round(int(promocode_price)/100, 2),
             billed = round(int(t_data['amount_cents'])/100, 2),
