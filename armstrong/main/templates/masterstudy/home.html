@@ -1,0 +1,1504 @@
+{% extends 'masterstudy/layout.html' %}
+{% load static %}
+{% block body %}
+<body class="home-page bp-nouveau home page-template-default page page-id-4977 stm_lms_button theme-masterstudy pmpro-body-has-access woocommerce-no-js ehf-template-masterstudy ehf-stylesheet-masterstudy skin_custom_color classic_lms stm_preloader_1 wpb-js-composer js-comp-ver-6.7.0 vc_responsive elementor-default elementor-kit-5 elementor-page elementor-page-4977 no-js" ontouchstart="">
+
+
+<div id="wrapper">
+
+
+
+<div id="header" class="transparent_header" data-color="">
+
+			<div class="header_top_bar" style="background-color:#002e5b">
+    <div class="container">
+        <div class="clearfix">
+<!-- Header Top bar Login -->
+{% if not user.is_authenticated %}
+<div class="pull-right">
+<div class="header_login_url">
+<a href="{% url 'authorization:login' %}">
+<i class="fa fa-user"></i>Login</a>
+<span class="vertical_divider"></span>
+<a href="{% url 'authorization:signup' %}">Register</a>
+</div>
+</div>
+{% else %}
+<div class="pull-right">
+<div class="header_login_url">
+                        {% if user.is_member and user.has_students %}
+                            {% for std in user.students.all %}
+                                {% if request.COOKIES.std_id|add:"0" == std.id|add:"0" %}
+                                    <a href="{% url "authorization:change-std" std.id %}" style="pointer-events: none; color:grey;"> {{ std.name }}</a>
+                                {% else %}
+                                    <a href="{% url "authorization:change-std" std.id %}"> {{ std.name }}</a>
+                                {% endif %}
+                            <span class="vertical_divider"></span>
+                            {% endfor %}
+                        {% endif %}
+<a href="{% url 'authorization:logout' %}">Logout</a>
+</div>
+</div>
+{% endif %}
+<!-- Header top bar Socials -->
+<div class="pull-right xs-pull-left">
+<ul class="top_bar_info clearfix">
+<li class="hidden-info">
+<i class="far fa-clock"></i> Sat - Thu 9.00 - 17.00 (GMT+2)				</li>
+<li class="hidden-info">
+<i class="fa fa-map-marker-alt"></i> 209 BUE's Science and Innovation Park - El Sherouk, Cairo - Egypt				</li>
+<li class="hidden-info">
+<i class="fa fa-phone"></i> ali@armstrong.courses                </li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+
+    <div class="header_default header_default">
+		<div class="container">
+    <div class="row">
+	    <div class="col-md-3 col-sm-12 col-xs-12">
+		    <div class="logo-unit">
+                	<a href="">
+                            <img class="img-responsive logo_transparent_static visible" src="{% static 'Artboard-2-copy-6@4x-8-3.png' %}" style="width: 253px;" alt="Armstrong"/>
+                            <img class="img-responsive logo_colored_fixed hidden" src="{% static 'Artboard-2-copy-6@4x-8-3.png' %}" style="width: 253px;" alt="Armstrong"/>
+			</a>
+		    </div>
+
+	        <!-- Navbar toggle MOBILE -->
+		    <button type="button" class="navbar-toggle collapsed hidden-lg hidden-md" data-toggle="collapse" data-target="#header_menu_toggler">
+				<span class="sr-only">Toggle navigation</span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+			</button>
+	    </div> <!-- md-3 -->
+
+
+	    <!-- MObile menu -->
+	    <div class="col-xs-12 col-sm-12 visible-xs visible-sm">
+		    <div class="collapse navbar-collapse header-menu-mobile" id="header_menu_toggler">
+			    <ul class="header-menu clearfix">
+                                <li id="menu-item-4999" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-4999"><a href="{% url 'course:courses' %}">Courses</a></li>
+<li id="menu-item-4990" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-4990"><a href="">Plans</a></li>
+<li id="menu-item-4978" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-4978"><a href="">About Us</a></li>
+<li id="menu-item-4979" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-4979"><a href="">Schools</a></li>
+<li id="menu-item-5060" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-5060"><a href="">Ambassadors</a></li>
+<li id="menu-item-5059" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-5059"><a href="">Franchise</a></li>
+<li id="menu-item-4992" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-4992"><a href="">Blog</a></li>
+			    </ul>
+		    </div>
+	    </div>
+
+	    <!-- Desktop menu -->
+	    <div class="col-md-9 col-sm-9 col-sm-offset-0 hidden-xs hidden-sm">
+
+<div class="stm_menu_toggler" data-text="Menu"></div>
+<div class="header_main_menu_wrapper clearfix" style="margin-top:5px;">
+
+
+    <div class="collapse navbar-collapse pull-right">
+        <ul class="header-menu clearfix">
+            <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-4999"><a href="{% url 'course:courses' %}">Courses</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-4990"><a href="">Plans</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-4978"><a href="">About Us</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-4979"><a href="">Schools</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-5060"><a href="">Ambassadors</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-5059"><a href="">Franchise</a></li>
+<li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-4992"><a href="">Blog</a></li>
+        </ul>
+    </div>
+
+</div>	    </div><!-- md-8 desk menu -->
+
+    </div> <!-- row -->
+</div> <!-- container -->    </div>
+</div> <!-- id header -->
+    <div id="main">
+
+
+<!-- Breads -->
+<div class="stm_lms_breadcrumbs stm_lms_breadcrumbs__header_default">
+
+
+	</div>
+
+    <div class="container">
+
+                    <div class="post_type_exist clearfix">
+                                    		<div data-elementor-type="wp-page" data-elementor-id="4977" class="elementor elementor-4977" data-elementor-settings="[]">
+							<div class="elementor-section-wrap">
+							<section class="elementor-section elementor-top-section elementor-element elementor-element-60210b0 elementor-section-stretched elementor-section-boxed elementor-section-height-default elementor-section-height-default" data-id="60210b0" data-element_type="section" data-settings="{&quot;background_background&quot;:&quot;classic&quot;,&quot;stretch_section&quot;:&quot;section-stretched&quot;}">
+						<div class="elementor-container elementor-column-gap-default">
+					<div class="elementor-column elementor-col-100 elementor-top-column elementor-element elementor-element-6021536" data-id="6021536" data-element_type="column" data-settings="{&quot;background_background&quot;:&quot;classic&quot;}">
+			<div class="elementor-widget-wrap elementor-element-populated">
+								<div class="elementor-element elementor-element-6021892 elementor-widget elementor-widget-slider_revolution" data-id="6021892" data-element_type="widget" data-widget_type="slider_revolution.default">
+				<div class="elementor-widget-container">
+
+		<div class="wp-block-themepunch-revslider">
+			<!-- START Main Slider REVOLUTION SLIDER 6.5.5 --><p class="rs-p-wp-fix"></p>
+			<rs-module-wrap id="rev_slider_1_1_wrapper" data-source="gallery" style="visibility:hidden;background:rgba(0,122,255,0.54);padding:0;margin:0px auto;margin-top:0;margin-bottom:0;">
+				<rs-module id="rev_slider_1_1" style="" data-version="6.5.5">
+					<rs-slides>
+						<rs-slide style="position: absolute;" data-key="rs-1" data-title="Slide" data-in="o:0;" data-out="a:false;">
+                                                    <img loading="lazy" src="{% static 'dummy.png' %}" title="father-sons-making-robot (3)" width="1920" height="1280" class="rev-slidebg tp-rs-img rs-lazyload" data-lazyload="{% static 'father-sons-making-robot-3-1.jpg' %}" data-no-retina>
+<!--
+							--><h1
+								id="slider-1-slide-1-layer-1"
+								class="rs-layer"
+								data-type="text"
+								data-xy="x:c;xo:1px,1px,0,0;y:m;yo:6px,6px,-100px,-91px;"
+								data-text="w:nowrap,nowrap,nowrap,normal;s:70,70,50,35;l:75,75,55,55;fw:700;a:inherit,inherit,inherit,center;"
+								data-dim="w:auto,auto,auto,100%;h:auto,auto,auto,112px;"
+								data-basealign="slide"
+								data-rsp_o="off"
+								data-rsp_bd="off"
+								data-frame_0="o:1;"
+								data-frame_0_sfx="se:blocktoright;"
+								data-frame_1="e:power4.inOut;sp:2000;sR:10;"
+								data-frame_1_sfx="se:blocktoright;"
+								data-frame_999="o:0;st:w;sR:6990;"
+								style="z-index:5;font-family:'Roboto';text-transform:uppercase;"
+							>to knowledge with us
+							</h1><!--
+
+							--><h1
+								id="slider-1-slide-1-layer-2"
+								class="rs-layer"
+								data-type="text"
+								data-color="#eab830"
+								data-xy="x:c;y:m;yo:-57px,-57px,-171px,-180px;"
+								data-text="s:50,50,40,30;l:75,75,55,55;fw:700;a:inherit;"
+								data-rsp_o="off"
+								data-rsp_bd="off"
+								data-frame_0="o:1;"
+								data-frame_0_sfx="se:blocktoright;"
+								data-frame_1="e:power4.inOut;sp:2000;sR:10;"
+								data-frame_1_sfx="se:blocktoright;"
+								data-frame_999="o:0;st:w;sR:6990;"
+								style="z-index:6;font-family:'Roboto';text-transform:uppercase;"
+							>Take the first step
+							</h1><!--
+
+							--><a
+								id="slider-1-slide-1-layer-3"
+								class="rs-layer rev-btn"
+                                                                href="{% url 'authorization:signup' %}" target="_self"
+								data-type="button"
+								data-color="rgba(255,255,255,1)"
+								data-xy="x:c;y:m;yo:97px,97px,-6px,18px;"
+								data-text="s:17;l:30;fw:700;a:inherit;"
+								data-rsp_o="off"
+								data-rsp_bd="off"
+								data-padding="t:12;r:35;b:12;l:35;"
+								data-border="bos:solid;boc:#ffffff;bow:2,2,2,2;bor:30px,30px,30px,30px;"
+								data-frame_0="y:50px;"
+								data-frame_1="st:2000;sp:760;sR:2000;"
+								data-frame_999="o:0;st:w;sR:6240;"
+								data-frame_hover="bgc:#307ad5;boc:#307ad5;bor:30px,30px,30px,30px;bos:solid;bow:2,2,2,2;oX:50;oY:50;e:power0.in;"
+								style="z-index:7;font-family:'Montserrat';cursor:pointer;outline:none;box-shadow:none;box-sizing:border-box;-moz-box-sizing:border-box;-webkit-box-sizing:border-box;"
+							>Ready to get Started?
+							</a><!--
+-->						</rs-slide>
+						<rs-slide style="position: absolute;" data-key="rs-3" data-title="Slide" data-in="o:0;" data-out="a:false;">
+                                                    <img loading="lazy" src="{% static 'dummy.png' %}" title="group-children-are-playing-with-robots-assembled-from-plastic-parts (1) (1)" width="1815" height="1212" class="rev-slidebg tp-rs-img rs-lazyload" data-lazyload="{% static 'group-children-are-playing-with-robots-assembled-from-plastic-parts-1-1-1.jpg' %}" data-no-retina>
+<!--
+							--><h1
+								id="slider-1-slide-3-layer-1"
+								class="rs-layer"
+								data-type="text"
+								data-xy="x:c;xo:1px,1px,0,0;y:m;yo:6px,6px,-100px,-91px;"
+								data-text="w:nowrap,nowrap,nowrap,normal;s:70,70,50,35;l:75,75,55,55;fw:700;a:inherit,inherit,inherit,center;"
+								data-dim="w:auto,auto,auto,100%;h:auto,auto,auto,112px;"
+								data-basealign="slide"
+								data-rsp_o="off"
+								data-rsp_bd="off"
+								data-frame_0="o:1;"
+								data-frame_0_sfx="se:blocktoright;"
+								data-frame_1="e:power4.inOut;sp:2000;sR:10;"
+								data-frame_1_sfx="se:blocktoright;"
+								data-frame_999="o:0;st:w;sR:6990;"
+								style="z-index:5;font-family:'Roboto';text-transform:uppercase;"
+							>of their journey to success
+							</h1><!--
+
+							--><h1
+								id="slider-1-slide-3-layer-2"
+								class="rs-layer"
+								data-type="text"
+								data-color="#eab830"
+								data-xy="x:c;y:m;yo:-57px,-57px,-171px,-180px;"
+								data-text="s:50,50,40,30;l:75,75,55,55;fw:700;a:inherit;"
+								data-rsp_o="off"
+								data-rsp_bd="off"
+								data-frame_0="o:1;"
+								data-frame_0_sfx="se:blocktoright;"
+								data-frame_1="e:power4.inOut;sp:2000;sR:10;"
+								data-frame_1_sfx="se:blocktoright;"
+								data-frame_999="o:0;st:w;sR:6990;"
+								style="z-index:6;font-family:'Roboto';text-transform:uppercase;"
+							>Take the first step
+							</h1><!--
+
+							--><a
+								id="slider-1-slide-3-layer-3"
+								class="rs-layer rev-btn"
+                                                                href="{% url 'authorization:signup' %}" target="_self"
+								data-type="button"
+								data-color="rgba(255,255,255,1)"
+								data-xy="x:c;y:m;yo:97px,97px,-6px,18px;"
+								data-text="s:17;l:30;fw:700;a:inherit;"
+								data-rsp_o="off"
+								data-rsp_bd="off"
+								data-padding="t:12;r:35;b:12;l:35;"
+								data-border="bos:solid;boc:#ffffff;bow:2,2,2,2;bor:30px,30px,30px,30px;"
+								data-frame_0="y:50px;"
+								data-frame_1="st:2000;sp:760;sR:2000;"
+								data-frame_999="o:0;st:w;sR:6240;"
+								data-frame_hover="bgc:#307ad5;boc:#307ad5;bor:30px,30px,30px,30px;bos:solid;bow:2,2,2,2;oX:50;oY:50;e:power0.in;"
+								style="z-index:7;font-family:'Montserrat';cursor:pointer;outline:none;box-shadow:none;box-sizing:border-box;-moz-box-sizing:border-box;-webkit-box-sizing:border-box;"
+							>Ready to get Started?
+							</a><!--
+-->						</rs-slide>
+						<rs-slide style="position: absolute;" data-key="rs-4" data-title="Slide" data-in="o:0;" data-out="a:false;">
+                                                    <img loading="lazy" src="{% static 'dummy.png' %}" title="side-view-portrait-female-teacher-helping-boy-building-robot-during-engineering-class-school (1)" width="1920" height="1280" class="rev-slidebg tp-rs-img rs-lazyload" data-lazyload="{% static 'side-view-portrait-female-teacher-helping-boy-building-robot-during-engineering-class-school-1-1.jpg' %}" data-no-retina>
+<!--
+							--><h1
+								id="slider-1-slide-4-layer-1"
+								class="rs-layer"
+								data-type="text"
+								data-xy="x:c;xo:1px,1px,0,0;y:m;yo:6px,6px,-100px,-91px;"
+								data-text="w:nowrap,nowrap,nowrap,normal;s:70,70,50,35;l:75,75,55,55;fw:700;a:inherit,inherit,inherit,center;"
+								data-dim="w:auto,auto,auto,100%;h:auto,auto,auto,112px;"
+								data-basealign="slide"
+								data-rsp_o="off"
+								data-rsp_bd="off"
+								data-frame_0="o:1;"
+								data-frame_0_sfx="se:blocktoright;"
+								data-frame_1="e:power4.inOut;sp:2000;sR:10;"
+								data-frame_1_sfx="se:blocktoright;"
+								data-frame_999="o:0;st:w;sR:6990;"
+								style="z-index:5;font-family:'Roboto';text-transform:uppercase;"
+							>to unleash their creativity
+							</h1><!--
+
+							--><h1
+								id="slider-1-slide-4-layer-2"
+								class="rs-layer"
+								data-type="text"
+								data-color="#eab830"
+								data-xy="x:c;y:m;yo:-57px,-57px,-171px,-180px;"
+								data-text="s:50,50,40,30;l:75,75,55,55;fw:700;a:inherit;"
+								data-rsp_o="off"
+								data-rsp_bd="off"
+								data-frame_0="o:1;"
+								data-frame_0_sfx="se:blocktoright;"
+								data-frame_1="e:power4.inOut;sp:2000;sR:10;"
+								data-frame_1_sfx="se:blocktoright;"
+								data-frame_999="o:0;st:w;sR:6990;"
+								style="z-index:6;font-family:'Roboto';text-transform:uppercase;"
+							>Take the first step
+							</h1><!--
+
+							--><a
+								id="slider-1-slide-4-layer-3"
+								class="rs-layer rev-btn"
+                                                                href="{% url 'authorization:signup' %}" target="_self"
+								data-type="button"
+								data-color="#ffffff||#ffffff||rgba(255,255,255,1)||rgba(255,255,255,1)"
+								data-xy="x:c;y:m;yo:97px,97px,-6px,18px;"
+								data-text="s:17;l:30;fw:700;a:inherit;"
+								data-rsp_o="off"
+								data-rsp_bd="off"
+								data-padding="t:12;r:35;b:12;l:35;"
+								data-border="bos:solid;boc:#ffffff;bow:2,2,2,2;bor:30px,30px,30px,30px;"
+								data-frame_0="y:50px;"
+								data-frame_1="st:2000;sp:760;sR:2000;"
+								data-frame_999="o:0;st:w;sR:6240;"
+								data-frame_hover="c:#fff;bgc:#307ad5;boc:#307ad5;bor:30px,30px,30px,30px;bos:solid;bow:2,2,2,2;oX:50;oY:50;e:power0.in;"
+								style="z-index:7;font-family:'Montserrat';cursor:pointer;outline:none;box-shadow:none;box-sizing:border-box;-moz-box-sizing:border-box;-webkit-box-sizing:border-box;"
+							>Ready to get Started?
+							</a><!--
+-->						</rs-slide>
+					</rs-slides>
+				</rs-module>
+				<script type="text/javascript">
+					setREVStartSize({c: 'rev_slider_1_1',rl:[1240,1024,778,480],el:[794,794,700,700],gw:[1240,1024,778,480],gh:[794,794,700,700],type:'standard',justify:'',layout:'fullwidth',mh:"0"});if (window.RS_MODULES!==undefined && window.RS_MODULES.modules!==undefined && window.RS_MODULES.modules["revslider11"]!==undefined) {window.RS_MODULES.modules["revslider11"].once = false;window.revapi1 = undefined;window.RS_MODULES.checkMinimal()}
+				</script>
+			</rs-module-wrap>
+			<!-- END REVOLUTION SLIDER -->
+</div>
+
+				</div>
+				</div>
+					</div>
+		</div>
+							</div>
+		</section>
+				<section class="elementor-section elementor-top-section elementor-element elementor-element-6021a72 elementor-section-stretched elementor-section-boxed elementor-section-height-default elementor-section-height-default" data-id="6021a72" data-element_type="section" data-settings="{&quot;background_background&quot;:&quot;classic&quot;,&quot;stretch_section&quot;:&quot;section-stretched&quot;}">
+						<div class="elementor-container elementor-column-gap-default">
+					<div class="elementor-column elementor-col-100 elementor-top-column elementor-element elementor-element-6021eb4" data-id="6021eb4" data-element_type="column">
+			<div class="elementor-widget-wrap elementor-element-populated">
+								<div class="elementor-element elementor-element-60221e6 elementor-widget elementor-widget-stm_lms_courses_categories" data-id="60221e6" data-element_type="widget" data-widget_type="stm_lms_courses_categories.default">
+				<div class="elementor-widget-container">
+			        <div class="stm_lms_courses_categories style_4">
+
+			                <div class="stm_lms_courses_category" style="background-color: #eab830; margin-left: 20px;">
+
+                    <a href=""
+                       title="Analysis of Algorithms"
+                       class="no_deco">
+                        <i class="lnricons-chart-bars"></i>
+                        <h4>Analysis of Algorithms</h4>
+                    </a>
+                </div>
+
+			                <div class="stm_lms_courses_category" style="background-color: #307ad5; margin-left: 20px;">
+
+                    <a href=""
+                       title="Economics &amp; Finance"
+                       class="no_deco">
+                        <i class="lnricons-calculator"></i>
+                        <h4>Economics &amp; Finance</h4>
+                    </a>
+                </div>
+
+			                <div class="stm_lms_courses_category" style="background-color: #1ec1d9; margin-left: 20px;">
+
+                    <a href=""
+                       title="Environmental Sciences"
+                       class="no_deco">
+                        <i class="lnricons-pine-tree"></i>
+                        <h4>Environmental Sciences</h4>
+                    </a>
+                </div>
+
+			                <div class="stm_lms_courses_category" style="background-color: #10c45c; margin-left: 20px;">
+
+                    <a href=""
+                       title="Graphic &amp; Web-design"
+                       class="no_deco">
+                        <i class="lnricons-select2"></i>
+                        <h4>Graphic &amp; Web-design</h4>
+                    </a>
+                </div>
+
+			                <div class="stm_lms_courses_category" style="background-color: #d94da6; margin-left: 20px;">
+
+                    <a href=""
+                       title="Software Training"
+                       class="no_deco">
+                        <i class="lnricons-mouse"></i>
+                        <h4>Software Training</h4>
+                    </a>
+                </div>
+
+			        </div>
+			</div>
+				</div>
+					</div>
+		</div>
+							</div>
+		</section>
+				<section class="elementor-section elementor-top-section elementor-element elementor-element-6022281 overflowed_content elementor-section-stretched elementor-section-boxed elementor-section-height-default elementor-section-height-default" data-id="6022281" data-element_type="section" data-settings="{&quot;stretch_section&quot;:&quot;section-stretched&quot;}">
+						<div class="elementor-container elementor-column-gap-default">
+					<div class="elementor-column elementor-col-100 elementor-top-column elementor-element elementor-element-6022644" data-id="6022644" data-element_type="column">
+			<div class="elementor-widget-wrap elementor-element-populated">
+								<div class="elementor-element elementor-element-6022959 elementor-widget elementor-widget-stm_lms_courses_grid" data-id="6022959" data-element_type="widget" data-widget_type="stm_lms_courses_grid.default">
+				<div class="elementor-widget-container">
+
+<div class="stm_lms_courses_grid stm_lms_courses">
+        <div class="stm_lms_courses_wrapper" style="padding-bottom: 200px !important;">
+            <div class="courses_filters">
+                <div class="courses_filters__title">
+                    <h1>Featured Courses</h1>
+                </div>
+            </div>
+            <div class="stm_lms_courses__archive_wrapper">
+                <div class="stm_lms_courses stm_lms_courses__archive">
+                <div class="stm_lms_courses__grid stm_lms_courses__grid_4 stm_lms_courses__grid_center archive_grid stm_lms_courses__grid_found_2"
+                data-pages="1">
+
+                {% for course in free_trial_courses %}
+                <div class="stm_lms_courses__single stm_lms_courses__single_animation no-sale style_1 " style="padding-top: 50px !important;">
+                <div class="stm_lms_courses__single__inner">
+                <div class="stm_lms_courses__single--image">
+                <a href="{% url 'course:free-trial-start' course.id %}"
+                class="heading_font"
+                data-preview="Start this course">
+                <div>
+                    {{ course.intro_video_iframe | safe }}
+                </div>
+                </a>
+                </div>
+                <div class="stm_lms_courses__single--inner">
+                <div class="stm_lms_courses__single--terms">
+                <div class="stm_lms_courses__single--term">
+                {% for category in course.category.all %}
+                    {{ category }}
+                {% endfor %}
+                </div>
+                </div>
+                <div class="stm_lms_courses__single--title">
+                <a href="{% url 'course:free-trial-start' course.id %}"><h5>{{ course.title }}</h5> </a>
+                </div>
+                <div class="stm_lms_courses__single--meta">
+                <div class="stm_lms_courses__single--price heading_font">
+                    <strong>{{ course.toolbox.name }} ToolBox</strong>
+                </div>
+                </div>
+                </div>
+                <div class="stm_lms_courses__single--info">
+                    <div class="stm_lms_courses__single--info_author">
+                <div class="stm_lms_courses__single--info_author__avatar">
+                <img alt="" src="http://0.gravatar.com/avatar/f94562563861857057c6a0a461c23805?s=215&amp;d=mm&amp;r=g" class="avatar avatar-215 photo" height="215" width="215" loading="lazy">            </div>
+                <div class="stm_lms_courses__single--info_author__login">
+                Author Name            </div>
+                </div>
+                <div class="stm_lms_courses__single--info_title">
+                <a href="{% url 'course:free-trial-start' course.id %}"><h5>{{ course.title }}</h5> </a>
+                </div>
+                {{ course.intro_video_iframe | safe }}
+                <div class="stm_lms_courses__single--info_excerpt">
+                With no prior experience, you will have the opportunity to walk through hands-on examples with Hadoop and Spark frameworks, two of the most common ...    </div>
+                <div class="stm_lms_courses__single--info_meta">
+                <div class="stm_lms_course__meta">
+                <i class="stmlms-cats"></i>
+                Lessons {{ course.lessons.count }}</div>
+                </div>
+          <div style="margin-left: auto; margin-right: auto;width:100%; text-align:center; padding-bottom:10px;">
+          <strong>{{ course.toolbox.name }} ToolBox</strong>
+          </div>
+                <div class="stm_lms_courses__single--info_meta rb-container">
+              {% if course.toolbox_status == course.TB_NO or not user.is_authenticated or not user.is_member %}
+              {% elif course.toolbox_status == course.TB_DELIVERY %}
+                  <ul class="rb">
+                    <li class="rb-item" >
+                      <div class="item-title">Placed</div>
+                    </li>
+                    <li class="rb-item" >
+                      <div class="item-title">Shipped</div>
+                    </li>
+
+                    <li class="rb-item" >
+
+                      <div class="item-title">Delivered</div>
+                    </li>
+                    <li class="rb-item" >
+                      <div class="item-title"></div>
+                    </li>
+                  </ul>
+              {% elif course.toolbox_status == course.TB_BOUGHT %}
+                  <ul class="rb">
+                    <li class="rb-item as-progress" >
+                      <div class="item-title">Placed</div>
+                    </li>
+                    <li class="rb-item as-progress" >
+                      <div class="item-title">Shipped</div>
+                    </li>
+                    <li class="rb-item as-progress" >
+                      <div class="item-title">Delivered</div>
+                    </li>
+                    <li class="rb-item as-progress" >
+                      <div class="item-title"></div>
+                    </li>
+                  </ul>
+              {% elif course.toolbox_status == course.TB_GET %}
+              <form  method="POST" action="{% url 'toolbox:place-order' %}" style="position: relative;display: inline-block;margin-bottom: 10px;margin-left: auto; margin-right: auto;text-align: center;overflow: hidden;">
+                  {% csrf_token %}
+                  <input type="hidden" value="{{ course.toolbox.id }}" name="tool_box_id">
+                    {% if min_age and max_age %}
+                        {% if course.start_age <= min_age or course.start_age <= max_age and course.end_age >= max_age %}
+                          <input value="Get ToolBox" class="for-checkbox-tools" type="submit" style="position: relative;display: inline-block;padding: 15px;width: 150px;font-size: 12px;line-height: 10px;letter-spacing: 1px;margin-bottom: 10px;margin-left: auto; margin-right: auto;text-align: center;border-radius: 4px;overflow: hidden;cursor: pointer;text-transform: uppercase;color: var(--white);border: 1px solid;">
+                        {% else %}
+                        {% endif %}
+                    {% else %}
+                    {% endif %}
+              </form>
+              {% endif %}
+                </div>
+                {% if min_age and max_age %}
+                    {% if course.start_age <= min_age or course.start_age <= max_age and course.end_age >= max_age %}
+                    <div class="stm_lms_courses__single--info_preview">
+                        <a href="{% url 'course:free-trial-start' course.id %}" title="{{ course.title }}" class="heading_font">Start this course        </a>
+                    </div>
+                    {% else %}
+                    {% endif %}
+                {% else %}
+                    <div class="stm_lms_courses__single--info_preview">
+                        <a href="{% url 'course:free-trial-start' course.id %}" title="{{ course.title }}" class="heading_font">Start this course        </a>
+                    </div>
+                {% endif %}
+                </div>
+                </div>
+                </div>
+                {% endfor %}
+
+
+
+
+                {% for course in courses %}
+                {% if min_age and max_age %}
+                    {% if course.start_age <= min_age or course.start_age <= max_age and course.end_age >= max_age %}
+                        <div class="stm_lms_courses__single stm_lms_courses__single_animation no-sale style_1 " style="padding-top: 50px !important;">
+                    {% else %}
+                    <div style="position: relative;">
+                        <h1 style="position: absolute;
+                        top: 30%;
+                        left: 4rem;
+                        color: white !important;
+                        transform: translate(0,46%);
+                        z-index: 3;">Locked
+                        </h1>
+                    </div>
+                    <div class="stm_lms_courses__single stm_lms_courses__single_animation no-sale style_1 " style="padding-top: 50px !important; filter:brightness(40%) ">
+                    {% endif %}
+                {% else %}
+                <div class="stm_lms_courses__single stm_lms_courses__single_animation no-sale style_1 " style="padding-top: 50px !important;">
+                {% endif %}
+                <div class="stm_lms_courses__single__inner">
+                <div class="stm_lms_courses__single--image">
+                <a href="{% url 'course:course' course.id %}"
+                class="heading_font"
+                data-preview="Preview this course">
+                <div>
+                    {{ course.intro_video_iframe | safe }}
+                </div>
+                </a>
+                </div>
+                <div class="stm_lms_courses__single--inner">
+                <div class="stm_lms_courses__single--terms">
+                <div class="stm_lms_courses__single--term">
+                {% for category in course.category.all %}
+                    {{ category }}
+                {% endfor %}
+                </div>
+                </div>
+                <div class="stm_lms_courses__single--title">
+                {% if min_age and max_age %}
+                    {% if course.start_age <= min_age or course.start_age <= max_age and course.end_age >= max_age %}
+                        <a href="{% url 'course:course' course.id %}"><h5>{{ course.title }}</h5> </a>
+                    {% else %}
+                        <h5>{{ course.title }}</h5>
+                    {% endif %}
+                {% else %}
+                        <a href="{% url 'course:course' course.id %}"><h5>{{ course.title }}</h5> </a>
+                {% endif %}
+                </div>
+                <div class="stm_lms_courses__single--meta">
+                <div class="stm_lms_courses__single--price heading_font">
+                    <strong>{{ course.toolbox.name }} ToolBox</strong>
+                </div>
+                </div>
+                </div>
+                <div class="stm_lms_courses__single--info">
+                    <div class="stm_lms_courses__single--info_author">
+                <div class="stm_lms_courses__single--info_author__avatar">
+                <img alt="" src="http://0.gravatar.com/avatar/f94562563861857057c6a0a461c23805?s=215&amp;d=mm&amp;r=g" class="avatar avatar-215 photo" height="215" width="215" loading="lazy">            </div>
+                <div class="stm_lms_courses__single--info_author__login">
+                Author Name            </div>
+                </div>
+                <div class="stm_lms_courses__single--info_title">
+                {% if min_age and max_age %}
+                    {% if course.start_age <= min_age or course.start_age <= max_age and course.end_age >= max_age %}
+                        <a href="{% url 'course:course' course.id %}"><h5>{{ course.title }}</h5> </a>
+                    {% else %}
+                        <h5>{{ course.title }}</h5>
+                    {% endif %}
+                {% else %}
+                        <a href="{% url 'course:course' course.id %}"><h5>{{ course.title }}</h5> </a>
+                {% endif %}
+                </div>
+                {{ course.intro_video_iframe | safe }}
+                <div class="stm_lms_courses__single--info_excerpt">
+                With no prior experience, you will have the opportunity to walk through hands-on examples with Hadoop and Spark frameworks, two of the most common ...    </div>
+                <div class="stm_lms_courses__single--info_meta">
+                <div class="stm_lms_course__meta">
+                <i class="stmlms-cats"></i>
+                Lessons {{ course.lessons.count }}</div>
+                </div>
+          <div style="margin-left: auto; margin-right: auto;width:100%; text-align:center; padding-bottom:10px;">
+          <strong>{{ course.toolbox.name }} ToolBox</strong>
+          </div>
+                <div class="stm_lms_courses__single--info_meta rb-container">
+              {% if course.toolbox_status == course.TB_NO or not user.is_authenticated or not user.is_member %}
+              {% elif course.toolbox_status == course.TB_DELIVERY %}
+                  <ul class="rb">
+                    <li class="rb-item" >
+                      <div class="item-title">Placed</div>
+                    </li>
+                    <li class="rb-item" >
+                      <div class="item-title">Shipped</div>
+                    </li>
+
+                    <li class="rb-item" >
+
+                      <div class="item-title">Delivered</div>
+                    </li>
+                    <li class="rb-item" >
+                      <div class="item-title"></div>
+                    </li>
+                  </ul>
+              {% elif course.toolbox_status == course.TB_BOUGHT %}
+                  <ul class="rb">
+                    <li class="rb-item as-progress" >
+                      <div class="item-title">Placed</div>
+                    </li>
+                    <li class="rb-item as-progress" >
+                      <div class="item-title">Shipped</div>
+                    </li>
+                    <li class="rb-item as-progress" >
+                      <div class="item-title">Delivered</div>
+                    </li>
+                    <li class="rb-item as-progress" >
+                      <div class="item-title"></div>
+                    </li>
+                  </ul>
+              {% elif course.toolbox_status == course.TB_GET %}
+              <form  method="POST" action="{% url 'toolbox:place-order' %}" style="position: relative;display: inline-block;margin-bottom: 10px;margin-left: auto; margin-right: auto;text-align: center;overflow: hidden;">
+                  {% csrf_token %}
+                  <input type="hidden" value="{{ course.toolbox.id }}" name="tool_box_id">
+                    {% if min_age and max_age %}
+                        {% if course.start_age <= min_age or course.start_age <= max_age and course.end_age >= max_age %}
+                          <input value="Get ToolBox" class="for-checkbox-tools" type="submit" style="position: relative;display: inline-block;padding: 15px;width: 150px;font-size: 12px;line-height: 10px;letter-spacing: 1px;margin-bottom: 10px;margin-left: auto; margin-right: auto;text-align: center;border-radius: 4px;overflow: hidden;cursor: pointer;text-transform: uppercase;color: var(--white);border: 1px solid;">
+                        {% else %}
+                        {% endif %}
+                    {% else %}
+                    {% endif %}
+              </form>
+              {% endif %}
+                </div>
+                {% if min_age and max_age %}
+                    {% if course.start_age <= min_age or course.start_age <= max_age and course.end_age >= max_age %}
+                    <div class="stm_lms_courses__single--info_preview">
+                        <a href="{% url 'course:course' course.id %}" title="{{ course.title }}" class="heading_font">Preview this course        </a>
+                    </div>
+                    {% else %}
+                    {% endif %}
+                {% else %}
+                    <div class="stm_lms_courses__single--info_preview">
+                        <a href="{% url 'course:course' course.id %}" title="{{ course.title }}" class="heading_font">Preview this course        </a>
+                    </div>
+                {% endif %}
+                </div>
+                </div>
+                </div>
+                {% endfor %}
+
+                </div>
+
+
+
+
+
+
+    <div class="hidden">
+
+<div class="text-center">
+    <a href="#"
+       class="btn btn-default stm_lms_load_more_courses"
+       data-offset="1"
+       data-template="courses/grid"
+       data-url=""
+       data-args='{"per_row":"4","include_link":true,"posts_per_page":"12"}'>
+        <span>Load more</span>
+    </a>
+</div>    </div>
+
+</div>
+		</div>
+				</div>
+					</div>
+		</div>
+							</div>
+		</section>
+				<section class="elementor-section elementor-top-section elementor-element elementor-element-60229e2 stm_fixed_background elementor-section-stretched elementor-section-boxed elementor-section-height-default elementor-section-height-default" data-id="60229e2" data-element_type="section" data-settings="{&quot;background_background&quot;:&quot;classic&quot;,&quot;stretch_section&quot;:&quot;section-stretched&quot;}">
+							<div class="elementor-background-overlay"></div>
+							<div class="elementor-container elementor-column-gap-default">
+					<div class="elementor-column elementor-col-100 elementor-top-column elementor-element elementor-element-602395a" data-id="602395a" data-element_type="column">
+			<div class="elementor-widget-wrap elementor-element-populated">
+								<div class="elementor-element elementor-element-6023d77 elementor-widget elementor-widget-stm_empty_space" data-id="6023d77" data-element_type="widget" data-widget_type="stm_empty_space.default">
+				<div class="elementor-widget-container">
+
+<div class="masterstudy_elementor_empty_space module__030c32d94c1824088745e22a9020f17c"
+         style="height: 42px" >
+    <span class="vc_empty_space_inner"></span>
+</div>
+		</div>
+				</div>
+				<div class="elementor-element elementor-element-6023f9d elementor-widget elementor-widget-vc_custom_heading" data-id="6023f9d" data-element_type="widget" data-widget_type="vc_custom_heading.default">
+				<div class="elementor-widget-container">
+			<div class=" vc_custom_heading  masterstudy_heading_font  text_align_center" ><h2 style="color: #ffffff;text-align: center;font-weight:700" class="masterstudy-custom-title"></h2></div>		</div>
+				</div>
+				<section class="elementor-section elementor-top-section elementor-element elementor-element-60244b3 elementor-section-boxed elementor-section-height-default elementor-section-height-default" data-id="60244b3" data-element_type="section">
+						<div class="elementor-container elementor-column-gap-default">
+					<div class="elementor-column elementor-col-100 elementor-top-column elementor-element elementor-element-602488d" data-id="602488d" data-element_type="column">
+			<div class="elementor-widget-wrap elementor-element-populated">
+								<div class="elementor-element elementor-element-6024b9f elementor-widget elementor-widget-text-editor" data-id="6024b9f" data-element_type="widget" data-widget_type="text-editor.default">
+				<div class="elementor-widget-container">
+													</div>
+				</div>
+					</div>
+		</div>
+							</div>
+		</section>
+				<section class="elementor-section elementor-top-section elementor-element elementor-element-6024ec8 elementor-section-boxed elementor-section-height-default elementor-section-height-default" data-id="6024ec8" data-element_type="section" data-settings="{&quot;background_background&quot;:&quot;classic&quot;}">
+						<div class="elementor-container elementor-column-gap-default">
+					<div class="elementor-column elementor-col-25 elementor-top-column elementor-element elementor-element-60252de" data-id="60252de" data-element_type="column">
+			<div class="elementor-widget-wrap">
+									</div>
+		</div>
+				<div class="elementor-column elementor-col-25 elementor-top-column elementor-element elementor-element-602569f" data-id="602569f" data-element_type="column">
+			<div class="elementor-widget-wrap">
+									</div>
+		</div>
+				<div class="elementor-column elementor-col-25 elementor-top-column elementor-element elementor-element-6025a42" data-id="6025a42" data-element_type="column">
+			<div class="elementor-widget-wrap">
+									</div>
+		</div>
+				<div class="elementor-column elementor-col-25 elementor-top-column elementor-element elementor-element-6025dde" data-id="6025dde" data-element_type="column">
+			<div class="elementor-widget-wrap">
+									</div>
+		</div>
+							</div>
+		</section>
+				<div class="elementor-element elementor-element-602617c elementor-widget elementor-widget-stm_empty_space" data-id="602617c" data-element_type="widget" data-widget_type="stm_empty_space.default">
+				<div class="elementor-widget-container">
+
+<div class="masterstudy_elementor_empty_space module__a912955f6471b497abce1d56d372f330"
+         style="height: 48px" >
+    <span class="vc_empty_space_inner"></span>
+</div>
+		</div>
+				</div>
+					</div>
+		</div>
+							</div>
+		</section>
+				<section class="elementor-section elementor-top-section elementor-element elementor-element-60262da overflowed_content elementor-section-stretched elementor-section-boxed elementor-section-height-default elementor-section-height-default" data-id="60262da" data-element_type="section" data-settings="{&quot;background_background&quot;:&quot;classic&quot;,&quot;stretch_section&quot;:&quot;section-stretched&quot;}">
+						<div class="elementor-container elementor-column-gap-default">
+					<div class="elementor-column elementor-col-100 elementor-top-column elementor-element elementor-element-6026b1f" data-id="6026b1f" data-element_type="column">
+			<div class="elementor-widget-wrap">
+									</div>
+		</div>
+							</div>
+		</section>
+				<section class="elementor-section elementor-top-section elementor-element elementor-element-6027499 sbc elementor-section-stretched elementor-section-boxed elementor-section-height-default elementor-section-height-default" data-id="6027499" data-element_type="section" data-settings="{&quot;background_background&quot;:&quot;classic&quot;,&quot;stretch_section&quot;:&quot;section-stretched&quot;}">
+						<div class="elementor-container elementor-column-gap-default">
+					<div class="elementor-column elementor-col-100 elementor-top-column elementor-element elementor-element-60278d5" data-id="60278d5" data-element_type="column">
+			<div class="elementor-widget-wrap elementor-element-populated">
+								<div class="elementor-element elementor-element-6027c2d elementor-widget elementor-widget-stm_empty_space" data-id="6027c2d" data-element_type="widget" data-widget_type="stm_empty_space.default">
+				<div class="elementor-widget-container">
+
+<div class="masterstudy_elementor_empty_space module__6c719a58015d0cf987f61dceb4aaf850"
+         style="height: 27px" >
+    <span class="vc_empty_space_inner"></span>
+</div>
+		</div>
+				</div>
+				<div class="elementor-element elementor-element-6027d58 elementor-widget elementor-widget-vc_custom_heading" data-id="6027d58" data-element_type="widget" data-widget_type="vc_custom_heading.default">
+				<div class="elementor-widget-container">
+			<div class=" vc_custom_heading  masterstudy_heading_font  text_align_left" ><h4 style="font-size: 19px;color: #ffffff;text-align: left;line-height: 22px;font-weight:400" class="masterstudy-custom-title">Join ARMSTRONG Community
+</h4></div>		</div>
+				</div>
+				<div class="elementor-element elementor-element-6027f61 elementor-widget elementor-widget-vc_custom_heading" data-id="6027f61" data-element_type="widget" data-widget_type="vc_custom_heading.default">
+				<div class="elementor-widget-container">
+			<div class=" vc_custom_heading fwl masterstudy_heading_font  text_align_left" ><h5 style="font-size: 15px;color: #ffffff;text-align: left;line-height: 22px;font-weight:700" class="masterstudy-custom-title">Get the latest news, new programs notifications and exclusive promotions conveniently in your
+</h5></div>		</div>
+				</div>
+				<div class="elementor-element elementor-element-602813f elementor-widget elementor-widget-stm_empty_space" data-id="602813f" data-element_type="widget" data-widget_type="stm_empty_space.default">
+				<div class="elementor-widget-container">
+			    <style type="text/css">
+        @media (max-width: 1024px) {
+            .module__f7c370850492bd72f82cacf9a2a367cb {
+                height : 0px !important;
+            }
+        }
+    </style>
+
+<div class="masterstudy_elementor_empty_space module__f7c370850492bd72f82cacf9a2a367cb"
+         style="height: 50px" >
+    <span class="vc_empty_space_inner"></span>
+</div>
+		</div>
+				</div>
+					</div>
+		</div>
+				<div class="elementor-column elementor-col-100 elementor-top-column elementor-element elementor-element-6028279" data-id="6028279" data-element_type="column">
+			<div class="elementor-widget-wrap elementor-element-populated">
+								<div class="elementor-element elementor-element-60285be elementor-widget elementor-widget-stm_empty_space" data-id="60285be" data-element_type="widget" data-widget_type="stm_empty_space.default">
+				<div class="elementor-widget-container">
+
+<div class="masterstudy_elementor_empty_space module__a46bc2567beacdd9838b8cca4e4630e7"
+         style="height: 18px" >
+    <span class="vc_empty_space_inner"></span>
+</div>
+		</div>
+				</div>
+				<div class="elementor-element elementor-element-60286e2 elementor-widget elementor-widget-stm_mailchimp" data-id="60286e2" data-element_type="widget" data-widget_type="stm_mailchimp.default">
+				<div class="elementor-widget-container">
+
+	<div class="stm_subscribe  masterstudy_elementor_mailchimp_ module__233652cad69be5e7c66e29c707da77be">
+		<div class="widget widget_mailchimp"><h5 class="stm_subscribe_title" style="color: #ffffff;">Your e-mail address</h5><form action="/" class="stm_subscribe_1636731342"><div class="stm_mailchimp_unit"><div class="form-group"><input type="email" name="email" class="form-control stm_subscribe_email" placeholder="Enter your E-mail" required/></div><button class="button"><span class="h5">Subscribe</span></button><div class="stm_subscribe_preloader">Please wait...</div></div></form>
+			<script type="text/javascript">
+				jQuery(document).ready( function($){
+					$(".stm_subscribe_1636731342").on('submit', function (e) {
+						e.preventDefault;
+					    var $this = $(this);
+						$(".stm_subscribe_preloader").addClass("loading");
+				        $.ajax({
+				            type: 'POST',
+				            data: 'action=stm_subscribe&email=' + $($this).find(".stm_subscribe_email").val(),
+				            dataType: 'json',
+				            url: ajaxurl,
+				            success: function (json) {
+				                if (json['success']) {
+				                    $($this).replaceWith('<div class="success_message">' + json['success'] + '</div>');
+				                }
+				                if (json['error']) {
+				                    alert(json['error']);
+				                }
+				                $(".stm_subscribe_preloader").removeClass("loading");
+				            }
+				        });
+
+				        return false;
+				    });
+				})
+			</script>
+		</div>	</div> <!-- stm_subscribe -->
+		</div>
+				</div>
+				<div class="elementor-element elementor-element-602875a elementor-widget elementor-widget-stm_empty_space" data-id="602875a" data-element_type="widget" data-widget_type="stm_empty_space.default">
+				<div class="elementor-widget-container">
+
+<div class="masterstudy_elementor_empty_space module__f5ec7fc4776ddaa2bfa850d725d4c78a"
+         style="height: 50px" >
+    <span class="vc_empty_space_inner"></span>
+</div>
+		</div>
+				</div>
+					</div>
+		</div>
+							</div>
+		</section>
+				<section class="elementor-section elementor-top-section elementor-element elementor-element-6028876 elementor-section-stretched elementor-section-boxed elementor-section-height-default elementor-section-height-default" data-id="6028876" data-element_type="section" data-settings="{&quot;background_background&quot;:&quot;classic&quot;,&quot;stretch_section&quot;:&quot;section-stretched&quot;}">
+						<div class="elementor-container elementor-column-gap-default">
+					<div class="elementor-column elementor-col-100 elementor-top-column elementor-element elementor-element-6028c62" data-id="6028c62" data-element_type="column">
+			<div class="elementor-widget-wrap elementor-element-populated">
+								<div class="elementor-element elementor-element-60290fb elementor-widget elementor-widget-stm_empty_space" data-id="60290fb" data-element_type="widget" data-widget_type="stm_empty_space.default">
+				<div class="elementor-widget-container">
+			    <style type="text/css">
+        @media (max-width: 1024px) {
+            .module__0cfc2b8ae4f50c700189def338ec603a {
+                height : 70px !important;
+            }
+        }
+    </style>
+    <style type="text/css">
+        @media (max-width: 768px) {
+            .module__0cfc2b8ae4f50c700189def338ec603a {
+                height : 50px !important;
+            }
+        }
+    </style>
+
+<div class="masterstudy_elementor_empty_space module__0cfc2b8ae4f50c700189def338ec603a"
+         style="height: 107px" >
+    <span class="vc_empty_space_inner"></span>
+</div>
+		</div>
+				</div>
+				<div class="elementor-element elementor-element-6029276 elementor-widget elementor-widget-vc_custom_heading" data-id="6029276" data-element_type="widget" data-widget_type="vc_custom_heading.default">
+				<div class="elementor-widget-container">
+			<div class=" vc_custom_heading  masterstudy_heading_font  text_align_center" ><h2 style="text-align: center;font-weight:700" class="masterstudy-custom-title">ARMSTRONG  BLOG
+</h2></div>		</div>
+				</div>
+				<section class="elementor-section elementor-top-section elementor-element elementor-element-60294e3 elementor-section-boxed elementor-section-height-default elementor-section-height-default" data-id="60294e3" data-element_type="section" data-settings="{&quot;background_background&quot;:&quot;classic&quot;}">
+						<div class="elementor-container elementor-column-gap-default">
+					<div class="elementor-column elementor-col-100 elementor-top-column elementor-element elementor-element-60299fb" data-id="60299fb" data-element_type="column">
+			<div class="elementor-widget-wrap elementor-element-populated">
+								<div class="elementor-element elementor-element-6029dbd elementor-widget elementor-widget-stm_color_separator" data-id="6029dbd" data-element_type="widget" data-widget_type="stm_color_separator.default">
+				<div class="elementor-widget-container">
+
+<div class="stm_colored_separator masterstudy_elementor_color_separator_ module__dfb06648b70c728958e15267f48d96bc">
+	<div class="triangled_colored_separator">
+		<div class="triangle"></div>
+	</div>
+</div>
+		</div>
+				</div>
+					</div>
+		</div>
+							</div>
+		</section>
+				<section class="elementor-section elementor-top-section elementor-element elementor-element-6029f13 elementor-section-boxed elementor-section-height-default elementor-section-height-default" data-id="6029f13" data-element_type="section">
+						<div class="elementor-container elementor-column-gap-default">
+					<div class="elementor-column elementor-col-100 elementor-top-column elementor-element elementor-element-602a3cb" data-id="602a3cb" data-element_type="column">
+			<div class="elementor-widget-wrap elementor-element-populated">
+								<div class="elementor-element elementor-element-602a726 elementor-widget elementor-widget-stm_post_list" data-id="602a726" data-element_type="widget" data-widget_type="stm_post_list.default">
+				<div class="elementor-widget-container">
+
+	<div class="post_list_main_section_wrapper post_list_3755">
+				<div class="row">
+							<div class="col-md-4 col-sm-4 col-xs-12">
+					<div class="post_list_content_unit">
+												<div class="row">
+															<div class="col-md-3 col-sm-4 col-xs-12">
+									<div class="post_list_meta_unit">
+										<div class="date-d">03</div>
+										<div class="date-m">Nov</div>
+																																												<div class="post_list_comment_num">
+													<span>1</span><i class="fa-icon-stm_icon_comment_o"></i>
+												</div>
+																																								</div>
+								</div>
+														<div class="col-md-9 col-sm-8 col-xs-12 ">
+								<div class="post_list_inner_content_unit post_list_inner_content_unit_left">
+									<a href="" class="post_list_item_title h3">Hello world!</a>
+									<div class="post_list_item_excerpt"><p>Welcome to WordPress. This is your first post. Edit or delete it, then start writing!</p>
+</div>
+									<div class="short_separator"></div>
+
+																			<!-- Post cats -->
+																					<div class="post_list_cats">
+												<span class="post_list_cats_label">Posted in:</span>
+																																						<a href="">Uncategorized</a><span class="post_list_divider">,</span>
+																							</div>
+
+									<!-- Post tags -->
+																																			</div> <!-- post_list_inner_content_unit -->
+							</div> <!-- inner col -->
+						</div> <!-- row -->
+					</div> <!-- post_list_content_unit -->
+				</div> <!-- col -->
+											<div class="col-md-4 col-sm-4 col-xs-12">
+					<div class="post_list_content_unit">
+													<div class="post_list_featured_image">
+								<a href="" title="View post details">
+                                                                    <div class='stm_lms_lazy_image'><img width="370" height="193" data-src="{% static 'photo-1517520287167-4bbf64a00d66-370x193.jpeg' %}" class="lazyload img-responsive wp-post-image" alt="" loading="lazy" /></div>								</a>
+							</div>
+												<div class="row">
+															<div class="col-md-3 col-sm-4 col-xs-12">
+									<div class="post_list_meta_unit">
+										<div class="date-d">09</div>
+										<div class="date-m">Aug</div>
+																																																													</div>
+								</div>
+														<div class="col-md-9 col-sm-8 col-xs-12 ">
+								<div class="post_list_inner_content_unit post_list_inner_content_unit_left">
+									<a href="" class="post_list_item_title h3">Our main target is to “Developing Yourself as a Leader”</a>
+									<div class="post_list_item_excerpt"><p>The upcoming budget for the Chicago Public Schools will rely on $500 million in yet-to-be-enacted pension savings by Illinois, school officials said on Monday.</p>
+</div>
+									<div class="short_separator"></div>
+
+																			<!-- Post cats -->
+																					<div class="post_list_cats">
+												<span class="post_list_cats_label">Posted in:</span>
+																																						<a href="">Adverisement</a><span class="post_list_divider">,</span>
+																							</div>
+
+									<!-- Post tags -->
+																													<div class="post_list_item_tags">
+												<span class="post_list_tags_label">Tags:</span>
+																									<a href="">developing</a><span class="post_list_divider">,</span>
+																									<a href="">leader</a><span class="post_list_divider">,</span>
+																									<a href="">target</a><span class="post_list_divider">,</span>
+																							</div>
+																											</div> <!-- post_list_inner_content_unit -->
+							</div> <!-- inner col -->
+						</div> <!-- row -->
+					</div> <!-- post_list_content_unit -->
+				</div> <!-- col -->
+											<div class="col-md-4 col-sm-4 col-xs-12">
+					<div class="post_list_content_unit">
+													<div class="post_list_featured_image">
+								<a href="" title="View post details">
+                                                                    <div class='stm_lms_lazy_image'><img width="370" height="193" data-src="{% static 'photo-1512790182412-b19e6d62bc39-370x193.jpeg' %}" class="lazyload img-responsive wp-post-image" alt="" loading="lazy" /></div>								</a>
+							</div>
+												<div class="row">
+															<div class="col-md-3 col-sm-4 col-xs-12">
+									<div class="post_list_meta_unit">
+										<div class="date-d">27</div>
+										<div class="date-m">May</div>
+																																																													</div>
+								</div>
+														<div class="col-md-9 col-sm-8 col-xs-12 ">
+								<div class="post_list_inner_content_unit post_list_inner_content_unit_left">
+									<a href="" class="post_list_item_title h3">Body Cameras on Public-School Educators</a>
+									<div class="post_list_item_excerpt"><p>Some of can&#8217;t rely on stable worlds economic, so learn, learn and learn everything new, this will help you anytime, dont be upset, believe yourself even in dark times!</p>
+</div>
+									<div class="short_separator"></div>
+
+																			<!-- Post cats -->
+																					<div class="post_list_cats">
+												<span class="post_list_cats_label">Posted in:</span>
+																																						<a href="">Technology</a><span class="post_list_divider">,</span>
+																							</div>
+
+									<!-- Post tags -->
+																													<div class="post_list_item_tags">
+												<span class="post_list_tags_label">Tags:</span>
+																									<a href="">camera</a><span class="post_list_divider">,</span>
+																									<a href="">public</a><span class="post_list_divider">,</span>
+																									<a href="">School</a><span class="post_list_divider">,</span>
+																							</div>
+																											</div> <!-- post_list_inner_content_unit -->
+							</div> <!-- inner col -->
+						</div> <!-- row -->
+					</div> <!-- post_list_content_unit -->
+				</div> <!-- col -->
+									</div> <!-- close row to prevent blocks jumping -->
+					<div class="row">
+									</div> <!-- row -->
+	</div> <!-- post_list_main_section_wrapper -->
+			</div>
+				</div>
+				<div class="elementor-element elementor-element-6026e94 elementor-widget elementor-widget-stm_lms_featured_teacher" data-id="6026e94" data-element_type="widget" data-widget_type="stm_lms_featured_teacher.default">
+				<div class="elementor-widget-container">
+
+    <div class="stm_lms_featured_teacher  stm_lms_featured_teacher_image_1"
+         style="background-image: url('{% static 'teacher2.png' %}">
+
+        <div class="stm_lms_featured_teacher_content">
+
+            <div class="stm_lms_featured_teacher_content__text">
+
+                <a href=""
+                   class="btn btn-default">
+                    Teacher of month                </a>
+
+                <h2>ashraf</h2>
+
+                                    <div class="stm_lms_featured_teacher_content__position">
+                        <h4>THE TOP ACHIEVER IN JAN 2021</h4>
+                    </div>
+
+                                    <div class="stm_lms_featured_teacher_content__bio">
+                        ASHRAF AHMED FROM KAUMEYA BRITISH SCHOOL YEAR 4 IS ARMSTRONG TOP ACHIEVER IN JAN 2021. HE HAS FINISHED AUTOMATION TRACK AND MOBILE APPLICATIONS PROGRAM WITH THE TOP SCORE.
+
+CONGRATULATIONS EYAD FOR YOUR GREAT WORK.                    </div>
+
+            </div>
+
+        </div>
+
+
+
+</div>
+    </div>
+
+</div>        </div>
+        </div>
+
+
+    </div>
+		</div>
+				</div>
+					</div>
+		</div>
+							</div>
+		</section>
+					</div>
+		</div>
+							</div>
+		</section>
+						</div>
+					</div>
+		                            </div>
+
+
+        <div class="clearfix">
+                    </div>
+
+    </div>
+
+           </div>
+</div>
+		<footer id="footer" class="">
+			<div class="footer_wrapper">
+
+        <div id="footer_bottom">
+            <div class="footer_widgets_wrapper kek text-upper">
+                <div class="container">
+                    <div class="widgets cols_4 clearfix">
+						<aside id="stm_text-2" class="widget stm_wp_widget_text"><div class="widget_title"><h3>About</h3></div>        <div class="textwidget"><p>Armstrong delivers the most interactive way for education as never before.<br />
+We do provide STEM programs, Science and Math Illustrations and more interactive programs for child's from 4 to 18 years old that helps in developing their characters and enrich their logical and analytical skills.<br />
+Proudly, Armstrong is accredited from STEM.org</p>
+</div>
+
+		</aside><aside id="stm_lms_popular_courses-4" class="widget widget_stm_lms_popular_courses"><div class='widget_title'><h3>Popular Courses</h3></div>
+            <ul class="stm_product_list_widget widget_woo_stm_style_2">
+
+                                    <li>
+                        <a href="">
+                            <img width="75" height="75" src="{% static '12345-1-75x75.png' %}" class="attachment-img-75-75 size-img-75-75 wp-post-image" alt="" loading="lazy" srcset="" sizes="(max-width: 75px) 100vw, 75px" />                            <div class="meta">
+                                <div class="title h5">Nvidia and UE4 Technologies Practice</div>
+
+                                                                    <div class="stm_featured_product_price">
+                                        <div class="price price-free">
+                                            Free                                        </div>
+                                    </div>
+
+                                                                <div class="rating">
+                                    <div class="star-rating"><span
+                                                style="width:80%">&nbsp;</span>
+                                    </div>
+                                </div>
+                                                                <div class="expert">By ashraf</div>
+                            </div>
+                        </a>
+                    </li>
+                                    <li>
+                        <a href="">
+                            <img width="75" height="75" src="{% static 'photo-1491897554428-130a60dd4757-75x75.jpeg' %}" class="attachment-img-75-75 size-img-75-75 wp-post-image" alt="" loading="lazy" srcset="" sizes="(max-width: 75px) 100vw, 75px" />                            <div class="meta">
+                                <div class="title h5">Fashion Photography from professional</div>
+
+                                                                    <div class="stm_featured_product_price">
+                                        <div class="price price-free">
+                                            Free                                        </div>
+                                    </div>
+
+                                                                <div class="rating">
+                                    <div class="star-rating"><span
+                                                style="width:80%">&nbsp;</span>
+                                    </div>
+                                </div>
+                                                                <div class="expert">By ashraf</div>
+                            </div>
+                        </a>
+                    </li>
+                                    <li>
+                        <a href="">
+                            <img width="75" height="75" src="{% static 'photo-1416339134316-0e91dc9ded92-75x75.jpeg' %}" class="attachment-img-75-75 size-img-75-75 wp-post-image" alt="" loading="lazy" srcset="" sizes="(max-width: 75px) 100vw, 75px" />                            <div class="meta">
+                                <div class="title h5">Design Instruments for Communication</div>
+
+                                                                    <div class="stm_featured_product_price">
+                                        <div class="price price-free">
+                                            Free                                        </div>
+                                    </div>
+
+                                                                <div class="rating">
+                                    <div class="star-rating"><span
+                                                style="width:80%">&nbsp;</span>
+                                    </div>
+                                </div>
+                                                                <div class="expert">By ashraf</div>
+                            </div>
+                        </a>
+                    </li>
+
+            </ul>
+
+        </aside><aside id="stm_pages-2" class="widget widget_pages"><div class="widget_title"><h3>Pages</h3></div>			<ul class="style_1">
+				<li class="page_item page-item-664"><a href=""><span class="h6">Blog</span></a></li>
+<li class="page_item page-item-183"><a href=""><span class="h6">Membership Account</span></a></li>
+<li class="page_item page-item-667"><a href=""><span class="h6">Shortcodes</span></a></li>
+<li class="page_item page-item-669"><a href=""><span class="h6">Typography</span></a></li>
+			</ul>
+			</aside><aside id="contacts-2" class="widget widget_contacts"><div class="widget_title"><h3>Contact</h3></div><ul class="widget_contacts_style_1"><li class="widget_contacts_address"><div class="icon"><i class="fa-icon-stm_icon_pin"></i></div><div class="text">209 BUE&#039;s science and innovation park, Cairo - Egypt</div></li><li class="widget_contacts_email"><div class="icon"><i class="fa fa-envelope"></i></div><div class="text"><a href="mailto:help@armstrong.courses">help@armstrong.courses</a></div></li></ul></aside>                    </div>
+			</div>
+          <div class="widgets cols_12 clearfix">
+            <aside id="stm_text-3" class="widget stm_wp_widget_text">
+              <div class="textwidget">
+                  <ul class="style_1" style="list-style-type: none;">
+                    <li class="text-center page_item page-item-664">
+                        Made With <i class="fas fa-heart has-text-danger"></i> By <a href="https://gaytomycode.com" target="_blank" class="text-white">Hassan</a> and <a href="https://hagarsaleh.com" target="_blank" class="text-white">Hagar</a>.
+                    </li>
+                  </ul>
+              </div>
+            </aside>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+		</footer>
+<!-- Searchform -->
+<div class="modal fade" id="searchModal" tabindex="-1" role="dialog" aria-labelledby="searchModal">
+<div class="modal-dialog" role="document">
+<div class="modal-content">
+<div class="modal-body heading_font">
+<div class="search-title">Search</div>
+<form role="search" method="get" id="searchform" action="{% url 'course:courses' %}">
+<div class="search-wrapper">
+<input placeholder="Start typing here..." type="text" class="form-control search-input" value="" name="s" id="s" />
+<button type="submit" class="search-submit" ><i class="fa fa-search"></i></button>
+</div>
+</form>
+</div>
+</div>
+</div>
+</div>
+<script type="text/javascript">
+window.RS_MODULES = window.RS_MODULES || {};
+window.RS_MODULES.modules = window.RS_MODULES.modules || {};
+window.RS_MODULES.waiting = window.RS_MODULES.waiting || [];
+window.RS_MODULES.defered = true;
+window.RS_MODULES.moduleWaiting = window.RS_MODULES.moduleWaiting || {};
+window.RS_MODULES.type = 'compiled';
+</script>
+<!-- Memberships powered by Paid Memberships Pro v2.5.10.1.
+-->
+<script type="text/javascript">
+(function () {
+var c = document.body.className;
+c = c.replace(/woocommerce-no-js/, 'woocommerce-js');
+document.body.className = c;
+})();
+</script>
+<link rel='stylesheet' id='stm-lms-courses_filters-css'  href='{% static 'masterstudy/courses_filters.css' %}' type='text/css' media='all' />
+<link rel='stylesheet' id='stm-lms-courses-css'  href='{% static 'masterstudy/courses.css' %}' type='text/css' media='all' />
+<link rel='stylesheet' id='stm-lms-course-css'  href='{% static 'masterstudy/course.css' %}' type='text/css' media='all' />
+<link rel='stylesheet' id='stm-lms-course-info-css'  href='{% static 'masterstudy/course_info.css' %}' type='text/css' media='all' />
+<link rel='stylesheet' id='stm-lms-curriculum-css'  href='{% static 'masterstudy/curriculum.css' %}' type='text/css' media='all' />
+<link rel='stylesheet' id='stm-lms-courses/style_1-css'  href='{% static 'masterstudy/style_1.css' %}' type='text/css' media='all' />
+<link rel='stylesheet' id='stm-contacts_widget-style_1-css'  href='{% static 'masterstudy/style_1.css' %}' type='text/css' media='all' />
+<link rel='stylesheet' id='stm-lms-courses/style_2-css'  href='{% static 'masterstudy/style_2.css' %}' type='text/css' media='all' />
+<link rel='stylesheet' id='stm-lms-courses/style_3-css'  href='{% static 'masterstudy/style_3.css' %}' type='text/css' media='all' />
+<link rel='stylesheet' id='stm-lms-courses/style_4-css'  href='{% static 'masterstudy/style_4.css' %}' type='text/css' media='all' />
+<link rel='stylesheet' id='stm-lms-courses/style_5-css'  href='{% static 'masterstudy/style_5.css' %}' type='text/css' media='all' />
+<link rel='stylesheet' id='stm-lms-courses/style_6-css'  href='{% static 'masterstudy/style_6.css' %}' type='text/css' media='all' />
+<link rel='stylesheet' id='stm-lms-courses/style_7-css'  href='{% static 'masterstudy/style_7.css' %}' type='text/css' media='all' />
+<link rel='stylesheet' id='stm-lms-courses/style_9-css'  href='{% static 'masterstudy/style_9.css' %}' type='text/css' media='all' />
+<link rel='stylesheet' id='rs-plugin-settings-css'  href='{% static 'masterstudy/rs6.css' %}' type='text/css' media='all' />
+<style id='rs-plugin-settings-inline-css' type='text/css'>
+#rs-demo-id {}
+</style>
+<script type='text/javascript' src='{% static 'masterstudy/regenerator-runtime.min.js' %}' id='regenerator-runtime-js'></script>
+<script type='text/javascript' src='{% static 'masterstudy/wp-polyfill.min.js' %}' id='wp-polyfill-js'></script>
+<script type='text/javascript' id='contact-form-7-js-extra'>
+/* <![CDATA[ */
+/* ]]> */
+</script>
+<script type='text/javascript' src='{% static 'masterstudy/index.js' %}' id='contact-form-7-js'></script>
+<script type='text/javascript' src='{% static 'masterstudy/bootstrap.min.js' %}' id='bootstrap-js'></script>
+<script type='text/javascript' src='{% static 'masterstudy/countdown.js' %}' id='lms_countdown.js-js'></script>
+<script type='text/javascript' src='{% static 'masterstudy/rbtools.min.js' %}' defer async id='tp-tools-js'></script>
+<script type='text/javascript' src='{% static 'masterstudy/rs6.min.js' %}' defer async id='revmin-js'></script>
+<script type='text/javascript' src='{% static 'masterstudy/js.cookie.min.js' %}' id='js-cookie-js'></script>
+<script type='text/javascript' src='{% static 'masterstudy/woocommerce.min.js' %}' id='woocommerce-js'></script>
+<script type='text/javascript' src='{% static 'masterstudy/cart-fragments.min.js' %}' id='wc-cart-fragments-js'></script>
+<script type='text/javascript' src='{% static 'masterstudy/jquery.fancybox.min.js' %}' id='fancybox-js'></script>
+<script type='text/javascript' src='{% static 'masterstudy/select2.full.min.js' %}' id='select2-js'></script>
+<script type='text/javascript' src='{% static 'masterstudy/custom.js' %}' id='stm_theme_scripts-js'></script>
+<script type='text/javascript' src='{% static 'masterstudy/ajax.submit.js' %}' id='ajaxsubmit-js'></script>
+<script type='text/javascript' src='{% static 'masterstudy/wp-embed.min.js' %}' id='wp-embed-js'></script>
+<script type='text/javascript' id='stm-lms-courses-js-extra'>
+/* <![CDATA[ */
+var courses_view = {"type":"grid"};
+/* ]]> */
+</script>
+<script type='text/javascript' src='{% static 'masterstudy/courses.js' %}' id='stm-lms-courses-js'></script>
+<script type='text/javascript' src='{% static 'masterstudy/courses_filters.js' %}' id='stm-lms-courses_filters-js'></script>
+<script type='text/javascript' src='{% static 'masterstudy/jquery.cookie.js' %}' id='jquery.cookie-js'></script>
+                <script>
+                    const canvasEl = document.querySelector('#canvas');
+
+                    const w = canvasEl.width = window.innerWidth;
+                    const h = canvasEl.height = window.innerHeight * 2;
+
+                    function loop() {
+                                              requestAnimationFrame(loop);
+                                                ctx.clearRect(0,0,w,h);
+
+                                              confs.forEach((conf) => {
+                                                                          conf.update();
+                                                                          conf.draw();
+                                                                        })
+                                        }
+
+                    function Confetti () {
+                                              //construct confetti
+                                              const colours = ['#fde132', '#009bde', '#ff6b00'];
+
+                                              this.x = Math.round(Math.random() * w);
+                                              this.y = Math.round(Math.random() * h)-(h/2);
+                                              this.rotation = Math.random()*360;
+
+                                              const size = Math.random()*(w/60);
+                                              this.size = size < 15 ? 15 : size;
+
+                                              this.color = colours[Math.floor(colours.length * Math.random())];
+
+                                              this.speed = this.size/7;
+
+                                              this.opacity = Math.random();
+
+                                              this.shiftDirection = Math.random() > 0.5 ? 1 : -1;
+                                        }
+
+                    Confetti.prototype.border = function() {
+                                              if (this.y >= h) {
+                                                                          this.y = h;
+                                                                        }
+                                        }
+
+                    Confetti.prototype.update = function() {
+                                              this.y += this.speed;
+
+                                              if (this.y <= h) {
+                     this.x += this.shiftDirection/3;
+                     this.rotation += this.shiftDirection*this.speed/100;
+                   }
+
+                   if (this.y > h) this.border();
+                                        };
+
+                    Confetti.prototype.draw = function() {
+                                              ctx.beginPath();
+                                              ctx.arc(this.x, this.y, this.size, this.rotation, this.rotation+(Math.PI/2));
+                                              ctx.lineTo(this.x, this.y);
+                                              ctx.closePath();
+                                              ctx.globalAlpha = this.opacity;
+                                              ctx.fillStyle = this.color;
+                                              ctx.fill();
+                                        };
+
+                    const ctx = canvasEl.getContext('2d');
+                    const confNum = Math.floor(w / 4);
+                    const confs = new Array(confNum).fill().map(_ => new Confetti());
+
+                    loop();
+                </script>
+
+
+    <!-- Searchform -->
+    <script>
+        var cf7_custom_image = '';
+        var daysStr = 'Days';
+        var hoursStr = 'Hours';
+        var minutesStr = 'Minutes';
+        var secondsStr = 'Seconds';
+    </script>
+
+
+
+		<script type="text/javascript">
+			window.RS_MODULES = window.RS_MODULES || {};
+			window.RS_MODULES.modules = window.RS_MODULES.modules || {};
+			window.RS_MODULES.waiting = window.RS_MODULES.waiting || [];
+			window.RS_MODULES.defered = true;
+			window.RS_MODULES.moduleWaiting = window.RS_MODULES.moduleWaiting || {};
+			window.RS_MODULES.type = 'compiled';
+		</script>
+				<!-- Memberships powered by Paid Memberships Pro v2.6.4.
+ -->
+	<link href="https://fonts.googleapis.com/css?family=Roboto:700%2C400%7CMontserrat:700" rel="stylesheet" property="stylesheet" media="all" type="text/css" >
+
+	<script type="text/javascript">
+		(function () {
+			var c = document.body.className;
+			c = c.replace(/woocommerce-no-js/, 'woocommerce-js');
+			document.body.className = c;
+		})();
+	</script>
+	<script type="text/javascript">
+		if(typeof revslider_showDoubleJqueryError === "undefined") {function revslider_showDoubleJqueryError(sliderID) {console.log("You have some jquery.js library include that comes after the Slider Revolution files js inclusion.");console.log("To fix this, you can:");console.log("1. Set 'Module General Options' -> 'Advanced' -> 'jQuery & OutPut Filters' -> 'Put JS to Body' to on");console.log("2. Find the double jQuery.js inclusion and remove it");return "Double Included jQuery Library";}}
+</script>
+
+
+
+
+<style id='stm-color_separator-style_1-inline-css' type='text/css'>
+
+                .module__dfb06648b70c728958e15267f48d96bc .triangled_colored_separator {
+                    background-color:  !important;
+                }
+                .module__dfb06648b70c728958e15267f48d96bc .triangled_colored_separator .triangle {
+                    border-bottom-color:  !important;
+                }
+
+</style>
+<style id='rs-plugin-settings-inline-css' type='text/css'>
+#rs-demo-id {}
+</style>
+<script type='text/javascript' id='apss-frontend-mainjs-js-extra'>
+/* <![CDATA[ */
+/* ]]> */
+</script>
+<script type='text/javascript' id='bp-nouveau-js-extra'>
+/* <![CDATA[ */
+/* ]]> */
+</script>
+<script type='text/javascript' id='contact-form-7-js-extra'>
+/* <![CDATA[ */
+/* ]]> */
+</script>
+<script type='text/javascript' id='woocommerce-js-extra'>
+/* <![CDATA[ */
+var woocommerce_params = {"ajax_url":"\/wp-admin\/admin-ajax.php","wc_ajax_url":"\/?wc-ajax=%%endpoint%%"};
+/* ]]> */
+</script>
+<script type='text/javascript' id='wc-cart-fragments-js-extra'>
+/* <![CDATA[ */
+var wc_cart_fragments_params = {"ajax_url":"\/wp-admin\/admin-ajax.php","wc_ajax_url":"\/?wc-ajax=%%endpoint%%","cart_hash_key":"wc_cart_hash_ecdcb9afd16ea0c3e03c416998b413bd","fragment_name":"wc_fragments_ecdcb9afd16ea0c3e03c416998b413bd","request_timeout":"5000"};
+/* ]]> */
+</script>
+<script type='text/javascript' id='stm-gdpr-scripts-js-extra'>
+/* <![CDATA[ */
+/* ]]> */
+</script>
+<script type='text/javascript' id='stm-hfe-js-extra'>
+/* <![CDATA[ */
+var stm_hfe_settings_4977 = {"id":"4977","sticky":"","absolute":"","sticky_threshold":"100","sticky_threshold_color":"#000"};
+/* ]]> */
+</script>
+<script type='text/javascript' id='stm-lms-courses-js-extra'>
+/* <![CDATA[ */
+var courses_view = {"type":"grid"};
+/* ]]> */
+</script>
+<script type='text/javascript' src='{% static 'webpack.runtime.min.js' %}' id='elementor-webpack-runtime-js'></script>
+<script type='text/javascript' src='{% static 'frontend-modules.min.js' %}' id='elementor-frontend-modules-js'></script>
+<script type='text/javascript' id='elementor-frontend-js-before'>
+var elementorFrontendConfig = {"environmentMode":{"edit":false,"wpPreview":false,"isScriptDebug":false},"i18n":{"shareOnFacebook":"Share on Facebook","shareOnTwitter":"Share on Twitter","pinIt":"Pin it","download":"Download","downloadImage":"Download image","fullscreen":"Fullscreen","zoom":"Zoom","share":"Share","playVideo":"Play Video","previous":"Previous","next":"Next","close":"Close"},"is_rtl":false,"breakpoints":{"xs":0,"sm":480,"md":768,"lg":1025,"xl":1440,"xxl":1600},"responsive":{"breakpoints":{"mobile":{"label":"Mobile","value":767,"default_value":767,"direction":"max","is_enabled":true},"mobile_extra":{"label":"Mobile Extra","value":880,"default_value":880,"direction":"max","is_enabled":false},"tablet":{"label":"Tablet","value":1024,"default_value":1024,"direction":"max","is_enabled":true},"tablet_extra":{"label":"Tablet Extra","value":1200,"default_value":1200,"direction":"max","is_enabled":false},"laptop":{"label":"Laptop","value":1366,"default_value":1366,"direction":"max","is_enabled":false},"widescreen":{"label":"Widescreen","value":2400,"default_value":2400,"direction":"min","is_enabled":false}}},"version":"3.4.7","is_static":false,"experimentalFeatures":{"e_dom_optimization":true,"a11y_improvements":true,"e_import_export":true,"additional_custom_breakpoints":true,"landing-pages":true,"elements-color-picker":true,"admin-top-bar":true},"urls":{"assets":""},"settings":{"page":[],"editorPreferences":[]},"kit":{"active_breakpoints":["viewport_mobile","viewport_tablet"],"global_image_lightbox":"yes","lightbox_enable_counter":"yes","lightbox_enable_fullscreen":"yes","lightbox_enable_zoom":"yes","lightbox_enable_share":"yes","lightbox_title_src":"title","lightbox_description_src":"description"},"post":{"id":4977,"title":"Armstrong%20%E2%80%93%20Just%20another%20WordPress%20site","excerpt":"","featuredImage":false}};
+</script>
+<script type='text/javascript' src='{% static 'frontend.min.js' %}' id='elementor-frontend-js'></script>
+<script type="text/javascript" id="rs-initialisation-scripts">
+		var	tpj = jQuery;
+
+		var	revapi1;
+
+		if(window.RS_MODULES === undefined) window.RS_MODULES = {};
+		if(RS_MODULES.modules === undefined) RS_MODULES.modules = {};
+		RS_MODULES.modules["revslider11"] = {init:function() {
+			window.revapi1 = window.revapi1===undefined || window.revapi1===null || window.revapi1.length===0  ? document.getElementById("rev_slider_1_1") : window.revapi1;
+			if(window.revapi1 === null || window.revapi1 === undefined || window.revapi1.length==0) return;
+			window.revapi1 = jQuery(window.revapi1);
+			if(window.revapi1.revolution==undefined){ revslider_showDoubleJqueryError("rev_slider_1_1"); return;}
+			revapi1.revolutionInit({
+					revapi:"revapi1",
+					DPR:"dpr",
+					sliderLayout:"fullwidth",
+					visibilityLevels:"1240,1024,778,480",
+					gridwidth:"1240,1024,778,480",
+					gridheight:"794,794,700,700",
+					lazyType:"smart",
+					spinner:"spinner0",
+					perspective:600,
+					perspectiveType:"local",
+					editorheight:"794,794,700,700",
+					responsiveLevels:"1240,1024,778,480",
+					progressBar:{disableProgressBar:true},
+					navigation: {
+						onHoverStop:false
+					},
+					viewPort: {
+						global:true,
+						globalDist:"-200px",
+						enable:false,
+						visible_area:"20%"
+					},
+					fallbacks: {
+						allowHTML5AutoPlayOnAndroid:true
+					},
+			});
+
+		}} // End of RevInitScript
+
+		if (window.RS_MODULES.checkMinimal!==undefined) { window.RS_MODULES.checkMinimal();};
+	</script>
+	</body>
+{% endblock %}

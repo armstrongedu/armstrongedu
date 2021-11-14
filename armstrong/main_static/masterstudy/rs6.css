@@ -320,7 +320,7 @@ rs-mask,
 rs-module-wrap,
 rs-module .rs-layer,
 rs-module img {
-	user-select: none;	
+	user-select: none;
 }
 
 rs-module rs-mask-wrap .rs-layer,
@@ -363,7 +363,7 @@ rs-carousel-space { clear:both;display:block;width:100%;height:0px;position:rela
 
 
 .rs-layer.rs-selectable {
-	user-select: text;	
+	user-select: text;
 }
 
 
@@ -1098,7 +1098,7 @@ rs-loader.spinner0 {
 	width: 40px;
 	height: 40px;
 	background-color: #fff;
-	background-image:url(../assets/loader.gif);
+	background-image:url(../loader.gif);
 	background-repeat:no-repeat;
 	background-position: center center;
 	box-shadow: 0px 0px 20px 0px rgba(0,0,0,0.15);
@@ -1123,7 +1123,7 @@ rs-loader.spinner1 {
 
 
 rs-loader.spinner5 	{
-	background-image:url(../assets/loader.gif);
+	background-image:url(../loader.gif);
 	background-repeat:no-repeat;
 	background-position:10px 10px;
 	background-color:#fff;
