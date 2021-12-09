@@ -26,8 +26,15 @@ class User(SimpleEmailConfirmationUserMixin, AbstractUser):
     def is_free_trial(self):
         return not self.is_member() and (now() - self.date_joined).days <= 14
 
+    def is_plus(self):
+        return self.is_member() and self.membership.membership_type.plan == self.membership.membership_type.PLUS
+
 
 class Student(models.Model):
     user = models.ForeignKey(User, null=False, blank=False, on_delete=models.CASCADE, related_name='students')
     name = models.CharField(max_length=255, null=False, blank=False)
     birth_year = models.IntegerField(null=False, blank=False)
+
+
+class Newsletter(models.Model):
+    email = models.CharField(max_length=255, null=False, blank=False)

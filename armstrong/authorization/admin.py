@@ -3,7 +3,7 @@ from django.contrib.auth.admin import UserAdmin
 from django.utils.translation import ugettext_lazy as _
 from django.contrib.auth import get_user_model
 
-from .models import Student
+from .models import Student, Newsletter
 
 
 @admin.register(get_user_model())
@@ -32,3 +32,8 @@ class UserAdmin(UserAdmin):
 @admin.register(Student)
 class StudentAmin(admin.ModelAdmin):
     list_display = ('user', 'name', 'birth_year',)
+
+
+@admin.register(Newsletter)
+class NewsletterAmin(admin.ModelAdmin):
+    list_display = ('email',)

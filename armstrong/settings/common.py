@@ -53,8 +53,8 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'django_middleware_global_request.middleware.GlobalRequestMiddleware',
+    'authorization.middlewares.email_checker',
     'login_sessions.middleware.OneSessionPerUserMiddleware',
-
 ]
 
 ROOT_URLCONF = 'armstrong.urls'

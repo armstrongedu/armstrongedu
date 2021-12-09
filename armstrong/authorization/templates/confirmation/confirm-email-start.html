@@ -1,0 +1,93 @@
+{% extends 'masterstudy/courses_layout.html' %}
+{% load static %}
+
+{% block main_body %}
+
+<!-- Breads -->
+<div class="stm_lms_breadcrumbs stm_lms_breadcrumbs__header_default">
+
+
+			<div class="breadcrumbs_holder"></div>
+	</div>
+
+    <div class="container">
+
+                    <div class="post_type_exist clearfix">
+                                    <script>
+    (function ($) {
+        $(document).ready(function () {
+            $('body').addClass('stm-lms-template-page');
+        });
+    })(jQuery);
+</script>
+
+<div class="stm-lms-wrapper stm-lms-wrapper__login">
+
+    <div class="container">
+
+        <div class="row">
+
+            <div class="col-md-12">
+
+
+
+
+    <div id="stm-lms-login" class="stm-lms-login active vue_is_disabled loaded is_vue_loaded"><div class="stm-lms-login__top">
+
+
+            <h3>Thank you for signing up with Armstrong</h3>
+            <h2>Check your email for the confirmation code</h2>
+
+        </div>
+
+
+
+<div class="column is-one-third mysignup">
+        <form action="{% url 'authorization:confirm-email' %}" method="post">
+        {% csrf_token %}
+        <div class="stm_lms_login_wrapper">
+            <div class="form-group">
+                <label class="heading_font">We sent you a link to verify your account</label>
+                <input class="form-control" type='text' name='confirmation_key' placeholder='Confirmation Key'>
+            </div>
+        <div class="stm_lms_login_wrapper__actions">
+                <span title="Lost Password" class="lostpassword">Didn't get your confirmation code?
+                    <a href="#">Send again</a>
+                </span>
+
+                <input type="submit" class="btn btn-default" style="border-radius: 25px;" value="Go">
+            </div>
+            </div>
+
+
+
+    </form>
+
+        {% if form.errors %}
+            {% for error_title, error in form.errors.items %}
+                <div class="stm-lms-message error">{{ error }}</div>
+            {% endfor %}
+        {% endif %}
+
+</div>
+
+
+
+
+            </div>
+
+
+        </div>
+
+    </div>
+    </div>
+
+
+        <div class="clearfix">
+                    </div>
+
+    </div>
+    </div>
+    </div>
+
+{% endblock %}

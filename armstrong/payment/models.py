@@ -27,11 +27,18 @@ class MembershipType(models.Model):
         (INTERNATIONAL, f'International {utils.CUR_INTERNATIONAL}'),
     )
 
+    BASIC, PLUS = range(2)
+
+    PLANS = (
+        (BASIC, f'Basic Plan'),
+        (PLUS, f'Plus Plan'),
+    )
     country = models.CharField(max_length=255, choices=STATUS, null=False, blank=False)
     name = models.CharField(max_length=255, null=False, blank=False)
     display_float_price = models.FloatField(null=False, blank=False)
     real_price_egyptian_cents = models.IntegerField(null=False, blank=False)
     number_of_students = models.IntegerField(null=False, blank=False)
+    plan = models.IntegerField(null=False, blank=False, choices=PLANS)
 
     def __str__(self):
         return f'{self.name} - {self.real_price_egyptian_cents} Egyptian Cents'

@@ -9,12 +9,13 @@ from django.conf import settings
 
 from .forms import SignUpForm
 from .utils import login_excluded
-from .models import Student
+from .models import Student, Newsletter
 
 
 member_required = user_passes_test(lambda user: user.is_member(), login_url='/')
 not_students_required = user_passes_test(lambda user: not user.has_students(), login_url='/')
 students_required = user_passes_test(lambda user: user.has_students(), login_url='/')
+email_not_confirmed = user_passes_test(lambda user: not user.is_confirmed, login_url='/')
 
 class SignUpView(generic.CreateView):
     form_class = SignUpForm
@@ -77,3 +78,37 @@ def switch_students(request, std_id):
     resp.set_cookie('std', std.name)
     return resp
 
+
+@login_required
+@email_not_confirmed
+def confirm_email_start(request):
+    context = {}
+    return render(template_name='confirmation/confirm-email-start.html', request=request,
+                  context=context)
+
+
+@login_required
+@email_not_confirmed
+def confirm_email(request, key=None):
+    user = request.user
+    conf_key = request.POST.get('confirmation_key', key)
+    user.confirm_email(conf_key)
+    if user.is_confirmed:
+        return redirect('authorization:email-confirmed')
+    else:
+        context = {
+            'errors': ['Wrong Key'],
+        }
+        return render(template_name='confirmation/confirm-email-start.html', request=request,
+                      context=context)
+
+
+@login_required
+def email_confirmed(request):
+    context = {}
+    return render(template_name='confirmation/email_confirmed.html', request=request,
+                  context=context)
+
+def newsletter(request):
+    Newsletter.objects.create(email=request.POST['email'])
+    return redirect('main:home')

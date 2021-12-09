@@ -1,10 +1,15 @@
+            <!---->
+
+
 <div class="column is-one-third mysignup">
     {% if social %}
         <div class="field is-grouped is-justify-content-center">
             <a class="button is-info is-medium social" href="{% url "authorization:social:begin" "google-oauth2" %}">Google</a>
             <a class="button is-info is-medium fb social" href="{% url "authorization:social:begin" "facebook" %}">Facebook</a>
         </div>
-        <div class="or"><h1>or</h1></div>
+        <br>
+
+        <div class="or"><h4>or</h4></div>
     {% endif %}
     {% if url %}
         <form method="post" action="{% url url %}">
@@ -12,32 +17,49 @@
         <form method="post" action="">
     {% endif %}
         {% csrf_token %}
+        <div class="stm_lms_login_wrapper">
         {% for field in form %}
-            <div class="field">
+            <div class="form-group">
+                <label class="heading_font">{{ field.label }}</label>
                 {{ field }}
                 {% if field.help_text %}
+                    <div style="padding-top: 10px;">
                     {% for help_text in field.help_text %}
-                        <p class="help">{{ help_text|safe }}</p>
+                        <h6 style="color: white;">{{ help_text|safe }}</h6>
                     {% endfor %}
+                    </div>
                 {% endif %}
             </div>
         {% endfor %}
+        <div class="stm_lms_login_wrapper__actions">
         {% if terms %}
-            <div class="field">
-                <div class="control">
-                    <label class="checkbox">
-                        <input type="checkbox"> I agree to the <a href="#">terms and conditions</a>
-                    </label>
-                </div>
-            </div>
+            <label class="stm_lms_styled_checkbox stm_lms_remember_me">
+                <span class="stm_lms_styled_checkbox__inner">
+                    <input type="checkbox" name="remember_me" required>
+                    <span><i class="fa fa-check"></i></span>
+                </span>
+                <span>I agree to the <a href="{% url 'main:terms' %}" target="_blank">terms and conditions</a> and <a href="{% url 'main:privacy' %}" target="_blank">privacy.</a></span>
+
+            </label>
         {% endif %}
-        <div class="signupbutton">
-            <input type="submit" class="button is-medium is-primary" value="Go">
-            <div>
-                <p>{{ switch_page_text }}</p>
-                <a href="{% url switch_page_url %}">{{ switch_page_help }}</a>
+                <span title="Lost Password" class="lostpassword">{{ switch_page_text }}
+                    <a href="{% url switch_page_url %}">{{ switch_page_help }}</a>
+                </span>
+
+                <input type="submit" class="btn btn-default" style="border-radius: 25px;" value="Go">
             </div>
-        </div>
+            </div>
+
+
+
+
         <input type="hidden" name="next" value="{{ next }}" />
     </form>
+
+        {% if form.errors %}
+            {% for error_title, error in form.errors.items %}
+                <div class="stm-lms-message error">{{ error }}</div>
+            {% endfor %}
+        {% endif %}
+
 </div>

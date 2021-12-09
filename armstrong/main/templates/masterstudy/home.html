@@ -10,6 +10,20 @@
 
 <div id="header" class="transparent_header" data-color="">
 
+
+<div class="header_top_bar" style="background-color:#002e5b;margin-bottom: 5px;" >
+<div class="container">
+<div class="clearfix">
+    <div class="pull-right xs-pull-left">
+
+    <ul class="top_bar_info clearfix">
+    <li class="hidden-info"><img class="" src="{% static 'stemorg.jpg' %}" style="width: 100px; padding-right: 10px;" alt="STEM.org"/>STEM.org accredited.</li>
+    </ul>
+    </div>
+</div>
+</div>
+<!-- container -->    </div>
+
 			<div class="header_top_bar" style="background-color:#002e5b">
     <div class="container">
         <div class="clearfix">
@@ -184,7 +198,7 @@
 							--><a
 								id="slider-1-slide-1-layer-3"
 								class="rs-layer rev-btn"
-                                                                href="{% url 'authorization:signup' %}" target="_self"
+                                                                href="{% url 'payment:subscribe' %}" target="_self"
 								data-type="button"
 								data-color="rgba(255,255,255,1)"
 								data-xy="x:c;y:m;yo:97px,97px,-6px,18px;"
@@ -244,7 +258,7 @@
 							--><a
 								id="slider-1-slide-3-layer-3"
 								class="rs-layer rev-btn"
-                                                                href="{% url 'authorization:signup' %}" target="_self"
+                                                                href="{% url 'payment:subscribe' %}" target="_self"
 								data-type="button"
 								data-color="rgba(255,255,255,1)"
 								data-xy="x:c;y:m;yo:97px,97px,-6px,18px;"
@@ -304,7 +318,7 @@
 							--><a
 								id="slider-1-slide-4-layer-3"
 								class="rs-layer rev-btn"
-                                                                href="{% url 'authorization:signup' %}" target="_self"
+                                                                href="{% url 'payment:subscribe' %}" target="_self"
 								data-type="button"
 								data-color="#ffffff||#ffffff||rgba(255,255,255,1)||rgba(255,255,255,1)"
 								data-xy="x:c;y:m;yo:97px,97px,-6px,18px;"
@@ -346,51 +360,51 @@
 
 			                <div class="stm_lms_courses_category" style="background-color: #eab830; margin-left: 20px;">
 
-                    <a href=""
-                       title="Analysis of Algorithms"
+                    <a href="#"
+                       title="Student Roadmap"
                        class="no_deco">
-                        <i class="lnricons-chart-bars"></i>
-                        <h4>Analysis of Algorithms</h4>
+                        <img class="" src="{% static 'studentroadmap.svg' %}" style="width: 100px;margin-bottom:10px" alt="Student Roadmap"/>
+                        <h4>Student Roadmap</h4>
                     </a>
                 </div>
 
 			                <div class="stm_lms_courses_category" style="background-color: #307ad5; margin-left: 20px;">
 
                     <a href=""
-                       title="Economics &amp; Finance"
+                       title="Interactive Simulation"
                        class="no_deco">
-                        <i class="lnricons-calculator"></i>
-                        <h4>Economics &amp; Finance</h4>
+                        <img class="" src="{% static 'interactivesimulation.svg' %}" style="width: 100px;margin-bottom:10px" alt="Interactive Simulation"/>
+                        <h4>Interactive Simulation</h4>
                     </a>
                 </div>
 
 			                <div class="stm_lms_courses_category" style="background-color: #1ec1d9; margin-left: 20px;">
 
                     <a href=""
-                       title="Environmental Sciences"
+                       title="Live Support Sessions"
                        class="no_deco">
-                        <i class="lnricons-pine-tree"></i>
-                        <h4>Environmental Sciences</h4>
+                        <img class="" src="{% static 'livesupportsessions.svg' %}" style="width: 100px;margin-bottom:10px" alt="Live Support Sessions"/>
+                        <h4>Live Support Session</h4>
                     </a>
                 </div>
 
 			                <div class="stm_lms_courses_category" style="background-color: #10c45c; margin-left: 20px;">
 
                     <a href=""
-                       title="Graphic &amp; Web-design"
+                       title="50+ Programs"
                        class="no_deco">
-                        <i class="lnricons-select2"></i>
-                        <h4>Graphic &amp; Web-design</h4>
+                        <img class="" src="{% static 'programs.svg' %}" style="width: 100px;margin-bottom:10px" alt="50+ Programs"/>
+                        <h4>50+ Programs</h4>
                     </a>
                 </div>
 
 			                <div class="stm_lms_courses_category" style="background-color: #d94da6; margin-left: 20px;">
 
                     <a href=""
-                       title="Software Training"
+                       title="Toolkit to The Home"
                        class="no_deco">
-                        <i class="lnricons-mouse"></i>
-                        <h4>Software Training</h4>
+                        <img class="" src="{% static 'toolkitathome.svg' %}" style="width: 100px;margin-bottom:10px" alt="Toolkit to The Home"/>
+                        <h4>Toolkit to The Home</h4>
                     </a>
                 </div>
 
@@ -409,10 +423,572 @@
 				<div class="elementor-widget-container">
 
 <div class="stm_lms_courses_grid stm_lms_courses">
-        <div class="stm_lms_courses_wrapper" style="padding-bottom: 200px !important;">
+        <div class="stm_lms_courses_wrapper" style="padding-bottom: 20px !important;">
             <div class="courses_filters">
                 <div class="courses_filters__title">
-                    <h1>Featured Courses</h1>
+                    <h1>4-6 Featured Courses</h1>
+                </div>
+            </div>
+            <div class="stm_lms_courses__archive_wrapper">
+                <div class="stm_lms_courses stm_lms_courses__archive">
+                <div class="stm_lms_courses__grid stm_lms_courses__grid_4 stm_lms_courses__grid_center archive_grid stm_lms_courses__grid_found_2"
+                data-pages="1">
+
+                {% for course in free_trial_courses %}
+                <div class="stm_lms_courses__single stm_lms_courses__single_animation no-sale style_1 " style="padding-top: 50px !important;">
+                <div class="stm_lms_courses__single__inner">
+                <div class="stm_lms_courses__single--image">
+                <a href="{% url 'course:free-trial-start' course.id %}"
+                class="heading_font"
+                data-preview="Start this course">
+                <div>
+                    {{ course.intro_video_iframe | safe }}
+                </div>
+                </a>
+                </div>
+                <div class="stm_lms_courses__single--inner">
+                <div class="stm_lms_courses__single--terms">
+                <div class="stm_lms_courses__single--term">
+                {% for category in course.category.all %}
+                    {{ category }}
+                {% endfor %}
+                </div>
+                </div>
+                <div class="stm_lms_courses__single--title">
+                <a href="{% url 'course:free-trial-start' course.id %}"><h5>{{ course.title }}</h5> </a>
+                </div>
+                <div class="stm_lms_courses__single--meta">
+                <div class="stm_lms_courses__single--price heading_font">
+                    <strong>{{ course.toolbox.name }} ToolBox</strong>
+                </div>
+                </div>
+                </div>
+                <div class="stm_lms_courses__single--info">
+                    <div class="stm_lms_courses__single--info_author">
+                <div class="stm_lms_courses__single--info_author__avatar">
+                <img alt="" src="http://0.gravatar.com/avatar/f94562563861857057c6a0a461c23805?s=215&amp;d=mm&amp;r=g" class="avatar avatar-215 photo" height="215" width="215" loading="lazy">            </div>
+                <div class="stm_lms_courses__single--info_author__login">
+                Author Name            </div>
+                </div>
+                <div class="stm_lms_courses__single--info_title">
+                <a href="{% url 'course:free-trial-start' course.id %}"><h5>{{ course.title }}</h5> </a>
+                </div>
+                {{ course.intro_video_iframe | safe }}
+                <div class="stm_lms_courses__single--info_excerpt">
+                With no prior experience, you will have the opportunity to walk through hands-on examples with Hadoop and Spark frameworks, two of the most common ...    </div>
+                <div class="stm_lms_courses__single--info_meta">
+                <div class="stm_lms_course__meta">
+                <i class="stmlms-cats"></i>
+                Lessons {{ course.lessons.count }}</div>
+                </div>
+          <div style="margin-left: auto; margin-right: auto;width:100%; text-align:center; padding-bottom:10px;">
+          <strong>{{ course.toolbox.name }} ToolBox</strong>
+          </div>
+                <div class="stm_lms_courses__single--info_meta rb-container">
+              {% if course.toolbox_status == course.TB_NO or not user.is_authenticated or not user.is_member %}
+              {% elif course.toolbox_status == course.TB_DELIVERY %}
+                  <ul class="rb">
+                    <li class="rb-item" >
+                      <div class="item-title">Placed</div>
+                    </li>
+                    <li class="rb-item" >
+                      <div class="item-title">Shipped</div>
+                    </li>
+
+                    <li class="rb-item" >
+
+                      <div class="item-title">Delivered</div>
+                    </li>
+                    <li class="rb-item" >
+                      <div class="item-title"></div>
+                    </li>
+                  </ul>
+              {% elif course.toolbox_status == course.TB_BOUGHT %}
+                  <ul class="rb">
+                    <li class="rb-item as-progress" >
+                      <div class="item-title">Placed</div>
+                    </li>
+                    <li class="rb-item as-progress" >
+                      <div class="item-title">Shipped</div>
+                    </li>
+                    <li class="rb-item as-progress" >
+                      <div class="item-title">Delivered</div>
+                    </li>
+                    <li class="rb-item as-progress" >
+                      <div class="item-title"></div>
+                    </li>
+                  </ul>
+              {% elif course.toolbox_status == course.TB_GET %}
+              <form  method="POST" action="{% url 'toolbox:place-order' %}" style="position: relative;display: inline-block;margin-bottom: 10px;margin-left: auto; margin-right: auto;text-align: center;overflow: hidden;">
+                  {% csrf_token %}
+                  <input type="hidden" value="{{ course.toolbox.id }}" name="tool_box_id">
+                    {% if min_age and max_age %}
+                        {% if course.start_age <= min_age or course.start_age <= max_age and course.end_age >= max_age %}
+                          <input value="Get ToolBox" class="for-checkbox-tools" type="submit" style="position: relative;display: inline-block;padding: 15px;width: 150px;font-size: 12px;line-height: 10px;letter-spacing: 1px;margin-bottom: 10px;margin-left: auto; margin-right: auto;text-align: center;border-radius: 4px;overflow: hidden;cursor: pointer;text-transform: uppercase;color: var(--white);border: 1px solid;">
+                        {% else %}
+                        {% endif %}
+                    {% else %}
+                    {% endif %}
+              </form>
+              {% endif %}
+                </div>
+                {% if min_age and max_age %}
+                    {% if course.start_age <= min_age or course.start_age <= max_age and course.end_age >= max_age %}
+                    <div class="stm_lms_courses__single--info_preview">
+                        <a href="{% url 'course:free-trial-start' course.id %}" title="{{ course.title }}" class="heading_font">Start this course        </a>
+                    </div>
+                    {% else %}
+                    {% endif %}
+                {% else %}
+                    <div class="stm_lms_courses__single--info_preview">
+                        <a href="{% url 'course:free-trial-start' course.id %}" title="{{ course.title }}" class="heading_font">Start this course        </a>
+                    </div>
+                {% endif %}
+                </div>
+                </div>
+                </div>
+                {% endfor %}
+
+
+
+
+                {% for course in courses %}
+                {% if min_age and max_age %}
+                    {% if course.start_age <= min_age or course.start_age <= max_age and course.end_age >= max_age %}
+                        <div class="stm_lms_courses__single stm_lms_courses__single_animation no-sale style_1 " style="padding-top: 50px !important;">
+                    {% else %}
+                    <div style="position: relative;">
+                        <h1 style="position: absolute;
+                        top: 30%;
+                        left: 4rem;
+                        color: white !important;
+                        transform: translate(0,46%);
+                        z-index: 3;">Locked
+                        </h1>
+                    </div>
+                    <div class="stm_lms_courses__single stm_lms_courses__single_animation no-sale style_1 " style="padding-top: 50px !important; filter:brightness(40%) ">
+                    {% endif %}
+                {% else %}
+                <div class="stm_lms_courses__single stm_lms_courses__single_animation no-sale style_1 " style="padding-top: 50px !important;">
+                {% endif %}
+                <div class="stm_lms_courses__single__inner">
+                <div class="stm_lms_courses__single--image">
+                <a href="{% url 'course:course' course.id %}"
+                class="heading_font"
+                data-preview="Preview this course">
+                <div>
+                    {{ course.intro_video_iframe | safe }}
+                </div>
+                </a>
+                </div>
+                <div class="stm_lms_courses__single--inner">
+                <div class="stm_lms_courses__single--terms">
+                <div class="stm_lms_courses__single--term">
+                {% for category in course.category.all %}
+                    {{ category }}
+                {% endfor %}
+                </div>
+                </div>
+                <div class="stm_lms_courses__single--title">
+                {% if min_age and max_age %}
+                    {% if course.start_age <= min_age or course.start_age <= max_age and course.end_age >= max_age %}
+                        <a href="{% url 'course:course' course.id %}"><h5>{{ course.title }}</h5> </a>
+                    {% else %}
+                        <h5>{{ course.title }}</h5>
+                    {% endif %}
+                {% else %}
+                        <a href="{% url 'course:course' course.id %}"><h5>{{ course.title }}</h5> </a>
+                {% endif %}
+                </div>
+                <div class="stm_lms_courses__single--meta">
+                <div class="stm_lms_courses__single--price heading_font">
+                    <strong>{{ course.toolbox.name }} ToolBox</strong>
+                </div>
+                </div>
+                </div>
+                <div class="stm_lms_courses__single--info">
+                    <div class="stm_lms_courses__single--info_author">
+                <div class="stm_lms_courses__single--info_author__avatar">
+                <img alt="" src="http://0.gravatar.com/avatar/f94562563861857057c6a0a461c23805?s=215&amp;d=mm&amp;r=g" class="avatar avatar-215 photo" height="215" width="215" loading="lazy">            </div>
+                <div class="stm_lms_courses__single--info_author__login">
+                Author Name            </div>
+                </div>
+                <div class="stm_lms_courses__single--info_title">
+                {% if min_age and max_age %}
+                    {% if course.start_age <= min_age or course.start_age <= max_age and course.end_age >= max_age %}
+                        <a href="{% url 'course:course' course.id %}"><h5>{{ course.title }}</h5> </a>
+                    {% else %}
+                        <h5>{{ course.title }}</h5>
+                    {% endif %}
+                {% else %}
+                        <a href="{% url 'course:course' course.id %}"><h5>{{ course.title }}</h5> </a>
+                {% endif %}
+                </div>
+                {{ course.intro_video_iframe | safe }}
+                <div class="stm_lms_courses__single--info_excerpt">
+                With no prior experience, you will have the opportunity to walk through hands-on examples with Hadoop and Spark frameworks, two of the most common ...    </div>
+                <div class="stm_lms_courses__single--info_meta">
+                <div class="stm_lms_course__meta">
+                <i class="stmlms-cats"></i>
+                Lessons {{ course.lessons.count }}</div>
+                </div>
+          <div style="margin-left: auto; margin-right: auto;width:100%; text-align:center; padding-bottom:10px;">
+          <strong>{{ course.toolbox.name }} ToolBox</strong>
+          </div>
+                <div class="stm_lms_courses__single--info_meta rb-container">
+              {% if course.toolbox_status == course.TB_NO or not user.is_authenticated or not user.is_member %}
+              {% elif course.toolbox_status == course.TB_DELIVERY %}
+                  <ul class="rb">
+                    <li class="rb-item" >
+                      <div class="item-title">Placed</div>
+                    </li>
+                    <li class="rb-item" >
+                      <div class="item-title">Shipped</div>
+                    </li>
+
+                    <li class="rb-item" >
+
+                      <div class="item-title">Delivered</div>
+                    </li>
+                    <li class="rb-item" >
+                      <div class="item-title"></div>
+                    </li>
+                  </ul>
+              {% elif course.toolbox_status == course.TB_BOUGHT %}
+                  <ul class="rb">
+                    <li class="rb-item as-progress" >
+                      <div class="item-title">Placed</div>
+                    </li>
+                    <li class="rb-item as-progress" >
+                      <div class="item-title">Shipped</div>
+                    </li>
+                    <li class="rb-item as-progress" >
+                      <div class="item-title">Delivered</div>
+                    </li>
+                    <li class="rb-item as-progress" >
+                      <div class="item-title"></div>
+                    </li>
+                  </ul>
+              {% elif course.toolbox_status == course.TB_GET %}
+              <form  method="POST" action="{% url 'toolbox:place-order' %}" style="position: relative;display: inline-block;margin-bottom: 10px;margin-left: auto; margin-right: auto;text-align: center;overflow: hidden;">
+                  {% csrf_token %}
+                  <input type="hidden" value="{{ course.toolbox.id }}" name="tool_box_id">
+                    {% if min_age and max_age %}
+                        {% if course.start_age <= min_age or course.start_age <= max_age and course.end_age >= max_age %}
+                          <input value="Get ToolBox" class="for-checkbox-tools" type="submit" style="position: relative;display: inline-block;padding: 15px;width: 150px;font-size: 12px;line-height: 10px;letter-spacing: 1px;margin-bottom: 10px;margin-left: auto; margin-right: auto;text-align: center;border-radius: 4px;overflow: hidden;cursor: pointer;text-transform: uppercase;color: var(--white);border: 1px solid;">
+                        {% else %}
+                        {% endif %}
+                    {% else %}
+                    {% endif %}
+              </form>
+              {% endif %}
+                </div>
+                {% if min_age and max_age %}
+                    {% if course.start_age <= min_age or course.start_age <= max_age and course.end_age >= max_age %}
+                    <div class="stm_lms_courses__single--info_preview">
+                        <a href="{% url 'course:course' course.id %}" title="{{ course.title }}" class="heading_font">Preview this course        </a>
+                    </div>
+                    {% else %}
+                    {% endif %}
+                {% else %}
+                    <div class="stm_lms_courses__single--info_preview">
+                        <a href="{% url 'course:course' course.id %}" title="{{ course.title }}" class="heading_font">Preview this course        </a>
+                    </div>
+                {% endif %}
+                </div>
+                </div>
+                </div>
+                {% endfor %}
+
+                </div>
+
+
+
+        <div class="stm_lms_courses_wrapper" style="padding-bottom: 20px !important;">
+            <div class="courses_filters">
+                <div class="courses_filters__title">
+                    <h1>7-9 years Featured Courses</h1>
+                </div>
+            </div>
+            <div class="stm_lms_courses__archive_wrapper">
+                <div class="stm_lms_courses stm_lms_courses__archive">
+                <div class="stm_lms_courses__grid stm_lms_courses__grid_4 stm_lms_courses__grid_center archive_grid stm_lms_courses__grid_found_2"
+                data-pages="1">
+
+                {% for course in free_trial_courses %}
+                <div class="stm_lms_courses__single stm_lms_courses__single_animation no-sale style_1 " style="padding-top: 50px !important;">
+                <div class="stm_lms_courses__single__inner">
+                <div class="stm_lms_courses__single--image">
+                <a href="{% url 'course:free-trial-start' course.id %}"
+                class="heading_font"
+                data-preview="Start this course">
+                <div>
+                    {{ course.intro_video_iframe | safe }}
+                </div>
+                </a>
+                </div>
+                <div class="stm_lms_courses__single--inner">
+                <div class="stm_lms_courses__single--terms">
+                <div class="stm_lms_courses__single--term">
+                {% for category in course.category.all %}
+                    {{ category }}
+                {% endfor %}
+                </div>
+                </div>
+                <div class="stm_lms_courses__single--title">
+                <a href="{% url 'course:free-trial-start' course.id %}"><h5>{{ course.title }}</h5> </a>
+                </div>
+                <div class="stm_lms_courses__single--meta">
+                <div class="stm_lms_courses__single--price heading_font">
+                    <strong>{{ course.toolbox.name }} ToolBox</strong>
+                </div>
+                </div>
+                </div>
+                <div class="stm_lms_courses__single--info">
+                    <div class="stm_lms_courses__single--info_author">
+                <div class="stm_lms_courses__single--info_author__avatar">
+                <img alt="" src="http://0.gravatar.com/avatar/f94562563861857057c6a0a461c23805?s=215&amp;d=mm&amp;r=g" class="avatar avatar-215 photo" height="215" width="215" loading="lazy">            </div>
+                <div class="stm_lms_courses__single--info_author__login">
+                Author Name            </div>
+                </div>
+                <div class="stm_lms_courses__single--info_title">
+                <a href="{% url 'course:free-trial-start' course.id %}"><h5>{{ course.title }}</h5> </a>
+                </div>
+                {{ course.intro_video_iframe | safe }}
+                <div class="stm_lms_courses__single--info_excerpt">
+                With no prior experience, you will have the opportunity to walk through hands-on examples with Hadoop and Spark frameworks, two of the most common ...    </div>
+                <div class="stm_lms_courses__single--info_meta">
+                <div class="stm_lms_course__meta">
+                <i class="stmlms-cats"></i>
+                Lessons {{ course.lessons.count }}</div>
+                </div>
+          <div style="margin-left: auto; margin-right: auto;width:100%; text-align:center; padding-bottom:10px;">
+          <strong>{{ course.toolbox.name }} ToolBox</strong>
+          </div>
+                <div class="stm_lms_courses__single--info_meta rb-container">
+              {% if course.toolbox_status == course.TB_NO or not user.is_authenticated or not user.is_member %}
+              {% elif course.toolbox_status == course.TB_DELIVERY %}
+                  <ul class="rb">
+                    <li class="rb-item" >
+                      <div class="item-title">Placed</div>
+                    </li>
+                    <li class="rb-item" >
+                      <div class="item-title">Shipped</div>
+                    </li>
+
+                    <li class="rb-item" >
+
+                      <div class="item-title">Delivered</div>
+                    </li>
+                    <li class="rb-item" >
+                      <div class="item-title"></div>
+                    </li>
+                  </ul>
+              {% elif course.toolbox_status == course.TB_BOUGHT %}
+                  <ul class="rb">
+                    <li class="rb-item as-progress" >
+                      <div class="item-title">Placed</div>
+                    </li>
+                    <li class="rb-item as-progress" >
+                      <div class="item-title">Shipped</div>
+                    </li>
+                    <li class="rb-item as-progress" >
+                      <div class="item-title">Delivered</div>
+                    </li>
+                    <li class="rb-item as-progress" >
+                      <div class="item-title"></div>
+                    </li>
+                  </ul>
+              {% elif course.toolbox_status == course.TB_GET %}
+              <form  method="POST" action="{% url 'toolbox:place-order' %}" style="position: relative;display: inline-block;margin-bottom: 10px;margin-left: auto; margin-right: auto;text-align: center;overflow: hidden;">
+                  {% csrf_token %}
+                  <input type="hidden" value="{{ course.toolbox.id }}" name="tool_box_id">
+                    {% if min_age and max_age %}
+                        {% if course.start_age <= min_age or course.start_age <= max_age and course.end_age >= max_age %}
+                          <input value="Get ToolBox" class="for-checkbox-tools" type="submit" style="position: relative;display: inline-block;padding: 15px;width: 150px;font-size: 12px;line-height: 10px;letter-spacing: 1px;margin-bottom: 10px;margin-left: auto; margin-right: auto;text-align: center;border-radius: 4px;overflow: hidden;cursor: pointer;text-transform: uppercase;color: var(--white);border: 1px solid;">
+                        {% else %}
+                        {% endif %}
+                    {% else %}
+                    {% endif %}
+              </form>
+              {% endif %}
+                </div>
+                {% if min_age and max_age %}
+                    {% if course.start_age <= min_age or course.start_age <= max_age and course.end_age >= max_age %}
+                    <div class="stm_lms_courses__single--info_preview">
+                        <a href="{% url 'course:free-trial-start' course.id %}" title="{{ course.title }}" class="heading_font">Start this course        </a>
+                    </div>
+                    {% else %}
+                    {% endif %}
+                {% else %}
+                    <div class="stm_lms_courses__single--info_preview">
+                        <a href="{% url 'course:free-trial-start' course.id %}" title="{{ course.title }}" class="heading_font">Start this course        </a>
+                    </div>
+                {% endif %}
+                </div>
+                </div>
+                </div>
+                {% endfor %}
+
+
+
+
+                {% for course in courses %}
+                {% if min_age and max_age %}
+                    {% if course.start_age <= min_age or course.start_age <= max_age and course.end_age >= max_age %}
+                        <div class="stm_lms_courses__single stm_lms_courses__single_animation no-sale style_1 " style="padding-top: 50px !important;">
+                    {% else %}
+                    <div style="position: relative;">
+                        <h1 style="position: absolute;
+                        top: 30%;
+                        left: 4rem;
+                        color: white !important;
+                        transform: translate(0,46%);
+                        z-index: 3;">Locked
+                        </h1>
+                    </div>
+                    <div class="stm_lms_courses__single stm_lms_courses__single_animation no-sale style_1 " style="padding-top: 50px !important; filter:brightness(40%) ">
+                    {% endif %}
+                {% else %}
+                <div class="stm_lms_courses__single stm_lms_courses__single_animation no-sale style_1 " style="padding-top: 50px !important;">
+                {% endif %}
+                <div class="stm_lms_courses__single__inner">
+                <div class="stm_lms_courses__single--image">
+                <a href="{% url 'course:course' course.id %}"
+                class="heading_font"
+                data-preview="Preview this course">
+                <div>
+                    {{ course.intro_video_iframe | safe }}
+                </div>
+                </a>
+                </div>
+                <div class="stm_lms_courses__single--inner">
+                <div class="stm_lms_courses__single--terms">
+                <div class="stm_lms_courses__single--term">
+                {% for category in course.category.all %}
+                    {{ category }}
+                {% endfor %}
+                </div>
+                </div>
+                <div class="stm_lms_courses__single--title">
+                {% if min_age and max_age %}
+                    {% if course.start_age <= min_age or course.start_age <= max_age and course.end_age >= max_age %}
+                        <a href="{% url 'course:course' course.id %}"><h5>{{ course.title }}</h5> </a>
+                    {% else %}
+                        <h5>{{ course.title }}</h5>
+                    {% endif %}
+                {% else %}
+                        <a href="{% url 'course:course' course.id %}"><h5>{{ course.title }}</h5> </a>
+                {% endif %}
+                </div>
+                <div class="stm_lms_courses__single--meta">
+                <div class="stm_lms_courses__single--price heading_font">
+                    <strong>{{ course.toolbox.name }} ToolBox</strong>
+                </div>
+                </div>
+                </div>
+                <div class="stm_lms_courses__single--info">
+                    <div class="stm_lms_courses__single--info_author">
+                <div class="stm_lms_courses__single--info_author__avatar">
+                <img alt="" src="http://0.gravatar.com/avatar/f94562563861857057c6a0a461c23805?s=215&amp;d=mm&amp;r=g" class="avatar avatar-215 photo" height="215" width="215" loading="lazy">            </div>
+                <div class="stm_lms_courses__single--info_author__login">
+                Author Name            </div>
+                </div>
+                <div class="stm_lms_courses__single--info_title">
+                {% if min_age and max_age %}
+                    {% if course.start_age <= min_age or course.start_age <= max_age and course.end_age >= max_age %}
+                        <a href="{% url 'course:course' course.id %}"><h5>{{ course.title }}</h5> </a>
+                    {% else %}
+                        <h5>{{ course.title }}</h5>
+                    {% endif %}
+                {% else %}
+                        <a href="{% url 'course:course' course.id %}"><h5>{{ course.title }}</h5> </a>
+                {% endif %}
+                </div>
+                {{ course.intro_video_iframe | safe }}
+                <div class="stm_lms_courses__single--info_excerpt">
+                With no prior experience, you will have the opportunity to walk through hands-on examples with Hadoop and Spark frameworks, two of the most common ...    </div>
+                <div class="stm_lms_courses__single--info_meta">
+                <div class="stm_lms_course__meta">
+                <i class="stmlms-cats"></i>
+                Lessons {{ course.lessons.count }}</div>
+                </div>
+          <div style="margin-left: auto; margin-right: auto;width:100%; text-align:center; padding-bottom:10px;">
+          <strong>{{ course.toolbox.name }} ToolBox</strong>
+          </div>
+                <div class="stm_lms_courses__single--info_meta rb-container">
+              {% if course.toolbox_status == course.TB_NO or not user.is_authenticated or not user.is_member %}
+              {% elif course.toolbox_status == course.TB_DELIVERY %}
+                  <ul class="rb">
+                    <li class="rb-item" >
+                      <div class="item-title">Placed</div>
+                    </li>
+                    <li class="rb-item" >
+                      <div class="item-title">Shipped</div>
+                    </li>
+
+                    <li class="rb-item" >
+
+                      <div class="item-title">Delivered</div>
+                    </li>
+                    <li class="rb-item" >
+                      <div class="item-title"></div>
+                    </li>
+                  </ul>
+              {% elif course.toolbox_status == course.TB_BOUGHT %}
+                  <ul class="rb">
+                    <li class="rb-item as-progress" >
+                      <div class="item-title">Placed</div>
+                    </li>
+                    <li class="rb-item as-progress" >
+                      <div class="item-title">Shipped</div>
+                    </li>
+                    <li class="rb-item as-progress" >
+                      <div class="item-title">Delivered</div>
+                    </li>
+                    <li class="rb-item as-progress" >
+                      <div class="item-title"></div>
+                    </li>
+                  </ul>
+              {% elif course.toolbox_status == course.TB_GET %}
+              <form  method="POST" action="{% url 'toolbox:place-order' %}" style="position: relative;display: inline-block;margin-bottom: 10px;margin-left: auto; margin-right: auto;text-align: center;overflow: hidden;">
+                  {% csrf_token %}
+                  <input type="hidden" value="{{ course.toolbox.id }}" name="tool_box_id">
+                    {% if min_age and max_age %}
+                        {% if course.start_age <= min_age or course.start_age <= max_age and course.end_age >= max_age %}
+                          <input value="Get ToolBox" class="for-checkbox-tools" type="submit" style="position: relative;display: inline-block;padding: 15px;width: 150px;font-size: 12px;line-height: 10px;letter-spacing: 1px;margin-bottom: 10px;margin-left: auto; margin-right: auto;text-align: center;border-radius: 4px;overflow: hidden;cursor: pointer;text-transform: uppercase;color: var(--white);border: 1px solid;">
+                        {% else %}
+                        {% endif %}
+                    {% else %}
+                    {% endif %}
+              </form>
+              {% endif %}
+                </div>
+                {% if min_age and max_age %}
+                    {% if course.start_age <= min_age or course.start_age <= max_age and course.end_age >= max_age %}
+                    <div class="stm_lms_courses__single--info_preview">
+                        <a href="{% url 'course:course' course.id %}" title="{{ course.title }}" class="heading_font">Preview this course        </a>
+                    </div>
+                    {% else %}
+                    {% endif %}
+                {% else %}
+                    <div class="stm_lms_courses__single--info_preview">
+                        <a href="{% url 'course:course' course.id %}" title="{{ course.title }}" class="heading_font">Preview this course        </a>
+                    </div>
+                {% endif %}
+                </div>
+                </div>
+                </div>
+                {% endfor %}
+
+                </div>
+
+
+
+        <div class="stm_lms_courses_wrapper" style="padding-bottom: 20px !important;">
+            <div class="courses_filters">
+                <div class="courses_filters__title">
+                    <h1>10-13 years Featured Courses</h1>
                 </div>
             </div>
             <div class="stm_lms_courses__archive_wrapper">
@@ -693,6 +1269,344 @@
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        <div class="stm_lms_courses_wrapper" style="padding-bottom: 20px !important;">
+            <div class="courses_filters">
+                <div class="courses_filters__title">
+                    <h1>14-18 years Featured Courses</h1>
+                </div>
+            </div>
+            <div class="stm_lms_courses__archive_wrapper">
+                <div class="stm_lms_courses stm_lms_courses__archive">
+                <div class="stm_lms_courses__grid stm_lms_courses__grid_4 stm_lms_courses__grid_center archive_grid stm_lms_courses__grid_found_2"
+                data-pages="1">
+
+                {% for course in free_trial_courses %}
+                <div class="stm_lms_courses__single stm_lms_courses__single_animation no-sale style_1 " style="padding-top: 50px !important;">
+                <div class="stm_lms_courses__single__inner">
+                <div class="stm_lms_courses__single--image">
+                <a href="{% url 'course:free-trial-start' course.id %}"
+                class="heading_font"
+                data-preview="Start this course">
+                <div>
+                    {{ course.intro_video_iframe | safe }}
+                </div>
+                </a>
+                </div>
+                <div class="stm_lms_courses__single--inner">
+                <div class="stm_lms_courses__single--terms">
+                <div class="stm_lms_courses__single--term">
+                {% for category in course.category.all %}
+                    {{ category }}
+                {% endfor %}
+                </div>
+                </div>
+                <div class="stm_lms_courses__single--title">
+                <a href="{% url 'course:free-trial-start' course.id %}"><h5>{{ course.title }}</h5> </a>
+                </div>
+                <div class="stm_lms_courses__single--meta">
+                <div class="stm_lms_courses__single--price heading_font">
+                    <strong>{{ course.toolbox.name }} ToolBox</strong>
+                </div>
+                </div>
+                </div>
+                <div class="stm_lms_courses__single--info">
+                    <div class="stm_lms_courses__single--info_author">
+                <div class="stm_lms_courses__single--info_author__avatar">
+                <img alt="" src="http://0.gravatar.com/avatar/f94562563861857057c6a0a461c23805?s=215&amp;d=mm&amp;r=g" class="avatar avatar-215 photo" height="215" width="215" loading="lazy">            </div>
+                <div class="stm_lms_courses__single--info_author__login">
+                Author Name            </div>
+                </div>
+                <div class="stm_lms_courses__single--info_title">
+                <a href="{% url 'course:free-trial-start' course.id %}"><h5>{{ course.title }}</h5> </a>
+                </div>
+                {{ course.intro_video_iframe | safe }}
+                <div class="stm_lms_courses__single--info_excerpt">
+                With no prior experience, you will have the opportunity to walk through hands-on examples with Hadoop and Spark frameworks, two of the most common ...    </div>
+                <div class="stm_lms_courses__single--info_meta">
+                <div class="stm_lms_course__meta">
+                <i class="stmlms-cats"></i>
+                Lessons {{ course.lessons.count }}</div>
+                </div>
+          <div style="margin-left: auto; margin-right: auto;width:100%; text-align:center; padding-bottom:10px;">
+          <strong>{{ course.toolbox.name }} ToolBox</strong>
+          </div>
+                <div class="stm_lms_courses__single--info_meta rb-container">
+              {% if course.toolbox_status == course.TB_NO or not user.is_authenticated or not user.is_member %}
+              {% elif course.toolbox_status == course.TB_DELIVERY %}
+                  <ul class="rb">
+                    <li class="rb-item" >
+                      <div class="item-title">Placed</div>
+                    </li>
+                    <li class="rb-item" >
+                      <div class="item-title">Shipped</div>
+                    </li>
+
+                    <li class="rb-item" >
+
+                      <div class="item-title">Delivered</div>
+                    </li>
+                    <li class="rb-item" >
+                      <div class="item-title"></div>
+                    </li>
+                  </ul>
+              {% elif course.toolbox_status == course.TB_BOUGHT %}
+                  <ul class="rb">
+                    <li class="rb-item as-progress" >
+                      <div class="item-title">Placed</div>
+                    </li>
+                    <li class="rb-item as-progress" >
+                      <div class="item-title">Shipped</div>
+                    </li>
+                    <li class="rb-item as-progress" >
+                      <div class="item-title">Delivered</div>
+                    </li>
+                    <li class="rb-item as-progress" >
+                      <div class="item-title"></div>
+                    </li>
+                  </ul>
+              {% elif course.toolbox_status == course.TB_GET %}
+              <form  method="POST" action="{% url 'toolbox:place-order' %}" style="position: relative;display: inline-block;margin-bottom: 10px;margin-left: auto; margin-right: auto;text-align: center;overflow: hidden;">
+                  {% csrf_token %}
+                  <input type="hidden" value="{{ course.toolbox.id }}" name="tool_box_id">
+                    {% if min_age and max_age %}
+                        {% if course.start_age <= min_age or course.start_age <= max_age and course.end_age >= max_age %}
+                          <input value="Get ToolBox" class="for-checkbox-tools" type="submit" style="position: relative;display: inline-block;padding: 15px;width: 150px;font-size: 12px;line-height: 10px;letter-spacing: 1px;margin-bottom: 10px;margin-left: auto; margin-right: auto;text-align: center;border-radius: 4px;overflow: hidden;cursor: pointer;text-transform: uppercase;color: var(--white);border: 1px solid;">
+                        {% else %}
+                        {% endif %}
+                    {% else %}
+                    {% endif %}
+              </form>
+              {% endif %}
+                </div>
+                {% if min_age and max_age %}
+                    {% if course.start_age <= min_age or course.start_age <= max_age and course.end_age >= max_age %}
+                    <div class="stm_lms_courses__single--info_preview">
+                        <a href="{% url 'course:free-trial-start' course.id %}" title="{{ course.title }}" class="heading_font">Start this course        </a>
+                    </div>
+                    {% else %}
+                    {% endif %}
+                {% else %}
+                    <div class="stm_lms_courses__single--info_preview">
+                        <a href="{% url 'course:free-trial-start' course.id %}" title="{{ course.title }}" class="heading_font">Start this course        </a>
+                    </div>
+                {% endif %}
+                </div>
+                </div>
+                </div>
+                {% endfor %}
+
+
+
+
+                {% for course in courses %}
+                {% if min_age and max_age %}
+                    {% if course.start_age <= min_age or course.start_age <= max_age and course.end_age >= max_age %}
+                        <div class="stm_lms_courses__single stm_lms_courses__single_animation no-sale style_1 " style="padding-top: 50px !important;">
+                    {% else %}
+                    <div style="position: relative;">
+                        <h1 style="position: absolute;
+                        top: 30%;
+                        left: 4rem;
+                        color: white !important;
+                        transform: translate(0,46%);
+                        z-index: 3;">Locked
+                        </h1>
+                    </div>
+                    <div class="stm_lms_courses__single stm_lms_courses__single_animation no-sale style_1 " style="padding-top: 50px !important; filter:brightness(40%) ">
+                    {% endif %}
+                {% else %}
+                <div class="stm_lms_courses__single stm_lms_courses__single_animation no-sale style_1 " style="padding-top: 50px !important;">
+                {% endif %}
+                <div class="stm_lms_courses__single__inner">
+                <div class="stm_lms_courses__single--image">
+                <a href="{% url 'course:course' course.id %}"
+                class="heading_font"
+                data-preview="Preview this course">
+                <div>
+                    {{ course.intro_video_iframe | safe }}
+                </div>
+                </a>
+                </div>
+                <div class="stm_lms_courses__single--inner">
+                <div class="stm_lms_courses__single--terms">
+                <div class="stm_lms_courses__single--term">
+                {% for category in course.category.all %}
+                    {{ category }}
+                {% endfor %}
+                </div>
+                </div>
+                <div class="stm_lms_courses__single--title">
+                {% if min_age and max_age %}
+                    {% if course.start_age <= min_age or course.start_age <= max_age and course.end_age >= max_age %}
+                        <a href="{% url 'course:course' course.id %}"><h5>{{ course.title }}</h5> </a>
+                    {% else %}
+                        <h5>{{ course.title }}</h5>
+                    {% endif %}
+                {% else %}
+                        <a href="{% url 'course:course' course.id %}"><h5>{{ course.title }}</h5> </a>
+                {% endif %}
+                </div>
+                <div class="stm_lms_courses__single--meta">
+                <div class="stm_lms_courses__single--price heading_font">
+                    <strong>{{ course.toolbox.name }} ToolBox</strong>
+                </div>
+                </div>
+                </div>
+                <div class="stm_lms_courses__single--info">
+                    <div class="stm_lms_courses__single--info_author">
+                <div class="stm_lms_courses__single--info_author__avatar">
+                <img alt="" src="http://0.gravatar.com/avatar/f94562563861857057c6a0a461c23805?s=215&amp;d=mm&amp;r=g" class="avatar avatar-215 photo" height="215" width="215" loading="lazy">            </div>
+                <div class="stm_lms_courses__single--info_author__login">
+                Author Name            </div>
+                </div>
+                <div class="stm_lms_courses__single--info_title">
+                {% if min_age and max_age %}
+                    {% if course.start_age <= min_age or course.start_age <= max_age and course.end_age >= max_age %}
+                        <a href="{% url 'course:course' course.id %}"><h5>{{ course.title }}</h5> </a>
+                    {% else %}
+                        <h5>{{ course.title }}</h5>
+                    {% endif %}
+                {% else %}
+                        <a href="{% url 'course:course' course.id %}"><h5>{{ course.title }}</h5> </a>
+                {% endif %}
+                </div>
+                {{ course.intro_video_iframe | safe }}
+                <div class="stm_lms_courses__single--info_excerpt">
+                With no prior experience, you will have the opportunity to walk through hands-on examples with Hadoop and Spark frameworks, two of the most common ...    </div>
+                <div class="stm_lms_courses__single--info_meta">
+                <div class="stm_lms_course__meta">
+                <i class="stmlms-cats"></i>
+                Lessons {{ course.lessons.count }}</div>
+                </div>
+          <div style="margin-left: auto; margin-right: auto;width:100%; text-align:center; padding-bottom:10px;">
+          <strong>{{ course.toolbox.name }} ToolBox</strong>
+          </div>
+                <div class="stm_lms_courses__single--info_meta rb-container">
+              {% if course.toolbox_status == course.TB_NO or not user.is_authenticated or not user.is_member %}
+              {% elif course.toolbox_status == course.TB_DELIVERY %}
+                  <ul class="rb">
+                    <li class="rb-item" >
+                      <div class="item-title">Placed</div>
+                    </li>
+                    <li class="rb-item" >
+                      <div class="item-title">Shipped</div>
+                    </li>
+
+                    <li class="rb-item" >
+
+                      <div class="item-title">Delivered</div>
+                    </li>
+                    <li class="rb-item" >
+                      <div class="item-title"></div>
+                    </li>
+                  </ul>
+              {% elif course.toolbox_status == course.TB_BOUGHT %}
+                  <ul class="rb">
+                    <li class="rb-item as-progress" >
+                      <div class="item-title">Placed</div>
+                    </li>
+                    <li class="rb-item as-progress" >
+                      <div class="item-title">Shipped</div>
+                    </li>
+                    <li class="rb-item as-progress" >
+                      <div class="item-title">Delivered</div>
+                    </li>
+                    <li class="rb-item as-progress" >
+                      <div class="item-title"></div>
+                    </li>
+                  </ul>
+              {% elif course.toolbox_status == course.TB_GET %}
+              <form  method="POST" action="{% url 'toolbox:place-order' %}" style="position: relative;display: inline-block;margin-bottom: 10px;margin-left: auto; margin-right: auto;text-align: center;overflow: hidden;">
+                  {% csrf_token %}
+                  <input type="hidden" value="{{ course.toolbox.id }}" name="tool_box_id">
+                    {% if min_age and max_age %}
+                        {% if course.start_age <= min_age or course.start_age <= max_age and course.end_age >= max_age %}
+                          <input value="Get ToolBox" class="for-checkbox-tools" type="submit" style="position: relative;display: inline-block;padding: 15px;width: 150px;font-size: 12px;line-height: 10px;letter-spacing: 1px;margin-bottom: 10px;margin-left: auto; margin-right: auto;text-align: center;border-radius: 4px;overflow: hidden;cursor: pointer;text-transform: uppercase;color: var(--white);border: 1px solid;">
+                        {% else %}
+                        {% endif %}
+                    {% else %}
+                    {% endif %}
+              </form>
+              {% endif %}
+                </div>
+                {% if min_age and max_age %}
+                    {% if course.start_age <= min_age or course.start_age <= max_age and course.end_age >= max_age %}
+                    <div class="stm_lms_courses__single--info_preview">
+                        <a href="{% url 'course:course' course.id %}" title="{{ course.title }}" class="heading_font">Preview this course        </a>
+                    </div>
+                    {% else %}
+                    {% endif %}
+                {% else %}
+                    <div class="stm_lms_courses__single--info_preview">
+                        <a href="{% url 'course:course' course.id %}" title="{{ course.title }}" class="heading_font">Preview this course        </a>
+                    </div>
+                {% endif %}
+                </div>
+                </div>
+                </div>
+                {% endfor %}
+
+                </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     <div class="hidden">
 
 <div class="text-center">
@@ -840,7 +1754,10 @@
 				<div class="elementor-widget-container">
 
 	<div class="stm_subscribe  masterstudy_elementor_mailchimp_ module__233652cad69be5e7c66e29c707da77be">
-		<div class="widget widget_mailchimp"><h5 class="stm_subscribe_title" style="color: #ffffff;">Your e-mail address</h5><form action="/" class="stm_subscribe_1636731342"><div class="stm_mailchimp_unit"><div class="form-group"><input type="email" name="email" class="form-control stm_subscribe_email" placeholder="Enter your E-mail" required/></div><button class="button"><span class="h5">Subscribe</span></button><div class="stm_subscribe_preloader">Please wait...</div></div></form>
+            <form method="post" action="{% url 'authorization:newsletter' %}">
+                {% csrf_token %}
+		<div class="widget widget_mailchimp"><h5 class="stm_subscribe_title" style="color: #ffffff;">Your e-mail address</h5><form action="/" class="stm_subscribe_1636731342"><div class="stm_mailchimp_unit"><div class="form-group"><input type="email" name="email" class="form-control stm_subscribe_email" placeholder="Enter your E-mail" required/></div><input type="submit" value="Subscribe" class="button"><span class="h5"></span><div class="stm_subscribe_preloader">Please wait...</div></div></form>
+                    </form>
 			<script type="text/javascript">
 				jQuery(document).ready( function($){
 					$(".stm_subscribe_1636731342").on('submit', function (e) {

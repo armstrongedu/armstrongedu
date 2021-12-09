@@ -5,7 +5,7 @@ from .models import BillingData, Membership, Card, Invoice, CardToken, Membershi
 
 @admin.register(MembershipType)
 class MembershipTypeAdmin(admin.ModelAdmin):
-    list_display = ('country', 'name', 'display_float_price', 'real_price_egyptian_cents', 'number_of_students',)
+    list_display = ('plan', 'country', 'name', 'display_float_price', 'real_price_egyptian_cents', 'number_of_students',)
 
 
 @admin.register(BillingData)
