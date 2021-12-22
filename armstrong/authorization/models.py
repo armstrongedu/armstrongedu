@@ -21,10 +21,11 @@ class User(SimpleEmailConfirmationUserMixin, AbstractUser):
         return hasattr(self, 'membership') and (self.membership.status == Membership.ACTIVE)
 
     def has_students(self):
-        return self.membership.membership_type.number_of_students == self.students.count()
+        return self.membership.number_of_students == self.students.count()
 
     def is_free_trial(self):
-        return not self.is_member() and (now() - self.date_joined).days <= 14
+        # return not self.is_member() and (now() - self.date_joined).days <= 14
+        return True
 
     def is_plus(self):
         return self.is_member() and self.membership.membership_type.plan == self.membership.membership_type.PLUS
@@ -32,6 +33,7 @@ class User(SimpleEmailConfirmationUserMixin, AbstractUser):
 
 class Student(models.Model):
     user = models.ForeignKey(User, null=False, blank=False, on_delete=models.CASCADE, related_name='students')
+    image = models.ImageField(null=True, blank=True,)
     name = models.CharField(max_length=255, null=False, blank=False)
     birth_year = models.IntegerField(null=False, blank=False)
 

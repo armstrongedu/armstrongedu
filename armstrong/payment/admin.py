@@ -5,7 +5,7 @@ from .models import BillingData, Membership, Card, Invoice, CardToken, Membershi
 
 @admin.register(MembershipType)
 class MembershipTypeAdmin(admin.ModelAdmin):
-    list_display = ('plan', 'country', 'name', 'display_float_price', 'real_price_egyptian_cents', 'number_of_students',)
+    list_display = ('plan', 'country', 'name', 'display_float_price', 'real_price_egyptian_cents', 'std_display_float_price', 'std_real_price_egyptian_cents',)
 
 
 @admin.register(BillingData)
@@ -15,7 +15,7 @@ class BillingDataAdmin(admin.ModelAdmin):
 
 @admin.register(Membership)
 class MembershipAdmin(admin.ModelAdmin):
-    list_display = ('user', 'activated_on', 'get_status_display', 'membership_type',)
+    list_display = ('user', 'activated_on', 'get_status_display', 'membership_type', 'number_of_students',)
 
 
 @admin.register(Card)
@@ -25,7 +25,7 @@ class CardAdmin(admin.ModelAdmin):
 
 @admin.register(Invoice)
 class InvoiceAdmin(admin.ModelAdmin):
-    list_display = ('user', 'card', 'paymob_id', 'created_at', 'item_name', 'item_price', 'promocode_price', 'billed',)
+    list_display = ('user', 'card', 'paymob_id', 'created_at', 'item_name', 'item_price', 'promocode_price', 'billed', 'add_stds_price',)
 
 
 @admin.register(CardToken)

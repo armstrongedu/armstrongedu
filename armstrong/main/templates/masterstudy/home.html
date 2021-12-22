@@ -442,7 +442,11 @@
                 class="heading_font"
                 data-preview="Start this course">
                 <div>
-                    {{ course.intro_video_iframe | safe }}
+                                                    {% if course.intro_video_iframe %}
+                                                        {{ course.intro_video_iframe | safe }}
+                                                    {% else %}
+                                                        <img src="{{ course.cover.url }}">
+                                                    {% endif %}
                 </div>
                 </a>
                 </div>
@@ -473,7 +477,11 @@
                 <div class="stm_lms_courses__single--info_title">
                 <a href="{% url 'course:free-trial-start' course.id %}"><h5>{{ course.title }}</h5> </a>
                 </div>
-                {{ course.intro_video_iframe | safe }}
+                                                    {% if course.intro_video_iframe %}
+                                                        {{ course.intro_video_iframe | safe }}
+                                                    {% else %}
+                                                        <img src="{{ course.cover.url }}">
+                                                    {% endif %}
                 <div class="stm_lms_courses__single--info_excerpt">
                 With no prior experience, you will have the opportunity to walk through hands-on examples with Hadoop and Spark frameworks, two of the most common ...    </div>
                 <div class="stm_lms_courses__single--info_meta">
@@ -577,7 +585,11 @@
                 class="heading_font"
                 data-preview="Preview this course">
                 <div>
-                    {{ course.intro_video_iframe | safe }}
+                                                    {% if course.intro_video_iframe %}
+                                                        {{ course.intro_video_iframe | safe }}
+                                                    {% else %}
+                                                        <img src="{{ course.cover.url }}">
+                                                    {% endif %}
                 </div>
                 </a>
                 </div>
@@ -624,7 +636,11 @@
                         <a href="{% url 'course:course' course.id %}"><h5>{{ course.title }}</h5> </a>
                 {% endif %}
                 </div>
-                {{ course.intro_video_iframe | safe }}
+                                                    {% if course.intro_video_iframe %}
+                                                        {{ course.intro_video_iframe | safe }}
+                                                    {% else %}
+                                                        <img src="{{ course.cover.url }}">
+                                                    {% endif %}
                 <div class="stm_lms_courses__single--info_excerpt">
                 With no prior experience, you will have the opportunity to walk through hands-on examples with Hadoop and Spark frameworks, two of the most common ...    </div>
                 <div class="stm_lms_courses__single--info_meta">
@@ -723,7 +739,11 @@
                 class="heading_font"
                 data-preview="Start this course">
                 <div>
-                    {{ course.intro_video_iframe | safe }}
+                                                    {% if course.intro_video_iframe %}
+                                                        {{ course.intro_video_iframe | safe }}
+                                                    {% else %}
+                                                        <img src="{{ course.cover.url }}">
+                                                    {% endif %}
                 </div>
                 </a>
                 </div>
@@ -754,7 +774,11 @@
                 <div class="stm_lms_courses__single--info_title">
                 <a href="{% url 'course:free-trial-start' course.id %}"><h5>{{ course.title }}</h5> </a>
                 </div>
-                {{ course.intro_video_iframe | safe }}
+                                                    {% if course.intro_video_iframe %}
+                                                        {{ course.intro_video_iframe | safe }}
+                                                    {% else %}
+                                                        <img src="{{ course.cover.url }}">
+                                                    {% endif %}
                 <div class="stm_lms_courses__single--info_excerpt">
                 With no prior experience, you will have the opportunity to walk through hands-on examples with Hadoop and Spark frameworks, two of the most common ...    </div>
                 <div class="stm_lms_courses__single--info_meta">
@@ -858,7 +882,11 @@
                 class="heading_font"
                 data-preview="Preview this course">
                 <div>
-                    {{ course.intro_video_iframe | safe }}
+                                                    {% if course.intro_video_iframe %}
+                                                        {{ course.intro_video_iframe | safe }}
+                                                    {% else %}
+                                                        <img src="{{ course.cover.url }}">
+                                                    {% endif %}
                 </div>
                 </a>
                 </div>
@@ -905,7 +933,11 @@
                         <a href="{% url 'course:course' course.id %}"><h5>{{ course.title }}</h5> </a>
                 {% endif %}
                 </div>
-                {{ course.intro_video_iframe | safe }}
+                                                    {% if course.intro_video_iframe %}
+                                                        {{ course.intro_video_iframe | safe }}
+                                                    {% else %}
+                                                        <img src="{{ course.cover.url }}">
+                                                    {% endif %}
                 <div class="stm_lms_courses__single--info_excerpt">
                 With no prior experience, you will have the opportunity to walk through hands-on examples with Hadoop and Spark frameworks, two of the most common ...    </div>
                 <div class="stm_lms_courses__single--info_meta">
@@ -1004,7 +1036,11 @@
                 class="heading_font"
                 data-preview="Start this course">
                 <div>
-                    {{ course.intro_video_iframe | safe }}
+                                                    {% if course.intro_video_iframe %}
+                                                        {{ course.intro_video_iframe | safe }}
+                                                    {% else %}
+                                                        <img src="{{ course.cover.url }}">
+                                                    {% endif %}
                 </div>
                 </a>
                 </div>
@@ -1035,7 +1071,11 @@
                 <div class="stm_lms_courses__single--info_title">
                 <a href="{% url 'course:free-trial-start' course.id %}"><h5>{{ course.title }}</h5> </a>
                 </div>
-                {{ course.intro_video_iframe | safe }}
+                                                    {% if course.intro_video_iframe %}
+                                                        {{ course.intro_video_iframe | safe }}
+                                                    {% else %}
+                                                        <img src="{{ course.cover.url }}">
+                                                    {% endif %}
                 <div class="stm_lms_courses__single--info_excerpt">
                 With no prior experience, you will have the opportunity to walk through hands-on examples with Hadoop and Spark frameworks, two of the most common ...    </div>
                 <div class="stm_lms_courses__single--info_meta">
@@ -1139,7 +1179,11 @@
                 class="heading_font"
                 data-preview="Preview this course">
                 <div>
-                    {{ course.intro_video_iframe | safe }}
+                                                    {% if course.intro_video_iframe %}
+                                                        {{ course.intro_video_iframe | safe }}
+                                                    {% else %}
+                                                        <img src="{{ course.cover.url }}">
+                                                    {% endif %}
                 </div>
                 </a>
                 </div>
@@ -1186,7 +1230,11 @@
                         <a href="{% url 'course:course' course.id %}"><h5>{{ course.title }}</h5> </a>
                 {% endif %}
                 </div>
-                {{ course.intro_video_iframe | safe }}
+                                                    {% if course.intro_video_iframe %}
+                                                        {{ course.intro_video_iframe | safe }}
+                                                    {% else %}
+                                                        <img src="{{ course.cover.url }}">
+                                                    {% endif %}
                 <div class="stm_lms_courses__single--info_excerpt">
                 With no prior experience, you will have the opportunity to walk through hands-on examples with Hadoop and Spark frameworks, two of the most common ...    </div>
                 <div class="stm_lms_courses__single--info_meta">
@@ -1306,7 +1354,11 @@
                 class="heading_font"
                 data-preview="Start this course">
                 <div>
-                    {{ course.intro_video_iframe | safe }}
+                                                    {% if course.intro_video_iframe %}
+                                                        {{ course.intro_video_iframe | safe }}
+                                                    {% else %}
+                                                        <img src="{{ course.cover.url }}">
+                                                    {% endif %}
                 </div>
                 </a>
                 </div>
@@ -1337,7 +1389,11 @@
                 <div class="stm_lms_courses__single--info_title">
                 <a href="{% url 'course:free-trial-start' course.id %}"><h5>{{ course.title }}</h5> </a>
                 </div>
-                {{ course.intro_video_iframe | safe }}
+                                                    {% if course.intro_video_iframe %}
+                                                        {{ course.intro_video_iframe | safe }}
+                                                    {% else %}
+                                                        <img src="{{ course.cover.url }}">
+                                                    {% endif %}
                 <div class="stm_lms_courses__single--info_excerpt">
                 With no prior experience, you will have the opportunity to walk through hands-on examples with Hadoop and Spark frameworks, two of the most common ...    </div>
                 <div class="stm_lms_courses__single--info_meta">
@@ -1441,7 +1497,11 @@
                 class="heading_font"
                 data-preview="Preview this course">
                 <div>
-                    {{ course.intro_video_iframe | safe }}
+                                                    {% if course.intro_video_iframe %}
+                                                        {{ course.intro_video_iframe | safe }}
+                                                    {% else %}
+                                                        <img src="{{ course.cover.url }}">
+                                                    {% endif %}
                 </div>
                 </a>
                 </div>
@@ -1488,7 +1548,11 @@
                         <a href="{% url 'course:course' course.id %}"><h5>{{ course.title }}</h5> </a>
                 {% endif %}
                 </div>
-                {{ course.intro_video_iframe | safe }}
+                                                    {% if course.intro_video_iframe %}
+                                                        {{ course.intro_video_iframe | safe }}
+                                                    {% else %}
+                                                        <img src="{{ course.cover.url }}">
+                                                    {% endif %}
                 <div class="stm_lms_courses__single--info_excerpt">
                 With no prior experience, you will have the opportunity to walk through hands-on examples with Hadoop and Spark frameworks, two of the most common ...    </div>
                 <div class="stm_lms_courses__single--info_meta">
@@ -2122,6 +2186,9 @@ Proudly, Armstrong is accredited from STEM.org</p>
                   <ul class="style_1" style="list-style-type: none;">
                     <li class="text-center page_item page-item-664">
                         Made With <i class="fas fa-heart has-text-danger"></i> By <a href="https://gaytomycode.com" target="_blank" class="text-white">Hassan</a> and <a href="https://hagarsaleh.com" target="_blank" class="text-white">Hagar</a>.
+                    </li>
+                    <li class="text-center page_item page-item-664">
+                        &copy;Armstrong LLC. 2021. All Rights Reserved.
                     </li>
                   </ul>
               </div>

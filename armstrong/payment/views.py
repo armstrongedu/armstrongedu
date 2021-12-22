@@ -1,5 +1,6 @@
 import json
 import datetime
+import re
 
 from django.shortcuts import render
 from django.contrib.auth.decorators import login_required, user_passes_test
@@ -42,6 +43,7 @@ def subscribe(request):
 def checkout(request):
     membership_type = MembershipType.objects.get(id=request.POST['membership_type'])
     promocode = promocode_post = request.POST.get('promocode')
+    num_of_stds = request.POST.get('number_of_students')
     if promocode_post:
         promocode = Promocode.objects.filter(promocode=promocode_post)
 
@@ -73,6 +75,11 @@ def checkout(request):
         context['error'] = 'Promocode Not Valid!'
         return render(template_name=f'masterstudy/subscribe{"_ar" if settings.AS_LANG == "ar" else ""}.html', request=request, context=context)
 
+    if not num_of_stds or not num_of_stds.isdigit() or int(num_of_stds)-1 < 0:
+        context['error'] = 'Number of Students Not Valid!'
+        return render(template_name=f'masterstudy/subscribe{"_ar" if settings.AS_LANG == "ar" else ""}.html', request=request, context=context)
+    num_of_stds = int(num_of_stds) - 1
+
     if promocode_post:
         promocode = promocode.first()
         promocode_price = int(membership_type.real_price_egyptian_cents * promocode.percent // 100)
@@ -80,6 +87,13 @@ def checkout(request):
     else:
         promocode_price = 0
         promocode_display = 0.0
+
+    if num_of_stds:
+        num_of_stds_price = int(membership_type.std_real_price_egyptian_cents * int(num_of_stds))
+        num_of_stds_display = int(membership_type.std_display_float_price * int(num_of_stds))
+    else:
+        num_of_stds_price = 0
+        num_of_stds_display = 0.0
 
     if not billing_data_form.is_valid():
         return render(template_name=f'masterstudy/subscribe{"_ar" if settings.AS_LANG == "ar" else ""}.html', request=request, context=context)
@@ -91,7 +105,7 @@ def checkout(request):
     order_data = {
         "auth_token": auth_token,
         "delivery_needed": "false",
-        "amount_cents": membership_type.real_price_egyptian_cents - promocode_price,
+        "amount_cents": membership_type.real_price_egyptian_cents - promocode_price + num_of_stds_price,
         "currency": "EGP",
         "items": [{
             "name": membership_type.id,
@@ -103,14 +117,19 @@ def checkout(request):
             "amount_cents": promocode_price,
             "description": promocode.promocode if promocode_post else '',
             "quantity": 1,
-        },],
+        },{
+            "name": 'STDS',
+            "amount_cents": num_of_stds_price,
+            "description": str(num_of_stds),
+            "quantity": int(num_of_stds),
+        }],
     }
 
     order = accept_api.order_registration(order_data)
 
     accept_api_request = {
         "auth_token": auth_token,
-        "amount_cents": membership_type.real_price_egyptian_cents - promocode_price,
+        "amount_cents": membership_type.real_price_egyptian_cents - promocode_price + num_of_stds_price,
         "expiration": 3600,
         "order_id": order.get("id"),
         "billing_data": {
@@ -129,7 +148,7 @@ def checkout(request):
             "state": billing_data_form['state'].value(),
         },
         "currency": "EGP",
-        "integration_id": 1139146,
+        "integration_id": settings.PAYMOB_PAYMENT_ID,
         "lock_order_when_paid": "false"
     }
 
@@ -140,8 +159,10 @@ def checkout(request):
     context['iframe_url'] = iframe_url
     if promocode_post:
         context['promocode'] = promocode
+    context['num_of_stds'] = num_of_stds
     context['promocode_display'] = round(int(promocode_display), 2)
-    context['net_price'] = round(int(membership_type.display_float_price - promocode_display), 2)
+    context['num_of_stds_display'] = round(int(num_of_stds_display), 2)
+    context['net_price'] = round(int(membership_type.display_float_price - promocode_display + num_of_stds_display), 2)
 
 
     billing_data_form.save()
@@ -163,6 +184,9 @@ def subscribe_done(request):
                 if item['name'] == 'PROMOCODE':
                     promocode_price = item['amount_cents']
                     promocode_name = item['description']
+                elif item['name'] == 'STDS':
+                    num_of_stds_price = item['amount_cents']
+                    num_of_stds = int(item['description'])
                 else:
                     item_name = item['name']
                     item_price = item['amount_cents']
@@ -198,6 +222,7 @@ def subscribe_done(request):
             promocode_name = promocode_name,
             item_price = round(int(item_price)/100, 2),
             promocode_price = round(int(promocode_price)/100, 2),
+            add_stds_price = round(int(num_of_stds_price)/100, 2),
             billed = round(int(t_data['amount_cents'])/100, 2),
         )
 
@@ -207,9 +232,10 @@ def subscribe_done(request):
                 'status': Membership.ACTIVE,
                 'membership_type': membership_type,
                 'activated_on': timezone.now(),
+                'number_of_students': num_of_stds + 1,
             }
         )
-        request.user.students.all().delete()
+        # request.user.students.all().delete()
 
         context['card'] = card
         context['invoice'] = invoice

@@ -17,7 +17,7 @@
         <form method="post" action="">
     {% endif %}
         {% csrf_token %}
-        <div class="stm_lms_login_wrapper">
+        <div class="stm_lms_login_wrapper" style="background-color: #eef1f7 !important;">
         {% for field in form %}
             <div class="form-group">
                 <label class="heading_font">{{ field.label }}</label>

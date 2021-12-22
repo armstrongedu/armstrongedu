@@ -56,8 +56,13 @@
                                         <div role="tabpanel"
      class="tab-pane active"
      id="description">
+                                                    {% if course.intro_video_iframe %}
                                                 <div class="stm_lms_course__image" style="height:500px">
-                                                    {{ course.intro_video_iframe | safe }}
+                                                        {{ course.intro_video_iframe | safe }}
+                                                    {% else %}
+                                                <div class="stm_lms_course__image">
+                                                        <img src="{{ course.cover.url }}" class="attachment-img-870-440 size-img-870-440 wp-post-image" alt="masterstudy_placeholder" loading="lazy" width="870" height="440">
+                                                    {% endif %}
                                                 </div>
                                                 <div class="stm_lms_course__content">
                                                         <div class="vc_row wpb_row vc_row-fluid">

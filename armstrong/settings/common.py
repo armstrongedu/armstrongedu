@@ -54,6 +54,7 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'django_middleware_global_request.middleware.GlobalRequestMiddleware',
     'authorization.middlewares.email_checker',
+    'authorization.middlewares.std_checker',
     'login_sessions.middleware.OneSessionPerUserMiddleware',
 ]
 
@@ -193,3 +194,4 @@ URL = ENV.str('URL')
 
 GEOIP_PATH = os.path.join(BASE_DIR, 'payment')
 CRYPT_KEY = ENV.str('CRYPT_KEY')
+PAYMOB_PAYMENT_ID = ENV.str('PAYMOB_PAYMENT_ID')

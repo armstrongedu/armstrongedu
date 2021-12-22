@@ -33,15 +33,18 @@
                                                                                 </div>
                                                                                 <div class="lp-pmpro-content">
                                                                                         <div class="lp-pmpro-desc">
-                                                                                            <label>Membership level:</label>{{ membership_type.name }}
+                                                                                            <label>Membership level:</label> {{ membership_type.get_plan_display }} - {{ membership_type.name }}
                                                                                         </div>
                                                                                         <div id="pmpro_level_cost">
                                                                                                 <div class="lp-pmpro-desc lp-pmpro-price">
                                                                                                         <label>Original Price:</label>
                                                                                                             <sup>{{ membership_type.currency }}</sup>{{ membership_type.display_float_price}}.
                                                                                                             <br>
-                                                                                                            <label>Promocode ({{ promocode.promocode }}):</label>
+                                                                                                            <label>Promocode {{ promocode.promocode }}:</label>
                                                                                                         <sup>{{ membership_type.currency }}</sup>{{ promocode_display }} ({{ promocode.percent }}%).
+                                                                                                            <br>
+                                                                                                            <label>Additional Students {{ num_of_stds }}:</label>
+                                                                                                        <sup>{{ membership_type.currency }}</sup>{{ num_of_stds_display }}.
                                                                                                             <br>
                                                                                                         <label>Price:</label>
                                                                                                         <strong>

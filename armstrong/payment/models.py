@@ -37,8 +37,9 @@ class MembershipType(models.Model):
     name = models.CharField(max_length=255, null=False, blank=False)
     display_float_price = models.FloatField(null=False, blank=False)
     real_price_egyptian_cents = models.IntegerField(null=False, blank=False)
-    number_of_students = models.IntegerField(null=False, blank=False)
     plan = models.IntegerField(null=False, blank=False, choices=PLANS)
+    std_display_float_price = models.FloatField(null=False, blank=False)
+    std_real_price_egyptian_cents = models.IntegerField(null=False, blank=False)
 
     def __str__(self):
         return f'{self.name} - {self.real_price_egyptian_cents} Egyptian Cents'
@@ -72,6 +73,7 @@ class Membership(models.Model):
     membership_type = models.ForeignKey(MembershipType, null=True, blank=True, on_delete=models.SET_NULL, related_name='memberships')
     activated_on = models.DateTimeField(null=False, blank=False)
     status = models.PositiveSmallIntegerField(choices=STATUS, null=False, blank=False, default=ACTIVE)
+    number_of_students = models.IntegerField(null=False, blank=False)
 
     def __str__(self):
         return f'{self.get_status_display()} - Started On: {self.activated_on.date()}'
@@ -96,6 +98,7 @@ class Invoice(models.Model):
     created_at = models.DateTimeField(auto_now=True, null=False, blank=False)
     item_price = models.FloatField(null=False, blank=False)
     promocode_price = models.FloatField(null=False, blank=False)
+    add_stds_price = models.FloatField(null=False, blank=False)
     billed = models.FloatField(null=False, blank=False)
 
 class CardToken(models.Model):

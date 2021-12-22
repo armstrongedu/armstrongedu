@@ -14,3 +14,17 @@ def email_checker(get_response):
             return redirect('authorization:confirm-email-start')
         return response
     return middleware
+
+
+def std_checker(get_response):
+    def middleware(request):
+        response = get_response(request)
+        user = request.user
+        if (user.is_authenticated
+            and user.is_member()
+            and not user.has_students()
+            and request.path != '/authorization/add-students/'
+            and not user.is_staff):
+            return redirect('authorization:add-students')
+        return response
+    return middleware

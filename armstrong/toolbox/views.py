@@ -68,7 +68,7 @@ def place_order(request):
             "state": billing_data.state,
         },
         "currency": "EGP",
-        "integration_id": 1139146,
+        "integration_id": settings.PAYMOB_PAYMENT_ID,
         "lock_order_when_paid": "false"
     }
 

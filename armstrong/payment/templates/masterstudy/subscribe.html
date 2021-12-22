@@ -36,12 +36,14 @@
                                                                                                             <label for="membership_type">Membership Level</label>
                                                                                                             <select name="membership_type" id="membership_type" class="pmpro_required select2-hidden-accessible" tabindex="-1" aria-hidden="true">
                                                                                                                 {% for membership_type in membership_types %}
-                                                                                                                <option value="{{ membership_type.id }}">{{ membership_type.name }} - {{ membership_type.display_float_price }} {{ membership_type.currency }}</option>
+                                                                                                                <option value="{{ membership_type.id }}">{{ membership_type.get_plan_display }}: {{ membership_type.name }} - {{ membership_type.display_float_price }} {{ membership_type.currency }} ({{ membership_type.std_display_float_price }} {{ membership_type.currency }} Per Additional Student)</option>
                                                                                                                 {% endfor %}
                                                                                                             </select>
                                                                                                     </div>
                                                                                                     <br>
                                                                                                         <input id="promocode" name="promocode" type="text" placeholder="Promocode">
+                                                                                                    <br>
+                                                                                                        <input id="number_of_students" name="number_of_students" type="text" placeholder="Number Of Students">
                                                                                                     <br>
                                                                                                     <div class="lp-pmpro-content">
                                                                                                             <div id="pmpro_level_cost">

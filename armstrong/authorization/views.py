@@ -34,19 +34,27 @@ class SignUpView(generic.CreateView):
 def add_students(request):
     resp = redirect('main:home')
     if request.method == 'GET':
-        request.user.students.all().delete()
-        std_count = request.user.membership.membership_type.number_of_students
+        # request.user.students.all().delete()
+        std_count = request.user.membership.number_of_students - request.user.students.count()
         cur_year = datetime.now().year
         context = {
             'range': range(cur_year, cur_year-20, -1),
             'std_range': range(0, std_count),
+            'stds': request.user.students.all(),
         }
         return render(template_name=f'masterstudy/add-students{"_ar" if settings.AS_LANG == "ar" else ""}.html', request=request, context=context)
     if request.method == 'POST':
         data = request.POST
-        std_count = request.user.membership.membership_type.number_of_students
+        std_count = request.user.membership.number_of_students - request.user.students.count()
+        for std in request.user.students.all():
+            if data.get(f'name_edit_{std.id}'):
+                std.image = request.FILES.get(f'image_edit_{std.id}')
+                std.name = data[f'name_edit_{std.id}']
+                std.birth_year = data[f'year_edit_{std.id}']
+                std.save()
         for i in range(0, std_count):
-            std = Student.objects.create(user=request.user, name=data[f'name_{i}'], birth_year=data[f'year_{i}'])
+            std = Student.objects.create(user=request.user, image=request.FILES.get(f'image_{i}'), name=data[f'name_{i}'], birth_year=data[f'year_{i}'])
+
         resp.set_cookie('std_id', std.id)
         resp.set_cookie('std', std.name)
     return resp
