@@ -23,7 +23,8 @@ def std_checker(get_response):
         if (user.is_authenticated
             and user.is_member()
             and not user.has_students()
-            and request.path != '/authorization/add-students/'
+            and request.path not in ['/authorization/add-students/',
+                                     '/payment/subscribe-done/',]
             and not user.is_staff):
             return redirect('authorization:add-students')
         return response

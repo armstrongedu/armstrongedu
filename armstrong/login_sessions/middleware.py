@@ -10,7 +10,10 @@ class OneSessionPerUserMiddleware:
             stored_session_key = request.user.login_sessions.session_key
 
             if stored_session_key and stored_session_key != request.session.session_key:
-                Session.objects.get(session_key=stored_session_key).delete()
+                try:
+                    Session.objects.get(session_key=stored_session_key).delete()
+                except Session.DoesNotExist:
+                    pass
 
             request.user.login_sessions.session_key = request.session.session_key
             request.user.login_sessions.save()
