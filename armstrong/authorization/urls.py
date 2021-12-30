@@ -62,4 +62,6 @@ urlpatterns = [
          name='email-confirmed'),
     path('newsletter/', views.newsletter,
          name='newsletter'),
+    path('profile/', views.profile,
+         name='profile'),
 ]

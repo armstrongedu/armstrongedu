@@ -1,0 +1,136 @@
+{% extends 'masterstudy/courses_layout.html' %}
+{% block title %}Profile - ARMSTRONG{% endblock %}
+{% block main_body %}
+<div class="entry-header clearfix" style="background-color: white !important;">
+<div class="container">
+                    <div class="post_type_exist clearfix">
+                                    	<div id="pmpro_account">
+					<div id="pmpro_account-membership" class="pmpro_box">
+
+				<h3>My Memberships</h3>
+				<table class="pmpro_table" width="100%" cellspacing="0" cellpadding="0" border="0">
+					<thead>
+						<tr>
+							<th style="text-align: center !important;">Payment ID</th>
+							<th style="text-align: center !important;">Membership</th>
+							<th style="text-align: center !important;">Billed</th>
+							<th style="text-align: center !important;">Expiration</th>
+						</tr>
+					</thead>
+					<tbody>
+                                            {% if user.invoices.all %}
+                                                {% for invo in user.invoices.all %}
+                                                        <tr>
+                                                            <td style="text-align: center !important;">{{ invo.paymob_id }}</td>
+                                                            <td style="text-align: center !important;">{{ invo.item_name }} {% if invo.promocode_name %}({{ invo.promocode_name }}){% endif %}</td>
+                                                            <td style="text-align: center !important;">£{{ invo.billed }}</td>
+                                                            <td style="text-align: center !important;">{{ invo.ends_on }}</td>
+                                                    </tr>
+                                                {% endfor %}
+                                            {% else %}
+												<tr>
+							<td colspan="3"> You do not have an active membership. <a href="{% url 'payment:subscribe' %}">Choose a membership level.</a>							</td>
+						</tr>
+                                            {% endif %}
+												</tbody>
+				</table>
+								<div class="pmpro_actionlinks">
+					<a id="pmpro_actionlink-levels" href="">View all Membership Options</a>
+				</div>
+                                <br>
+				<h3>My Students</h3>
+				<table class="pmpro_table" width="100%" cellspacing="0" cellpadding="0" border="0">
+					<thead>
+						<tr>
+							<th style="text-align: center !important;">Student</th>
+							<th style="text-align: center !important;">Birth Year</th>
+						</tr>
+					</thead>
+					<tbody>
+                                            {% if user.students.all %}
+                                                {% for std in user.students.all %}
+                                                        <tr>
+                                                            <td style="text-align: center !important; display: flex; align-items: center; align-content: center;">
+                                                            <div class="stm_lms_courses__single--info_author" style="text-align: center !important; margin-left: auto; margin-right: auto;">
+                                                                                <div class="stm_lms_courses__single--info_author__avatar" style="text-align: center !important;">
+                                                                                    <img alt="" src="{% if std.image %}{{ std.image.url }}{% else %}http://0.gravatar.com/avatar/f94562563861857057c6a0a461c23805?s=215&amp;d=mm&amp;r=g{% endif %}" class="avatar avatar-215 photo" loading="lazy" width="215" height="215">            </div>
+                                                                                                <div class="stm_lms_courses__single--info_author__login" style="text-align: center !important;">{{ std.name }}</div>
+                                                                                                                </div>
+                                                            </td>
+                                                            <td style="text-align: center !important;">{{ std.birth_year }}</td>
+                                                    </tr>
+                                                {% endfor %}
+                                            {% else %}
+												<tr>
+							<td colspan="3"> You do not have an active membership. <a href="{% url 'payment:subscribe' %}">Choose a membership level.</a>							</td>
+						</tr>
+                                            {% endif %}
+												</tbody>
+				</table>
+
+                                <br>
+				<h3>My Toolboxses</h3>
+				<table class="pmpro_table" width="100%" cellspacing="0" cellpadding="0" border="0">
+					<thead>
+						<tr>
+							<th style="text-align: center !important;">Order Number</th>
+							<th style="text-align: center !important;">Toolbox</th>
+							<th style="text-align: center !important;">Billed</th>
+						</tr>
+					</thead>
+					<tbody>
+                                            {% if user.orders.all %}
+                                                {% for order in user.orders.all %}
+                                                        <tr>
+                                                            <td style="text-align: center !important;">{{ order.bosta_id }}</td>
+                                                            <td style="text-align: center !important;">{{ order.toolbox.name }}</td>
+                                                            <td style="text-align: center !important;">£{{ order.toolbox.price_pounds }}</td>
+                                                    </tr>
+                                                {% endfor %}
+                                            {% else %}
+												<tr>
+							<td colspan="3"> You do not have any toolbox orders. <a href="">Order a Toolbox.</a>							</td>
+						</tr>
+                                            {% endif %}
+												</tbody>
+				</table>
+			</div> <!-- end pmpro_account-membership -->
+
+					<div id="pmpro_account-profile" class="pmpro_box">
+								<h3>My Account</h3>
+								<ul>
+                                                                    <li><strong>Email:</strong> {{ request.user.email }}</li>
+                                                                    <li><strong>First Name:</strong> {{ request.user.first_name }}</li>
+                                                                    <li><strong>Last Name:</strong> {{ request.user.last_name }}</li>
+                                                                    <li><strong>Date Joined:</strong> {{ request.user.date_joined }}</li>
+                                                                    <li><strong>Last Login:</strong> {{ request.user.last_login }}</li>
+                                                                </ul>
+				<div class="pmpro_actionlinks">
+                                    <a id="pmpro_actionlink-profile" href="">Edit Profile</a> | <a id="pmpro_actionlink-change-password" href="">Change Password</a> | <a id="pmpro_actionlink-logout" href="{% url 'authorization:logout' %}">Log Out</a>				</div>
+                                <br>
+                                <br>
+
+								<h3>My Shipping/Billing</h3>
+								<ul>
+                                                                    <li><strong>Address:</strong> {{ request.user.billing_data.address_1 }}</li>
+                                                                    <li><strong>City:</strong> {{ request.user.billing_data.city }}</li>
+                                                                    <li><strong>State:</strong> {{ request.user.billing_data.state }}</li>
+                                                                    <li><strong>Postal Code:</strong> {{ request.user.billing_data.postal_code }}</li>
+                                                                    <li><strong>Country:</strong> {{ request.user.billing_data.country }}</li>
+                                                                    <li><strong>Phone:</strong> {{ request.user.billing_data.phone }}</li>
+                                                                    <li><strong>Email:</strong> {{ request.user.billing_data.email }}</li>
+                                                                    <li><strong>Address:</strong> {{ request.user.billing_data.address_1 }}</li>
+                                                                </ul>
+				<div class="pmpro_actionlinks">
+                                    <a id="pmpro_actionlink-profile" href="">Edit Data</a> 				</div>
+			</div> <!-- end pmpro_account-profile -->
+
+			</div> <!-- end pmpro_account -->
+
+        <div class="clearfix">
+                    </div>
+
+    </div>
+</div>
+
+{% endblock %}

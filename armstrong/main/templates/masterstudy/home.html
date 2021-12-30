@@ -31,8 +31,8 @@
 {% if not user.is_authenticated %}
 <div class="pull-right">
 <div class="header_login_url">
-<a href="{% url 'authorization:login' %}">
-<i class="fa fa-user"></i>Login</a>
+<a href="{% url 'authorization:profile' %}"><i class="fa fa-user"></i></a>
+<a href="{% url 'authorization:login' %}">Login</a>
 <span class="vertical_divider"></span>
 <a href="{% url 'authorization:signup' %}">Register</a>
 </div>
@@ -50,6 +50,8 @@
                             <span class="vertical_divider"></span>
                             {% endfor %}
                         {% endif %}
+
+<a href="{% url 'authorization:profile' %}"><i class="fa fa-user"></i></a>
 <a href="{% url 'authorization:logout' %}">Logout</a>
 </div>
 </div>

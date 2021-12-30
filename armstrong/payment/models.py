@@ -1,3 +1,5 @@
+import datetime
+
 from django.db import models
 from django.contrib.auth import get_user_model
 
@@ -100,6 +102,12 @@ class Invoice(models.Model):
     promocode_price = models.FloatField(null=False, blank=False)
     add_stds_price = models.FloatField(null=False, blank=False)
     billed = models.FloatField(null=False, blank=False)
+
+    class Meta:
+        ordering = ('-created_at',)
+
+    def ends_on(self):
+        return self.created_at + datetime.timedelta(30)
 
 class CardToken(models.Model):
     user = models.OneToOneField(get_user_model(), null=False, blank=False, on_delete=models.CASCADE, related_name='card_token')

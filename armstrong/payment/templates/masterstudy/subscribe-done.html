@@ -58,6 +58,11 @@
                     <br>
                     <label>Additional Students:</label>
                 <sup>£</sup>{{ invoice.add_stds_price }}.
+                {% if credit_left %}
+                    <br>
+                    <label>Credit Left:</label>
+                <sup>£</sup>{{ credit_left }}.
+                {% endif %}
                     <br>
                     <strong>Total Billed</strong>
                     <p><sup>£</sup>{{ invoice.billed }}</p>

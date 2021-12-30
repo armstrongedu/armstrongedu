@@ -120,3 +120,10 @@ def email_confirmed(request):
 def newsletter(request):
     Newsletter.objects.create(email=request.POST['email'])
     return redirect('main:home')
+
+@login_required
+def profile(request):
+    context = {}
+    return render(template_name='masterstudy/profile.html', request=request,
+                  context=context)
+

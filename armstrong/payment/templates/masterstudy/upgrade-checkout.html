@@ -1,0 +1,102 @@
+{% extends 'masterstudy/courses_layout.html' %}
+{% block title %}Subscribe - ARMSTRONG{% endblock %}
+{% block main_body %}
+<div class="entry-header clearfix" style="">
+	<div class="container">
+		<div class="entry-title-left">
+			<div class="entry-title">
+				<h1 style="">Subscribtion Checkout</h1>
+			</div>
+		</div>
+		<div class="entry-title-right"></div>
+	</div>
+</div>
+<div class="container">
+        <div class="post_type_exist clearfix">
+                <div id="pmpro_level-3">
+                                                {% if error %}
+                                                <div id="pmpro_message" class="pmpro_message ">{{ error }}</div>
+                                                {% endif %}
+                                                <table id="pmpro_pricing_fields" class="pmpro_checkout" width="100%" cellpadding="0" cellspacing="0" border="0">
+                                                        <thead>
+                                                                <tr>
+                                                                        <th>
+                                                                                <h3 class="pmpro_thead-name">subscription</h3>
+                                                                        </th>
+                                                                </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                                <tr>
+                                                                        <td class="lp-pmpro-td">
+                                                                                <div class="lp-pmpro-name">
+                                                                                    <h4>{{ membership_type.name }}</h4>
+                                                                                </div>
+                                                                                <div class="lp-pmpro-content">
+                                                                                        <div class="lp-pmpro-desc">
+                                                                                            <label>Membership level:</label> {{ membership_type.get_plan_display }} - {{ membership_type.name }}
+                                                                                        </div>
+                                                                                        <div id="pmpro_level_cost">
+                                                                                                <div class="lp-pmpro-desc lp-pmpro-price">
+                                                                                                        <label>Original Price:</label>
+                                                                                                            <sup>{{ membership_type.currency }}</sup>{{ membership_type.display_float_price}}.
+                                                                                                            <br>
+                                                                                                            <label>Promocode {{ promocode.promocode }}:</label>
+                                                                                                        <sup>{{ membership_type.currency }}</sup>{{ promocode_display }} ({{ promocode.percent }}%).
+                                                                                                            <br>
+                                                                                                            <label>Additional Students {{ num_of_stds }}:</label>
+                                                                                                        <sup>{{ membership_type.currency }}</sup>{{ num_of_stds_display }}.
+                                                                                                            <br>
+                                                                                                            <label>Old Credit:</label>
+                                                                                                        <sup>{{ membership_type.currency }}</sup>{{ credit_left }}.
+                                                                                                            <br>
+                                                                                                        <label>Price:</label>
+                                                                                                        <strong>
+                                                                                                            <sup>{{ membership_type.currency }}</sup>{{ net_price }}
+                                                                                                        </strong> now.
+                                                                                                </div>
+                                                                                                <div class="lp-pmpro-desc">
+                                                                                                        <label>Expires after:</label>30 days
+                                                                                                </div>
+                                                                                        </div>
+                                                                                        <div class="lp-pmpro-desc lp-pmpro-description">
+                                                                                                <label>Description:</label>
+                                                                                                <ul>
+                                                                                                        <li>Best choice</li>
+                                                                                                        <li>Learner Record</li>
+                                                                                                        <li>Indiviual Course</li>
+                                                                                                        <li>Full Access to Courses</li>
+                                                                                                </ul>
+                                                                                        </div>
+                                                                                </div>
+                                                                        </td>
+                                                                </tr>
+                                                        </tbody>
+                                                </table>
+
+                                                                                                                                <table id="pmpro_payment_information_fields" class="pmpro_checkout top1em" width="100%" cellpadding="0" cellspacing="0" border="0">
+                                                                                                                                        <thead>
+                                                                                                                                                <tr>
+                                                                                                                                                        <th>
+                                                                                                                                                                <span class="pmpro_thead-name">Payment Information</span>
+                                                                                                                                                                <span class="pmpro_thead-msg">Your payment information is sent directly to the payment processor and is not saved on our servers.</span>
+                                                                                                                                                        </th>
+                                                                                                                                                </tr>
+                                                                                                                                        </thead>
+
+                                                                                                                                            <tbody>
+                                                                                                                                                <tr valign="top">
+                                                                                                                                                    <td>
+                                                                                                                                                        <iframe src="{{ iframe_url }}" title="PayMob" style="border:none; width: 100%; height: 850px; margin-left: auto; margin-right: auto; "></iframe>
+                                                                                                                                                    </td>
+                                                                                                                                                </tr>
+                                                                                                                                            </tbody>
+
+
+                                                                                                                                                        </table>
+                                                                                                                                                                        <div class="clearfix"></div>
+                                                                                                                                                                </div>
+                                                                                                                                                                </div>
+                                                                                                                                                                </div>
+                                                                                                                                                                </div>
+
+{% endblock %}

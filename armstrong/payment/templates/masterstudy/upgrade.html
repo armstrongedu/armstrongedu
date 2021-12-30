@@ -1,0 +1,494 @@
+{% extends 'masterstudy/courses_layout.html' %}
+{% block title %}Upgrade - ARMSTRONG{% endblock %}
+{% block main_body %}
+<div class="entry-header clearfix" style="">
+	<div class="container">
+		<div class="entry-title-left">
+			<div class="entry-title">
+				<h1 style="">Upgrade Checkout</h1>
+			</div>
+		</div>
+		<div class="entry-title-right"></div>
+	</div>
+</div>
+                    <div class="container">
+                            <div class="post_type_exist clearfix">
+                                    <div id="pmpro_level-3">
+                                        <form id="pmpro_form" class="pmpro_form" action="{% url 'payment:upgrade-checkout' %}" method="post">
+                                            {% csrf_token %}
+                                                    <input type="hidden" id="level" name="level" value="3">
+                                                            <input type="hidden" id="checkjavascript" name="checkjavascript" value="1">
+                                                                    {% if error %}
+                                                                    <div id="pmpro_message" class="pmpro_message ">{{ error }}</div>
+                                                                    {% endif %}
+                                                                    <table id="pmpro_pricing_fields" class="pmpro_checkout" width="100%" cellpadding="0" cellspacing="0" border="0">
+                                                                            <thead>
+                                                                                    <tr>
+                                                                                            <th>
+                                                                                                    <h3 class="pmpro_thead-name">upgrade</h3>
+                                                                                            </th>
+                                                                                    </tr>
+                                                                            </thead>
+                                                                            <tbody>
+                                                                                    <tr>
+                                                                                            <td class="lp-pmpro-td">
+                                                                                                    <div class="lp-pmpro-name">
+                                                                                                            <label for="membership_type">Membership Level</label>
+                                                                                                            <select name="membership_type" id="membership_type" class="pmpro_required select2-hidden-accessible" tabindex="-1" aria-hidden="true">
+                                                                                                                {% for membership_type in membership_types %}
+                                                                                                                <option value="{{ membership_type.id }}">{{ membership_type.get_plan_display }}: {{ membership_type.name }} - {{ membership_type.display_float_price }} {{ membership_type.currency }} ({{ membership_type.std_display_float_price }} {{ membership_type.currency }} Per Additional Student)</option>
+                                                                                                                {% endfor %}
+                                                                                                            </select>
+                                                                                                    </div>
+                                                                                                    <br>
+                                                                                                        <input id="promocode" name="promocode" type="text" placeholder="Promocode">
+                                                                                                    <br>
+                                                                                                        <input id="number_of_students" name="number_of_students" type="text" placeholder="Number Of Students">
+                                                                                                    <br>
+                                                                                                    <div class="lp-pmpro-content">
+                                                                                                            <div id="pmpro_level_cost">
+                                                                                                                    <div class="lp-pmpro-desc">
+                                                                                                                            <label>Expires after:</label>30 days
+                                                                                                                    </div>
+                                                                                                            </div>
+                                                                                                    </div>
+                                                                                            </td>
+                                                                                    </tr>
+                                                                            </tbody>
+                                                                    </table>
+                                                                    <table id="pmpro_billing_address_fields" class="pmpro_checkout top1em" width="100%" cellpadding="0" cellspacing="0" border="0">
+                                                                            <thead>
+                                                                                    <tr>
+                                                                                            <th>Billing Address</th>
+                                                                                    </tr>
+                                                                            </thead>
+                                                                            <tbody>
+                                                                                    <tr>
+                                                                                            <td>
+                                                                                                    <div class="stm_lms_checkout_fields">
+                                                                                                        <input id="user" name="user" type="hidden" value="{{ request.user.id }}">
+                                                                                                            <div>
+                                                                                                                    <label for="first_name">First Name</label>
+                                                                                                                    <input id="first_name" name="first_name" type="text" class="input  pmpro_required" size="30" value="{{ billing_data.first_name.value }}">
+                                                                                                                            <span class="pmpro_asterisk">
+                                                                                                                                    <abbr title="Required Field">*</abbr>
+                                                                                                                            </span>
+                                                                                                                    </div>
+                                                                                                                    <div>
+                                                                                                                            <label for="last_name">Last Name</label>
+                                                                                                                            <input id="last_name" name="last_name" type="text" class="input  pmpro_required" size="30" value="{{ billing_data.last_name.value }}">
+                                                                                                                                    <span class="pmpro_asterisk">
+                                                                                                                                            <abbr title="Required Field">*</abbr>
+                                                                                                                                    </span>
+                                                                                                                            </div>
+                                                                                                                            <div>
+                                                                                                                                    <label for="address_1">Address 1</label>
+                                                                                                                                    <input id="address_1" name="address_1" type="text" class="input  pmpro_required" size="30" value="{{ billing_data.address_1.value }}">
+                                                                                                                                            <span class="pmpro_asterisk">
+                                                                                                                                                    <abbr title="Required Field">*</abbr>
+                                                                                                                                            </span>
+                                                                                                                                    </div>
+                                                                                                                                            <div>
+                                                                                                                                                    <label for="city">City</label>
+                                                                                                                                                    <input id="city" name="city" type="text" class="input  pmpro_required" size="30" value="{{ billing_data.city.value }}">
+                                                                                                                                                            <span class="pmpro_asterisk">
+                                                                                                                                                                    <abbr title="Required Field">*</abbr>
+                                                                                                                                                            </span>
+                                                                                                                                                    </div>
+                                                                                                                                                    <div>
+                                                                                                                                                            <label for="state">State</label>
+                                                                                                                                                            <input id="state" name="state" type="text" class="input  pmpro_required" size="30" value="{{ billing_data.state.value }}">
+                                                                                                                                                                    <span class="pmpro_asterisk">
+                                                                                                                                                                            <abbr title="Required Field">*</abbr>
+                                                                                                                                                                    </span>
+                                                                                                                                                            </div>
+                                                                                                                                                            <div>
+                                                                                                                                                                    <label for="postal_code">Postal Code</label>
+                                                                                                                                                                    <input id="postal_code" name="postal_code" type="text" class="input  pmpro_required" size="30" value="{{ billing_data.postal_code.value }}">
+                                                                                                                                                                            <span class="pmpro_asterisk">
+                                                                                                                                                                                    <abbr title="Required Field">*</abbr>
+                                                                                                                                                                            </span>
+                                                                                                                                                                    </div>
+                                                                                                                                                                    <div>
+                                                                                                                                                                            <label for="country">Country</label>
+                                                                                                                                                                            <select name="country" class="pmpro_required select2-hidden-accessible" tabindex="-1" aria-hidden="true">
+                                                                                                                                                                                    <option value="AF">Afghanistan</option>
+                                                                                                                                                                                    <option value="AX">Aland Islands</option>
+                                                                                                                                                                                    <option value="AL">Albania</option>
+                                                                                                                                                                                    <option value="DZ">Algeria</option>
+                                                                                                                                                                                    <option value="AS">American Samoa</option>
+                                                                                                                                                                                    <option value="AD">Andorra</option>
+                                                                                                                                                                                    <option value="AO">Angola</option>
+                                                                                                                                                                                    <option value="AI">Anguilla</option>
+                                                                                                                                                                                    <option value="AQ">Antarctica</option>
+                                                                                                                                                                                    <option value="AG">Antigua and Barbuda</option>
+                                                                                                                                                                                    <option value="AR">Argentina</option>
+                                                                                                                                                                                    <option value="AM">Armenia</option>
+                                                                                                                                                                                    <option value="AW">Aruba</option>
+                                                                                                                                                                                    <option value="AU">Australia</option>
+                                                                                                                                                                                    <option value="AT">Austria</option>
+                                                                                                                                                                                    <option value="AZ">Azerbaijan</option>
+                                                                                                                                                                                    <option value="BS">Bahamas</option>
+                                                                                                                                                                                    <option value="BH">Bahrain</option>
+                                                                                                                                                                                    <option value="BD">Bangladesh</option>
+                                                                                                                                                                                    <option value="BB">Barbados</option>
+                                                                                                                                                                                    <option value="BY">Belarus</option>
+                                                                                                                                                                                    <option value="BE">Belgium</option>
+                                                                                                                                                                                    <option value="BZ">Belize</option>
+                                                                                                                                                                                    <option value="BJ">Benin</option>
+                                                                                                                                                                                    <option value="BM">Bermuda</option>
+                                                                                                                                                                                    <option value="BT">Bhutan</option>
+                                                                                                                                                                                    <option value="BO">Bolivia</option>
+                                                                                                                                                                                    <option value="BA">Bosnia and Herzegovina</option>
+                                                                                                                                                                                    <option value="BW">Botswana</option>
+                                                                                                                                                                                    <option value="BV">Bouvet Island</option>
+                                                                                                                                                                                    <option value="BR">Brazil</option>
+                                                                                                                                                                                    <option value="IO">British Indian Ocean Territory</option>
+                                                                                                                                                                                    <option value="VG">British Virgin Islands</option>
+                                                                                                                                                                                    <option value="BN">Brunei</option>
+                                                                                                                                                                                    <option value="BG">Bulgaria</option>
+                                                                                                                                                                                    <option value="BF">Burkina Faso</option>
+                                                                                                                                                                                    <option value="BI">Burundi</option>
+                                                                                                                                                                                    <option value="KH">Cambodia</option>
+                                                                                                                                                                                    <option value="CM">Cameroon</option>
+                                                                                                                                                                                    <option value="CA">Canada</option>
+                                                                                                                                                                                    <option value="CV">Cape Verde</option>
+                                                                                                                                                                                    <option value="KY">Cayman Islands</option>
+                                                                                                                                                                                    <option value="CF">Central African Republic</option>
+                                                                                                                                                                                    <option value="TD">Chad</option>
+                                                                                                                                                                                    <option value="CL">Chile</option>
+                                                                                                                                                                                    <option value="CN">China</option>
+                                                                                                                                                                                    <option value="CX">Christmas Island</option>
+                                                                                                                                                                                    <option value="CC">Cocos (Keeling) Islands</option>
+                                                                                                                                                                                    <option value="CO">Colombia</option>
+                                                                                                                                                                                    <option value="KM">Comoros</option>
+                                                                                                                                                                                    <option value="CG">Congo (Brazzaville)</option>
+                                                                                                                                                                                    <option value="CD">Congo (Kinshasa)</option>
+                                                                                                                                                                                    <option value="CK">Cook Islands</option>
+                                                                                                                                                                                    <option value="CR">Costa Rica</option>
+                                                                                                                                                                                    <option value="HR">Croatia</option>
+                                                                                                                                                                                    <option value="CU">Cuba</option>
+                                                                                                                                                                                    <option value="CY">Cyprus</option>
+                                                                                                                                                                                    <option value="CZ">Czech Republic</option>
+                                                                                                                                                                                    <option value="DK">Denmark</option>
+                                                                                                                                                                                    <option value="DJ">Djibouti</option>
+                                                                                                                                                                                    <option value="DM">Dominica</option>
+                                                                                                                                                                                    <option value="DO">Dominican Republic</option>
+                                                                                                                                                                                    <option value="EC">Ecuador</option>
+                                                                                                                                                                                    <option value="EG" selected="selected">Egypt</option>
+                                                                                                                                                                                    <option value="SV">El Salvador</option>
+                                                                                                                                                                                    <option value="GQ">Equatorial Guinea</option>
+                                                                                                                                                                                    <option value="ER">Eritrea</option>
+                                                                                                                                                                                    <option value="EE">Estonia</option>
+                                                                                                                                                                                    <option value="ET">Ethiopia</option>
+                                                                                                                                                                                    <option value="FK">Falkland Islands</option>
+                                                                                                                                                                                    <option value="FO">Faroe Islands</option>
+                                                                                                                                                                                    <option value="FJ">Fiji</option>
+                                                                                                                                                                                    <option value="FI">Finland</option>
+                                                                                                                                                                                    <option value="FR">France</option>
+                                                                                                                                                                                    <option value="GF">French Guiana</option>
+                                                                                                                                                                                    <option value="PF">French Polynesia</option>
+                                                                                                                                                                                    <option value="TF">French Southern Territories</option>
+                                                                                                                                                                                    <option value="GA">Gabon</option>
+                                                                                                                                                                                    <option value="GM">Gambia</option>
+                                                                                                                                                                                    <option value="GE">Georgia</option>
+                                                                                                                                                                                    <option value="DE">Germany</option>
+                                                                                                                                                                                    <option value="GH">Ghana</option>
+                                                                                                                                                                                    <option value="GI">Gibraltar</option>
+                                                                                                                                                                                    <option value="GR">Greece</option>
+                                                                                                                                                                                    <option value="GL">Greenland</option>
+                                                                                                                                                                                    <option value="GD">Grenada</option>
+                                                                                                                                                                                    <option value="GP">Guadeloupe</option>
+                                                                                                                                                                                    <option value="GU">Guam</option>
+                                                                                                                                                                                    <option value="GT">Guatemala</option>
+                                                                                                                                                                                    <option value="GG">Guernsey</option>
+                                                                                                                                                                                    <option value="GN">Guinea</option>
+                                                                                                                                                                                    <option value="GW">Guinea-Bissau</option>
+                                                                                                                                                                                    <option value="GY">Guyana</option>
+                                                                                                                                                                                    <option value="HT">Haiti</option>
+                                                                                                                                                                                    <option value="HM">Heard Island and McDonald Islands</option>
+                                                                                                                                                                                    <option value="HN">Honduras</option>
+                                                                                                                                                                                    <option value="HK">Hong Kong S.A.R., China</option>
+                                                                                                                                                                                    <option value="HU">Hungary</option>
+                                                                                                                                                                                    <option value="IS">Iceland</option>
+                                                                                                                                                                                    <option value="IN">India</option>
+                                                                                                                                                                                    <option value="ID">Indonesia</option>
+                                                                                                                                                                                    <option value="IR">Iran</option>
+                                                                                                                                                                                    <option value="IQ">Iraq</option>
+                                                                                                                                                                                    <option value="IE">Ireland</option>
+                                                                                                                                                                                    <option value="IM">Isle of Man</option>
+                                                                                                                                                                                    <option value="IL">Israel</option>
+                                                                                                                                                                                    <option value="IT">Italy</option>
+                                                                                                                                                                                    <option value="CI">Ivory Coast</option>
+                                                                                                                                                                                    <option value="JM">Jamaica</option>
+                                                                                                                                                                                    <option value="JP">Japan</option>
+                                                                                                                                                                                    <option value="JE">Jersey</option>
+                                                                                                                                                                                    <option value="JO">Jordan</option>
+                                                                                                                                                                                    <option value="KZ">Kazakhstan</option>
+                                                                                                                                                                                    <option value="KE">Kenya</option>
+                                                                                                                                                                                    <option value="KI">Kiribati</option>
+                                                                                                                                                                                    <option value="KW">Kuwait</option>
+                                                                                                                                                                                    <option value="KG">Kyrgyzstan</option>
+                                                                                                                                                                                    <option value="LA">Laos</option>
+                                                                                                                                                                                    <option value="LV">Latvia</option>
+                                                                                                                                                                                    <option value="LB">Lebanon</option>
+                                                                                                                                                                                    <option value="LS">Lesotho</option>
+                                                                                                                                                                                    <option value="LR">Liberia</option>
+                                                                                                                                                                                    <option value="LY">Libya</option>
+                                                                                                                                                                                    <option value="LI">Liechtenstein</option>
+                                                                                                                                                                                    <option value="LT">Lithuania</option>
+                                                                                                                                                                                    <option value="LU">Luxembourg</option>
+                                                                                                                                                                                    <option value="MO">Macao S.A.R., China</option>
+                                                                                                                                                                                    <option value="MK">Macedonia</option>
+                                                                                                                                                                                    <option value="MG">Madagascar</option>
+                                                                                                                                                                                    <option value="MW">Malawi</option>
+                                                                                                                                                                                    <option value="MY">Malaysia</option>
+                                                                                                                                                                                    <option value="MV">Maldives</option>
+                                                                                                                                                                                    <option value="ML">Mali</option>
+                                                                                                                                                                                    <option value="MT">Malta</option>
+                                                                                                                                                                                    <option value="MH">Marshall Islands</option>
+                                                                                                                                                                                    <option value="MQ">Martinique</option>
+                                                                                                                                                                                    <option value="MR">Mauritania</option>
+                                                                                                                                                                                    <option value="MU">Mauritius</option>
+                                                                                                                                                                                    <option value="YT">Mayotte</option>
+                                                                                                                                                                                    <option value="MX">Mexico</option>
+                                                                                                                                                                                    <option value="FM">Micronesia</option>
+                                                                                                                                                                                    <option value="MD">Moldova</option>
+                                                                                                                                                                                    <option value="MC">Monaco</option>
+                                                                                                                                                                                    <option value="MN">Mongolia</option>
+                                                                                                                                                                                    <option value="ME">Montenegro</option>
+                                                                                                                                                                                    <option value="MS">Montserrat</option>
+                                                                                                                                                                                    <option value="MA">Morocco</option>
+                                                                                                                                                                                    <option value="MZ">Mozambique</option>
+                                                                                                                                                                                    <option value="MM">Myanmar</option>
+                                                                                                                                                                                    <option value="NA">Namibia</option>
+                                                                                                                                                                                    <option value="NR">Nauru</option>
+                                                                                                                                                                                    <option value="NP">Nepal</option>
+                                                                                                                                                                                    <option value="NL">Netherlands</option>
+                                                                                                                                                                                    <option value="AN">Netherlands Antilles</option>
+                                                                                                                                                                                    <option value="NC">New Caledonia</option>
+                                                                                                                                                                                    <option value="NZ">New Zealand</option>
+                                                                                                                                                                                    <option value="NI">Nicaragua</option>
+                                                                                                                                                                                    <option value="NE">Niger</option>
+                                                                                                                                                                                    <option value="NG">Nigeria</option>
+                                                                                                                                                                                    <option value="NU">Niue</option>
+                                                                                                                                                                                    <option value="NF">Norfolk Island</option>
+                                                                                                                                                                                    <option value="KP">North Korea</option>
+                                                                                                                                                                                    <option value="MP">Northern Mariana Islands</option>
+                                                                                                                                                                                    <option value="NO">Norway</option>
+                                                                                                                                                                                    <option value="OM">Oman</option>
+                                                                                                                                                                                    <option value="PK">Pakistan</option>
+                                                                                                                                                                                    <option value="PW">Palau</option>
+                                                                                                                                                                                    <option value="PS">Palestinian Territory</option>
+                                                                                                                                                                                    <option value="PA">Panama</option>
+                                                                                                                                                                                    <option value="PG">Papua New Guinea</option>
+                                                                                                                                                                                    <option value="PY">Paraguay</option>
+                                                                                                                                                                                    <option value="PE">Peru</option>
+                                                                                                                                                                                    <option value="PH">Philippines</option>
+                                                                                                                                                                                    <option value="PN">Pitcairn</option>
+                                                                                                                                                                                    <option value="PL">Poland</option>
+                                                                                                                                                                                    <option value="PT">Portugal</option>
+                                                                                                                                                                                    <option value="PR">Puerto Rico</option>
+                                                                                                                                                                                    <option value="QA">Qatar</option>
+                                                                                                                                                                                    <option value="RE">Reunion</option>
+                                                                                                                                                                                    <option value="RO">Romania</option>
+                                                                                                                                                                                    <option value="RU">Russia</option>
+                                                                                                                                                                                    <option value="RW">Rwanda</option>
+                                                                                                                                                                                    <option value="BL">Saint Barthelemy</option>
+                                                                                                                                                                                    <option value="SH">Saint Helena</option>
+                                                                                                                                                                                    <option value="KN">Saint Kitts and Nevis</option>
+                                                                                                                                                                                    <option value="LC">Saint Lucia</option>
+                                                                                                                                                                                    <option value="MF">Saint Martin (French part)</option>
+                                                                                                                                                                                    <option value="PM">Saint Pierre and Miquelon</option>
+                                                                                                                                                                                    <option value="VC">Saint Vincent and the Grenadines</option>
+                                                                                                                                                                                    <option value="WS">Samoa</option>
+                                                                                                                                                                                    <option value="SM">San Marino</option>
+                                                                                                                                                                                    <option value="ST">Sao Tome and Principe</option>
+                                                                                                                                                                                    <option value="SA">Saudi Arabia</option>
+                                                                                                                                                                                    <option value="SN">Senegal</option>
+                                                                                                                                                                                    <option value="RS">Serbia</option>
+                                                                                                                                                                                    <option value="SC">Seychelles</option>
+                                                                                                                                                                                    <option value="SL">Sierra Leone</option>
+                                                                                                                                                                                    <option value="SG">Singapore</option>
+                                                                                                                                                                                    <option value="SK">Slovakia</option>
+                                                                                                                                                                                    <option value="SI">Slovenia</option>
+                                                                                                                                                                                    <option value="SB">Solomon Islands</option>
+                                                                                                                                                                                    <option value="SO">Somalia</option>
+                                                                                                                                                                                    <option value="ZA">South Africa</option>
+                                                                                                                                                                                    <option value="GS">South Georgia and the South Sandwich Islands</option>
+                                                                                                                                                                                    <option value="KR">South Korea</option>
+                                                                                                                                                                                    <option value="ES">Spain</option>
+                                                                                                                                                                                    <option value="LK">Sri Lanka</option>
+                                                                                                                                                                                    <option value="SD">Sudan</option>
+                                                                                                                                                                                    <option value="SR">Suriname</option>
+                                                                                                                                                                                    <option value="SJ">Svalbard and Jan Mayen</option>
+                                                                                                                                                                                    <option value="SZ">Swaziland</option>
+                                                                                                                                                                                    <option value="SE">Sweden</option>
+                                                                                                                                                                                    <option value="CH">Switzerland</option>
+                                                                                                                                                                                    <option value="SY">Syria</option>
+                                                                                                                                                                                    <option value="TW">Taiwan</option>
+                                                                                                                                                                                    <option value="TJ">Tajikistan</option>
+                                                                                                                                                                                    <option value="TZ">Tanzania</option>
+                                                                                                                                                                                    <option value="TH">Thailand</option>
+                                                                                                                                                                                    <option value="TL">Timor-Leste</option>
+                                                                                                                                                                                    <option value="TG">Togo</option>
+                                                                                                                                                                                    <option value="TK">Tokelau</option>
+                                                                                                                                                                                    <option value="TO">Tonga</option>
+                                                                                                                                                                                    <option value="TT">Trinidad and Tobago</option>
+                                                                                                                                                                                    <option value="TN">Tunisia</option>
+                                                                                                                                                                                    <option value="TR">Turkey</option>
+                                                                                                                                                                                    <option value="TM">Turkmenistan</option>
+                                                                                                                                                                                    <option value="TC">Turks and Caicos Islands</option>
+                                                                                                                                                                                    <option value="TV">Tuvalu</option>
+                                                                                                                                                                                    <option value="VI">U.S. Virgin Islands</option>
+                                                                                                                                                                                    <option value="USAF">US Armed Forces</option>
+                                                                                                                                                                                    <option value="UG">Uganda</option>
+                                                                                                                                                                                    <option value="UA">Ukraine</option>
+                                                                                                                                                                                    <option value="AE">United Arab Emirates</option>
+                                                                                                                                                                                    <option value="GB">United Kingdom</option>
+                                                                                                                                                                                    <option value="US">United States</option>
+                                                                                                                                                                                    <option value="UM">United States Minor Outlying Islands</option>
+                                                                                                                                                                                    <option value="UY">Uruguay</option>
+                                                                                                                                                                                    <option value="UZ">Uzbekistan</option>
+                                                                                                                                                                                    <option value="VU">Vanuatu</option>
+                                                                                                                                                                                    <option value="VA">Vatican</option>
+                                                                                                                                                                                    <option value="VE">Venezuela</option>
+                                                                                                                                                                                    <option value="VN">Vietnam</option>
+                                                                                                                                                                                    <option value="WF">Wallis and Futuna</option>
+                                                                                                                                                                                    <option value="EH">Western Sahara</option>
+                                                                                                                                                                                    <option value="YE">Yemen</option>
+                                                                                                                                                                                    <option value="ZM">Zambia</option>
+                                                                                                                                                                                    <option value="ZW">Zimbabwe</option>
+                                                                                                                                                                            </select>
+                                                                                                                                                                            <span class="pmpro_asterisk">
+                                                                                                                                                                                    <abbr title="Required Field">*</abbr>
+                                                                                                                                                                            </span>
+                                                                                                                                                                    </div>
+                                                                                                                                                                    <div>
+                                                                                                                                                                            <label for="phone">Phone</label>
+                                                                                                                                                                            <input id="phone" name="phone" type="text" class="input  pmpro_required" size="30" value="{{ billing_data.phone.value }}">
+                                                                                                                                                                                    <span class="pmpro_asterisk">
+                                                                                                                                                                                            <abbr title="Required Field">*</abbr>
+                                                                                                                                                                                    </span>
+                                                                                                                                                                            </div>
+                                                                                                                                                                            <div>
+                                                                                                                                                                                    <label for="email">E-mail Address</label>
+                                                                                                                                                                                    <input id="email" name="email" type="email" class="input  pmpro_required" size="30" value="{% firstof card.email.value user.email %}">
+                                                                                                                                                                                            <span class="pmpro_asterisk">
+                                                                                                                                                                                                    <abbr title="Required Field">*</abbr>
+                                                                                                                                                                                            </span>
+                                                                                                                                                                                    </div>
+                                                                                                                                                                            </td>
+                                                                                                                                                                    </tr>
+                                                                                                                                                            </tbody>
+                                                                                                                                                    </table>
+                                                                                                                                                                            <script>//checking a discount code
+jQuery('#discount_code_button').on('click', function () {
+var code = jQuery('#discount_code').val();
+var level_id = jQuery('#level').val();
+
+if (code) {
+//hide any previous message
+jQuery('.pmpro_discount_code_msg').hide();
+
+//disable the apply button
+jQuery('#discount_code_button').attr('disabled', 'disabled');
+
+jQuery.ajax({
+    type: 'GET',
+    timeout:5000,
+    dataType: 'html',
+    data: "action=applydiscountcode&code=" + code + "&level=" + level_id + "&msgfield=discount_code_message",
+    error: function (xml) {
+        alert('Error applying discount code [1]');
+
+        //enable apply button
+        jQuery('#discount_code_button').removeAttr('disabled');
+    },
+    success: function (responseHTML) {
+        if (responseHTML == 'error') {
+            alert('Error applying discount code [2]');
+        } else {
+            jQuery('#discount_code_message').html(responseHTML);
+        }
+
+        //enable invite button
+        jQuery('#discount_code_button').removeAttr('disabled');
+    }
+});
+}
+});</script>
+                                                                                                                                                                            <div class="pmpro_submit">
+                                                                                                                                                                                    <span id="pmpro_submit_span">
+                                                                                                                                                                                            <input type="hidden" name="submit-checkout" value="1">
+                                                                                                                                                                                                    <input type="hidden" name="javascriptok" value="1">
+                                                                                                                                                                                                            <input type="hidden" name="javascriptok" value="1">
+                                                                                                                                                                                                                    <input type="submit" class="btn btn-default pmpro_btn-submit-checkout" value="Submit and Check Out">
+                                                                                                                                                                                                                    </span>
+                                                                                                                                                                                                                    <span id="pmpro_processing_message" style="visibility: hidden;"> Processing... </span>
+                                                                                                                                                                                                            </div>
+                                                                                                                                                                                                    </form>
+                                                                                                                                                                                            </div>
+                                                                                                                                                                                            <script>// Find ALL
+                                                                                                                                                                                                    <form> tags on your page
+jQuery('form').submit(function () {
+// On submit disable its submit button
+jQuery('input[type=submit]', this).attr('disabled', 'disabled');
+jQuery('input[type=image]', this).attr('disabled', 'disabled');
+jQuery('#pmpro_processing_message').css('visibility', 'visible');
+});
+
+//iOS Safari fix (see: http://stackoverflow.com/questions/20210093/stop-safari-on-ios7-prompting-to-save-card-data)
+var userAgent = window.navigator.userAgent;
+if (userAgent.match(/iPad/i) || userAgent.match(/iPhone/i)) {
+jQuery('input[type=submit]').on('click', function () {
+try {
+jQuery("input[type=password]").attr("type", "hidden");
+} catch (ex) {
+try {
+jQuery("input[type=password]").prop("type", "hidden");
+} catch (ex) {
+}
+}
+});
+}
+
+//add required to required fields
+jQuery('.pmpro_required').after('
+                                                                                                                                                                                                            <span class="pmpro_asterisk">
+                                                                                                                                                                                                                    <abbr title="Required Field">*</abbr>
+                                                                                                                                                                                                            </span>');
+
+//unhighlight error fields when the user edits them
+jQuery('.pmpro_error').on("change keyup input", function () {
+jQuery(this).removeClass('pmpro_error');
+});
+
+//click apply button on enter in discount code box
+jQuery('#discount_code').keydown(function (e) {
+if (e.keyCode == 13) {
+e.preventDefault();
+jQuery('#discount_code_button').click();
+}
+});
+
+//hide apply button if a discount code was passed in
+
+//click apply button on enter in *other* discount code box
+jQuery('#other_discount_code').keydown(function (e) {
+if (e.keyCode == 13) {
+e.preventDefault();
+jQuery('#other_discount_code_button').click();
+}
+});
+                                                                                                                                                                                                    </script>
+                                                                                                                                                                                                    <script>//add javascriptok hidden field to checkout
+jQuery("input[name=submit-checkout]").after('
+                                                                                                                                                                                                            <input type="hidden" name="javascriptok" value="1" />');
+                                                                                                                                                                                                    </script>
+                                                                                                                                                                                            </div>
+                                                                                                                                                                                            <div class="clearfix"></div>
+                                                                                                                                                                                    </div>
+                                                                                                                                                                            </div>
+
+{% endblock %}
