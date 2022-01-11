@@ -12,5 +12,8 @@ urlpatterns = [
     path('free-trial-start/<topic_id>', views.free_trial_start, name='free-trial-start'),
     path('free-trial-answer-mcq/<quiz_id>', views.free_trial_answer_mcq, name='free-trial-answer-mcq'),
     path('free-trial-answer-tf/<quiz_id>', views.free_trial_answer_tf, name='free-trial-answer-tf'),
+    path('builder', views.builder, name='builder'),
+    path('build', views.build, name='build'),
+    path('build/<course_id>', views.build, name='build'),
     path('<course_id>', views.course, name='course'),
 ]

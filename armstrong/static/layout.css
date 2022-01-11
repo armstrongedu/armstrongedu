@@ -1,468 +1,180 @@
-body {
-  height: 100vh;
-  width: 100vw;
-  overflow: hidden;
-  color: white !important;
-  background-color: #242424;
+html {
+    min-height: 100vh;
+    background-color: #242424 !important;
 }
+
+body {
+    color: white;
+}
+
 body .input::-moz-placeholder,
 body .select select::-moz-placeholder,
 body .textarea::-moz-placeholder {
-  color: white;
+    color: white;
 }
-body .mynav {
-  background-color: transparent;
-  list-style-type: none;
-  margin: 0;
-  padding: 0;
-  padding-left: 1rem;
-  overflow: hidden;
-  width: 100%;
-  left: 0;
-  margin-top: 0;
-  top: 0;
-  position: absolute;
+
+main {
+    min-height: 70vh;
 }
+
+main .mynav {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    padding-left: 1rem;
+    overflow: hidden;
+    width: 100%;
+    left: 0;
+    margin-top: 0;
+    top: 0;
+    background-color: #242424;
+    position: unset;
+}
+
 body .mynav .buttons {
-  display: inline;
-  float: right;
-  margin: 0.5em;
-  margin-right: 1em;
-}
-body .mynav .buttons a {
-  margin: 0;
-}
-body .mynav .navbar-end:nth-child(2) {
-  margin-right: 1.2em;
-  margin-left: 1.2em;
-}
-body .content h1, body .content h2, body .content h3, body .content h4, body .content h5, body .content h6 {
-  color: white;
-}
-body .columns {
-  margin: 0 !important;
-}
-body .didocol {
-  height: 100vh;
-}
-
-.columnpic {
-  min-height: 20rem;
-  background-image: url("graphics.png");
-  background-size: cover;
-}
-
-.mysignup {
-  transform: translate(0, 20%);
-  padding: 2.2rem !important;
-}
-.mysignup input {
-  border: solid 1px #707070;
-}
-.mysignup input, .mysignup select, .mysignup textarea {
-  color: white;
-}
-
-.or {
-  transform: translate(50%, -30%);
-}
-.or h1:before, .or h1:after {
-  content: "";
-  display: inline-block;
-  width: 44%;
-  margin: 0 0.5em 0 -50%;
-  border-bottom: 1px #4a4a4a solid;
-}
-.or h1:after {
-  margin: 0 -55% 0 0.5em;
-}
-
-.paragraph {
-  transform: translate(20%, 20%);
-  color: white;
-}
-.paragraph .content h1, .paragraph .content h2 {
-  margin: 0;
-  margin-top: 0 !important;
-}
-.paragraph .paragraphsec {
-  max-width: 18ch;
-}
-.paragraph .paragraphsub {
-  padding: 0;
-  margin: 0;
-}
-.paragraph .paragraphsub .subtitle.is-5 {
-  font-size: 0.7rem;
-  margin: 0 !important;
-}
-
-.signupbutton {
-  display: flex;
-  flex-direction: row;
-}
-.signupbutton .button.is-primary {
-  color: black;
-}
-.signupbutton input {
-  padding-right: 3em;
-  margin-right: 1em;
-  font-weight: bolder;
-}
-
-.button.is-info {
-  padding-left: 3rem;
-  margin-right: auto;
-  margin-left: auto;
-  padding-right: 3rem;
-  border-radius: 5px;
-  font-size: 1rem !important;
-}
-
-.fb {
-  background-color: #3b5998 !important;
-}
-
-@media only screen and (max-width: 800px) {
-  body {
-    overflow-y: unset;
-    margin-bottom: 3rem;
-  }
-
-  body .mynav .buttons {
     display: inline;
     float: right;
-    margin: 0.6em;
+    margin: 0.5em;
     margin-right: 1em;
-  }
-
-  body .mynav {
-    background-color: #242424;
-  }
-
-  .paragraph {
-    max-width: unset;
-    transform: translate(6%, 30%);
-    padding: 1% !important;
-  }
-  .paragraph .paragraphsec {
-    max-width: 44ch;
-  }
-  .paragraph .content.is-medium {
-    font-size: 0.9rem;
-    font-weight: lighter;
-    letter-spacing: 0.09em;
-  }
-
-  .mysignup {
-    margin-bottom: 9rem !important;
-    padding: 2%;
-  }
-}
-#homepage {
-  overflow-y: auto;
-}
-#homepage .locked {
-  opacity: 0.2;
-}
-#homepage .locked-text {
-  position: relative;
-  top: 50%;
-  left: 40%;
-  color: white !important;
-  z-index: 3;
-}
-#homepage .mynav {
-  background-color: #242424;
-  position: unset;
-}
-#homepage .feature {
-  text-align: center;
-}
-#homepage .mybreadcrumb {
-  border-bottom: solid #E5E5E5 1px;
-  border-top: solid #E5E5E5 1px;
-  padding: 1.3em;
-  margin: 10%;
-  margin-left: 20%;
-  margin-right: 20%;
-}
-#homepage .iconclr {
-  color: #00D1B2;
-}
-#homepage .intro {
-  font-size: 20px;
-  padding: 1.3em;
-  background-color: #E5E5E5;
-  background-image: url(hero.svg);
-  background-repeat: no-repeat;
-  background-position: center right;
-  background-size: contain;
-}
-#homepage .container {
-  padding: 2em;
-}
-#homepage .introcontent {
-  max-width: 50ch;
-}
-#homepage .intropic {
-  float: right;
-  transform: translate(0, -2.4rem);
-}
-#homepage .introtitle {
-  margin-bottom: 2em;
-}
-#homepage .introbtn {
-  padding: 1.7em;
-  color: black;
-  margin-top: 2em;
-}
-#homepage .coursesbtn {
-  border-radius: 3px;
-  background-color: #3273DC !important;
-  padding: 1.5em;
-  padding-right: 4.6em;
-  padding-left: 4.6em;
-  transform: translate(0, 4rem);
-}
-#homepage .featurecourse .is-one-third {
-  padding: 2%;
-}
-#homepage .featurecourse .rb-container {
-  font-family: "PT Sans", sans-serif;
-  margin: auto;
-  display: flex;
-  flex-direction: row;
-  position: relative;
-}
-#homepage .featurecourse .rb-container ul.rb {
-  padding: 1em;
-  margin: auto !important;
-  display: flex;
-}
-#homepage .featurecourse .rb-container ul.rb li {
-  list-style: none;
-  min-height: 50px;
-  margin-top: 0;
-  border-top: 3px solid #ccc;
-  padding-top: 1em;
-  position: relative;
-}
-#homepage .featurecourse .rb-container ul.rb li::before {
-  position: absolute;
-  left: -19px;
-  top: -1px;
-  content: " ";
-  border: 8px solid #ccc;
-  border-radius: 500%;
-  background: #50d890;
-  height: 20px;
-  width: 20px;
-  transition: all 500ms ease-in-out;
-  transform: translate(0, -13px);
-}
-#homepage .featurecourse .item-title {
-  padding: 0.8em;
-}
-#homepage .featurecourse .rb-container ul.rb .as-progress::before {
-  border-color: #232931;
-  transition: all 1000ms ease-in-out;
-}
-#homepage .featurecourse .rb-container ul.rb .as-progress {
-  border-color: #232931;
-  transition: all 1000ms ease-in-out;
-}
-#homepage .featurecourse .rb-container ul.rb li:last-child {
-  border-top: 3px solid transparent;
-  margin-left: 10px;
-}
-#homepage .whysec {
-  margin: 4rem;
-  margin-top: 10rem;
-}
-#homepage .whysec .whycont {
-  padding-top: 6.5rem;
-  font-size: 20px;
-}
-#homepage .whysec .whyimg {
-  float: left;
-  width: 30%;
-  margin: 5rem;
-  margin-top: 0;
-}
-#homepage .whysec .button {
-  padding: 1.7em;
-}
-#homepage .whysec .whyicons {
-  margin-left: 0;
-  padding-left: 0;
-  display: flex;
-  flex-direction: row;
-}
-#homepage .whysec .whyicons ul {
-  margin-left: 0;
-  padding-left: 0;
-}
-#homepage .whysec .whyicons ul div {
-  padding-top: 0.3em;
-}
-#homepage .column:nth-child(n) {
-  margin-bottom: 2em;
-}
-#homepage .memeberships {
-  padding-top: 7rem;
-}
-#homepage .memeberships .title {
-  text-align: center;
-  font-weight: bolder;
-  font-size: 1.5rem !important;
-}
-#homepage .memeberships .as_sub_title {
-  font-size: 1rem !important;
-}
-#homepage .memeberships span {
-  font-size: 1.4em;
-}
-#homepage .memeberships .membertitle {
-  margin: 0;
-  font-size: 2rem;
-}
-#homepage .memebercrd .card {
-  border-radius: 20px;
-  max-width: 60ch;
-  margin: 5vw;
-}
-#homepage .memebercrd .card:first-child {
-  background: #E5E5E5;
-}
-#homepage .memebercrd div {
-  padding: 0.1em;
-  margin: 1em;
-}
-#homepage .memebercrd .memeberfooter {
-  display: flex;
-  flex-direction: column;
-  border: 0;
-  text-align: center;
-}
-#homepage .memebercrd .card-header .title {
-  font-size: 4.5rem;
-}
-#homepage .memebercrd .card-header h1:before {
-  content: "";
-  position: absolute;
-  top: 4rem;
-  left: 2rem;
-  width: 20%;
-  height: 1rem;
-  border-bottom: 3px solid #4a4a4a;
-}
-#homepage .memebercrd .memeberbtn {
-  width: 48%;
-  margin: 1em;
-  margin-left: auto;
-  margin-right: auto;
-  border-radius: 3px;
-  font-weight: normal;
-}
-#homepage .memebercrd .footericon .title {
-  transform: translate(60px, -11px);
-  font-size: 2.5rem;
-}
-#homepage .memebercrd .footericon .subtitle {
-  font-size: 0.8rem;
 }
 
-::placeholder {
-  color: #7a7a7a !important;
-  opacity: 1 !important;
-}
-
-:-ms-input-placeholder {
-  color: #7a7a7a !important;
-}
-
-::-ms-input-placeholder {
-  color: #7a7a7a !important;
-}
-
-@media only screen and (max-width: 600px) {
-  #homepage .locked-text {
-    transform: translate(-18px, 18rem);
-  }
-  #homepage .button {
-    margin-right: auto;
-    margin-left: auto;
-  }
-  #homepage .intro {
-    background-image: unset;
-    padding: 0;
-    background-color: unset;
-  }
-  #homepage .intro .introbtn {
+body .mynav .buttons a {
     margin: 0;
-    color: white !important;
-    font-weight: bold;
-  }
-  #homepage .intropic {
-    transform: unset;
-    background-color: #585757;
-    background-image: url(hero.svg);
-    background-repeat: no-repeat;
-    background-position: center;
-    background-size: cover;
-  }
-  #homepage .introcontent {
-    transform: translate(0, 2em);
-  }
-  #homepage .introcontent .subtitle {
-    color: #D8D8D8 !important;
-  }
-  #homepage .introcontent .title {
-    color: #D8D8D8 !important;
-    margin: 0;
-    padding-bottom: 1em;
-  }
-  #homepage .whysec {
-    margin: 0.1em;
-  }
-  #homepage .whysec .whyicons ul {
-    margin-left: auto;
-    padding-left: 0;
-    margin-right: auto;
-  }
-  #homepage .whysec .whyimg {
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
-    margin-top: 8rem;
-    float: unset;
-    width: unset;
-  }
-  #homepage .whysec .whycont {
-    padding: 1.2em;
-  }
-  #homepage .memeberships {
-    font-size: 0.8em;
-  }
-}
-#mobile-hero-image {
-  display: none;
 }
 
-.rb {
-  width: 33ch;
-  margin-top: 2em;
+body .mynav .navbar-end:nth-child(2) {
+    margin-right: 1.2em;
+    margin-left: 1.2em;
 }
 
-@media only screen and (max-width: 600px) {
-  #web-hero-image {
-    display: none;
-  }
-
-  #mobile-hero-image {
-    display: unset;
-  }
+body .content h1, body .content h2, body .content h3, body .content h4, body .content h5, body .content h6 {
+    color: white;
 }
 
-/*# sourceMappingURL=layout.css.map */
+/*custom font*/
+@import url(https://fonts.googleapis.com/css?family=Montserrat);
+
+/*basic reset*/
+* {margin: 0; padding: 0;}
+
+body {
+	font-family: montserrat, arial, verdana;
+}
+/*form styles*/
+#msform {
+	width: 80vw;
+	margin: 50px auto;
+	text-align: center;
+	position: relative;
+}
+#msform fieldset {
+	background: white;
+	border: 0 none;
+	border-radius: 5px;
+	box-shadow: 0 0 15px 1px rgba(0, 0, 0, 0.4);
+	padding: 20px 30px;
+	box-sizing: border-box;
+	width: 80%;
+	margin: 0 10%;
+
+	/*stacking fieldsets above each other*/
+	position: relative;
+}
+/*Hide all except first fieldset*/
+#msform fieldset:not(:first-of-type) {
+	display: none;
+}
+/*inputs*/
+#msform input, #msform textarea {
+	padding: 15px;
+	border: 1px solid #ccc;
+	border-radius: 5px;
+	margin-bottom: 10px;
+	width: 100%;
+	box-sizing: border-box;
+	font-family: montserrat;
+	color: #2C3E50;
+	font-size: 13px;
+}
+/*buttons*/
+#msform .action-button {
+	width: 100px;
+	background: grey;
+	font-weight: bold;
+	color: white;
+	border: 0 none;
+	border-radius: 3px;
+	cursor: pointer;
+	padding: 10px 5px;
+	margin: 10px 5px;
+}
+#msform .action-button:hover, #msform .action-button:focus {
+	box-shadow: 0 0 0 2px white, 0 0 0 3px grey;
+}
+/*headings*/
+.fs-title {
+	font-size: 15px;
+	text-transform: uppercase;
+	color: #2C3E50;
+	margin-bottom: 10px;
+}
+.fs-subtitle {
+	font-weight: normal;
+	font-size: 13px;
+	color: #666;
+	margin-bottom: 20px;
+}
+/*progressbar*/
+#progressbar {
+	margin-bottom: 30px;
+	overflow: hidden;
+	/*CSS counters to number the steps*/
+	counter-reset: step;
+}
+#progressbar li {
+	list-style-type: none;
+	color: white;
+	text-transform: uppercase;
+	font-size: 9px;
+	width: 14.2%;
+	float: left;
+	position: relative;
+}
+#progressbar li:before {
+	content: counter(step);
+	counter-increment: step;
+	width: 20px;
+	line-height: 20px;
+	display: block;
+	font-size: 10px;
+	color: #333;
+	background: white;
+	border-radius: 3px;
+	margin: 0 auto 5px auto;
+}
+/*progressbar connectors*/
+#progressbar li:after {
+	content: '';
+	width: 100%;
+	height: 2px;
+	background: white;
+	position: absolute;
+	left: -50%;
+	top: 9px;
+	z-index: -1; /*put it behind the numbers*/
+}
+#progressbar li:first-child:after {
+	/*connector not needed before the first step*/
+	content: none;
+}
+/*marking active/completed steps green*/
+/*The number of the step and the connector before it = green*/
+#progressbar li.active:before,  #progressbar li.active:after{
+	background: grey !important;
+	color: white !important;
+}
+
+
+
+
+

@@ -1,0 +1,9 @@
+{% extends 'layout.html' %}
+{% load static %}
+{% block body %}
+<div  id="msform">
+    {% for course in courses %}
+        <a href="{% url 'course:build' course.id %}"><h2>{{ course.title }}</h2></a>
+    {% endfor %}
+</div>
+{% endblock %}

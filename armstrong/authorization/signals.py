@@ -8,6 +8,6 @@ from . import utils
 
 @receiver(post_save, sender=get_user_model())
 def new_user_added(sender, instance, **kwargs):
-    if not instance.is_confirmed:
+    if not instance.is_confirmed and kwargs['created'] == True:
         notifications.confirmation_email(instance)
         utils.create_trial_student(instance)
