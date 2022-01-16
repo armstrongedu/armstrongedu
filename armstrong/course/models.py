@@ -160,7 +160,7 @@ class Topic(models.Model):
         return self.progress.filter(user=get_request().user, std=get_request().COOKIES['std_id']).exists()
 
     def free_trial_completed(self):
-        std = Student.objects.get(user=get_request().user, name='Trial Student')
+        std = Student.objects.filter(user=get_request().user,).first()
         return self.progress.filter(user=get_request().user, std=std).exists()
 
 class Text(models.Model):
@@ -228,15 +228,15 @@ class MCQQuiz(models.Model):
         return self.mcq_solution.filter(user=get_request().user, std=get_request().COOKIES['std_id']).first().choice
 
     def free_trial_answered(self):
-        std = Student.objects.get(user=get_request().user, name='Trial Student')
+        std = Student.objects.filter(user=get_request().user,).first()
         return self.mcq_solution.filter(user=get_request().user, std=std).exists()
 
     def free_trial_answered_correct(self):
-        std = Student.objects.get(user=get_request().user, name='Trial Student')
+        std = Student.objects.filter(user=get_request().user,).first()
         return self.mcq_solution.filter(user=get_request().user, std=std).first().choice == self.correct_choice
 
     def free_trial_get_choice(self):
-        std = Student.objects.get(user=get_request().user, name='Trial Student')
+        std = Student.objects.filter(user=get_request().user,).first()
         return self.mcq_solution.filter(user=get_request().user, std=std).first().choice
 
 class TFQuiz(models.Model):
@@ -262,15 +262,15 @@ class TFQuiz(models.Model):
         return self.tf_solution.filter(user=get_request().user, std=get_request().COOKIES['std_id']).first().choice
 
     def free_trial_answered(self):
-        std = Student.objects.get(user=get_request().user, name='Trial Student')
+        std = Student.objects.filter(user=get_request().user,).first()
         return self.tf_solution.filter(user=get_request().user, std=std).exists()
 
     def free_trial_answered_correct(self):
-        std = Student.objects.get(user=get_request().user, name='Trial Student')
+        std = Student.objects.filter(user=get_request().user,).first()
         return self.tf_solution.filter(user=get_request().user, std=std).first().choice == self.answer
 
     def free_trial_get_choice(self):
-        std = Student.objects.get(user=get_request().user, name='Trial Student')
+        std = Student.objects.filter(user=get_request().user,).first()
         return self.tf_solution.filter(user=get_request().user, std=std).first().choice
 
 class Progress(models.Model):

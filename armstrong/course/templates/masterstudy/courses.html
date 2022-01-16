@@ -72,7 +72,7 @@
                     </div>
                     </a>
                     </div>
-                    <div class="stm_lms_courses__single--info_excerpt">With no prior experience, you will have the opportunity to walk through hands-on examples with Hadoop and Spark frameworks, two of the most common ...    </div>
+                    <div class="stm_lms_courses__single--info_excerpt">{{ course.description }}</div>
                     <div class="stm_lms_courses__single--info_meta">
                         <div class="stm_lms_course__meta"><i class="stmlms-cats"></i>Lessons {{ course.lessons.count }}</div>
                     </div>
@@ -266,8 +266,7 @@
                                                     {% else %}
                                                         <img src="{{ course.cover.url }}">
                                                     {% endif %}
-                <div class="stm_lms_courses__single--info_excerpt">
-                With no prior experience, you will have the opportunity to walk through hands-on examples with Hadoop and Spark frameworks, two of the most common ...    </div>
+                                                    <div class="stm_lms_courses__single--info_excerpt">{{ course.description }}</div>
                 <div class="stm_lms_courses__single--info_meta">
                 <div class="stm_lms_course__meta">
                 <i class="stmlms-cats"></i>
@@ -425,8 +424,7 @@
                                                     {% else %}
                                                         <img src="{{ course.cover.url }}">
                                                     {% endif %}
-                <div class="stm_lms_courses__single--info_excerpt">
-                With no prior experience, you will have the opportunity to walk through hands-on examples with Hadoop and Spark frameworks, two of the most common ...    </div>
+                                                    <div class="stm_lms_courses__single--info_excerpt">{{ course.description }}</div>
                 <div class="stm_lms_courses__single--info_meta">
                 <div class="stm_lms_course__meta">
                 <i class="stmlms-cats"></i>

@@ -169,7 +169,7 @@ def free_trial_start(request, topic_id):
 @free_trial_required
 def free_trial_mark_complete(request):
     topic_id = request.POST['topic']
-    std = Student.objects.get(user=request.user, name='Trial Student')
+    std = Student.objects.filter(user=get_request().user,).first()
     Progress.objects.get_or_create(user=request.user, std=std, topic_id=topic_id)
 
     topic = Topic.objects.get(id=topic_id)
@@ -188,7 +188,7 @@ def free_trial_mark_complete(request):
 def free_trial_answer_mcq(request, quiz_id):
     choice = request.POST['choice']
     quiz = MCQQuiz.objects.get(id=quiz_id)
-    std = Student.objects.get(user=request.user, name='Trial Student')
+    std = Student.objects.filter(user=get_request().user,).first()
     _, _ = MCQQuizSolution.objects.get_or_create(user=request.user, std=std, mcq_quiz=quiz, defaults={'choice': choice})
     Progress.objects.get_or_create(user=request.user, std=std, topic_id=quiz.topic_id)
     return redirect('course:free-trial-start', topic_id=quiz.topic_id)
@@ -198,7 +198,7 @@ def free_trial_answer_mcq(request, quiz_id):
 def free_trial_answer_tf(request, quiz_id):
     choice = request.POST['choice']
     quiz = TFQuiz.objects.get(id=quiz_id)
-    std = Student.objects.get(user=request.user, name='Trial Student')
+    std = Student.objects.filter(user=get_request().user,).first()
     _, _ = TFQuizSolution.objects.get_or_create(user=request.user, std=std, tf_quiz=quiz, defaults={'choice': True if choice == 'true' else False})
     Progress.objects.get_or_create(user=request.user, std=std, topic_id=quiz.topic_id)
     return redirect('course:free-trial-start', topic_id=quiz.topic_id)

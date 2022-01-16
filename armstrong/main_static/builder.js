@@ -10,6 +10,8 @@ function addLesson(element) {
         <fieldset>
         <h2 class="fs-title">Add Lesson</h2>
         <h3 class="fs-subtitle">Add a lesson or Quit and save</h3>
+        <input type="button" name="previous" class="previous action-button" value="Previous" />
+        <input type="button" name="next" class="next action-button" value="Next" />
         <input type="text" name="lesson-${cur_lesson_id}-title" placeholder="Title" >
         <input type="text" name="lesson-${cur_lesson_id}-title_ar" placeholder="Arabic Title" >
         <textarea name="lesson-${cur_lesson_id}-summary" placeholder="Summary"></textarea>
@@ -33,6 +35,8 @@ function addTopic(element) {
     <fieldset>
       <h2 class="fs-title">Pick Topic Type</h2>
       <h3 class="fs-subtitle">Pick a Topic or Quit and save</h3>
+      <input type="button" name="previous" class="previous action-button" value="Previous" />
+      <input type="button" name="next" class="next action-button" value="Next" />
       <input type="submit" class="action-button" value="Save and Quit" />
       <input type="button" class="add-text-topic action-button" value="Text Topic"/>
       <input type="button" class="add-embedded-topic action-button" value="Embedded Topic"/>
@@ -50,6 +54,8 @@ function addTopicText(element) {
     <fieldset>
       <h2 class="fs-title">Add Text Topic</h2>
       <h3 class="fs-subtitle">Add a Text Topic or Quit and save</h3>
+      <input type="button" name="previous" class="previous action-button" value="Previous" />
+      <input type="button" name="next" class="next action-button" value="Next" />
       <input type="hidden" name="lesson-${cur_lesson_id}-topic-${cur_topic_id}-type" value="TEXT" >
       <input type="text" name="lesson-${cur_lesson_id}-topic-${cur_topic_id}-title" placeholder="Title" >
       <input type="text" name="lesson-${cur_lesson_id}-topic-${cur_topic_id}-title_ar" placeholder="Title Arabic" >
@@ -69,6 +75,8 @@ function addTopicVideo(element) {
     <fieldset>
       <h2 class="fs-title">Add Video Topic</h2>
       <h3 class="fs-subtitle">Add a Video Topic or Quit and save</h3>
+      <input type="button" name="previous" class="previous action-button" value="Previous" />
+      <input type="button" name="next" class="next action-button" value="Next" />
       <input type="hidden" name="lesson-${cur_lesson_id}-topic-${cur_topic_id}-type" value="VIDEO" >
       <input type="text" name="lesson-${cur_lesson_id}-topic-${cur_topic_id}-title" placeholder="Title" >
       <input type="text" name="lesson-${cur_lesson_id}-topic-${cur_topic_id}-title_ar" placeholder="Title Arabic" >
@@ -88,6 +96,8 @@ function addTopicEmbedded(element) {
     <fieldset>
       <h2 class="fs-title">Add Embedded Topic</h2>
       <h3 class="fs-subtitle">Add a Embedded Topic or Quit and save</h3>
+      <input type="button" name="previous" class="previous action-button" value="Previous" />
+      <input type="button" name="next" class="next action-button" value="Next" />
       <input type="hidden" name="lesson-${cur_lesson_id}-topic-${cur_topic_id}-type" value="GAME" >
       <input type="text" name="lesson-${cur_lesson_id}-topic-${cur_topic_id}-title" placeholder="Title" >
       <input type="text" name="lesson-${cur_lesson_id}-topic-${cur_topic_id}-title_ar" placeholder="Title Arabic" >
@@ -107,6 +117,8 @@ function addTopicMCQQuiz(element) {
     <fieldset>
       <h2 class="fs-title">Add MCQ Quiz Topic</h2>
       <h3 class="fs-subtitle">Add a MCQ Quiz Topic or Quit and save</h3>
+      <input type="button" name="previous" class="previous action-button" value="Previous" />
+      <input type="button" name="next" class="next action-button" value="Next" />
       <input type="hidden" name="lesson-${cur_lesson_id}-topic-${cur_topic_id}-type" value="MCQ" >
       <input type="text" name="lesson-${cur_lesson_id}-topic-${cur_topic_id}-question" placeholder="Question" >
       <input type="text" name="lesson-${cur_lesson_id}-topic-${cur_topic_id}-question_ar" placeholder="Question Arabic" >
@@ -128,6 +140,8 @@ function addTopicTFQuiz(element) {
     <fieldset>
       <h2 class="fs-title">Add TF Quiz Topic</h2>
       <h3 class="fs-subtitle">Add a TF Quiz Topic or Quit and save</h3>
+      <input type="button" name="previous" class="previous action-button" value="Previous" />
+      <input type="button" name="next" class="next action-button" value="Next" />
       <input type="hidden" name="lesson-${cur_lesson_id}-topic-${cur_topic_id}-type" value="TF" >
       <input type="text" name="lesson-${cur_lesson_id}-topic-${cur_topic_id}-question" placeholder="Question" >
       <input type="text" name="lesson-${cur_lesson_id}-topic-${cur_topic_id}-question_ar" placeholder="Question Arabic" >
@@ -403,37 +417,68 @@ $(document).on('click', '.add-tf-quiz-topic', function() {
 	});
 });
 
-// $().click(function(){
-// 	if(animating) return false;
-// 	animating = true;
-//
-// 	current_fs = $(this).parent();
-// 	previous_fs = $(this).parent().prev();
-//
-// 	//de-activate current step on progressbar
-// 	$("#progressbar li").eq($("fieldset").index(current_fs)).removeClass("active");
-//
-// 	//show the previous fieldset
-// 	previous_fs.show();
-// 	//hide the current fieldset with style
-// 	current_fs.animate({opacity: 0}, {
-// 		step: function(now, mx) {
-// 			//as the opacity of current_fs reduces to 0 - stored in "now"
-// 			//1. scale previous_fs from 80% to 100%
-// 			scale = 0.8 + (1 - now) * 0.2;
-// 			//2. take current_fs to the right(50%) - from 0%
-// 			left = ((1-now) * 50)+"%";
-// 			//3. increase opacity of previous_fs to 1 as it moves in
-// 			opacity = 1 - now;
-// 			current_fs.css({'left': left});
-// 			previous_fs.css({'transform': 'scale('+scale+')', 'opacity': opacity});
-// 		},
-// 		duration: 800,
-// 		complete: function(){
-// 			current_fs.hide();
-// 			animating = false;
-// 		},
-// 		//this comes from the custom easing plugin
-// 		easing: 'easeInOutBack'
-// 	});
-// });
+$(document).on('click', '.next', function() {
+	if(animating) return false;
+	animating = true;
+
+	current_fs = $(this).parent();
+	next_fs = $(this).parent().next();
+
+
+	//show the next fieldset
+	next_fs.show();
+	//hide the current fieldset with style
+	current_fs.animate({opacity: 0}, {
+		step: function(now, mx) {
+			//as the opacity of current_fs reduces to 0 - stored in "now"
+			//1. scale current_fs down to 80%
+			scale = 1 - (1 - now) * 0.2;
+			//2. bring next_fs from the right(50%)
+			left = (now * 50)+"%";
+			//3. increase opacity of next_fs to 1 as it moves in
+			opacity = 1 - now;
+			current_fs.css({'transform': 'scale('+scale+')'});
+			next_fs.css({'left': left, 'opacity': opacity});
+		},
+		duration: 800,
+		complete: function(){
+			current_fs.hide();
+			animating = false;
+		},
+		//this comes from the custom easing plugin
+		easing: 'easeInOutBack'
+	});
+});
+
+$(document).on('click', '.previous', function() {
+	if(animating) return false;
+	animating = true;
+
+	current_fs = $(this).parent();
+	previous_fs = $(this).parent().prev();
+
+
+	//show the previous fieldset
+	previous_fs.show();
+	//hide the current fieldset with style
+	current_fs.animate({opacity: 0}, {
+		step: function(now, mx) {
+			//as the opacity of current_fs reduces to 0 - stored in "now"
+			//1. scale previous_fs from 80% to 100%
+			scale = 0.8 + (1 - now) * 0.2;
+			//2. take current_fs to the right(50%) - from 0%
+			left = ((1-now) * 50)+"%";
+			//3. increase opacity of previous_fs to 1 as it moves in
+			opacity = 1 - now;
+			current_fs.css({'left': left});
+			previous_fs.css({'transform': 'scale('+scale+')', 'opacity': opacity});
+		},
+		duration: 800,
+		complete: function(){
+			current_fs.hide();
+			animating = false;
+		},
+		//this comes from the custom easing plugin
+		easing: 'easeInOutBack'
+	});
+});
