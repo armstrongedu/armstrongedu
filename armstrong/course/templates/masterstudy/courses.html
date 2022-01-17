@@ -329,6 +329,9 @@
                         <a href="{% url 'course:free-trial-start' course.id %}" title="{{ course.title }}" class="heading_font">Start this course        </a>
                     </div>
                     {% else %}
+                    <div class="stm_lms_courses__single--info_preview">
+                        <a href="{% url 'course:free-trial-start' course.id %}" title="{{ course.title }}" class="heading_font">Start this course        </a>
+                    </div>
                     {% endif %}
                 {% else %}
                     <div class="stm_lms_courses__single--info_preview">
