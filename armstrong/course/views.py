@@ -304,7 +304,7 @@ def build(request, course_id=None):
                         topic=topic_type,
                         question=topic['question'],
                         question_ar=topic['question_ar'],
-                        answer=True if topic['answer'] == 'on' else False,
+                        answer=True if topic.get('answer', '') == 'on' else False,
                     )
         return redirect('course:builder')
     context = {}
