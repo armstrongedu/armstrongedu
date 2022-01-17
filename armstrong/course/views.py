@@ -6,6 +6,7 @@ from django.conf import settings
 from django.utils import timezone
 from cryptography.fernet import Fernet
 from django.contrib.admin.views.decorators import staff_member_required
+from django_middleware_global_request.middleware import get_request
 
 from .models import Course, Lesson, Topic, Track, Progress, MCQQuiz, TFQuiz, MCQQuizSolution, TFQuizSolution, Text, Game, Video
 from help_sessions.models import Period, HelpSession
