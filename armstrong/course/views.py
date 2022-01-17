@@ -254,7 +254,6 @@ def build(request, course_id=None):
                 order=order,
             )
             for order, topic in lesson['topics'].items():
-                print(topic)
                 topic_type = Topic.objects.create(
                     lesson=lesson_obj,
                     order=order,

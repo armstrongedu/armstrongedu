@@ -154,7 +154,8 @@ class Topic(models.Model):
         ordering = ('order',)
 
     def __str__(self):
-        return f'{self.lesson.course} - {self.lesson.order}.{self.order}'
+        # return f'{self.lesson.course} - {self.lesson.order}.{self.order}'
+        return 'topic'
 
     def completed(self):
         return self.progress.filter(user=get_request().user, std=get_request().COOKIES['std_id']).exists()

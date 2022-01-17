@@ -123,3 +123,10 @@ class MCQQuizSolutionAdmin(admin.ModelAdmin):
 class TFQuizSolutionAdmin(admin.ModelAdmin):
     list_display = ('user', 'std', 'tf_quiz', 'choice')
     search_fields = ('user', 'std', 'tf_quiz', 'choice')
+
+admin.site.register(Topic)
+admin.site.register(Text)
+admin.site.register(Video)
+admin.site.register(Game)
+admin.site.register(MCQQuiz)
+admin.site.register(TFQuiz)
