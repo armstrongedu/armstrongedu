@@ -278,7 +278,7 @@ $(document).on('click', '.add-video-topic', function() {
 	if(animating) return false;
 	animating = true;
 	current_fs = $(this).parent();
-        next_fs = addTopicText(current_fs);
+        next_fs = addTopicVideo(current_fs);
         console.log(next_fs);
 
 	//show the next fieldset
