@@ -12,9 +12,13 @@ function addLesson(element) {
         <h3 class="fs-subtitle">Add a lesson or Quit and save</h3>
         <input type="button" name="previous" class="previous action-button" value="Previous" />
         <input type="button" name="next" class="next action-button" value="Next" />
+        <br><h4>Title</h4>
         <input type="text" name="lesson-${cur_lesson_id}-title" placeholder="Title" >
+        <h4>Arabic Title</h4>
         <input type="text" name="lesson-${cur_lesson_id}-title_ar" placeholder="Arabic Title" >
+        <h4>Summary</h4>
         <textarea name="lesson-${cur_lesson_id}-summary" placeholder="Summary"></textarea>
+        <h4>Arabic Summary</h4>
         <textarea name="lesson-${cur_lesson_id}-summary_ar" placeholder="Summary Arabic"></textarea>
         <input type="submit" class="action-button" value="Save and Quit" />
         <input type="button" class="add-lesson action-button" value="Next Lesson" />
@@ -57,9 +61,13 @@ function addTopicText(element) {
       <input type="button" name="previous" class="previous action-button" value="Previous" />
       <input type="button" name="next" class="next action-button" value="Next" />
       <input type="hidden" name="lesson-${cur_lesson_id}-topic-${cur_topic_id}-type" value="TEXT" >
+      <br><h4>Title</h4>
       <input type="text" name="lesson-${cur_lesson_id}-topic-${cur_topic_id}-title" placeholder="Title" >
+      <h4>Arabic Title</h4>
       <input type="text" name="lesson-${cur_lesson_id}-topic-${cur_topic_id}-title_ar" placeholder="Title Arabic" >
+      <h4>Content</h4>
       <textarea name="lesson-${cur_lesson_id}-topic-${cur_topic_id}-summary" placeholder="Text"></textarea>
+      <h4>Arabic Content</h4>
       <textarea name="lesson-${cur_lesson_id}-topic-${cur_topic_id}-summary_ar" placeholder="Text Arabic"></textarea>
       <input type="submit" class="action-button" value="Save and Quit" />
       <input type="button" class="add-lesson action-button" value="Next Lesson"/>
@@ -78,10 +86,14 @@ function addTopicVideo(element) {
       <input type="button" name="previous" class="previous action-button" value="Previous" />
       <input type="button" name="next" class="next action-button" value="Next" />
       <input type="hidden" name="lesson-${cur_lesson_id}-topic-${cur_topic_id}-type" value="VIDEO" >
+      <br><h4>Title</h4>
       <input type="text" name="lesson-${cur_lesson_id}-topic-${cur_topic_id}-title" placeholder="Title" >
+      <h4>Arabic Title</h4>
       <input type="text" name="lesson-${cur_lesson_id}-topic-${cur_topic_id}-title_ar" placeholder="Title Arabic" >
-      <input type="text" name="lesson-${cur_lesson_id}-topic-${cur_topic_id}-video_iframe" placeholder="Video Iframe" >
-      <input type="text" name="lesson-${cur_lesson_id}-topic-${cur_topic_id}-video_iframe_ar" placeholder="Video Iframe Arabic" >
+      <h4>Video File</h4>
+      <input type="file" name="lesson-${cur_lesson_id}-topic-${cur_topic_id}-video_file" placeholder="Video Iframe" >
+      <h4>Arabic Video File</h4>
+      <input type="file" name="lesson-${cur_lesson_id}-topic-${cur_topic_id}-video_file_ar" placeholder="Video Iframe Arabic" >
       <input type="submit" class="action-button" value="Save and Quit" />
       <input type="button" class="add-lesson action-button" value="Next Lesson"/>
       <input type="button" class="add-topic action-button" value="Add Topic" />
@@ -99,9 +111,13 @@ function addTopicEmbedded(element) {
       <input type="button" name="previous" class="previous action-button" value="Previous" />
       <input type="button" name="next" class="next action-button" value="Next" />
       <input type="hidden" name="lesson-${cur_lesson_id}-topic-${cur_topic_id}-type" value="GAME" >
+      <br><h4>Title</h4>
       <input type="text" name="lesson-${cur_lesson_id}-topic-${cur_topic_id}-title" placeholder="Title" >
+      <h4>Arabic Title</h4>
       <input type="text" name="lesson-${cur_lesson_id}-topic-${cur_topic_id}-title_ar" placeholder="Title Arabic" >
+      <h4>Iframe</h4>
       <input type="text" name="lesson-${cur_lesson_id}-topic-${cur_topic_id}-iframe" placeholder="Iframe" >
+      <h4>Arabic Iframe</h4>
       <input type="text" name="lesson-${cur_lesson_id}-topic-${cur_topic_id}-iframe_ar" placeholder="Iframe Arabic" >
       <input type="submit" class="action-button" value="Save and Quit" />
       <input type="button" class="add-lesson action-button" value="Next Lesson"/>
@@ -120,11 +136,17 @@ function addTopicMCQQuiz(element) {
       <input type="button" name="previous" class="previous action-button" value="Previous" />
       <input type="button" name="next" class="next action-button" value="Next" />
       <input type="hidden" name="lesson-${cur_lesson_id}-topic-${cur_topic_id}-type" value="MCQ" >
+      <br><h4>Question</h4>
       <input type="text" name="lesson-${cur_lesson_id}-topic-${cur_topic_id}-question" placeholder="Question" >
+      <h4>Arabic Question</h4>
       <input type="text" name="lesson-${cur_lesson_id}-topic-${cur_topic_id}-question_ar" placeholder="Question Arabic" >
+      <h4>Wrong Choices</h4>
       <textarea name="lesson-${cur_lesson_id}-topic-${cur_topic_id}-wrong_choices" placeholder="Wrong Choice 1, Wrong Choice 2"></textarea>
+      <h4>Arabic Wrong Choices</h4>
       <textarea name="lesson-${cur_lesson_id}-topic-${cur_topic_id}-wrong_choices_ar" placeholder="Wrong Choice 1 Arabic, Wrong Choice 2 Arabic"></textarea>
+      <h4>Correct Choice</h4>
       <input type="text" name="lesson-${cur_lesson_id}-topic-${cur_topic_id}-correct_choice" placeholder="Correct Choice" >
+      <h4>Arabic Correct Choice</h4>
       <input type="text" name="lesson-${cur_lesson_id}-topic-${cur_topic_id}-correct_choice_ar" placeholder="Correct Choice Arabic" >
       <input type="submit" class="action-button" value="Save and Quit" />
       <input type="button" class="add-lesson action-button" value="Next Lesson"/>
@@ -143,8 +165,11 @@ function addTopicTFQuiz(element) {
       <input type="button" name="previous" class="previous action-button" value="Previous" />
       <input type="button" name="next" class="next action-button" value="Next" />
       <input type="hidden" name="lesson-${cur_lesson_id}-topic-${cur_topic_id}-type" value="TF" >
+      <br><h4>Question</h4>
       <input type="text" name="lesson-${cur_lesson_id}-topic-${cur_topic_id}-question" placeholder="Question" >
+      <h4>Arabic Question</h4>
       <input type="text" name="lesson-${cur_lesson_id}-topic-${cur_topic_id}-question_ar" placeholder="Question Arabic" >
+      <h4>Answer</h4>
       <div style="display: flex;">
           <input type="checkbox" id="lesson-${cur_lesson_id}-topic-${cur_topic_id}-answer" name="lesson-${cur_lesson_id}-topic-${cur_topic_id}-answer" ="" style="width: 10%;/* display: flex; */margin-top: 6px;">
           <p style="padding: 0; margin: 0;">Answer is True?</p>

@@ -1,4 +1,7 @@
 from datetime import datetime, timedelta, date
+import io
+import random
+
 
 from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib.auth.decorators import login_required, user_passes_test
@@ -7,6 +10,9 @@ from django.utils import timezone
 from cryptography.fernet import Fernet
 from django.contrib.admin.views.decorators import staff_member_required
 from django_middleware_global_request.middleware import get_request
+import apivideo
+from apivideo.apis import VideosApi
+from apivideo.exceptions import ApiAuthException
 
 from .models import Course, Lesson, Topic, Track, Progress, MCQQuiz, TFQuiz, MCQQuizSolution, TFQuizSolution, Text, Game, Video
 from help_sessions.models import Period, HelpSession
@@ -103,7 +109,18 @@ def start(request, topic_id):
 def mark_complete(request):
     topic_id = request.POST['topic']
     Progress.objects.get_or_create(user=request.user, std_id=request.COOKIES['std_id'], topic_id=topic_id)
-    return redirect('course:start', topic_id=topic_id)
+
+    std_id = request.COOKIES['std_id']
+    topic = Topic.objects.get(id=topic_id)
+    next_lesson = Lesson.objects.filter(course_id=topic.lesson.course, order=topic.lesson.order+1).first()
+    next_topic = (Topic.objects.filter(lesson__course_id=topic.lesson.course, lesson=topic.lesson, order=topic.order+1).first() or
+                  (next_lesson.topics.all().first() if next_lesson else None))
+    if next_topic:
+        return redirect('course:start', topic_id=next_topic.id)
+    else:
+        cert_id = f'{topic.lesson.course.id}-{std_id}'
+        return redirect('main:cert', cert_id=cert_id)
+
 
 @login_required
 @member_required
@@ -113,7 +130,18 @@ def answer_mcq(request, quiz_id):
     quiz = MCQQuiz.objects.get(id=quiz_id)
     _, _ = MCQQuizSolution.objects.get_or_create(user=request.user, std_id=request.COOKIES['std_id'], mcq_quiz=quiz, defaults={'choice': choice})
     Progress.objects.get_or_create(user=request.user, std_id=request.COOKIES['std_id'], topic_id=quiz.topic_id)
-    return redirect('course:start', topic_id=quiz.topic_id)
+
+    std_id = request.COOKIES['std_id']
+    topic = Topic.objects.get(id=topic_id)
+    next_lesson = Lesson.objects.filter(course_id=topic.lesson.course, order=topic.lesson.order+1).first()
+    next_topic = (Topic.objects.filter(lesson__course_id=topic.lesson.course, lesson=topic.lesson, order=topic.order+1).first() or
+                  (next_lesson.topics.all().first() if next_lesson else None))
+    if next_topic:
+        return redirect('course:start', topic_id=quiz.topic_id)
+    else:
+        cert_id = f'{topic.lesson.course.id}-{std_id}'
+        return redirect('main:cert', cert_id=cert_id)
+
 
 @login_required
 @member_required
@@ -123,7 +151,18 @@ def answer_tf(request, quiz_id):
     quiz = TFQuiz.objects.get(id=quiz_id)
     _, _ = TFQuizSolution.objects.get_or_create(user=request.user, std_id=request.COOKIES['std_id'], tf_quiz=quiz, defaults={'choice': True if choice == 'true' else False})
     Progress.objects.get_or_create(user=request.user, std_id=request.COOKIES['std_id'], topic_id=quiz.topic_id)
-    return redirect('course:start', topic_id=quiz.topic_id)
+
+    std_id = request.COOKIES['std_id']
+    topic = Topic.objects.get(id=topic_id)
+    next_lesson = Lesson.objects.filter(course_id=topic.lesson.course, order=topic.lesson.order+1).first()
+    next_topic = (Topic.objects.filter(lesson__course_id=topic.lesson.course, lesson=topic.lesson, order=topic.order+1).first() or
+                  (next_lesson.topics.all().first() if next_lesson else None))
+    if next_topic:
+        return redirect('course:start', topic_id=quiz.topic_id)
+    else:
+        cert_id = f'{topic.lesson.course.id}-{std_id}'
+        return redirect('main:cert', cert_id=cert_id)
+
 
 
 @login_required
@@ -192,7 +231,17 @@ def free_trial_answer_mcq(request, quiz_id):
     std = Student.objects.filter(user=get_request().user,).first()
     _, _ = MCQQuizSolution.objects.get_or_create(user=request.user, std=std, mcq_quiz=quiz, defaults={'choice': choice})
     Progress.objects.get_or_create(user=request.user, std=std, topic_id=quiz.topic_id)
-    return redirect('course:free-trial-start', topic_id=quiz.topic_id)
+
+    topic = Topic.objects.get(id=topic_id)
+    next_lesson = Lesson.objects.filter(course_id=topic.lesson.course, order=topic.lesson.order+1).first()
+    next_topic = (Topic.objects.filter(lesson__course_id=topic.lesson.course, lesson=topic.lesson, order=topic.order+1).first() or
+                  (next_lesson.topics.all().first() if next_lesson else None))
+    if next_topic:
+        return redirect('course:free-trial-start', topic_id=quiz.topic_id)
+    else:
+        cert_id = f'{topic.lesson.course.id}-{std.id}'
+        return redirect('main:cert', cert_id=cert_id)
+
 
 @login_required
 @free_trial_required
@@ -202,7 +251,17 @@ def free_trial_answer_tf(request, quiz_id):
     std = Student.objects.filter(user=get_request().user,).first()
     _, _ = TFQuizSolution.objects.get_or_create(user=request.user, std=std, tf_quiz=quiz, defaults={'choice': True if choice == 'true' else False})
     Progress.objects.get_or_create(user=request.user, std=std, topic_id=quiz.topic_id)
-    return redirect('course:free-trial-start', topic_id=quiz.topic_id)
+
+    topic = Topic.objects.get(id=topic_id)
+    next_lesson = Lesson.objects.filter(course_id=topic.lesson.course, order=topic.lesson.order+1).first()
+    next_topic = (Topic.objects.filter(lesson__course_id=topic.lesson.course, lesson=topic.lesson, order=topic.order+1).first() or
+                  (next_lesson.topics.all().first() if next_lesson else None))
+    if next_topic:
+        return redirect('course:free-trial-start', topic_id=quiz.topic_id)
+    else:
+        cert_id = f'{topic.lesson.course.id}-{std.id}'
+        return redirect('main:cert', cert_id=cert_id)
+
 
 @login_required
 @staff_member_required
@@ -254,10 +313,10 @@ def build(request, course_id=None):
                 summary_ar=lesson['summary_ar'],
                 order=order,
             )
-            for order, topic in lesson['topics'].items():
+            for t_order, topic in lesson['topics'].items():
                 topic_type = Topic.objects.create(
                     lesson=lesson_obj,
-                    order=order,
+                    order=t_order,
                     type=topic_types[topic['type']],
                 )
                 if topic['type'] == 'TEXT':
@@ -270,13 +329,52 @@ def build(request, course_id=None):
                         text_ar=topic['summary_ar'],
                     )
                 elif topic['type'] == 'VIDEO':
+                    v_file = request.FILES.get(f'lesson-{order}-topic-{t_order}-video_file')
+                    v_file_ar = request.FILES.get(f'lesson-{order}-topic-{t_order}-video_file_ar')
+                    api_key = settings.API_VIDEO_KEY
+
+                    with apivideo.AuthenticatedApiClient(api_key) as client:
+                        videos_api = VideosApi(client)
+                        video_create_payload = {
+                            "title": str(v_file),
+                            "description": "",
+                            "public": True,
+                            "mp4_support": False,
+                            "tags": []
+                        }
+                        response = videos_api.create(video_create_payload)
+                        video_id = response["video_id"]
+                        binary_file = io.BytesIO(v_file.read())
+                        binary_file.name = str(v_file)
+                        video_response = videos_api.upload(video_id, binary_file)
+                        v_iframe = iframe = response['assets']['iframe']
+
+                    with apivideo.AuthenticatedApiClient(api_key) as client:
+                        videos_api = VideosApi(client)
+                        video_create_payload = {
+                            "title": str(v_file_ar),
+                            "description": "",
+                            "public": True,
+                            "mp4_support": False,
+                            "tags": []
+                        }
+                        response = videos_api.create(video_create_payload)
+                        video_id = response["video_id"]
+                        binary_file = io.BytesIO(v_file_ar.read())
+                        binary_file.name = str(v_file_ar)
+                        video_response = videos_api.upload(video_id, binary_file)
+                        v_iframe_ar = iframe = response['assets']['iframe']
+
+                    print(v_iframe)
+                    print(v_iframe_ar)
+
                     Video.objects.create(
                         lesson=lesson_obj,
                         topic=topic_type,
                         title=topic['title'],
                         title_ar=topic['title_ar'],
-                        video_iframe=topic['video_iframe'],
-                        video_iframe_ar=topic['video_iframe_ar'],
+                        video_iframe=v_iframe,
+                        video_iframe_ar=v_iframe_ar,
                     )
                 elif topic['type'] == 'GAME':
                     Game.objects.create(
